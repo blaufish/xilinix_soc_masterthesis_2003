@@ -105,10 +105,10 @@ begin
 
 	word_data <= fifo_q;
 	fifo_rd <= word_rd;
+	fifo_reset <= '0';
 
 	status_p : process (sys_clk) begin
 		if rising_edge(sys_clk) then
-			fifo_reset <= '0';
 			fifo_wr    <= '0';
 			--fifo_rd    <= '0';
 			--fifo_d     <= (others => '0');
