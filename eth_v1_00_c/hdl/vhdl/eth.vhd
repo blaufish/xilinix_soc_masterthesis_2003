@@ -115,8 +115,9 @@ architecture RTL of ETH is
 	-- internal signals
 
 	signal address_match, uint32_operation, selected, ETH_xferAck_sig : std_logic;
-	signal reg : std_logic_vector(0 to 2);
+	signal reg : std_logic_vector(0 to 1);
 	signal dbus : std_logic_vector(0 to 31);
+	signal rnw : std_logic;
 
 begin -- architecture RTL
 
@@ -125,24 +126,26 @@ begin -- architecture RTL
 	address_match <= '1' when OPB_ABus(0 to 23) = C_BASEADDR(0 to 23) else '0';
 	uint32_operation <= '1' when OPB_BE = X"F" else '0';
 
-	selected <= OPB_select and address_match and uint32_operation and not ETH_xferAck_sig;
-
-	reg <= OPB_ABus(27 to 29);
-
+	process (OPB_Clk) begin
+		if rising_edge(OPB_Clk) then
+			if OPB_Rst = '1' then
+				selected <= '0';
+				reg      <= (others => '-');
+				rnw      <= '-';
+		    else
+				selected <= OPB_select and address_match and uint32_operation and not ETH_xferAck_sig and not selected;
+				reg <= OPB_ABus(27) & OPB_ABus(29); -- originally 3 bits, shrunken
+				rnw <= OPB_RNW;
+		   end if;
+	 end if;
+	end process;
 	
 	dbus <= 
 	    (others => '0') when selected/='1' else
-		RX_reg_fifo     when reg(0)='0' and reg(2)='0' else 
-		RX_reg_status   when reg(0)='0' and reg(2)='1' else 
-		TX_reg_status   when reg(0)='1' and reg(2)='1' else
+		RX_reg_fifo     when reg="00" else 
+		RX_reg_status   when reg="01" else 
+		TX_reg_status   when reg="11" else
 		(others => '-') ;
-
-		--RX_debugfile0   when reg="010" else 
-		--RX_debugfile1   when reg="011" else 
-		--X"DEAD0001"     when reg="100" else -- read only
-		--X"DEAD0002"; -- unimplemented
-
-	--dbus_2 <= dbus when selected='1' else (others => '0');
 
 	ETH_DBus_FDRE : FDRE 
 		generic map (
@@ -182,21 +185,20 @@ begin -- architecture RTL
 			elsif selected='1' then
 				ETH_xferAck_sig <= '1';
 
-				if OPB_RNW='1' then
-					--ETH_DBus <= dbus;
+				if rnw='1' then
 
 					case reg is
-					when  "000" => RX_reg_fifo_rd <= '1';
-					when  "101" => TX_reg_status_rd <= '1';
+					when  "00" => RX_reg_fifo_rd <= '1';
+					when  "11" => TX_reg_status_rd <= '1';
 					when others => null;
 					end case;
 									
-				elsif OPB_RNW='0' then
+				elsif rnw='0' then
 				
 					case reg is 
-					when  "001" => RX_reg_status_wr <= '1';
-					when  "100" => TX_reg_fifo_wr   <= '1';
-					when  "101" => TX_reg_ctrl_wr   <= '1';
+					when  "01" => RX_reg_status_wr <= '1';
+					when  "10" => TX_reg_fifo_wr   <= '1';
+					when  "11" => TX_reg_ctrl_wr   <= '1';
 					when others => null;
 					end case;
 
