@@ -190,7 +190,7 @@ begin
 
 	cyclic :  crc32
 	generic map (
-		order  => false, --true,
+		order  => true,
 		dwidth => 8
 	)
 	port map (
