@@ -152,7 +152,10 @@ begin
 					if (append_fcs='0' and count="000" and byte_valid='0') 
 					or (append_fcs='1' and fcs_count="100" and count="000") then
 						
-						packet_sent_REG <= '1';
+						if packet_sent_REG='0' then
+							packet_sent_REG <= '1';
+						end if;
+						
 						count <= (others => '0');
 
 						-- race condition fix
