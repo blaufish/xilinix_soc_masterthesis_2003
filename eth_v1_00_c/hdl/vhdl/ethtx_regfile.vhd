@@ -18,9 +18,10 @@ entity ethtx_regfile is
 		reg_fifo_wr	: in  std_logic;
 		reg_ctrl_wr	: in  std_logic;
 
-		word_rd		: in  std_logic;
-                word_data       : out std_logic_vector(31 downto 0);
-                word_count      : out std_logic_vector(2 downto 0);
+		word_rd	          : in  std_logic;
+                word_data         : out std_logic_vector(31 downto 0);
+                word_count        : out std_logic_vector(2 downto 0);
+		word_almost_empty : out std_logic;
 		
 		packet_sent	: in  std_logic;
 		append_fcs	: out std_logic;
@@ -35,9 +36,6 @@ architecture RTL of ethtx_regfile is
 	signal status_fifo_words       : unsigned(8 downto 0);
 	signal status_fifo_words_rev   : unsigned(8 downto 0);
 	signal status_fifo_BILW        : unsigned(2 downto 0);
-
-	--signal status_fifo_words_p1    : unsigned(8 downto 0);
-	--signal status_fifo_words_p1_c3 : unsigned(0 downto 0);
 
 	signal output_set : std_logic;
 
@@ -121,7 +119,8 @@ begin
 				status_fifo_BILW       <= (others => '0');
 				output_set             <= '0';
 				word_count             <= (others => '0');
-			    fifo_d     <= (others => '0');
+				word_almost_empty      <= '0';
+				fifo_d                 <= (others => '0');
 			else
 				
 				
@@ -148,14 +147,15 @@ begin
 
 				if status_packet_buffered='1' and status_fifo_words_rev/="000000000" and output_set='0' then
 					output_set <= '1';
-					--fifo_rd    <= '1';
 					
 					status_fifo_words_rev <= status_fifo_words_rev - 1;
 					
 					if status_fifo_words_rev="000000001" then
 						word_count <= std_logic_vector( status_fifo_BILW );
+						word_almost_empty <= '1';
 					else
 						word_count <= "100";
+						word_almost_empty <= '0';
 					end if;
 				end if;
 

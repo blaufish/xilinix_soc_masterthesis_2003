@@ -7,12 +7,11 @@ entity ethtx_byte_to_mii is
                 data_pins       : natural := 4
         );
         port (
-                sys_clk         : in std_logic; -- rising edge
+                tx_clk          : in std_logic; -- rising edge
                 sys_reset       : in std_logic; -- synchronous reset on 1
 
 		send_state	: in std_logic_vector(1 downto 0);
 
-                tx_clock_pulse  : in  std_logic;
                 tx_data         : out std_logic_vector(data_pins-1 downto 0);
                 tx_en           : out std_logic;
 	
@@ -79,9 +78,9 @@ begin
 		fcs_byte(i) <= fcs_byte_BadOrder(7-i);
 	end generate;
 
-	process (sys_clk) 
+	process (tx_clk) 
 	begin
-		if rising_edge(sys_clk) then
+		if rising_edge(tx_clk) then
 			packet_sent_REG <= '0';
 			byte_rd         <= '0';
 			
@@ -94,23 +93,23 @@ begin
 				send_fcs_ok <= '0';
 			else
 
-				if tx_clock_pulse='1' and send_state=state_wait then
+				if send_state=state_wait then
 					tx_en <= '0';
 					count <= (others => '0');
 					fcs_count <= (others => '0');
 					send_fcs_ok <= '0';
 
-				elsif tx_clock_pulse='1' and send_state=state_preamble then
+				elsif send_state=state_preamble then
 					tx_en   <= '1';
 					tx_data <= preamble_seq;
 					--count <= (others => '0');
 
-				elsif tx_clock_pulse='1' and send_state=state_sync then
+				elsif send_state=state_sync then
 					tx_en   <= '1';
 					tx_data <= preamble_sfd;
 					--count <= (others => '0');
 
-				elsif tx_clock_pulse='1' and send_state=state_send then
+				elsif send_state=state_send then
 					tx_en   <= '1';
 					tx_data <= data(data_pins-1 downto 0);
 					count   <= count-1;
@@ -118,29 +117,36 @@ begin
 				end if;
 
 
-				if send_state/=state_wait and (count="000" or (count="001" and tx_clock_pulse='1')) then
-					if byte_valid='1' then
-						byte_rd <= '1';
-						data <= byte_data;
-						count <= to_unsigned( 8/data_pins, 3 );
+				if byte_valid='1' then
+					byte_rd <= '1';
 						
-						if send_state=state_send then
-							send_fcs_ok <= '1';
-						end if;
+					if send_state = state_send and count="001" then
+						send_fcs_ok <= '1';
+						data        <= byte_data;
+						count       <= to_unsigned( 8/data_pins, 3 );
+
+					elsif (send_state = state_preamble or send_state = state_sync) and count="000" then
+						data  <= byte_data;
+						count <= to_unsigned( 8/data_pins, 3 );		
 						
-					
-					elsif send_state=state_send and append_fcs='1' and send_fcs_ok='1' then
+					else
+						byte_rd <= '0';
+					end if;
+				end if;
+
+				if send_state=state_send and append_fcs='1' and send_fcs_ok='1' and count="001" and byte_valid='0' then
 						fcs_count <= fcs_count+1;
 						data      <= fcs_byte;
 						count     <= to_unsigned( 8/data_pins, 3 );
 						
 						if fcs_count="100" then
-							-- race condition fix
 							count <= "000";
 							fcs_count <= fcs_count;
 						end if;
-					end if;
 				end if;
+					
+							
+			
 			
 				if send_state=state_send then
 					if (append_fcs='0' and count="000" and byte_valid='0') 
@@ -150,14 +156,14 @@ begin
 						count <= (others => '0');
 
 						-- race condition fix
-						if tx_clock_pulse='1' then
-							tx_en <= '0';
-						end if;
+						--if tx_clock_pulse='1' then
+						tx_en <= '0';
+						--end if;
 					end if;
 				end if;
 
 				-- race condition fix
-				if packet_sent_REG = '1' and tx_clock_pulse='1' then
+				if packet_sent_REG = '1' then
 					tx_en <= '0';
 				end if;
 

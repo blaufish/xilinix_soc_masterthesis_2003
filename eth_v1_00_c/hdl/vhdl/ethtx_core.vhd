@@ -26,26 +26,13 @@ end ethtx_core;
 
 architecture RTL of ethtx_core is
 
-        component ethtx_clk_sampler is
-        port (
-                sys_clk         : in std_logic; -- rising edge
-                sys_reset       : in std_logic; -- synchronous reset on 1
-
-                tx_clock        : in std_logic;
-                tx_clock_pulse  : out std_logic
-        );
-        end component ethtx_clk_sampler;
-
-        signal tx_clock_pulse : std_logic;
-
         component ethtx_statemachine is
         port (
-                sys_clk         : in std_logic; -- rising edge
+                tx_clk         : in std_logic; -- rising edge
                 sys_reset       : in std_logic; -- synchronous reset on 1
 
 		packet_buffered : in  std_logic;	       
 		packet_sent  	: in  std_logic;
-		tx_clock_pulse  : in  std_logic;
 
 		send_state	: out std_logic_vector(1 downto 0) -- 00 wait 01 preamble; 10 synch 11 send		
 
@@ -59,12 +46,11 @@ architecture RTL of ethtx_core is
                 data_pins       : natural := 4
         );
         port (
-                sys_clk         : in std_logic; -- rising edge
+                tx_clk         : in std_logic; -- rising edge
                 sys_reset       : in std_logic; -- synchronous reset on 1
 
 		send_state	: in std_logic_vector(1 downto 0);
 
-                tx_clock_pulse  : in  std_logic;
                 tx_data         : out std_logic_vector(data_pins-1 downto 0);
                 tx_en           : out std_logic;                
 
@@ -95,9 +81,10 @@ architecture RTL of ethtx_core is
 		reg_fifo_wr	: in  std_logic;
 		reg_ctrl_wr	: in  std_logic;
 
-		word_rd		: in  std_logic;
-                word_data       : out std_logic_vector(31 downto 0);
-                word_count      : out std_logic_vector(2 downto 0);
+		word_rd            : in  std_logic;
+                word_data          : out std_logic_vector(31 downto 0);
+                word_count         : out std_logic_vector(2 downto 0);
+		word_almost_empty  : out std_logic;
 
 		packet_sent	: in  std_logic;
 		append_fcs	: out std_logic;
@@ -105,19 +92,21 @@ architecture RTL of ethtx_core is
 	);
 	end component ethtx_regfile;
 	
-	signal word_data       : std_logic_vector(31 downto 0);
-        signal word_count      : std_logic_vector(2 downto 0);
-	signal append_fcs      : std_logic;
-	signal packet_buffered : std_logic;
+	signal word_data         : std_logic_vector(31 downto 0);
+        signal word_count        : std_logic_vector(2 downto 0);
+	signal word_almost_empty : std_logic;
+	signal append_fcs        : std_logic;
+	signal packet_buffered   : std_logic;
 
 	component ethtx_word_to_byte is
 	port (
-		sys_clk		: in std_logic;
+		tx_clk		: in std_logic;
 		sys_reset	: in std_logic;
 			
-		word_rd		: out  std_logic;
-                word_data       : in   std_logic_vector(31 downto 0);
-                word_count      : in   std_logic_vector(2 downto 0);
+		word_rd	          : out  std_logic;
+                word_data         : in   std_logic_vector(31 downto 0);
+                word_count        : in   std_logic_vector(2 downto 0);
+		word_almost_empty : in   std_logic;
 
 		byte_rd		: in  std_logic;
                 byte_data       : out std_logic_vector(7 downto 0);
@@ -145,121 +134,93 @@ architecture RTL of ethtx_core is
 
 	signal fcs : std_logic_vector(31 downto 0);
 
-	component fifo_async
-    	generic (data_bits : integer;
-             	addr_bits  : integer;
-             	block_type : integer := 0;
-             	fifo_arch  : integer := 0); -- 0=Generic architecture, 
-                	                    -- 1=Xilinx XAPP131, 
-                                            -- 2=Xilinx XAPP131 w/carry mux
-    	port (reset	: in  std_logic;
-          	wr_clk	: in  std_logic;
-          	wr_en	: in  std_logic;
-          	wr_data	: in  std_logic_vector (data_bits-1 downto 0);
-          	rd_clk	: in  std_logic;
-          	rd_en	: in  std_logic;
-          	rd_data	: out std_logic_vector (data_bits-1 downto 0);
-          	full	: out std_logic;
-          	empty	: out std_logic
-         	);
-  	end component;
 
-	signal	tx_async_fifo_full, 
-		tx_async_fifo_full_inv,
-		tx_async_fifo_empty,
-		tx_async_fifo_empty_inv : std_logic;
-		
-	signal	tx_async_fifo_din, 
-		tx_async_fifo_dout : std_logic_vector(data_pins downto 0);
-	
 
 	signal tx_clk_fdr : std_logic;	
 
 	signal tx_en_s	: std_logic;
 	signal tx_d_s	: std_logic_vector(data_pins-1 downto 0);
 
-	signal fifo_was_empty : std_logic;
+	component ethtx_clkdomain is
+	port (
+		sys_clk   : in std_logic;
+		sys_reset : in std_logic;
+		tx_clk    : in std_logic;
+				
+		packet_sent_SYSCLK : out std_logic;
+		packet_sent_TXCLK  : in  std_logic;
+		word_rd_SYSCLK     : out std_logic;
+		word_rd_TXCLK      : in  std_logic;
 
+		append_fcs_SYSCLK        : in  std_logic;
+		append_fcs_TXCLK         : out std_logic;
+		packet_buffered_SYSCLK   : in  std_logic;
+		packet_buffered_TXCLK    : out std_logic;
+		word_data_SYSCLK         : in  std_logic_vector(31 downto 0);
+		word_data_TXCLK          : out std_logic_vector(31 downto 0);
+		word_count_SYSCLK        : in  std_logic_vector(2 downto 0);
+		word_count_TXCLK         : out std_logic_vector(2 downto 0);
+		word_almost_empty_SYSCLK : in  std_logic;
+		word_almost_empty_TXCLK  : out std_logic
+	);
+	end component ethtx_clkdomain;
+	
+	-----------------------------------------------------
+	--- Signals for crossing TXCLK to SYSCLK boundary ---
+	-----------------------------------------------------
+
+	signal word_rd_SYSCLK, packet_sent_SYSCLK : std_logic;
+
+
+
+	-----------------------------------------------------
+	--- Signals for crossing SYSCLK to TXCLK boundary ---
+	-----------------------------------------------------
+	
+
+	signal append_fcs_TXCLK, packet_buffered_TXCLK : std_logic;
+	signal word_data_TXCLK : std_logic_vector(31 downto 0);
+	signal word_count_TXCLK : std_logic_vector(2 downto 0);
+	signal word_almost_empty_TXCLK : std_logic;
+
+
+	
 begin
 
-	gen0 : if async = false generate
 
-		tx_en <= tx_en_s;
-		tx_d <= tx_d_s;
+	domaincross : ethtx_clkdomain
+	port map (
+		sys_clk   => sys_clk,
+		sys_reset => sys_reset,
+		tx_clk    => tx_clk,
+				
+		packet_sent_SYSCLK => packet_sent_SYSCLK,
+		packet_sent_TXCLK  => packet_sent,
+		word_rd_SYSCLK     => word_rd_SYSCLK,
+		word_rd_TXCLK      => word_rd,
 
-		fdr : process (sys_clk) begin
-			if rising_edge(sys_clk) then
-				if sys_reset='1' then
-					tx_clk_fdr <= '0';
-				else
-					tx_clk_fdr <= tx_clk;		
-				end if;
-			end if;
-		end process;
+		append_fcs_SYSCLK        => append_fcs,
+		append_fcs_TXCLK         => append_fcs_TXCLK,
+		packet_buffered_SYSCLK   => packet_buffered,
+		packet_buffered_TXCLK    => packet_buffered_TXCLK,
+		word_data_SYSCLK         => word_data,
+		word_data_TXCLK          => word_data_TXCLK,
+		word_count_SYSCLK        => word_count,
+		word_count_TXCLK         => word_count_TXCLK,
+		word_almost_empty_SYSCLK => word_almost_empty,
+		word_almost_empty_TXCLK  => word_almost_empty_TXCLK
+	);
 
-
-	        sampler : ethtx_clk_sampler
-	        port map (
-	                sys_clk         => sys_clk,
-	                sys_reset       => sys_reset,
-
-        	        tx_clock        => tx_clk_fdr,
-                	tx_clock_pulse  => tx_clock_pulse
-	        );
-	end generate gen0;
 	
-	gen1 : if async = true generate
-		tx_async_fifo :  fifo_async
-    		generic map (
-			data_bits  => data_pins+1,
-             		addr_bits  => 4,
-             		block_type => 0,
-             		fifo_arch  => 0) -- 0=Generic architecture, 
-                	                   -- 1=Xilinx XAPP131, 
-                        	           -- 2=Xilinx XAPP131 w/carry mux
-    		port map (
-			reset	=> sys_reset,
-        	  	wr_clk	=> sys_clk,
-          		wr_en	=> tx_async_fifo_full_inv,
-	          	wr_data	=> tx_async_fifo_din,
-        	  	rd_clk	=> tx_clk,
-          		rd_en	=> tx_async_fifo_empty_inv,
-          		rd_data	=> tx_async_fifo_dout,
-          		full	=> tx_async_fifo_full,
-          		empty	=> tx_async_fifo_empty
-         	);
-
-		tx_clock_pulse <= not tx_async_fifo_full;
-		tx_async_fifo_full_inv <= not tx_async_fifo_full;
-		tx_async_fifo_empty_inv <= not tx_async_fifo_empty;
-
-		tx_async_fifo_din <= tx_en_s & tx_d_s;
-
-		process (tx_clk) begin
-			if rising_edge(tx_clk) then
-				fifo_was_empty <= tx_async_fifo_empty;
-			
-				tx_en <= tx_async_fifo_dout(data_pins);
-				tx_d <= tx_async_fifo_dout(data_pins-1 downto 0);
-
-				if fifo_was_empty = '1' then
-					tx_en <= '0';
-				end if;
-			end if;
-		end process;
-					
-
-	end generate gen1;
-
+				
 
 	state : ethtx_statemachine
         port map (
-                sys_clk         => sys_clk,
+                tx_clk         => tx_clk,
                 sys_reset       => sys_reset,
 
-		packet_buffered => packet_buffered,
+		packet_buffered => packet_buffered_TXCLK,
 		packet_sent  	=> packet_sent,
-		tx_clock_pulse  => tx_clock_pulse,
 
 		send_state	=> send_state
 
@@ -271,7 +232,7 @@ begin
 		dwidth => 8
 	)
 	port map (
-		CLK       => sys_clk,
+		CLK       => tx_clk,
 		RST       => sys_reset,
 		softreset => packet_sent,
 		dvalid    => byte_rd,
@@ -282,13 +243,14 @@ begin
 
 	byteifier : ethtx_word_to_byte
 	port map (
-		sys_clk		=> sys_clk,
+		tx_clk		=> tx_clk,
 		sys_reset	=> sys_reset,
 
 			
-		word_rd		=> word_rd,
-                word_data       => word_data,
-                word_count      => word_count,
+		word_rd	          => word_rd,
+                word_data         => word_data_TXCLK,
+                word_count        => word_count_TXCLK,
+		word_almost_empty => word_almost_empty_TXCLK,
 
 		byte_rd		=> byte_rd,
                 byte_data       => byte_data,
@@ -301,16 +263,15 @@ begin
                 data_pins       => data_pins
         )
         port map (
-                sys_clk         => sys_clk,
+                tx_clk         => tx_clk,
                 sys_reset       => sys_reset,
 
 		send_state	=> send_state,
 
-                tx_clock_pulse  => tx_clock_pulse,
-                tx_data         => tx_d_s,
-                tx_en           => tx_en_s,
+                tx_data         => tx_d,
+                tx_en           => tx_en,
 
-		append_fcs	=> append_fcs,
+		append_fcs	=> append_fcs_TXCLK,
 		fcs		=> fcs,
 
 		packet_sent	=> packet_sent,
@@ -332,11 +293,12 @@ begin
 		reg_fifo_wr	=> reg_fifo_wr,
 		reg_ctrl_wr	=> reg_ctrl_wr,
 
-		word_rd		=> word_rd,
-                word_data       => word_data,
-                word_count      => word_count,
+		word_rd	          => word_rd_SYSCLK,
+                word_data         => word_data,
+                word_count        => word_count,
+		word_almost_empty => word_almost_empty,
 
-		packet_sent	=> packet_sent,
+		packet_sent	=> packet_sent_SYSCLK,
 		append_fcs	=> append_fcs,
 		packet_buffered => packet_buffered
 	);

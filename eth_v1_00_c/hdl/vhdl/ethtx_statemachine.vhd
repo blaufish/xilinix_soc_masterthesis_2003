@@ -7,12 +7,11 @@ entity ethtx_statemachine is
 		data_pins	: natural := 4
 	);
 	port (
-		sys_clk		: in std_logic; -- rising edge
+		tx_clk		: in std_logic; -- rising edge
 		sys_reset	: in std_logic; -- synchronous reset on 1
 		
 		packet_buffered : in std_logic;	       
 		packet_sent  	: in std_logic;
-		tx_clock_pulse  : in std_logic;
 
 		send_state	: out std_logic_vector(1 downto 0) -- 00 wait 01 preamble; 10 synch 11 send
 		
@@ -51,8 +50,8 @@ begin
 
 
 
-	state_p : process (sys_clk) begin
-		if rising_edge(sys_clk) then
+	state_p : process (tx_clk) begin
+		if rising_edge(tx_clk) then
 			if sys_reset='1' then
 				state   <= S_IPG;
 				counter <= 0;
@@ -61,7 +60,7 @@ begin
 				state <= S_IPG;
 				counter <= 0;
 
-			elsif tx_clock_pulse = '1' then
+			else
 				case state is
 				when S_IPG =>
 					counter <= counter + 1;
@@ -87,8 +86,12 @@ begin
 				when S_SYNC =>
 					counter <= 0;
 					state   <= S_SEND;
+				
+				when S_SEND =>
+					null;
 					
-				when others => null;
+				when others => 
+					assert false report "ethtx_statemachine unknown state" severity error;
 				end case;
 			end if; -- clock_pulse
 		end if; -- sys_reset
