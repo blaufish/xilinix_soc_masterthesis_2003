@@ -40,7 +40,7 @@ architecture RTL of ETH is
 
 	component ethrx_core is
 	generic (
-		rx_data_pins : natural := C_PHY_WIDTH
+		rx_data_pins : natural := 4
 	);
 	port (
 		sys_clk		: in std_logic; -- rising edge
@@ -72,7 +72,7 @@ architecture RTL of ETH is
 
 	component ethtx_core is
         generic (
-                data_pins : natural := C_PHY_WIDTH
+                data_pins : natural := 4
 	);
         port (
                 sys_clk         : in std_logic; -- rising edge
@@ -87,7 +87,7 @@ architecture RTL of ETH is
 
 		tx_clk		: in  std_logic;
 		tx_en		: out std_logic;
-		tx_d		: out std_logic_vector(3 downto 0)
+		tx_d		: out std_logic_vector(data_pins-1 downto 0)
 	);
 	end component ethtx_core;
 
@@ -207,7 +207,7 @@ begin -- architecture RTL
 
 	RX_core : ethrx_core 
 	generic map (
-		rx_data_pins => 4
+		rx_data_pins => C_PHY_WIDTH
 	)
 	port map (
 		sys_clk		=> OPB_clk,
@@ -225,7 +225,7 @@ begin -- architecture RTL
 
 	TX_core : ethtx_core
         generic map (
-                data_pins => 4
+                data_pins => C_PHY_WIDTH
 	)
         port map (
                 sys_clk         => OPB_clk,

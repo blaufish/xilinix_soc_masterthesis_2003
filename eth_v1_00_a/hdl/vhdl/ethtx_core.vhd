@@ -19,7 +19,7 @@ entity ethtx_core is
 
 		tx_clk		: in  std_logic;
 		tx_en		: out std_logic;
-		tx_d		: out std_logic_vector(3 downto 0)
+		tx_d		: out std_logic_vector(data_pins-1 downto 0)
 	);
 end ethtx_core;
 
@@ -224,7 +224,7 @@ begin
 
 	sender : ethtx_byte_to_mii
         generic map (
-                data_pins       => 4
+                data_pins       => data_pins
         )
         port map (
                 sys_clk         => sys_clk,

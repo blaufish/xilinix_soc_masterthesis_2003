@@ -188,7 +188,7 @@ begin
 
 	debug : ethrx_debug
 	generic map (
-		data_pins	=> 4
+		data_pins	=> rx_data_pins
 	)
 	port map (
 		sys_clk		=> sys_clk, -- rising edge
