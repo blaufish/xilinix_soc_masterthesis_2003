@@ -1,4 +1,4 @@
-lib eth_v1_00_b ramlib_sim
+lib eth_v1_00_b ramlib_xil
 lib eth_v1_00_b freefifo
 
 lib eth_v1_00_b blockram_dp
