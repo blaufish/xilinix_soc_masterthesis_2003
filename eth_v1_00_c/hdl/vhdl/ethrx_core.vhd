@@ -114,80 +114,47 @@ architecture RTL of ethrx_core is
 	);
 	end component ethrx_regfile;
 
-	component fifo_async
-    	generic (data_bits	:integer;
-             	addr_bits  :integer;
-             	block_type	:integer := 0;
-             	fifo_arch  :integer := 0); -- 0=Generic architecture, 
-                	                   -- 1=Xilinx XAPP131, 
-                        	           -- 2=Xilinx XAPP131 w/carry mux
-    	port (
-		reset	:in  std_logic;
-          	wr_clk	:in  std_logic;
-          	wr_en	:in  std_logic;
-          	wr_data	:in  std_logic_vector (data_bits-1 downto 0);
-          	rd_clk	:in  std_logic;
-          	rd_en	:in  std_logic;
-          	rd_data	:out std_logic_vector (data_bits-1 downto 0);
-          	full	:out std_logic;
-          	empty	:out std_logic
-         	);
-  	end component;
 
-	signal fifo_wren  : std_logic;
-	signal fifo_wrd   : std_logic_vector(36 downto 0);
-	signal fifo_rden  : std_logic;
-	signal fifo_rdd   : std_logic_vector(36 downto 0);
-	signal fifo_empty : std_logic;
-	signal to_reg_en  : std_logic;
-	signal to_reg     : std_logic_vector(36 downto 0);
+	component ethrx_clkdomain is
+	port (
+		sys_clk   : in std_logic;
+		sys_reset : in std_logic;
+		rx_clk    : in std_logic;
+				
+		packet_start_SYSCLK  : out std_logic;
+		packet_start_RXCLK   : in  std_logic;
+		packet_end_SYSCLK    : out std_logic;
+		packet_end_RXCLK     : in  std_logic;
+		word_dv_bytes_SYSCLK : out std_logic_vector(0 to 2);
+		word_dv_bytes_RXCLK  : in  std_logic_vector(0 to 2);
+		word_data_SYSCLK     : out std_logic_vector(0 to 31);
+		word_data_RXCLK      : in  std_logic_vector(0 to 31)
+
+	);
+	end component ethrx_clkdomain;
+
 
 	signal rx_clock_FDR  : std_logic;
 	signal rx_data_FDR   : std_logic_vector(rx_data_pins-1 downto 0);
 	signal rx_dvalid_FDR : std_logic;
 begin
-	domaincross : fifo_async
-    	generic map (
-		data_bits  => 37,
-             	addr_bits  => 2,
-             	block_type => 2,
-             	fifo_arch  => 0 ) -- 0=Generic architecture, 
-                	                   -- 1=Xilinx XAPP131, 
-                        	           -- 2=Xilinx XAPP131 w/carry mux
-    	port map (
-		reset	=> sys_reset,
-          	wr_clk	=> rx_clock,
-          	wr_en	=> fifo_wren,
-          	wr_data	=> fifo_wrd,
-          	rd_clk	=> sys_clk,
-          	rd_en	=> fifo_rden,
-          	rd_data	=> fifo_rdd,
-          	full	=> open,
-          	empty	=> fifo_empty
-         	);
 
-	fifo_wren <= '1' when (word_pkt_start & word_pkt_end & word_dv_bytes) /= "00000" else '0';
-	fifo_wrd  <= word_pkt_start & word_pkt_end & word_data & word_dv_bytes;
-	fifo_rden <= not fifo_empty;
-	
-	--to_reg_en <= fifo_rden;
-	process (sys_clk) begin
-		if rising_edge(sys_clk) then
-			if sys_reset = '1' then
-				to_reg_en <= '0';
-			else
-				to_reg_en <= fifo_rden;
-			end if;
-		end if;
-	end process;
-	
-	to_reg <= fifo_rdd when to_reg_en = '1' else (others=>'0');
+	domaincross : ethrx_clkdomain
+	port map (
+		sys_clk   => sys_clk,
+		sys_reset => sys_reset,
+		rx_clk    => rx_clock,
+				
+		packet_start_SYSCLK  => core_pkt_start,
+		packet_start_RXCLK   => word_pkt_start,
+		packet_end_SYSCLK    => core_pkt_end,
+		packet_end_RXCLK     => word_pkt_end,
+		word_dv_bytes_SYSCLK => core_dv_bytes,
+		word_dv_bytes_RXCLK  => word_dv_bytes,
+		word_data_SYSCLK     => core_data,
+		word_data_RXCLK      => word_data
 
-	core_pkt_start <= to_reg(36);
-	core_pkt_end   <= to_reg(35);
-	core_data      <= to_reg(34 downto 3);
-	core_dv_bytes  <= to_reg(2 downto 0);
-
+	);
 
 	clockbuffering1 : process (rx_clock) begin
 		if rising_edge(rx_clock) then
