@@ -233,13 +233,21 @@ begin
           		empty	=> rx_async_fifo_empty
          	);
 		rx_async_fifo_din <= rx_dvalid_FDR & rx_data_FDR;
-		rx_dvalid_s <= rx_async_fifo_dout(rx_data_pins);
-		rx_data_s <= rx_async_fifo_dout(rx_data_pins-1 downto 0);
+		--rx_dvalid_s <= rx_async_fifo_dout(rx_data_pins);
+		--rx_data_s <= rx_async_fifo_dout(rx_data_pins-1 downto 0);
 
 		rx_async_fifo_full_inv <= not rx_async_fifo_full;
 		rx_async_fifo_empty_inv <= not rx_async_fifo_empty;
-		
+	
 		rx_clock_pulse <= not rx_async_fifo_empty;
+		process (sys_clk) begin
+			if rising_edge(sys_clk) then
+				--rx_clock_pulse <= not rx_async_fifo_empty;
+				rx_dvalid_s <= rx_async_fifo_dout(rx_data_pins);
+				rx_data_s <= rx_async_fifo_dout(rx_data_pins-1 downto 0);
+
+			end if;
+		end process;
 		
 	end generate gen1;
 	
