@@ -33,6 +33,7 @@ architecture RTL of ethtx_regfile is
 	signal status_packet_buffered  : std_logic;
 	signal status_append_fcs       : std_logic;
 	signal status_fifo_words       : unsigned(8 downto 0);
+	signal status_fifo_words_rev   : unsigned(8 downto 0);
 	signal status_fifo_BILW        : unsigned(2 downto 0);
 
 	--signal status_fifo_words_p1    : unsigned(8 downto 0);
@@ -116,6 +117,7 @@ begin
 				status_packet_buffered <= '0';
 				status_append_fcs      <= '0';
 				status_fifo_words      <= (others => '0');
+				status_fifo_words_rev  <= (others => '0');
 				status_fifo_BILW       <= (others => '0');
 				output_set             <= '0';
 				word_count             <= (others => '0');
@@ -128,12 +130,13 @@ begin
 					status_append_fcs            <= reg_wr_data(1);
 					status_fifo_BILW(1 downto 0) <= unsigned( reg_wr_data(30 to 31) );
 					status_fifo_BILW(2)          <= reg_wr_data(30) nor reg_wr_data(31);
+					status_fifo_words_rev        <= status_fifo_words;
 					
-					if reg_wr_data(8) = '1' then
-						fifo_reset        <= '1';
-						status_fifo_words <= (others => '0');
-						status_fifo_BILW  <= (others => '0');
-					end if;	
+					--if reg_wr_data(8) = '1' then
+					--	fifo_reset        <= '1';
+					--	status_fifo_words <= (others => '0');
+					--	status_fifo_BILW  <= (others => '0');
+					--end if;	
 						
 				end if;
 
@@ -143,13 +146,13 @@ begin
 					status_fifo_words <= status_fifo_words + 1;
 				end if;
 
-				if status_packet_buffered='1' and status_fifo_words/="000000000" and output_set='0' then
+				if status_packet_buffered='1' and status_fifo_words_rev/="000000000" and output_set='0' then
 					output_set <= '1';
 					--fifo_rd    <= '1';
 					
-					status_fifo_words <= status_fifo_words - 1;
+					status_fifo_words_rev <= status_fifo_words_rev - 1;
 					
-					if status_fifo_words="000000001" then
+					if status_fifo_words_rev="000000001" then
 						word_count <= std_logic_vector( status_fifo_BILW );
 					else
 						word_count <= "100";
