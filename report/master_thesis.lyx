@@ -1410,4 +1410,57 @@ The stack should be modular.
 The stack should be available as well commented/documented source code,
  as it is likely that an engineer may wish to tweak the stack for the embedded
  application the engineer is developing.
+\layout Subsection
+
+Xilinx XilNet
+\layout Standard
+
+Xilinx Xilnet is included with MicroBlaze, however it is the only software
+ library in the 
+\begin_inset Quotes eld
+\end_inset 
+
+unsupported
+\begin_inset Quotes erd
+\end_inset 
+
+ directory.
+ The documentation is entirely function oriented, no documentation of overal
+ design idea is provided.
+ Xilinx does not provide a MAC or reference implementation of XilNet's layer
+ 2 API, or any application used to test XilNet.
+\layout Subsubsection
+
+Modularity
+\layout Standard
+
+XilNet is not modular.
+ Although XilNet modular at file level (arp.c, tcp.c and such), there are
+ interdepencies between the different modules that are not motivated.
+ XilNet does not provide any meassure to remove TCP/IP substacks an engineer
+ might wish to remove from his application.
+ To do this, you must modify a number of if() statements and insert a number
+ of #ifdef #else #endif preprocessor statements into the code.
+\layout Subsubsection
+
+Functionallity
+\layout Standard
+
+XilNet generated ICMP packets with bad IP checksum and invalid ICMP packet.
+ Weather this is a general flaw in XilNet, or a failure by the author to
+ use XilNet correctly, is currently unknown.
+ XilNet documentation leaves little or no help in debugging this.
+\layout Standard
+
+XilNet TCP support is limited.
+ It supports only a single concurrent TCP connection.
+\layout Subsubsection
+
+Overall
+\layout Standard
+
+XilNet appears to be written with the purpose of labeling MicroBlaze as
+ a Internet enabled processor.
+ Code quality, modularity and functionallity is poor.
+ 
 \the_end
