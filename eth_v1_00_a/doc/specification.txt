@@ -1,5 +1,5 @@
 Eth V 1.00 Revision A Specification
-$Id$
+$Id: specification.txt,v 1.2 2003/02/21 11:22:21 petmag-8 Exp $
 
 Author: Peter Magnusson < petmag-8 at sm.luth.se >
 
@@ -59,10 +59,10 @@ Section 2; Signals
 
 
 OPB decoding notes:
-OPB_ABus<0:23> is check against C_BASEADDR, if equal and OPB_select='1' the device is selected.
+OPB_ABus<0:23> equals C_BASEADDR<0:23>, address is considered to match.
 OPB_ABus<27:29> is used to decode register offset.
 OPB_ABus<30:31> and OPB_BE is used to verify that access is 32-bit.
-
+ETH will ignore OPB Bus unless 1) address match, 2) access is 32-bit, 3) OPB_select='1'.
 
 
 Section 3; Registers
