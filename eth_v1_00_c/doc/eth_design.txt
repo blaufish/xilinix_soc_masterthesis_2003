@@ -1,0 +1,104 @@
+Eth V1.00 Revision C Design Description
+$Id$
+
+Asynchronous, please read Xilinx techXclusives: Moving Data Across Asynchronous Clock Boundaries
+for details on clock domains.
+
+0) Testbench
+
+MII verification is provided in eth_v1_00_a/bench/Makefile. The command "make simrun" should
+output several lines like
+
+ASSERT/NOTE (time 17844085 PS) from process :reciever:p 
+(architecture worklib.tb_mii_reciever_model:tb_mii_reciever_model_sim)
+##--## tb_mii_reciever_model  ::  tx0  ::  RECV: Packet received, Length: 62 FCS: FB6C27F9 CRC: FB6C27F9 
+DATA: DEADFFFFFFFF000000000000CCCC1032547698BADCFE1032547698BADCFE1032547698BADCFE1032547698BADCFE00FF00
+FF00FF00FF00000000DF36E49F
+
+ASSERT/NOTE (time 32402090 PS) from process :reciever:p 
+(architecture worklib.tb_mii_reciever_model:tb_mii_reciever_model_sim)
+##--## tb_mii_reciever_model  ::  tx0  ::  RECV: Packet received, Length: 71 FCS: 1AC04291 CRC: 1AC04291 
+DATA: FFFFFFFFFFFF000000000000CCCC1032547698BADCFE1032547698BADCFE1032547698BADCFE1032547698BADCFE888888
+88888888888888888888888888880000000058034289
+
+Correct output has the following properties:
+	- The only valid warnings occur at 0 ns (prior to reset)
+	- The only valid error is ASSERT/ERROR (time 500 US) from process :halt_sim,
+	  which indicates end of testbench. Everything beyond 500 US is not part of the testbench.
+	- Each "RECV: Packet received, Length: 71 FCS: [FCS] CRC: [CRC] row should yield [FCS]=[CRC]. 
+
+1) Top
+The top module, "Eth", is a small and simple OPB slave device. It only contain minimal logiic
+needed to interface cores & OPB bus. It uses three-cycle access times to shorten logic paths,
+as shown in timing diagram bellow.
+
+  ==================================
+  =                                =
+  =  OPB_ABus:    -------<valid>-  =
+  =                       _ _ _    =
+  =  OPB_Select:  _ _ _ _|     |_  =
+  =                           _    =
+  =  ETH_xferAck: _ _ _ _ _ _| |_  =
+  =                                =
+  ==================================
+
+2) RX Core
+
+RX Core contains a two stage pipeline, clocked by RX_Clock.
+Stage 1 contains a statemachine (ethrx_statemachine) and a PHY-to-Byte entity (ethrx_MII_to_byte).
+Stage 1 is interconnected (through the "sample_rx" ports), so that the statemachine controlls when bytes
+should be recorded from the PHY stream.
+Stage 2 is a word-to-byte enitity (ethrx_byte_to_word), which turns four 8 bit bytes into 32 bit words.
+
+Stage 2 is connected to "domaincross" which moves data from the RX_Clock domain into the Sys_clk domain.
+"domaincross" is currently implemented as an assynchronous fifo and some control logic.
+
+In the sys_clk domain, a regfile entity (ethrx_regfile) which provides the FIFO and the OPB RX-registers.
+
+
+RX domaincross notes:
+When medium is idle, the "domaincross"-fifo will not be written to. When medium is active, a write will be 
+issued whenever a new word is avialable (which is every 32/data_pins cycle) or word_pkt_start/word_pkt_end 
+status bits are sent.  Therefore, in MII worst condition is a write approx. every 8th RX_Clk cycle, possibly
+with two consecutive writes. Therefore, in respect only to RX domaincross issues, sys_clk may be
+several times slower that RX_Clk. RX Domaincross may be optimized if we instead assume that sys_clk is
+always faster than RX_CLK.
+
+
+3) TX Core
+
+TX Core contains a two stage pipeline, clocked by TX_Clock.
+Stage 1 contain a word-to-byte
+Stage 2 contains a statemachine (ethtx_statemachine) and a byte-to-PHY entity (ethtx_byte_to_phy), and
+a CRC-32 module (crc.vhd) for generic sizes (configured to operate on byte-level). The statemachine
+ensures that design conforms to most ethernet transmit rules.
+
+Stage 1 is connected to a domaincross entity (ethtx_domaincross) which handles TX_Clock<->Sys_Clk domain
+crossings. The TX_Clock to sys_clk crossing is an open loop crossing, which assume sys_clk to always be
+faster than TX_Clock. The Sys_clk to TX_Clock is a slow FDR based flag-clear-clear domain cross interface.
+(Will probably be rewritten to utilize asynchronous reset later, will discuss topic with Thor first)
+
+The domaincross is also connected to a regfile entity (ethtx_regfile) which provides the OPB TX-related 
+registers and send-FIFO.
+
+A number of devices utilize a <signal>_rd (_rd=read), <signal>_valid (or <signal>_count), 
+<signal>_data interface. In this interface, _valid indicates that there is data available, and _rd that
+it has been read.
+
+  ==================================================
+  ==                 _ _         _ _ _ _          ==
+  ==  _valid:  _ _ _|   |_ _ _ _|       |_ _ _ _  ==
+  ==                   _               _          ==
+  ==  _rd:     _ _ _ _| |_ _ _ _ _ _ _| |_ _ _ _  ==
+  ==                                              ==
+  ==================================================
+
+A special case of this interface is the word_data, word_count, word_rd signals. Because word_rd is
+delayed through the domaincross logic, _valid and _data may be allready read when the last word is
+read (if word_count was less than 4, the case was observed when _count=2). To compensate for 
+misbehavior, a word_almost_empty signal was added. If word_almost_empty='1' in the current cycle, 
+in all word_ signals will be ignored until word_count and word_almost_empty both are non-zero.
+
+
+
+
