@@ -1,0 +1,14 @@
+eth_v1_00_a: Eth Version 1.00 Revision A
+Minimalistic CoreConnect OPB-Slave Ethernet interface
+
+
+Introduction:
+	Eth is a small ethernet MAC for academic purposes only. 
+	Eth is designed for simplicity and modularity, with minimal functionallity.
+	Eth is 10 MBit full duplex only.
+
+Status:
+	Eth is not completed. Eth completes _some_ tests correctly, but not all.
+	Refere to testing_status.txt for details.
+
+
