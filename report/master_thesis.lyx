@@ -1,0 +1,1413 @@
+#LyX 1.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 220
+\textclass report
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Evaluating Xilinx MicroBlaze for Network SoC solutions
+\newline 
+--- DRAFT - WORK IN PROGRESS ---
+\layout Author
+
+Peter Magnusson
+\newline 
+petmag-8@sm.luth.se
+\layout Abstract
+
+abstract abstract abstract abstract abstract abstract abstract abstract
+ abstract abstract abstract abstract abstract abstract abstract abstract
+ abstract abstract abstract abstract abstract abstract abstract abstract
+ 
+\layout Chapter*
+
+Preface
+\layout Standard
+
+förord, tacktal m.m.
+\layout Standard
+
+
+\begin_inset LatexCommand \tableofcontents{}
+
+\end_inset 
+
+
+\layout Chapter
+
+Introduction
+\layout Section
+
+About CSEE and EISLAB
+\layout Standard
+
+...
+\layout Section
+
+About System On Chip (SoC) solutions
+\layout Standard
+
+...
+\layout Section
+
+About Ethernet 10/100 MBit
+\layout Standard
+
+Ethernet 10/100 MBit
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Any reference to 
+\begin_inset Quotes eld
+\end_inset 
+
+Ethernet
+\begin_inset Quotes erd
+\end_inset 
+
+ in this paper referes to the 10/100 MBit Ethernet standards.
+ Gigabit Ethernet, Experimental Ethernet and other none 10/100 Mbit versions
+ of Ethernet are not in the scope of this paper.
+\end_inset 
+
+ is a network link (OSI layer 2) protocol.
+ Ethernet is by far the most common layer 2 protocol for LANs (Local Area
+ Network).
+ An Ethernet Packet (figure 
+\begin_inset LatexCommand \prettyref{cap:Ethernet-Packet-Format}
+
+\end_inset 
+
+) includes a 14 byte header (DA, SA, TYPE) and a 46 to 1500 byte DATA section.
+ In a standard implementation software (e.g.
+ operating system) handles these 60-1514 bytes long 
+\begin_inset Quotes eld
+\end_inset 
+
+subframes
+\begin_inset Quotes erd
+\end_inset 
+
+, while synchronization (PREAMBLE, SYNC) and error detection (FCS) and a
+ number of other Ethernet specifics are managed by hardware.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ethernet-Packet-Format}
+
+\end_inset 
+
+Ethernet Packet Format
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="7">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+PREAMBLE
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+SYNCH
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+DA
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+SA
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+TYPE
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+DATA
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+FCS
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+62
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+46-1500
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bits
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bits
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bytes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bytes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bytes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bytes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+bytes
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+Full Duplex, Half Duplex, and Auto negociation
+\layout Standard
+
+An Ethernet device is either operating at Full Duplex or Half Duplex mode.
+ Most Ethernet devices can be configured to Auto Negociate duplex, or to
+ use a staticly selected duplex mode.
+ 
+\layout Standard
+
+In half duplex, an aribatry number of ethernet devices share an Ethernet
+ bus, using the CSMA/CD access protocol.
+ Half duplex is an inefficient and antique Ethernet mode, although still
+ in use in a number of Ethernet Networks.
+\layout Standard
+
+In full duplex, each Ethernet device has a dedicated send and receive bus.
+ Interconnections are handled by network switches.
+ Pending on network design and switch capacity allows much more throughput
+ than half duplex, as different paths often can be used in parallel instead
+ of a single shared medium.
+\layout Standard
+
+Most common Ethernet devices support Half, Full and Auto duplex, and will
+ negociate Full Duplex unless negociating with a Half Duplex only Ethernet
+ interface.
+\layout Subsection
+
+10 MBit, 100 MBit or Auto Negociation
+\layout Standard
+
+Today,10 MBit Ethernet devices are still available for sale, but the faster
+ 100 MBit Ethernet is by far more common.
+ However, many old devices are 10 MBit only.
+ Most 100 MBit devices will Auto Negociate to 100 MBit unless negociating
+ with a 10 Mbit device.
+ Most (if not all) 100 MBit Ethernet devices support Auto Negociation.
+\layout Subsection
+
+
+\begin_inset LatexCommand \label{sub:MAU-PHY}
+
+\end_inset 
+
+Medium Attachment Unit (MAU) and Physical device (PHY)
+\layout Standard
+
+Ethernet can be used in several different mediums, typically coaxial cables,
+ optical fibers and twisted pair cables.
+ To simplify development, a PHY (or MAU
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+MAU is used in Ethernet 10 MBit references.
+ PHY is used in Ethernet 10/100 Mbit references.
+ In this paper, the term PHY is loosly used in reference to both MAU and
+ PHY.
+\end_inset 
+
+) handle the OSI Layer 2 (Link/MAC) 
+\begin_inset Formula $\Leftrightarrow $
+\end_inset 
+
+ OSI Layer 1 (Physical) interface.
+ An PHY is a transceiver which may be able to Auto Negociate between different
+ Ethernet standards.
+ There are a number of different PHY prococols, which defines how the PHY
+ pins should be used.
+ Since PHYs conform to standards an Ethernet device does not need to be
+ aware of what kind of physical medium it will be implemented in.
+ An Ethernet device is also portable to all compatible PHYs, making it manufactu
+rer independant.
+\layout Standard
+
+There are three common PHYs: AUI, MII and RMII.
+ Each of them have their own charisterstics (as shown in table 
+\begin_inset LatexCommand \prettyref{cap:MAU-PHY}
+
+\end_inset 
+
+).
+ AUI is an old 10 Mbit interface only.
+ MII was defined as the 10/100 MBit Ethernet was introduced.
+ An MII design goal appears to be a high parallellism (data width), offering
+ 100 MBit at 25 MHz clockcycles.
+ RMII was invented to reduce the number of pins needed by each interface,
+ which is a major design concern in e.g.
+ switches and other multi-interface ASIC/FPGA designs.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MAU-PHY}
+
+\end_inset 
+
+Common MAU and PHY protocols
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features>
+<column alignment="left" valignment="top" leftline="true" width="5cm">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAU / PHY protocol
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Pins/Interface
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Width
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MBit
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Attachment Unit Interface (AUI)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6 pins
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1 bit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Medium Independant Interface (MII)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+16 pins
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 4 bit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10/100
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Reduced Medium Independant Interface (RMII)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8 pins
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2 bit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10/100
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Section
+
+About IBM CoreConnect On-Chip Peripheral Bus
+\layout Standard
+
+The IBM Core Connect On-Chip Peripheral Bus
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Refered to as 
+\begin_inset Quotes eld
+\end_inset 
+
+OPB
+\begin_inset Quotes erd
+\end_inset 
+
+ or 
+\begin_inset Quotes eld
+\end_inset 
+
+OPB Bus
+\begin_inset Quotes erd
+\end_inset 
+
+ in this paper.
+\end_inset 
+
+ is an easy to use bus, allowing an aribtery number of masters to read from
+ / write to an aribitery number of slaves.
+ 
+\layout Standard
+
+The bus includes a data bus and an address bus.
+ A typical OPB device use the most significant bits of the address bus to
+ determin weather it was selected or not, and the least significant bits
+ to determin which address was accessed.
+ 
+\layout Standard
+
+An OPB device access can performed in two cycles but slower devices can
+ responed in up to 16 cycles, or an aribitary number of cycles by issuing
+ a Timout Supress signal.
+\layout Section
+
+About Xilinx MicroBlaze
+\layout Standard
+
+Xilinx MicroBlaze is a small RISC kernel geared for implementation in Xilinx
+ FPGAs and embedded applications.
+ MicroBlaze is a highly optimized 
+\begin_inset Quotes eld
+\end_inset 
+
+soft processor
+\begin_inset Quotes erd
+\end_inset 
+
+
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Processor implementation of configurable devices, such as FGPAs.
+ Soft processors are usually distributed as source code or as netlists.
+\end_inset 
+
+ and among the fastest available to Xilinx FPGAs.
+ The MicroBlaze instruction set is a typical RISC instruction set, similar
+ to e.g.
+ MIPS.
+ 
+\layout Standard
+
+The MicroBlaze core contains two OPB buses, and two LMB (Local Memory Buses)
+ buses.
+ The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
+ Port Block RAM support for dual single cycle access.
+ A MicroBlaze system with only LMB access is extremly efficient, however
+ an FPGA conatins only a few kilobytes of Block RAM.
+ A MicroBlaze system may utilize all four buses (as shown in figure 
+\begin_inset LatexCommand \prettyref{cap:MicroBlaze}
+
+\end_inset 
+
+) but it can also be configured to use less buses, as long as a datapath
+ and an instruction path is provided.
+ Therefor a MicroBlaze system always utilize 2, 3 or 4 buses.
+\layout Standard
+
+Xilinx provides software and documentation allowing developers to utilize
+ a number of standard OPB peripherals (Memory Controller, UART, Watchdog,
+ JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
+ 1 to 16 masters to share an OPB Bus).
+ Xilinx also provides documentation and tutorials on the subject of designing
+ custom OPB Slaves for MicroBlaze systems.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze}
+
+\end_inset 
+
+MicroBlaze Core with Bus Connections
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_busconfig.eps
+	display default
+	size_type 2
+	scale 75
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Chapter
+
+Development of MicroBlaze Ethernet devices
+\layout Section
+
+Design requirements and limitations
+\layout Subsection
+
+Full Duplex only
+\layout Standard
+
+In principal, supporting the entire range of Full/Half/Auto combinations
+ is easy, but it takes time and effort to develop and verify.
+ For simplicty, all ethernet devices were developed for Full Duplex only,
+ which is by far the most common Ethernet Duplex mode today.
+\layout Subsection
+
+Ethernet Interfaces (PHY): MII and RMII
+\layout Standard
+
+The Ethernet devices were designed to be used on two different prototype
+ boards, one which was based on an MII Ethernet Interface, one which was
+ based on a Reduced MII (RMII) Ethernet Interface.
+ Therefore, the designs needed to be capable to manage both interfaces.
+ MII and RMII are discussed in section 
+\begin_inset LatexCommand \vref{sub:MAU-PHY}
+
+\end_inset 
+
+.
+\layout Section
+
+Implementation
+\layout Subsection
+
+Fully synchronous
+\layout Standard
+
+To simplify design and verification, no assynchronous logic is used in the
+ design.
+ It should be noted that due to this design choice, Ethernet Interface clocks
+ must be sampled fast enough to detect rising edge and change values prior
+ to falling edge.
+ Thus, system clock must be approximately 5 times faster than Ethernet interface
+ clocks.
+ Table 
+\begin_inset LatexCommand \prettyref{cap:Min-SysClk}
+
+\end_inset 
+
+ shows the interface clocks and resulting minimal system clock frequence.
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Min-SysClk}
+
+\end_inset 
+
+Minimum System Clock
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Interface
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Interface Clock
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Minimum System Clock
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MII 10 MBit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2.5 MHz
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+12.5 MHz
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MII 100 MBit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+25 MHz
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+125 MHz
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+RMII 10 MBit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5 MHz
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+25 MHz
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+RMII 100 MBit
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+50 MHz
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+250 MHz
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+System Clock and Performance Impact
+\layout Standard
+
+With respect to target architecture (Virtex 800, Speedgrade 4), design reaches
+ 50 MHz after synthesis.
+ As shown in table 
+\begin_inset LatexCommand \prettyref{cap:Min-SysClk}
+
+\end_inset 
+
+, this only enables 10 MBit implementations.
+\layout Standard
+
+The OPB bus, operating at 50 MHz, two cycle access times and 32 bit transferes,
+ yields a theoretical switching capacity of 32*50/2 = 800 MBit.
+ This should be enough for a large number of 10 MBit devices - about 40
+ operating at full speed in both directions.
+ 
+\layout Subsection
+
+Modular design
+\layout Standard
+
+To provide a simple, extendable and reusable interface, each component is
+ design with modularity and reusability in mind.
+ 
+\layout Standard
+
+All receive-logic is placed in an RX core (figure 
+\begin_inset LatexCommand \prettyref{cap:RX-Core}
+
+\end_inset 
+
+), and all send logic in an TX core (figure 
+\begin_inset LatexCommand \prettyref{cap:TX-Core}
+
+\end_inset 
+
+).
+ The cores are mapped into a small top-module which handles bus interconnections.
+ As shown in table 
+\begin_inset LatexCommand \prettyref{cap:EthModules}
+
+\end_inset 
+
+, all parts of the design have successfully been kept at a small number
+ of short and easily read VHDL files.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:EthModules}
+
+\end_inset 
+
+Ethernet Device Modules
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modules
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+VHDL Files/Entities
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Avgerage number of lines per file
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+General
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+93
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+RX Core
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+7
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+112
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+TX Core
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+133
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+OPB Slave
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+250
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:RX-Core}
+
+\end_inset 
+
+RX Core
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename ethrx-core-hack.eps
+	display default
+	size_type 1
+	width 40page%
+	height 90page%
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:TX-Core}
+
+\end_inset 
+
+TX Core
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/ethtx-core-hack.eps
+	display default
+	size_type 1
+	width 60page%
+	height 25page%
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Section
+
+Verification
+\layout Subsection
+
+Testbenches
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Modular Testbench
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/testbench1.eps
+	display default
+	size_type 2
+	scale 50
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsubsection
+
+Regression tests
+\layout Standard
+
+Testbenches are written to be highly automized and generate logfiles of
+ assert notes, warnings and errors.
+ Therefore, human inspection of waveforms are rarely needed to verify that
+ recently added code does not break previous functionallity.
+ Regression tests proved to be a highly usefull tool and considerably shortened
+ verification cycles by automaticly finding errors in design.
+\layout Subsubsection
+
+Modular testbench: Ethernet Model
+\layout Standard
+
+To simplify the main testbench, verification of Ethernet correctness is
+ performed in a stand alone module.
+ The modul identifies short packets, long packets, short interframe gaps,
+ incorrect FCS and a number of other Ethernet violations.
+ Such errors are asserted as warnings, and packets are outputed as assert
+ notes in hexadecimal notation.
+\layout Subsubsection
+
+Modular testbench: OPB Loopback Model
+\layout Standard
+
+Verification of OPB behaivor correctness is performed in the OPB Loopback
+ Model.
+ The model is able to identify some but not all possible violations of the
+ OPB bus.
+ Additionally, the OPB loopback acts as a loopback device: Any packet recieved
+ by the device will be outputed by the device, without modification.
+\layout Subsection
+
+Multiple Compilation and Synthesis
+\layout Standard
+
+Ethenet devices were compiled and simulated with two common simulation environme
+nts, Modeltech Modelsim and Cadence Logic Verification.
+ Ethernet devices were compiled and synthesized with Xilinx Synthesis Techonolog
+y (XST) and Synplicity Synplify Pro.
+ By testing code in a large number of different tools, unportable VHDL construct
+s have been identified and removed, as well as most code cunstructs which
+ cause warnings in any of the tools used.
+\layout Subsection
+
+Packet monitoring with The Ethereal Network Analyzer
+\layout Standard
+
+The The Ethereal Network Analyzer (
+\begin_inset Quotes eld
+\end_inset 
+
+Ethereal
+\begin_inset Quotes erd
+\end_inset 
+
+) was used to capture Ethernet packets, efficiently monitoring network conversat
+ions between testcomputer and ethernet devices.
+ Overall, Ethereal was not very usefull for finding hardware/VHDL errors,
+ but a powerfull tool for debugging software such as IP stacks.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Test Setup #1
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/testsetup1.eps
+	display default
+	size_type 2
+	scale 75
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+Real World Tests
+\layout Standard
+
+To verify hardware robustness, the ethernet devices were used in a number
+ of real world tests.
+ Some of them, such as a simple ICMP Echo Request / ICMP Echo Reply (
+\begin_inset Quotes eld
+\end_inset 
+
+ping
+\begin_inset Quotes erd
+\end_inset 
+
+) test, was performed for several hours with 0 packet loss.
+ All real world tests indicates that design is robust.
+\layout Chapter
+
+Network software for MicroBlaze
+\layout Standard
+
+A Network System on Chip could do everything in ASIC hardware or configurable
+ blocks (FPGA/CPLD).
+ However, there are several reasons to utilize a processor and run software
+ on it:
+\layout Itemize
+
+Software can be tested and verified in other environments before they are
+ implemented for the SoC being developed, shortening design times.
+\layout Itemize
+
+Software tends to be easier to develop than hardware (HDL code).
+\layout Itemize
+
+Software version could be upgraded during operation, perhaps even by remote.
+ Programmable logic (e.g.
+ FPGA) however usually requires manual reprogramming, physical acess to
+ the FPGA and takes the the chip offline during reprogramming.
+ ASICs without any processor or programmable logic would be even harder
+ to update.
+ Thus, software makes the chip more flexible and easier to fix if bugs are
+ detected after distribution.
+\layout Section
+
+Small TCP/IP stacks for embedded applications
+\layout Standard
+
+In the context of small TCP/IP stacks, it is interesting to know 
+\begin_inset Quotes eld
+\end_inset 
+
+how small is a small TCP/IP stack?
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ The answer is simple - it depends upon what you are comparing to.
+ Extreme application specific stacks may only contain 256 bytes of code,
+ a general stack is hard to make small.
+\layout Standard
+
+Therefore, we define a number of heuristics we want from a small TCP/IP
+ stack:
+\layout Itemize
+
+The TCP/IP stack should provide both a recieve and a send packet to datagram
+ oriented handling functions (ARP, ICMP, UDP and others).
+ This is for ease of use, in practice it is not needed but it considerably
+ simplifies development and verification.
+ As these bufferts can be reused by all functions, it is prefered that they
+ are implemented by global arrays or pointers, instead of local variables.
+\layout Itemize
+
+The stack should be general and reusable, not application specific.
+\layout Itemize
+
+The stack should be functional.
+ It should generate correct packets (correct IP checksum etc).
+\layout Itemize
+
+The stack should not be user oriented - there aren't users multiple users
+ in an embedded application, don't waste memory handling such cases.
+\layout Itemize
+
+The stack should be modular.
+ If an application only need ARP+UDP, or ARP+ICMP, it should not be required
+ to implement memory expensive protocols such as TCP.
+\layout Itemize
+
+The stack should be available as well commented/documented source code,
+ as it is likely that an engineer may wish to tweak the stack for the embedded
+ application the engineer is developing.
+\the_end

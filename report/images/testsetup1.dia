@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">
+  <diagramdata>
+    <attribute name="background">
+      <color val="#ffffff"/>
+    </attribute>
+    <attribute name="paper">
+      <composite type="paper">
+        <attribute name="name">
+          <string>#A4#</string>
+        </attribute>
+        <attribute name="tmargin">
+          <real val="2.82"/>
+        </attribute>
+        <attribute name="bmargin">
+          <real val="2.82"/>
+        </attribute>
+        <attribute name="lmargin">
+          <real val="2.82"/>
+        </attribute>
+        <attribute name="rmargin">
+          <real val="2.82"/>
+        </attribute>
+        <attribute name="is_portrait">
+          <boolean val="true"/>
+        </attribute>
+        <attribute name="scaling">
+          <real val="0.522385"/>
+        </attribute>
+        <attribute name="fitto">
+          <boolean val="true"/>
+        </attribute>
+        <attribute name="fitwidth">
+          <int val="1"/>
+        </attribute>
+        <attribute name="fitheight">
+          <int val="1"/>
+        </attribute>
+      </composite>
+    </attribute>
+  </diagramdata>
+  <layer name="Background" visible="true">
+    <object type="Network - Hub" version="0" id="O0">
+      <attribute name="obj_pos">
+        <point val="14.45,-0.548"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="12.11,-2.612;16.79,0.544"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="12.15,-2.572"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="4.6"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2.024"/>
+      </attribute>
+      <attribute name="magnify">
+        <real val="0.92"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>##</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="1"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="14.45,0.337103"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Standard - Line" version="0" id="O1">
+      <attribute name="obj_pos">
+        <point val="14.45,-0.548"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="4.25343,-0.598;14.5,5.4"/>
+      </attribute>
+      <attribute name="conn_endpoints">
+        <point val="14.45,-0.548"/>
+        <point val="4.30343,5.35"/>
+      </attribute>
+      <attribute name="numcp">
+        <int val="1"/>
+      </attribute>
+      <connections>
+        <connection handle="0" to="O0" connection="0"/>
+        <connection handle="1" to="O5" connection="2"/>
+      </connections>
+    </object>
+    <object type="Network - General Computer (Tower)" version="0" id="O2">
+      <attribute name="obj_pos">
+        <point val="6.52895,13.9"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="5.21789,9.26;7.84,15.0211"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="5.25789,9.3"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="2.54211"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="4.6"/>
+      </attribute>
+      <attribute name="magnify">
+        <real val="1.21053"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>##</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="1"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="6.52895,14.8142"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Network - General Monitor (With Stand)" version="0" id="O3">
+      <attribute name="obj_pos">
+        <point val="2.18475,13.9"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="0.06,9.76;4.30949,15.039"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="0.1,9.8"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="4.16949"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="4.1"/>
+      </attribute>
+      <attribute name="magnify">
+        <real val="1.38983"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>##</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="1"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="2.18475,14.8321"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="ER - Entity" version="0" id="O4">
+      <attribute name="obj_pos">
+        <point val="10.2034,-5.55"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="10.1534,-5.6;19.1254,-3.7"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="10.2034,-5.55"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="8.872"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="1.8"/>
+      </attribute>
+      <attribute name="border_width">
+        <real val="0.1"/>
+      </attribute>
+      <attribute name="border_color">
+        <color val="#000000"/>
+      </attribute>
+      <attribute name="inner_color">
+        <color val="#ffffff"/>
+      </attribute>
+      <attribute name="name">
+        <string>#Ethernet Switch#</string>
+      </attribute>
+      <attribute name="weak">
+        <boolean val="false"/>
+      </attribute>
+    </object>
+    <object type="Flowchart - Box" version="0" id="O5">
+      <attribute name="obj_pos">
+        <point val="-2.16417,5.35"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="-2.21417,5.3;10.821,8.1"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="-2.16417,5.35"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="12.9352"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2.7"/>
+      </attribute>
+      <attribute name="show_background">
+        <boolean val="true"/>
+      </attribute>
+      <attribute name="padding">
+        <real val="0.5"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>#Test PC running
+Test software &amp; Ethereal#</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="0.8"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="4.30343,6.53448"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Flowchart - Box" version="0" id="O6">
+      <attribute name="obj_pos">
+        <point val="18.5674,5.15"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="18.5174,5.1;27.1894,7.9"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="18.5674,5.15"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="8.572"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2.7"/>
+      </attribute>
+      <attribute name="show_background">
+        <boolean val="true"/>
+      </attribute>
+      <attribute name="padding">
+        <real val="0.5"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>#Prototype Board
+(Network SoC)#</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="0.8"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="22.8534,6.33448"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Standard - Line" version="0" id="O7">
+      <attribute name="obj_pos">
+        <point val="14.45,-0.548"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="14.4,-0.598;22.9034,5.2"/>
+      </attribute>
+      <attribute name="conn_endpoints">
+        <point val="14.45,-0.548"/>
+        <point val="22.8534,5.15"/>
+      </attribute>
+      <attribute name="numcp">
+        <int val="1"/>
+      </attribute>
+      <connections>
+        <connection handle="0" to="O0" connection="0"/>
+        <connection handle="1" to="O6" connection="2"/>
+      </connections>
+    </object>
+  </layer>
+</diagram>
