@@ -120,7 +120,7 @@ architecture RTL of ETH is
 
 	signal address_match, uint32_operation, selected, ETH_xferAck_sig : std_logic;
 	signal reg : std_logic_vector(0 to 2);
-	signal dbus, dbus_2 : std_logic_vector(0 to 31);
+	signal dbus : std_logic_vector(0 to 31);
 
 begin -- architecture RTL
 
@@ -135,15 +135,18 @@ begin -- architecture RTL
 
 	
 	dbus <= 
-		RX_reg_fifo   when reg="000" else 
-		RX_reg_status when reg="001" else 
-		RX_debugfile0 when reg="010" else 
-		RX_debugfile1 when reg="011" else 
-		X"DEAD0001"   when reg="100" else -- read only
-		TX_reg_status when reg="101" else
-		X"DEAD0002"; -- unimplemented
+	    (others => '0') when selected/='1' else
+		RX_reg_fifo     when reg(0)='0' and reg(2)='0' else 
+		RX_reg_status   when reg(0)='0' and reg(2)='1' else 
+		TX_reg_status   when reg(0)='1' and reg(2)='1' else
+		(others => '-') ;
 
-	dbus_2 <= dbus when selected='1' else (others => '0');
+		--RX_debugfile0   when reg="010" else 
+		--RX_debugfile1   when reg="011" else 
+		--X"DEAD0001"     when reg="100" else -- read only
+		--X"DEAD0002"; -- unimplemented
+
+	--dbus_2 <= dbus when selected='1' else (others => '0');
 
 	ETH_DBus_FDRE : FDRE 
 		generic map (
@@ -154,7 +157,7 @@ begin -- architecture RTL
 			clk => OPB_Clk,
 			r => ETH_DBus_REG_r,
 			e => ETH_DBus_REG_e,
-			d => dbus_2,
+			d => dbus,
 			q => ETH_DBus_REG
 		);
 
