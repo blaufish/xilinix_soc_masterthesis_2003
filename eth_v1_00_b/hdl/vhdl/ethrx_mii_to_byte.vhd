@@ -89,7 +89,14 @@ begin
 				
 					elsif sample_rx='1' and rx_dvalid='1' then
 						data_sampled <= data_BE & data_sampled(data_sampled'left downto data_pins);
-						data_count <= data_count + 1;
+						
+						if data_count = words then
+							-- bugfix: race condition
+							data_count <= 1;
+						else
+							-- normal action
+							data_count <= data_count + 1;
+						end if;
 
 						if pkt_start_sent = '0' then
 							pkt_start_sent <= '1';
