@@ -90,6 +90,7 @@ begin
 
 				if tx_clock_pulse='1' and send_state=state_wait then
 					tx_en <= '0';
+					count <= (others => '0');
 					fcs_count <= (others => '0');
 					send_fcs_ok <= '0';
 
@@ -109,15 +110,6 @@ begin
 				end if;
 
 
-				if send_state=state_send and append_fcs='0' and count="000" and byte_valid='0' then
-					packet_sent <= '1';
-				end if;
-
-				if send_state=state_send and append_fcs='1' and fcs_count="100" and count="000" then
-					packet_sent <= '1';
-				end if;
-
-
 				if count="000" then
 					if byte_valid='1' then
 						byte_rd <= '1';
@@ -131,7 +123,17 @@ begin
 						count       <= to_unsigned( 8/data_pins, 3 );
 					end if;
 				end if;
-				
+			
+				if send_state=state_send then
+					if (append_fcs='0' and count="000" and byte_valid='0') 
+					or (append_fcs='1' and fcs_count="100" and count="000") then
+						
+						packet_sent <= '1';
+						count <= (others => '0');
+					end if;
+				end if;
+
+	
 			end if;
 		end if;
 	end process;
