@@ -29,6 +29,8 @@
 Evaluating Xilinx MicroBlaze for Network SoC solutions
 \newline 
 --- DRAFT - WORK IN PROGRESS ---
+\newline 
+
 \layout Author
 
 Peter Magnusson
@@ -36,16 +38,51 @@ Peter Magnusson
 petmag-8@sm.luth.se
 \layout Abstract
 
-abstract abstract abstract abstract abstract abstract abstract abstract
- abstract abstract abstract abstract abstract abstract abstract abstract
- abstract abstract abstract abstract abstract abstract abstract abstract
- 
+Xilinx MicroBlaze is a processor core for implementation in Xilinx Field
+ Programmable Arrays (FPGA) circuits.
+ This thesis explores the possibility of utilizing Xilinx MicroBlaze and
+ IBM CoreConnect On-Chip Peripheral Bus peripherals in a single FPGA to
+ provide a System on Chip (SoC) solution for an aribitery set of network
+ applications.
+ Typical applications include Ethernet switches, Internet-connected embedded
+ systems, small IP clients for handheld devices and simple Internet gateways.
 \layout Chapter*
 
 Preface
 \layout Standard
 
-förord, tacktal m.m.
+The evaluation of Xilinx MicroBlaze has been performed as a Master Thesis
+ in Computer Science and Engineering.
+ The evaluation was performed at Department of Computer Science and Electrical
+ Engineering (CSEE) and Embedded Internet Systems Laboratory (EISLAB) at
+ Luleå Univeristy of Technology.
+ 
+\layout Standard
+
+I wish to thank 
+\layout Itemize
+
+Ph.d.
+ Per Lindgren for supervising my thesis.
+\layout Itemize
+
+Ph.d.
+ student Jonas Thor for feedback on various computer engineering topics.
+\layout Itemize
+
+MS.c.
+ student Jens Eliasson for various MicroBlaze discussions.
+\layout Itemize
+
+MS.c.
+ students Jan Dahlberg, Johan Mattsson and Frederik Schmid for reusing and
+ bugtesting my Ethernet MAC.
+\layout Standard
+
+During my work on the theisis, I have tought MicroBlaze based System on
+ Chip (SoC) development to MS.c.
+ students in the Digital Synthesis course at CSEE.
+ Additional credits goes to these students for valuable input.
 \layout Standard
 
 
@@ -59,16 +96,197 @@ förord, tacktal m.m.
 Introduction
 \layout Section
 
-About CSEE and EISLAB
+System on Chip (SoC) solutions
 \layout Standard
 
-...
+System on Chip (SoC) refer to devices where all essential parts of a computing
+ systems have been integrated in a single circuit.
+ A typical SoC includes one (or many) processor core(s), an aribitary number
+ of peripherals for input/output, some on-chip memory and an interface for
+ connecting external memory, and one or several busses which interconnects
+ all these devices.
+\layout Standard
+
+As SoCs usually are designed with a limited set of applications in mind,
+ they tend to need less CPU power than a general purpose computer.
+ As a modern workstation operates with clock frequences in the range of
+ 500 MHz - 3 GHz, the SoC CPU might operate with just a few megahertz.
+ An ideal SoC CPU is operating at the minimum clock frequence needed to
+ properly perform the desired application.
+ By maintaining a slow clock frequence the power consumtion and chip temperature
+ is reduced.
+ This allows SoCs to operate with less cooling devices and better battery/power
+ utilization.
+\layout Subsection
+
+What is a microcontroller and what is a SoC?
+\layout Standard
+
+A typical microcontroller consists of a single processor core, some memory
+ and a few simple peripherals.
+ Most microcontrollers share the following properties: they are cheap, they
+ are energy efficient and they are more or less general purpose.
+ Therefore microcontrollers can be considered to be a subset of SoCs.
 \layout Section
 
-About System On Chip (SoC) solutions
+On-Chip Peripheral Bus (OPB)
 \layout Standard
 
-...
+The IBM Core Connect On-Chip Peripheral Bus
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Refered to as 
+\begin_inset Quotes eld
+\end_inset 
+
+OPB
+\begin_inset Quotes erd
+\end_inset 
+
+ or 
+\begin_inset Quotes eld
+\end_inset 
+
+OPB Bus
+\begin_inset Quotes erd
+\end_inset 
+
+ in this paper.
+\end_inset 
+
+ is an easy to use bus, allowing an aribtery number of masters to read from
+ / write to an aribitery number of slaves.
+\layout Standard
+
+The bus includes a data bus and an address bus.
+ A typical OPB device use the most significant bits of the address bus to
+ determin weather it was selected or not, and the least significant bits
+ to determin which address was accessed.
+ 
+\layout Standard
+
+A normal OPB access can be performed in one cycle.
+ Slow OPB devices may responed in up to 16 cycles, or an aribitary number
+ of cycles if issuing a Timout Supress signal.
+\layout Standard
+
+When several masters share a OPB bus, a bus aribitrator is used to grant
+ exclusive bus access.
+ In these systems, an master may have to wait until bus is idle.
+ The aribitrator itself may also introduce a short mandatory delay before
+ it grant access.
+ An OPB master may utilize bus lock / sequencial access to make several
+ slave accesses per aribitrated bus grant.
+ Utilization of sequencial access keeps arbitration overhead to a minimum.
+\layout Section
+
+Field Programmable Gate Array (FPGA)
+\layout Standard
+
+Field Programmable Gate Array (FPGA) is a type of programmable devices.
+ An FPGA contains a generic architecture with configurable logic and routing.
+ FPGAs are expensive, but can contain enough logic to implement advanced
+ systems, such as a System on Chip.
+ 
+\layout Standard
+
+FPGAs are not optimized for any specific task, and therefore they consume
+ more power or implement a design inefficiently.
+ However FPGAs are ease of use and quickly reprogrammed.
+ This makes FPGA perfect for prototypes or small series development.
+ FPGAs are also usefull in first generation manufacturing if standards and
+ applications are subject to change, or if an application must be released
+ earlier than engineers consider the design safe for implementation in an
+ Application Specific Integrated Circuit (ASIC).
+\layout Section
+
+Xilinx MicroBlaze
+\layout Standard
+
+Xilinx MicroBlaze is a small processor core geared for implementation in
+ Xilinx FPGAs and embedded applications.
+ MicroBlaze is a highly optimized 
+\begin_inset Quotes eld
+\end_inset 
+
+soft processor
+\begin_inset Quotes erd
+\end_inset 
+
+
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Processor implementation of configurable devices, such as FGPAs.
+ Soft processors are usually distributed as source code or as netlists.
+\end_inset 
+
+ and among the fastest available to Xilinx FPGAs.
+ The MicroBlaze instruction set is a typical instruction set familar to
+ MIPS and other common RISC processors.
+ 
+\layout Standard
+
+The MicroBlaze core contains two OPB buses (OPB instruction path, OPB data
+ path), and two Local Memory Buses (LMB) buses (LMB instruction path, LMB
+ data path).
+ The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
+ Port Block RAM support for dual single cycle access.
+ A MicroBlaze system with only LMB access is extremly efficient, however
+ an FPGA conatins only a few kilobytes of Block RAM.
+ A MicroBlaze system may utilize all four buses (as shown in figure 
+\begin_inset LatexCommand \prettyref{cap:MicroBlaze}
+
+\end_inset 
+
+).
+ A MicroBlaze system must include a data path and an instruction path to
+ the MicroBlaze core, therefor it will utilize 2, 3 or 4 buses.
+\layout Standard
+
+Xilinx provides software and documentation allowing developers to utilize
+ a number of standard OPB peripherals (Memory Controller, UART, Watchdog,
+ JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
+ 1 to 16 masters to share an OPB Bus).
+ Xilinx also provides documentation and tutorials on the subject of designing
+ custom OPB Slaves for MicroBlaze systems.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze}
+
+\end_inset 
+
+MicroBlaze Core with Bus Connections
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_busconfig.eps
+	display default
+	size_type 2
+	scale 75
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
 \layout Section
 
 About Ethernet 10/100 MBit
@@ -102,23 +320,46 @@ Ethernet
 \end_inset 
 
 ) includes a 14 byte header (DA, SA, TYPE) and a 46 to 1500 byte DATA section.
- In a standard implementation software (e.g.
- operating system) handles these 60-1514 bytes long 
+ In a typical implementation, hardware manages access control, synchronization
+ (PREAMBLE, SYNC) and error detection (FCS).
+ Hardware may or may not verify source address (SA).
+ Packets can be based in three classes based upon source address:
+\layout Itemize
+
+Broadcast packets; sent to all hosts
+\layout Itemize
+
+Multicast packets; sent to a group of hosts
+\layout Itemize
+
+Unicast packets; sent to a specific host
+\layout Standard
+
+As an endhost, a packet is considered to be a stray if is a multicast packet
+ sent to a group which the device does not participate in, or if it is a
+ unicast packet sent to another host.
+ Stray packets are common in ethernet (in a half duplex network, they are
+ in fact more common than none stray packets).
+ Many end host ethernet devices drop stray packets instead of passing them
+ to software.
+ To not drop stray packets, is commonly refered to as 
 \begin_inset Quotes eld
 \end_inset 
 
-subframes
+promiscuous mode
 \begin_inset Quotes erd
 \end_inset 
 
-, while synchronization (PREAMBLE, SYNC) and error detection (FCS) and a
- number of other Ethernet specifics are managed by hardware.
+.
+ Several end host devices can enable/disable promiscuous mode by software.
+ Interconnect devices such as network swicthes, can be considered to operate
+ in promiscious mode.
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -329,22 +570,25 @@ Full Duplex, Half Duplex, and Auto negociation
 \layout Standard
 
 An Ethernet device is either operating at Full Duplex or Half Duplex mode.
- Most Ethernet devices can be configured to Auto Negociate duplex, or to
+ Most Ethernet devices can be configured to Auto Negociate duplex or to
  use a staticly selected duplex mode.
  
 \layout Standard
 
-In half duplex, an aribatry number of ethernet devices share an Ethernet
- bus, using the CSMA/CD access protocol.
+In half duplex, an aribatry number of ethernet devices share a single Ethernet
+ medium, using the CSMA/CD access protocol.
  Half duplex is an inefficient and antique Ethernet mode, although still
- in use in a number of Ethernet Networks.
+ in use in a dwindeling number of legacy networks.
 \layout Standard
 
-In full duplex, each Ethernet device has a dedicated send and receive bus.
+In full duplex mode each Ethernet device has a dedicated send medium and
+ a dedicated receive medium.
  Interconnections are handled by network switches.
+ A special ethernet PAUSE frame is used to notify a sender that a Ethernet
+ device is congested and may not recieve more packets for a period of time.
  Pending on network design and switch capacity allows much more throughput
- than half duplex, as different paths often can be used in parallel instead
- of a single shared medium.
+ than half duplex, as several parallell mediums may be utilized concurently
+ instead of a single shared medium.
 \layout Standard
 
 Most common Ethernet devices support Half, Full and Auto duplex, and will
@@ -360,7 +604,8 @@ Today,10 MBit Ethernet devices are still available for sale, but the faster
  However, many old devices are 10 MBit only.
  Most 100 MBit devices will Auto Negociate to 100 MBit unless negociating
  with a 10 Mbit device.
- Most (if not all) 100 MBit Ethernet devices support Auto Negociation.
+ Most (if not all) 100 MBit Ethernet devices support 10/100 MBit Auto Negociatio
+n.
 \layout Subsection
 
 
@@ -368,7 +613,7 @@ Today,10 MBit Ethernet devices are still available for sale, but the faster
 
 \end_inset 
 
-Medium Attachment Unit (MAU) and Physical device (PHY)
+Physical device (PHY)
 \layout Standard
 
 Ethernet can be used in several different mediums, typically coaxial cables,
@@ -379,7 +624,7 @@ collapsed true
 
 \layout Standard
 
-MAU is used in Ethernet 10 MBit references.
+Medium Attachment Unit (MAU) is used in Ethernet 10 MBit references.
  PHY is used in Ethernet 10/100 Mbit references.
  In this paper, the term PHY is loosly used in reference to both MAU and
  PHY.
@@ -419,7 +664,7 @@ There are three common PHYs: AUI, MII and RMII.
 
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -583,137 +828,176 @@ Reduced Medium Independant Interface (RMII)
 \end_inset 
 
 
+\layout Chapter
+
+Xilinx MicroBlaze as a Network SoC
 \layout Section
 
-About IBM CoreConnect On-Chip Peripheral Bus
+Microblaze Development Kit, MDK
 \layout Standard
 
-The IBM Core Connect On-Chip Peripheral Bus
-\begin_inset Foot
-collapsed true
+Microblaze is a part of the Xilinx Embedded Development Kit (EDK) which
+ is a powerfull development environment for embedded applications.
+ For budget purposes, Xilinx Microblaze Development Kit (MDK) was used instead.
+ MDK is a simpler version of EDK with less peripherals, older versions of
+ the peripherals and utilities available, and less advanced configuration
+ options.
+ It is also harder to locate information and examples for MDK, as most searches
+ at Xilinx website returns EDK information instead of MDK information.
+\layout Subsection
 
+MDK platform tailoring utilities
 \layout Standard
 
-Refered to as 
+A Microblaze system is specified in a Microblaze Hardware Specification
+ (MHS) configuration file.
+ A PERL-script platgen (
 \begin_inset Quotes eld
 \end_inset 
 
-OPB
+Platform Generator
 \begin_inset Quotes erd
 \end_inset 
 
- or 
-\begin_inset Quotes eld
-\end_inset 
+) build the hardware specification.
+ Typicall MHS options are which bus configuration to use and which peripherals
+ to include.
+\layout Subsubsection
 
-OPB Bus
-\begin_inset Quotes erd
-\end_inset 
-
- in this paper.
-\end_inset 
-
- is an easy to use bus, allowing an aribtery number of masters to read from
- / write to an aribitery number of slaves.
- 
+Bus configuration limitations
 \layout Standard
 
-The bus includes a data bus and an address bus.
- A typical OPB device use the most significant bits of the address bus to
- determin weather it was selected or not, and the least significant bits
- to determin which address was accessed.
- 
+IOPB and DOPB ....
+\layout Subsection
+
+MDK software development tools
 \layout Standard
 
-An OPB device access can performed in two cycles but slower devices can
- responed in up to 16 cycles, or an aribitary number of cycles by issuing
- a Timout Supress signal.
+MDK includes most common development tools, such as an assembler, a compiler,
+ a linker, a debugger and some other utilities.
+ All these tools are based on famous and well verified GNU tools.
+ This is a mayor benefit, as most developers have previous experience with
+ the tools.
+\layout Standard
+
+The debugger is interfaced by JTAG or RS232.
+ Any debugger familiar with either the GDB Remote Protocol or the Unified
+ Debugging Interface standard may be used to debug Microblaze systems.
+ This allows a broad range of debuggers and debugger GUIs to be used with
+ a Microblaze system.
+\layout Standard
+
+Microblaze software utilize a small set of standard libraries (libc, libm
+ etc) and driver directories which contain .c and .h files.
+ The build of a Microblaze software system is performed by a PERL-script,
+ libgen.
+ Libgen reads a Microblaze Software Specification (MSS) configuration file.
+ When executed, libgen compiles all drivers configured to be used and add
+ the compiled drivers to the libc library.
+ The .h files from the drivers are copied to the projects include path.
+ Finally libgen creates mbio.h, a C-header with macros to each base address
+ of any peripheral used in the microblaze project.
+\layout Standard
+
+The project source code is compiled and linked with access to all associated
+ .h files and the modified libc library.
 \layout Section
 
-About Xilinx MicroBlaze
+...
 \layout Standard
 
-Xilinx MicroBlaze is a small RISC kernel geared for implementation in Xilinx
- FPGAs and embedded applications.
- MicroBlaze is a highly optimized 
-\begin_inset Quotes eld
-\end_inset 
-
-soft processor
-\begin_inset Quotes erd
-\end_inset 
-
-
-\begin_inset Foot
-collapsed true
-
+Microblaze is based upon OPB which is easy to use.
+ The bus is memory mapped to Microblaze, which makes it simple to interface
+ peripherals by pointers in software.
+ A great number of usefull (although sometimes limited) peripherals is included
+ with Microblaze.
+ Software development environement is based upon popular GNU tools (gcc,
+ gdb) which many developers are allready familiar with.
+ Documentation and example codes are sometimes a bit unclear, but overall
+ impression is good.
 \layout Standard
 
-Processor implementation of configurable devices, such as FGPAs.
- Soft processors are usually distributed as source code or as netlists.
-\end_inset 
-
- and among the fastest available to Xilinx FPGAs.
- The MicroBlaze instruction set is a typical RISC instruction set, similar
- to e.g.
- MIPS.
+It is obvious that Xilinx has put a lot of effort into making Microblaze
+ an easy to use environment, and have included what most developers will
+ need in an initial project.
  
 \layout Standard
 
-The MicroBlaze core contains two OPB buses, and two LMB (Local Memory Buses)
- buses.
- The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
- Port Block RAM support for dual single cycle access.
- A MicroBlaze system with only LMB access is extremly efficient, however
- an FPGA conatins only a few kilobytes of Block RAM.
- A MicroBlaze system may utilize all four buses (as shown in figure 
-\begin_inset LatexCommand \prettyref{cap:MicroBlaze}
+That Microblaze is FPGA based is ideal for prototypes and first generation
+ small scale manufacturing.
+ An important question is how much trouble it is to transition a Microblaze
+ design from FPGA to ASIC, to lower chip cost and power consumption.
+ 
+\layout Section
 
-\end_inset 
-
-) but it can also be configured to use less buses, as long as a datapath
- and an instruction path is provided.
- Therefor a MicroBlaze system always utilize 2, 3 or 4 buses.
+Microblaze as a SoC system
 \layout Standard
 
-Xilinx provides software and documentation allowing developers to utilize
- a number of standard OPB peripherals (Memory Controller, UART, Watchdog,
- JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
- 1 to 16 masters to share an OPB Bus).
- Xilinx also provides documentation and tutorials on the subject of designing
- custom OPB Slaves for MicroBlaze systems.
+The Microblaze Development Kit is geared at developing System on Chip solutions.
+ All standard peripherals are implemented in the same chip (FPGA) as the
+ Microblaze core.
+ It also contains typical I/O interfaces for microcontrollers and SoCs,
+ such as: serial (RS232), memory (SRAM/FlashRAM) and General Purpose I/O.
+\layout Section
+
+Microblaze Network Support
 \layout Standard
 
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:MicroBlaze}
-
-\end_inset 
-
-MicroBlaze Core with Bus Connections
+Microblaze does not include any network device.
+ This is obviously a major drawback when designing network SoCs.
+ However there are two MicroBlaze compatible OPB Ethernet peripherals available
+ for sale at Xilinx.
+ One of these is a small, simple Ethernet MAC.
+ The other is a professional Ethernet MAC which is highly configurable and
+ support most Ethernet modes.
+ In a commercial SoC project, buying either of these MACs is simple way
+ to get a well verified peripheral.
 \layout Standard
-\align center 
 
-\begin_inset Graphics FormatVersion 1
-	filename images/microblaze_busconfig.eps
-	display default
-	size_type 2
-	scale 75
-	rotateOrigin leftBaseline
-	lyxsize_type 0
+However, custom design of an Ethernet peripheral may be adviceable.
+ A custom made peripheral yields a number of interesting properties:
+\layout Itemize
 
-\end_inset 
+Cheep.
+ Basic core design and verification can be one or two students as a part
+ of a thesis or course.
+\layout Itemize
 
+May be customized for specific application.
+\layout Standard
 
-\end_inset 
+The cost of an Ethernet module may not be a mayor interest in a commerical
+ project, but in academic project where fundig is limited it might be.
+ 
+\layout Standard
 
+The level of application specific customization is of interest in a large
+ number of projects.
+ A few examples of interesting customizations are:
+\layout Itemize
 
+Speed or area optimized design
+\layout Itemize
+
+DMA or register access
+\layout Itemize
+
+Promiscious mode or not
+\layout Itemize
+
+Classification, validation, or special handling of certain ethernet frames
+\layout Standard
+
+Classification, validation, and special handling of certain ethernet frames
+ is performed by most ethernet peripherals, as it is a requirement for IEEE
+ ethernet standard compliance.
+ A typical ethernet peripheral will verify ethernet frames and take special
+ actions upon receipt of Ethernet pause frames.
+ It would not be difficult to extend such a classification module to also
+ handle layer 3 frames, such as IPv4, which might of interest to reduce
+ MicroBlaze CPU utilization.
+ By lowering utilization, software application may be simplified and functionall
+ity may be reduced.
 \layout Chapter
 
 Development of MicroBlaze Ethernet devices
@@ -725,7 +1009,7 @@ Design requirements and limitations
 Full Duplex only
 \layout Standard
 
-In principal, supporting the entire range of Full/Half/Auto combinations
+In principal, supporting the entire range of Full/Half/Auto Duplex combinations
  is easy, but it takes time and effort to develop and verify.
  For simplicty, all ethernet devices were developed for Full Duplex only,
  which is by far the most common Ethernet Duplex mode today.
@@ -738,23 +1022,32 @@ The Ethernet devices were designed to be used on two different prototype
  boards, one which was based on an MII Ethernet Interface, one which was
  based on a Reduced MII (RMII) Ethernet Interface.
  Therefore, the designs needed to be capable to manage both interfaces.
- MII and RMII are discussed in section 
-\begin_inset LatexCommand \vref{sub:MAU-PHY}
-
-\end_inset 
-
-.
 \layout Section
 
 Implementation
 \layout Subsection
 
+Eth Version 1.00, Revision A
+\layout Standard
+
+Eth Version 1.00 Revision A is designed to be a very simple MAC, portable
+ to most FPGA and prototype boards.
+\layout Subsubsection
+
 Fully synchronous
 \layout Standard
 
-To simplify design and verification, no assynchronous logic is used in the
+To simplify design and verification, no asynchronous logic is used in the
  design.
- It should be noted that due to this design choice, Ethernet Interface clocks
+ Asynchronous logic, such as an asynchronous FIFO, is often harder to verify
+ and less architecture independant.
+ Asynchronous logic in FPGA implementations require a clock net dedicated
+ to the ethernet clocks.
+ Therefore this design decision places less requirements upon the design
+ of target prototype board and simplify verification.
+\layout Standard
+
+It should be noted that due to this design choice, Ethernet Interface clocks
  must be sampled fast enough to detect rising edge and change values prior
  to falling edge.
  Thus, system clock must be approximately 5 times faster than Ethernet interface
@@ -767,7 +1060,7 @@ To simplify design and verification, no assynchronous logic is used in the
  shows the interface clocks and resulting minimal system clock frequence.
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -776,7 +1069,7 @@ collapsed false
 
 \end_inset 
 
-Minimum System Clock
+Minimum System Clock for reliable synchronous sampling
 \layout Standard
 \align center 
 
@@ -924,7 +1217,7 @@ RMII 100 MBit
 \end_inset 
 
 
-\layout Subsection
+\layout Subsubsection
 
 System Clock and Performance Impact
 \layout Standard
@@ -939,12 +1232,12 @@ With respect to target architecture (Virtex 800, Speedgrade 4), design reaches
 , this only enables 10 MBit implementations.
 \layout Standard
 
-The OPB bus, operating at 50 MHz, two cycle access times and 32 bit transferes,
- yields a theoretical switching capacity of 32*50/2 = 800 MBit.
- This should be enough for a large number of 10 MBit devices - about 40
- operating at full speed in both directions.
+The OPB bus is operating at 50 MHz and takes two cycled for each 32 bit
+ transfere.
+ This yields a theoretical switching capacity of 32*50/2 = 800 MBit.
+ This should be enough for a very large number of 10 MBit devices.
  
-\layout Subsection
+\layout Subsubsection
 
 Modular design
 \layout Standard
@@ -987,7 +1280,7 @@ collapsed true
 
 \end_inset 
 
-Ethernet Device Modules
+Eth version 1.00.a VHDL files
 \layout Standard
 \align center 
 
@@ -1151,7 +1444,7 @@ RX Core
 \align center 
 
 \begin_inset Graphics FormatVersion 1
-	filename ethrx-core-hack.eps
+	filename images/ethrx-core-hack.eps
 	display default
 	size_type 1
 	width 40page%
@@ -1167,7 +1460,7 @@ RX Core
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1188,6 +1481,201 @@ TX Core
 	height 25page%
 	rotateOrigin leftBaseline
 	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+Eth V 1.00, Revision C
+\layout Standard
+
+This is a redisign of Eth V.100 Revision A.
+ It is designed to reach 100 MBit at target technology MII, Virtex 800 Speedgrad
+e -4 with system clock set to 50 MHz.
+\layout Subsubsection
+
+Asynchronous
+\layout Standard
+
+The asynchronous solution clock most of the design upon ethernet PHY clock
+ which is significantly slower than the 50 MHz system clock.
+ Only the register files and the top module is clocked upon system clock.
+ The design utilize open loop to move from ethernet clock domain to system
+ clock domain, thus the minimum system clock is can be calculated as shown
+ in formula 
+\begin_inset LatexCommand \prettyref{cap:EthV1.00C-minsysclk}
+
+\end_inset 
+
+.
+ Given a clock drift worst case of 19%
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+19% is the worst case clockdrift used in a simulation model supplied by
+ Robert Wikander of Switchcore for verification of academic ethernet peripherals.
+\end_inset 
+
+, this yields that system clock must be 23% faster than ethernet clock,
+\layout Standard
+
+
+\begin_inset Float algorithm
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:EthV1.00C-minsysclk}
+
+\end_inset 
+
+Eth V1.00 Revision C mininum system clock frequency
+\layout Standard
+\align center 
+
+\begin_inset Formula $f_{sysclk}\geq \frac{1}{t_{phyclk}-\left|t_{phydrift}\right|-\left|t_{sysdrift}\right|}$
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="left" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Variable
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Meaning
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $f_{sysclk}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+System clock frequency 
+\begin_inset Formula $\left(Hz\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $t_{phyclk}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Ethernet PHY Clock period 
+\begin_inset Formula $\left(s\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $t_{phydrift}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Ethernet PHY Clock drift, estimated worst case 
+\begin_inset Formula $\left(s\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $t_{sysdrift}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+System clock drift 
+\begin_inset Formula $\left(s\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset 
 
@@ -1334,6 +1822,89 @@ ping
 
 ) test, was performed for several hours with 0 packet loss.
  All real world tests indicates that design is robust.
+\layout Section
+
+Analasys and comparision
+\layout Subsection
+
+Other Ethernet peripherals
+\layout Subsubsection
+
+Xilinx OPB Ethernet Lite Media Access Controller
+\layout Standard
+
+50 MHz for 100 MBit
+\layout Standard
+
+5 MHz for 10 MBit
+\layout Standard
+
+Virtex-E -8; 80.2 MHz full duplex, 75.5 MHz half
+\layout Standard
+
+no MII management
+\layout Standard
+
+no pause frame support
+\layout Subsubsection
+
+Xilinx OPB Ethernet Media Access Controller
+\layout Standard
+
+multiple packets, 2 or 4 kb fifos, up to 16 packets per fifo, pause frame
+ support, MII management, DMA or FIFO-read-registers, autopad, promiscious
+ mode optional, etc etc 
+\layout Subsubsection
+
+Opencores.org 
+\begin_inset Quotes eld
+\end_inset 
+
+EthMac
+\begin_inset Quotes erd
+\end_inset 
+
+ 10/100 Ethernet MAC
+\layout Subsubsection
+
+Bandung Institute of Technolgy 10/100 Ethernet MAC
+\layout Standard
+
+The Bandung MAC is a simple Ethernet MAC.
+ It is not designed for SoC implementation, instead it is externally interfaced
+ using the prototype board's SRAM as a shared medium.
+ A PC controlls the MAC utilizing the shared medium.
+ Apparently, the transmit modules are broken (cite: 
+\begin_inset Quotes eld
+\end_inset 
+
+the transmitter can only send a few bytes
+\begin_inset Quotes erd
+\end_inset 
+
+).
+ Appears to be a half-finnished academic design.
+\layout Standard
+
+Key aspects:
+\layout Itemize
+
+10/100 MBit, MII only
+\layout Itemize
+
+Half Duplex supported
+\layout Itemize
+
+Full Duplex supported, but no PAUSE frame support
+\layout Itemize
+
+No system bus - Interfaced through shared SRAM medium
+\layout Itemize
+
+Asynchronous
+\layout Itemize
+
+No MII Management module
 \layout Chapter
 
 Network software for MicroBlaze
