@@ -1971,6 +1971,9 @@ To simplify design and verification, no asynchronous logic is used in the
  of target prototype board and simplify verification.
 \layout Standard
 
+Additionally, only rising edge flip flops are used.
+\layout Standard
+
 It should be noted that due to this design choice, Ethernet Interface clocks
  must be sampled fast enough to detect rising edge and change values prior
  to falling edge.
@@ -2452,9 +2455,13 @@ Asynchronous
 The asynchronous solution clock most of the design upon Ethernet PHY clock
  which is significantly slower than the 50 MHz system clock.
  Only the register files and the top module is clocked upon system clock.
- The design utilize open loop to move from Ethernet clock domain to system
- clock domain, thus the minimum system clock is can be calculated as shown
- in formula 
+ The design utilize open loop 
+\begin_inset LatexCommand \cite{XTE-Asynchronous}
+
+\end_inset 
+
+ to move from Ethernet clock domain to system clock domain, thus the minimum
+ system clock is can be calculated as shown in formula 
 \begin_inset LatexCommand \prettyref{cap:EthV1.00C-minsysclk}
 
 \end_inset 
@@ -2466,7 +2473,7 @@ The asynchronous solution clock most of the design upon Ethernet PHY clock
 
  
 \begin_inset Foot
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -4649,86 +4656,101 @@ Future work
 \layout Bibliography
 \bibitem [ETHERNET]{Book-Gigabit-Ethernet}
 
-Gigabit Ethernet - Migrating to High-Bandwidth LANs 
+Jayant Kadambi, Ian Crayford, Mohan Kalkunte.
 \newline 
-Jayant Kadambi, Ian Crayford, Mohan Kalkunte
+
+\emph on 
+Gigabit Ethernet - Migrating to High-Bandwidth LANs
+\emph default 
+.
+ 
 \newline 
-Prentice Hall, ISBN 0-13-913286-4
+Prentice Hall, 1998.
+ ISBN 0-13-913286-4
 \layout Bibliography
 \bibitem [XAPP632]{XAPP632 Programming via E-Mail}
 
-Xilinx Application Note 632 (v 1.0) - Programming an FPGA via E-Mail
+Marc Defossez.
 \newline 
-Marc Defossez
+Programming an FPGA via E-Mail.
 \newline 
-May 13, 2002
+In 
+\emph on 
+Xilinx Application Note 632 (v 1.0)
+\emph default 
+, 2002.
+\layout Bibliography
+\bibitem [XTE1]{XTE-Asynchronous}
+
+Peter Alfke.
+\newline 
+Moving Data Across Asynchronous Clock Boundaries
+\newline 
+In 
+\emph on 
+Xilinx techXclusives
+\emph default 
+, 2001.
+\newline 
+
 \layout Bibliography
 \bibitem [XEPF1]{XEPF-Platgen-OPB-Limitation}
 
-Xilinx Embedded Processor Forum
-\newline 
-
-\begin_inset Quotes eld
-\end_inset 
-
-Platgen: OPB Limitation
-\begin_inset Quotes erd
-\end_inset 
-
-
-\newline 
 Mathew Oullette et al.
  
 \newline 
-June 20, 2002
+Platgen: OPB Limitation
+\newline 
+In 
+\emph on 
+Xilinx Embedded Processor Forum
+\emph default 
+, 2002.
 \layout Bibliography
 \bibitem [XPEF2]{XPEF-XilNet1}
 
+Brett Boren et al.
+\newline 
+Xilnet: more meaningful examples please.
+\newline 
+In 
+\emph on 
 Xilinx Embedded Processor Forum
-\newline 
-
-\begin_inset Quotes eld
-\end_inset 
-
-Xilnet: more meaningful examples please
-\begin_inset Quotes erd
-\end_inset 
-
-, Brett Boren et al.
-\newline 
-April 29, 2003
+\emph default 
+, 2003.
 \layout Bibliography
 \bibitem [XPEF3]{XPEF-XilNet2}
 
-Xilinx Embedded Processor Forum
-\newline 
-
-\begin_inset Quotes eld
-\end_inset 
-
-XilNet: Incomplete tcp/ip stack
-\begin_inset Quotes erd
-\end_inset 
-
-
-\newline 
 Brett Boren, Trond Kortner et al.
 \newline 
-February, 2003
+XilNet: Incomplete tcp/ip stack.
+\newline 
+In 
+\emph on 
+Xilinx Embedded Processor Forum
+\emph default 
+, 2003.
 \layout Bibliography
 \bibitem [FPGACPU]{Site-fpgacpu.org}
 
-FPGA CPU News
+FPGA CPU News.
+ 
 \newline 
+2003.
+ 
+\emph on 
 http://www.fpgacpu.org/
-\newline 
-February, 2003
 \layout Bibliography
 \bibitem [OPENCORES]{Site-OpenCores}
 
-OPENCORES.ORG,
+OPENCORES.ORG.
 \newline 
+2003.
+ 
+\emph on 
 http://www.opencores.org/
+\emph default 
+
 \newline 
-May, 2003
+
 \the_end
