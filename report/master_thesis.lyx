@@ -106,17 +106,6 @@ During my work on the thesis, I have taught MicroBlaze based System on Chip
  (SoC) development to MS.c.
  students in the Digital Synthesis course at CSEE.
  Additional credits goes to these students for valuable input.
-\layout Chapter*
-
-Copyrights & Trademarks
-\layout Standard
-
-All products and company names are service marks, trademarks or registered
- trademarks are the property of their respective owners.
- This thesis include images from copyrighted materials for academic citation
- purposes.
- All images included from copyrighted materials are the property of their
- respective owners.
 \layout Standard
 
 
@@ -400,7 +389,8 @@ Field Programmable Gate Array (FPGA)
 \layout Standard
 
 Field Programmable Gate Array (FPGA) is a type of programmable devices.
- An FPGA contains a generic architecture with configurable logic and routing.
+ FPGA is a generic architecture which consists of configurable logic blocks
+ and programmable interconnect.
  FPGAs are expensive but may contain enough logic to implement large designs
  such as a System on Chip.
  
@@ -410,10 +400,14 @@ FPGAs are not optimized for any specific application, and therefore they
  may consume more power or implement a design less efficient than a ASIC.
  However an FPGA is easily reprogrammed and which shortens design cycles
  and allows early real world tests.
- This makes FPGAs perfect for prototypes and small production volumes.
- FPGAs are also useful in first generation manufacturing if standards and
- applications are subject to change, or if an application must be released
- before engineers consider the design safe for ASIC implementation.
+ 
+\layout Standard
+
+This makes FPGAs perfect for prototypes and small production volumes.
+ FPGA may also be used for applications which are not of ASIC production
+ quality.
+ An example of this is first generation manufacturing where standards and
+ applications are subject to change.
 \layout Section
 
 Processor cores
@@ -441,7 +435,7 @@ As opposed to a Microcontroller core which may include peripherals.
 Soft, firm and hard cores
 \layout Standard
 
-The terms soft, firm and hard cores are ASIC manufacturing jargon.
+The terms soft, firm and hard cores are originally ASIC manufacturing jargon.
  
 \layout Itemize
 
@@ -479,8 +473,8 @@ Hard core
  the design as a standard cell.
 \layout Standard
 
-Firm and hard core apply to ASIC only.
- Soft cores are used in ASICs as well as programmable logic.
+Firm and hard cores mainly apply to ASICs.
+ Soft cores are commonly used in both ASICs as well as programmable logic.
 \layout Subsection
 
 Soft Processors
@@ -542,7 +536,7 @@ Programmable logic (e.g.
  FPGA) usually take some time to update (ranging from a few seconds to a
  couple of minutes).
  FPGAs are typically not upgraded by remote, although possible 
-\begin_inset LatexCommand \cite{XAPP632 Programming via E-Mail}
+\begin_inset LatexCommand \cite{XAPP632_Programming_via_E-Mail}
 
 \end_inset 
 
@@ -567,8 +561,15 @@ IBM CoreConnect
 
 \end_inset 
 
- is family of SoC busses.
- It features three bus architectures:
+ architecture is a small family of SoC busses.
+ The design principle in CoreConnect is to provide different busses for
+ different type of cores.
+ By providing different busses, the overall design may be optimized for
+ best performance while simple peripherals may be optimized for simplicity.
+ 
+\layout Standard
+
+IBM CoreConnecy features three busses:
 \layout Itemize
 
 Processor Local Bus (PLB): a high performance bus for interconnecting fast
@@ -594,7 +595,7 @@ An IBM CoreConnect system may utilize DCR, OPB and PLB in a single SoC (as
  A mixed system may use different systems clocks - often OPB uses a slower
  clock than PLB.
  PLB and OPB may be interconnected using OPB-to-PLB and PLB-to-OPB bridges.
- The CoreConnect busses shares two important parameters:
+ The CoreConnect busses share important characteristics:
 \layout Itemize
 
 CoreConnect is fully synchronous
@@ -2577,7 +2578,7 @@ Eth Version 1.00 Revision bus is operating at 50 MHz, 32-bit datawidth and
 \layout Standard
 \align center 
 
-\begin_inset Formula $\frac{32\, bit\, *50M\, cycles/s}{2\, cycles}=800\, MBit/s$
+\begin_inset Formula $\frac{32\, \textrm{bit}\, *50\, \textrm{M}\, \textrm{cycles/s}}{2\, \textrm{cycles}}=800\, \textrm{MBit/s}$
 \end_inset 
 
 .
@@ -2875,7 +2876,7 @@ The design utilize an open loop
 \layout Standard
 \align center 
 
-\begin_inset Formula $t_{sysclk}+\left|d_{sysclk}\right|\leq t_{phyclk}-\left|d_{phyclk}\right|$
+\begin_inset Formula $t_{sysclk}\, +\, \left|d_{sysclk}\right|\, \leq \, t_{phyclk}\, -\, \left|d_{phyclk}\right|$
 \end_inset 
 
 
@@ -2885,7 +2886,7 @@ This formula may be rewritten as:
 \layout Standard
 \align center 
 
-\begin_inset Formula $f_{sysclk}\geq \frac{1}{t_{phyclk}-\left|d_{phyclk}\right|-\left|d_{sysclk}\right|}$
+\begin_inset Formula $f_{sysclk}\, \geq \, \frac{1}{t_{phyclk}\, -\, \left|d_{phyclk}\right|\, -\, \left|d_{sysclk}\right|}$
 \end_inset 
 
 
@@ -2919,9 +2920,9 @@ Figure
 
 \end_inset 
 
- illustrates the race condition which eventually occure if the timing requiremen
-ts requirement is not met; the system clock domain fails to sample valid
- data.
+ illustrates the race condition which eventually will occure if the timing
+ requirements requirement is not met; the system clock domain fails to sample
+ valid data.
 \layout Standard
 
 
@@ -5288,7 +5289,9 @@ Xilinx Inc., 2002.
 \newline 
 
 \emph on 
-http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/hwref.pdf
+http://www.xilinx.com/ipcenter/processor_central/
+\newline 
+microblaze/doc/hwref.pdf
 \layout Bibliography
 \bibitem [XMB2]{MB_SWREF}
 
@@ -5306,7 +5309,9 @@ Xilinx Inc, 2002.
 \newline 
 
 \emph on 
-http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/swref.pdf
+http://www.xilinx.com/ipcenter/processor_central/
+\newline 
+microblaze/doc/swref.pdf
 \layout Bibliography
 \bibitem [XMB3]{MB_TUTORIAL}
 
@@ -5320,8 +5325,9 @@ Xilinx Inc, 2002.
 \newline 
 
 \emph on 
-http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/mb_tutotial_c2bits.
-pdf
+http://www.xilinx.com/ipcenter/processor_central/
+\newline 
+microblaze/doc/mb_tutotial_c2bits.pdf
 \layout Bibliography
 \bibitem [XMB4]{MB_OPB_TUTORIAL}
 
@@ -5335,9 +5341,11 @@ Xilinx Inc, 2002.
 \newline 
 
 \emph on 
-http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/opb_tutorial.pdf
+http://www.xilinx.com/ipcenter/processor_central/
+\newline 
+microblaze/doc/opb_tutorial.pdf
 \layout Bibliography
-\bibitem [XAPP632]{XAPP632 Programming via E-Mail}
+\bibitem [XAPP632]{XAPP632_Programming_via_E-Mail}
 
 Marc Defossez.
 \newline 
@@ -5360,8 +5368,6 @@ In
 Xilinx techXclusives
 \emph default 
 , 2001.
-\newline 
-
 \layout Bibliography
 \bibitem [XEPF1]{XEPF-Platgen-OPB-Limitation}
 
@@ -5418,8 +5424,15 @@ OPENCORES.ORG.
  
 \emph on 
 http://www.opencores.org/
-\emph default 
+\layout Chapter*
 
-\newline 
+Copyrights & Trademarks
+\layout Standard
 
+All products and company names are service marks, trademarks or registered
+ trademarks are the property of their respective owners.
+ This thesis include images from copyrighted materials for academic citation
+ purposes.
+ All images included from copyrighted materials are the property of their
+ respective owners.
 \the_end
