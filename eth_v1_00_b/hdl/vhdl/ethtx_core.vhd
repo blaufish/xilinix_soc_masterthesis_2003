@@ -175,8 +175,8 @@ architecture RTL of ethtx_core is
 
 	signal tx_clk_fdr : std_logic;	
 
-	signal tx_en_s	: std_logic;
-	signal tx_d_s	: std_logic_vector(data_pins-1 downto 0);
+	signal tx_en_fdr, tx_en_s	: std_logic;
+	signal tx_d_fdr, tx_d_s	: std_logic_vector(data_pins-1 downto 0);
 
 
 begin
@@ -236,12 +236,17 @@ begin
 
 		process (tx_clk) begin
 			if rising_edge(tx_clk) then
-				tx_en <= tx_async_fifo_dout(data_pins);
-				tx_d <= tx_async_fifo_dout(data_pins-1 downto 0);
+				tx_en_fdr <= tx_async_fifo_dout(data_pins);
+				tx_d_fdr <= tx_async_fifo_dout(data_pins-1 downto 0);
 
 				if tx_async_fifo_empty = '1' then
-					tx_en <= '0';
+					tx_en_fdr <= '0';
 				end if;
+			end if;
+
+			if falling_edge(tx_clk) then
+				tx_en <= tx_en_fdr;
+				tx_d <= tx_d_fdr;
 			end if;
 		end process;
 					
