@@ -6,11 +6,9 @@ lib eth_v1_00_c blockram_fifo
 lib eth_v1_00_c crc
 lib eth_v1_00_c fdre
 
-lib eth_v1_00_c ethrx_clk_sampler
 lib eth_v1_00_c ethrx_statemachine
 lib eth_v1_00_c ethrx_mii_to_byte
 lib eth_v1_00_c ethrx_byte_to_word
-lib eth_v1_00_c ethrx_debug
 lib eth_v1_00_c ethrx_regfile
 lib eth_v1_00_c ethrx_core
 
