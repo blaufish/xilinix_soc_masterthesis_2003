@@ -128,13 +128,17 @@ Limitations
 Dispotion
 \layout Standard
 
+\SpecialChar ~
+
+\layout Standard
+
 Chapter 
 \begin_inset LatexCommand \ref{cha:Introduction}
 
 \end_inset 
 
  gives a general introduction to the thesis and the work perfomed to evaluate
- Xilinx Microblaze.
+ Xilinx MicroBlaze.
  
 \layout Standard
 
@@ -153,11 +157,23 @@ Chapter
 
 \end_inset 
 
- covers the technologies is used and referred to in the thesis.
+ covers the technologies which is used and referred to in the thesis.
 \layout Standard
 
--- Skall MicroBlaze delarna styckas om? Två kapitel? Inget i introduction?
- --
+Chapter 
+\begin_inset LatexCommand \ref{cha:Xilinx-MicroBlaze}
+
+\end_inset 
+
+ introduces Xilinx MicroBlaze and the MDK software.
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Xilinx-MicroBlaze-as-a-Network-SoC}
+
+\end_inset 
+
+ investigastes the possibilty of using Xilinx MicroBlaze in a network SoC.
 \layout Standard
 
 Chapter 
@@ -165,7 +181,7 @@ Chapter
 
 \end_inset 
 
- outlines the design of a set of Ethernet peripherals for Xilinx Microblaze.
+ outlines the design of a set of Ethernet peripherals for Xilinx MicroBlaze.
 \layout Standard
 
 Chapter 
@@ -182,7 +198,7 @@ Chapter
 
 \end_inset 
 
- covers network software, such as TCP/IP stacks, available to Xilinx Microblaze.
+ covers network software, such as TCP/IP stacks, available to Xilinx MicroBlaze.
 \layout Standard
 
 Chapter 
@@ -199,7 +215,7 @@ Chapter
 \end_inset 
 
  sugests which futher work could be performed to improve the evaluation
- of Microblaze or to extend it's network capabilities.
+ of MicroBlaze or to extend it's network capabilities.
 \layout Chapter
 
 
@@ -215,7 +231,7 @@ System on Chip (SoC) solutions
 
 System on Chip (SoC) refers to devices where all essential parts of a computing
  systems have been integrated in a single circuit.
- A typical SoC includes one (or many) processor core(s), an aribitary number
+ A typical SoC includes one (or many) processor core(s), an aribitrary number
  of peripherals for input/output, some on-chip memory and an interface for
  connecting external memory, and one or several busses which interconnects
  all these devices.
@@ -248,12 +264,7 @@ Application Specific Interated Circuit (ASIC)
 
 Application Specific Interated Circuit (ASIC) is one of the most common
  type of chips.
- An ASIC is designed for a specific applications and can be heavily customized
- for reduced low power dissipation, small area or high clock frequencies.
- Defining characteristics of ASICs is -----
-\layout Standard
-
-An ASIC may implement a large design (
+ An ASIC may implement simple designs (
 \begin_inset Quotes eld
 \end_inset 
 
@@ -261,7 +272,15 @@ application
 \begin_inset Quotes erd
 \end_inset 
 
- in ASIC terms) such as a SoC.
+ in ASIC terms) but also large design such as SoCs.
+\layout Standard
+
+An ASIC is designed for a specific applications and can be heavily customized
+ for reduced low power dissipation, small area or high clock frequencies.
+ Other important ASIC characteristics is low reconfigurability, long design
+ phazes, large startup costs and low mass production costs.
+ This makes ASIC ideal for large scale manufacturing of well verified designs,
+ but badly suited for prototypes.
 \layout Section
 
 Programmable logic devices (PLDs)
@@ -275,7 +294,7 @@ Programmable logic devices are chips which can programmed to behave as an
  One common type of programmable logic devices is FPGAs.
 \layout Subsection
 
-Field Programmable Gate Array (FPGA)
+Field Programmable Gate Arrays (FPGAs)
 \layout Standard
 
 Field Programmable Gate Array (FPGA) is a type of programmable devices.
@@ -303,13 +322,13 @@ FPGAs are not optimized for any specific application, and therefore they
 On-Chip Peripheral Bus (OPB)
 \layout Standard
 
-The IBM Core Connect On-Chip Peripheral Bus
+The IBM Core Connect On-Chip Peripheral bus
 \begin_inset Foot
 collapsed true
 
 \layout Standard
 
-Refered to as 
+Referred to as 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -336,7 +355,7 @@ OPB Bus
 \emph on 
 not
 \emph default 
- compatible unless they designed with the same designrules.
+ compatible unless they share the same OPB paramaters.
 \layout Standard
 
 The bus includes a data bus and an address bus.
@@ -362,26 +381,28 @@ When several OPB masters share a bus, an OPB Aribter is used to grant exclusive
  Utilization of sequencial access keeps arbitration overhead to a minimum.
 \layout Subsection
 
-Xilinx OPB
-\layout Standard
 
-Xilinx implements the IBM CoreConnect On-Chip Peripheral bus 
-\begin_inset LatexCommand \ref{sec:On-Chip-Peripheral-Bus}
+\begin_inset LatexCommand \label{sub:Xilinx-OPB}
 
 \end_inset 
 
- with a number of parameters defined.
- Some of these parameters include datawidth set to 32 and addresswidth which
- also is set to 32.
+Xilinx OPB
+\layout Standard
+
+Xilinx implements the IBM CoreConnect On-Chip Peripheral bus with most configura
+ble OPB parameters set to specific values.
+ Important parameters include datawidth which is set to 32 and addresswidth
+ which also is set to 32.
  Xilinx documents how some other OPB implementations may be interconnected,
  such as OPB-devices with less addresswidth.
 \layout Standard
 
 This definition of OPB parameters makes all Xilinx OPB devices compatible.
- Xilinx compatible OPB devices include Xilinx Microblaze softcore processor,
- Xilinx Picoblaze softcore processor, a large set of OPB peripherals and
- a bridge which allows IBM PPC 440 processor core (built into recent Xilinx
- Virtex II Pro FPGAs) to be interconnected.
+ Xilinx compatible OPB devices include Xilinx MicroBlaze softcore processor,
+ Xilinx PicoBlaze softcore processor and a large set of OPB peripherals.
+ Xilinx also provides bridge which allows the IBM PPC 440 processor core
+ built into recent Xilinx Virtex II Pro FPGAs to be interconnected with
+ the OPB devices.
 \layout Section
 
 About Ethernet 10/100 MBit
@@ -925,10 +946,15 @@ Reduced Medium Independant Interface (RMII)
 
 \layout Chapter
 
+
+\begin_inset LatexCommand \label{cha:Xilinx-MicroBlaze}
+
+\end_inset 
+
 Xilinx MicroBlaze
 \layout Section
 
-The Xilinx Microblaze core
+The Xilinx MicroBlaze core
 \layout Standard
 
 Xilinx MicroBlaze is a small processor core geared for implementation in
@@ -961,75 +987,24 @@ Processor implementation of configurable devices, such as FGPAs.
  
 \layout Subsection
 
-Xilinx Microblaze bus interfaces
+Xilinx MicroBlaze bus interfaces
 \layout Standard
 
-The MicroBlaze core contains two OPB master interfaces, the 
-\begin_inset Quotes eld
-\end_inset 
-
-IOPB
-\begin_inset Quotes erd
-\end_inset 
-
- OPB instruction path and the 
-\begin_inset Quotes eld
-\end_inset 
-
-DOPB
-\begin_inset Quotes erd
-\end_inset 
-
- OPB data path.
- The core also contain two Local Memory Buses (LMB) buses, the 
-\begin_inset Quotes eld
-\end_inset 
-
-ILMB
-\begin_inset Quotes erd
-\end_inset 
-
- instruction path and the 
-\begin_inset Quotes eld
-\end_inset 
-
-DLMB
-\begin_inset Quotes erd
-\end_inset 
-
- data path.
+The MicroBlaze core contains two OPB master interfaces, IOPB which provides
+ an instruction path and DOPB which provides a data path.
+ The core also contains two Local Memory Buses (LMB) interfaces, ILMB which
+ provide an instruction path and DLMB which provides a data path.
  
-\layout Subsubsection
-
-Local Memory Buses (LMBs)
 \layout Standard
 
-The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
- Port Block RAM support for dual memory access.
- This enables concurrent ILMB and DLMB access.
-\layout Standard
-
-A MicroBlaze platform with only LMB access is extremly efficient, however
- many FPGAs contains only a few kilobytes of Block RAM.
- A MicroBlaze system may utilize all four buses (as shown in figure 
+A MicroBlaze system may utilize all four buses (as shown in figure 
 \begin_inset LatexCommand \prettyref{cap:MicroBlaze}
 
 \end_inset 
 
 ).
  A MicroBlaze platform must include a data path and an instruction path
- to the MicroBlaze core, therefor it will utilize 2, 3 or 4 busess.
-\layout Subsubsection
-
-On-Chip Periperal buses (OPBs)
-\layout Standard
-
-Xilinx provides software and documentation allowing developers to utilize
- a number of standard OPB peripherals (Memory Controller, UART, Watchdog,
- JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
- 1 to 16 masters to share an OPB Bus).
- Xilinx also provides documentation and tutorials on the subject of designing
- custom OPB Slaves for MicroBlaze platforms.
+ to the MicroBlaze core, therefor it will utilize 2, 3 or 4 busses.
 \layout Standard
 
 
@@ -1062,28 +1037,65 @@ MicroBlaze Core with Bus Connections
 \end_inset 
 
 
-\layout Chapter
+\layout Subsubsection
 
-Xilinx MicroBlaze as a Network SoC
-\layout Section
-
-Microblaze Development Kit, MDK
+Local Memory Buses (LMBs)
 \layout Standard
 
-Microblaze is a part of the Xilinx Embedded Development Kit (EDK) which
- is a powerfull development environment for embedded applications.
- For budget purposes, Xilinx Microblaze Development Kit (MDK) was used instead.
- MDK is a simpler version of EDK with less peripherals, older versions of
- the peripherals and utilities available, and less advanced configuration
- options.
- It is also harder to locate information and examples for MDK, as most searches
- at Xilinx website returns EDK information instead of MDK information.
+The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
+ Port Block RAM support for dual single-cycle memory access.
+ This enables concurrent ILMB and DLMB access.
+\layout Standard
+
+A MicroBlaze platform with only LMB access is extremly efficient, however
+ many FPGAs contains only a few kilobytes of Block RAM.
+ 
+\layout Subsubsection
+
+On-Chip Periperal buses (OPBs)
+\layout Standard
+
+Xilinx MicroBlaze is compatible with several other OPB devices, as stated
+ in subsection 
+\begin_inset LatexCommand \ref{sub:Xilinx-OPB}
+
+\end_inset 
+
+.
+\layout Section
+
+Embedded Development Kit (EDK)
+\layout Standard
+
+Xilinx main development kit for embedded applications and SoCs is the Embedded
+ Development Kit (EDK).
+ It contains a large set of OPB peripherals, Xilinx MicroBlaze soft processor,
+ Xilinx PicoBlaze soft processor, and a powerfull up to date development
+ kit.
+\layout Section
+
+MicroBlaze Development Kit (MDK)
+\layout Standard
+
+MDK is a stripped down version of EDK, and contain less peripherals.
+ The software in MDK is based upon an old version of EDK.
+\layout Subsection
+
+MicroBlaze peripherals includeded in MDK
+\layout Standard
+
+MDK includes ten standard OPB peripherals, e.g.
+ Memory Controller, UART, Watchdog, JTAG_UART, Interrupt controller.
+ One of the peripherals is an OPB Aribitrator which allows 1 to 16 masters
+ to share the OPB Bus.
+ XilinxXilinx also provides documentation and tutorials on the subject of
+ designing custom OPB Slaves for MicroBlaze platforms.
 \layout Subsection
 
 MDK platform tailoring utilities
 \layout Standard
 
-A Microblaze platform is specified in a Microblaze Hardware Specification
+A MicroBlaze platform is specified in a MicroBlaze Hardware Specification
  (MHS) configuration file.
  A PERL-script platgen (
 \begin_inset Quotes eld
@@ -1097,23 +1109,59 @@ Platform Generator
 on.
  Typicall MHS options include which bus configuration to use and which periphera
 ls to interface.
- 
-\layout Standard
-
-MDK platgen is moderately simple while able to cope with most MDK beginners
+ MDK platgen is moderately simple while able to cope with most MDK beginners
  design issues.
- However there are several limitationd in MDK platgen and some bugs.
- Some of these problem are described in the following subsections.
+\layout Subsection
+
+MDK software development tools
 \layout Standard
 
-The limitations and problems with MDK platgen are encountered during normal
- design cycles and make MDK platgen, increase implementation and debugging
- times.
- Overall MDK platgen is a pretty good tool.
- But when designing more advanced platforms, time and effort is required
- to make it work.
- This have a negative impact on ease of use and the perceived quality of
- MDK as whole.
+MDK includes most common development tools, such as an assembler, a compiler,
+ a linker, a debugger and some other utilities.
+ All these tools are based on famous and well verified GNU tools.
+ This is a major benefit, as most developers have previous experience with
+ the tools.
+\layout Standard
+
+The debugger is interfaced by JTAG or RS232.
+ Any debugger familiar with either the GDB Remote Protocol or the Unified
+ Debugging Interface standard may be used to debug MicroBlaze platforms.
+ This allows a broad range of debuggers and debugger GUIs to be used with
+ a MicroBlaze platform.
+\layout Standard
+
+MicroBlaze software utilize a small set of standard libraries (libc, libm
+ etc) and driver directories which contain .c and .h files.
+ The build of a MicroBlaze software system is performed by a PERL-script,
+ libgen.
+ Libgen reads a MicroBlaze Software Specification (MSS) configuration file.
+ When executed, libgen compiles all drivers configured to be used and add
+ the compiled drivers to the libc library.
+ The .h files from the drivers are copied to the projects include path.
+ Finally libgen creates mbio.h, a C-header with macros to each base address
+ of any peripheral used in the MicroBlaze project.
+\layout Standard
+
+The project source code is compiled and linked with access to all associated
+ .h files and the modified libc library.
+\layout Subsection
+
+Problems with MDK
+\layout Standard
+
+There are several problems with MDK which are easily encountered.
+ Lack of in depth documentation, bugs and limitations in the MDK platform
+ tailoring utility are the greatest problems.
+\layout Subsubsection
+
+MDK Documentation
+\layout Standard
+
+One problem with MDK is that is difficult to find information about MDK.
+ Most searches at Xilinx (or common internet search enginees such as Google
+ or Altavista) usually return information about EDK.
+ While the MDK documentation is fine for beginner applications, in depth
+ information is hard to find.
 \layout Subsubsection
 
 MDK platform tailoring limitations - OPB bus configuration
@@ -1211,13 +1259,13 @@ Another issue is that tristate buffers in peripherals must be written as
  Although this is not a major drawback, it is an uneccesary restriction
  in how designers may choose to implement their design.
  Specificly, it may limit which blackboxes and source codes which are possible
- to easily utilize in a Microblaze peripheral design.
+ to easily utilize in a MicroBlaze peripheral design.
 \layout Standard
 
 
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1333,55 +1381,30 @@ Tristate input/output
 \end_inset 
 
 
-\layout Subsection
+\layout Chapter
 
-MDK software development tools
-\layout Standard
 
-MDK includes most common development tools, such as an assembler, a compiler,
- a linker, a debugger and some other utilities.
- All these tools are based on famous and well verified GNU tools.
- This is a major benefit, as most developers have previous experience with
- the tools.
-\layout Standard
+\begin_inset LatexCommand \label{cha:Xilinx-MicroBlaze-as-a-Network-SoC}
 
-The debugger is interfaced by JTAG or RS232.
- Any debugger familiar with either the GDB Remote Protocol or the Unified
- Debugging Interface standard may be used to debug Microblaze platforms.
- This allows a broad range of debuggers and debugger GUIs to be used with
- a Microblaze platform.
-\layout Standard
+\end_inset 
 
-Microblaze software utilize a small set of standard libraries (libc, libm
- etc) and driver directories which contain .c and .h files.
- The build of a Microblaze software system is performed by a PERL-script,
- libgen.
- Libgen reads a Microblaze Software Specification (MSS) configuration file.
- When executed, libgen compiles all drivers configured to be used and add
- the compiled drivers to the libc library.
- The .h files from the drivers are copied to the projects include path.
- Finally libgen creates mbio.h, a C-header with macros to each base address
- of any peripheral used in the microblaze project.
-\layout Standard
-
-The project source code is compiled and linked with access to all associated
- .h files and the modified libc library.
+Xilinx MicroBlaze as a Network SoC
 \layout Section
 
-Microblaze as a SoC system
+MicroBlaze as a SoC system
 \layout Standard
 
-The Microblaze Development Kit is geared at developing System on Chip solutions.
+The MicroBlaze Development Kit is geared at developing System on Chip solutions.
  All standard peripherals are implemented in the same chip (FPGA) as the
- Microblaze core.
+ MicroBlaze core.
  It also contains typical I/O interfaces for microcontrollers and SoCs,
  such as: serial (RS232), memory (SRAM/FlashRAM) and General Purpose I/O.
 \layout Section
 
-Microblaze Network Support
+MicroBlaze Network Support
 \layout Standard
 
-Microblaze does not include any network device.
+MicroBlaze does not include any network device.
  This is obviously a major drawback when designing network SoCs.
  However there are two MicroBlaze compatible OPB Ethernet peripherals available
  for sale at Xilinx.
@@ -1390,9 +1413,12 @@ Microblaze does not include any network device.
  support most Ethernet modes.
  In a commercial SoC project, buying either of these MACs is simple way
  to get a well verified peripheral.
+\layout Subsection
+
+Customized Ethernet periperheral
 \layout Standard
 
-However, custom design of an Ethernet peripheral may be adviceable.
+However, custom design of an Ethernet peripheral may be prefered.
  A custom made peripheral yields a number of interesting properties:
 \layout Itemize
 
@@ -1420,7 +1446,7 @@ Speed or area optimized design
 DMA or register access
 \layout Itemize
 
-Promiscious mode or not
+Promiscious mode or not.
 \layout Itemize
 
 Classification, validation, or special handling of certain ethernet frames
@@ -2325,7 +2351,7 @@ Asynchronous, e.g.
 \layout Itemize
 
 System bus.
- OPB is perfered because as it is the only native I/O bus in Microblaze.
+ OPB is perfered because as it is the only native I/O bus in MicroBlaze.
 \layout Itemize
 
 DMA.
@@ -3744,7 +3770,7 @@ No MII Management module
 
 \end_inset 
 
-Network software for Microblaze
+Network software for MicroBlaze
 \layout Standard
 
 A Network System on Chip could do everything in ASIC hardware or configurable
