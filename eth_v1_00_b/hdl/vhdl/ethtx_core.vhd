@@ -4,7 +4,8 @@ use ieee.numeric_std.all;
 
 entity ethtx_core is
         generic (
-                data_pins : natural := 4
+                	data_pins : natural := 4;
+			async     : boolean := true
 		);
         port (
                 sys_clk         : in std_logic; -- rising edge
@@ -118,9 +119,6 @@ architecture RTL of ethtx_core is
                 word_data       : in   std_logic_vector(31 downto 0);
                 word_count      : in   std_logic_vector(2 downto 0);
 
-		--append_fcs	: in std_logic;
-		--fcs		: in std_logic_vector(31 downto 0);
-		
 		byte_rd		: in  std_logic;
                 byte_data       : out std_logic_vector(7 downto 0);
                 byte_valid      : out std_logic
@@ -147,30 +145,108 @@ architecture RTL of ethtx_core is
 
 	signal fcs : std_logic_vector(31 downto 0);
 
+	component fifo_async
+    	generic (data_bits : integer;
+             	addr_bits  : integer;
+             	block_type : integer := 0;
+             	fifo_arch  : integer := 0); -- 0=Generic architecture, 
+                	                    -- 1=Xilinx XAPP131, 
+                                            -- 2=Xilinx XAPP131 w/carry mux
+    	port (reset	: in  std_logic;
+          	wr_clk	: in  std_logic;
+          	wr_en	: in  std_logic;
+          	wr_data	: in  std_logic_vector (data_bits-1 downto 0);
+          	rd_clk	: in  std_logic;
+          	rd_en	: in  std_logic;
+          	rd_data	: out std_logic_vector (data_bits-1 downto 0);
+          	full	: out std_logic;
+          	empty	: out std_logic
+         	);
+  	end component;
+
+	signal	tx_async_fifo_full, 
+		tx_async_fifo_full_inv,
+		tx_async_fifo_empty,
+		tx_async_fifo_empty_inv : std_logic;
+		
+	signal	tx_async_fifo_din, 
+		tx_async_fifo_dout : std_logic_vector(data_pins downto 0);
+	
 
 	signal tx_clk_fdr : std_logic;	
 
+	signal tx_en_s	: std_logic;
+	signal tx_d_s	: std_logic_vector(data_pins-1 downto 0);
+
+
 begin
 
-	fdr : process (sys_clk) begin
-		if rising_edge(sys_clk) then
-			if sys_reset='1' then
-				tx_clk_fdr <= '0';
-			else
-				tx_clk_fdr <= tx_clk;		
+	gen0 : if async = false generate
+
+		tx_en <= tx_en_s;
+		tx_d <= tx_d_s;
+
+		fdr : process (sys_clk) begin
+			if rising_edge(sys_clk) then
+				if sys_reset='1' then
+					tx_clk_fdr <= '0';
+				else
+					tx_clk_fdr <= tx_clk;		
+				end if;
 			end if;
-		end if;
-	end process;
+		end process;
 
 
-        sampler : ethtx_clk_sampler
-        port map (
-                sys_clk         => sys_clk,
-                sys_reset       => sys_reset,
+	        sampler : ethtx_clk_sampler
+	        port map (
+	                sys_clk         => sys_clk,
+	                sys_reset       => sys_reset,
 
-                tx_clock        => tx_clk_fdr,
-                tx_clock_pulse  => tx_clock_pulse
-        );
+        	        tx_clock        => tx_clk_fdr,
+                	tx_clock_pulse  => tx_clock_pulse
+	        );
+	end generate gen0;
+	
+	gen0 : if async = true generate
+		tx_async_fifo :  fifo_async
+    		generic map (
+			data_bits  => data_pins+1,
+             		addr_bits  => 4,
+             		block_type => 0,
+             		fifo_arch  => 0) -- 0=Generic architecture, 
+                	                   -- 1=Xilinx XAPP131, 
+                        	           -- 2=Xilinx XAPP131 w/carry mux
+    		port map (
+			reset	=> sys_reset,
+        	  	wr_clk	=> sys_clk,
+          		wr_en	=> tx_async_fifo_full_inv,
+	          	wr_data	=> tx_async_fifo_din,
+        	  	rd_clk	=> tx_clk,
+          		rd_en	=> tx_async_fifo_empty_inv,
+          		rd_data	=> tx_async_fifo_dout,
+          		full	=> tx_async_fifo_full,
+          		empty	=> tx_async_fifo_empty
+         	);
+
+		tx_clock_pulse <= not tx_async_fifo_full;
+		tx_async_fifo_full_inv <= not tx_async_fifo_full;
+		tx_async_fifo_empty_inv <= not tx_async_fifo_empty;
+
+		tx_async_fifo_din <= tx_en_s & tx_d_s;
+
+		process (tx_clk) begin
+			if rising_edge(tx_clk) then
+				tx_en <= tx_async_fifo_dout(data_pins);
+				tx_d <= tx_async_fifo_dout(data_pins-1 downto 0);
+
+				if tx_async_fifo_empty = '0' then
+					tx_en <= '0';
+				end if;
+			end if;
+		end process;
+					
+
+	end generate gen0;
 
 
 	state : ethtx_statemachine
@@ -185,8 +261,6 @@ begin
 		send_state	=> send_state
 
         );
-
-	--fcs <= (others => '0');
 
 	cyclic :  crc32
 	generic map (
@@ -213,9 +287,6 @@ begin
                 word_data       => word_data,
                 word_count      => word_count,
 
-		--append_fcs	=> append_fcs,
-		--fcs		=> fcs,
-		
 		byte_rd		=> byte_rd,
                 byte_data       => byte_data,
                 byte_valid      => byte_valid
@@ -233,8 +304,8 @@ begin
 		send_state	=> send_state,
 
                 tx_clock_pulse  => tx_clock_pulse,
-                tx_data         => tx_d,
-                tx_en           => tx_en,
+                tx_data         => tx_d_s,
+                tx_en           => tx_en_s,
 
 		append_fcs	=> append_fcs,
 		fcs		=> fcs,
