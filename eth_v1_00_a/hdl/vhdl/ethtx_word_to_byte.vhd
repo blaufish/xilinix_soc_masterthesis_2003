@@ -31,7 +31,7 @@ architecture RTL of ethtx_word_to_byte is
 
 begin
 
-	byte_valid <= '1' when count /= "000" else '0';
+	--byte_valid <= '1' when count /= "000" else '0';
 
 	byte_data  <= data(31 downto 24);
 
@@ -43,6 +43,7 @@ begin
 				count      <= (others => '0');
 				data       <= (others => '0');
 				state      <= S_WORD;
+				byte_valid <= '0';
 
 			else
 				if byte_rd = '1' then
@@ -51,27 +52,21 @@ begin
 					count  <= count - 1 ;
 					data   <= data(23 downto 0) & X"00";
 				
+					if count="001" then
+						byte_valid <= '0';
+					end if;
 
 				elsif state=S_WORD then
 						if count="000" then
 							if word_count="000" then
-								--if append_fcs = '1' then
-								--	state    <= S_FCS;
-								--	count    <= "100";
-								--	data     <= fcs;
-								--else
-									state    <= S_SLEEP;
-								--end if;
+								state    <= S_SLEEP;
 							else
 								word_rd <= '1';
 								count   <= unsigned( word_count );
 								data    <= word_data;
+								byte_valid <= '1';
 							end if;
 						end if;
-
-				--elsif state=S_FCS and count="000" then
-				--	state    <= S_SLEEP;
-				--	count	 <= "000";
 
 				elsif state=S_SLEEP and word_count/="000" then
 					state    <= S_WORD;
