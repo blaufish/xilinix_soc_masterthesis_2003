@@ -1,5 +1,7 @@
 Eth V 1.00 Revision A Specification
+$Id$
 
+Author: Peter Magnusson < petmag-8 at sm.luth.se >
 
 Section 0; Features
 	- IBM CoreConnect / Xilinx MicroBlaze compatible device
@@ -21,6 +23,8 @@ Section 1; Parameters
 | OPB Data Bus Width  | C_OPB_AWIDTH   | 32                | 32      | integer          |
 +---------------------+----------------+-------------------+---------+------------------+
 (generic PHY-width will be added)
+
+
 
 
 Section 2; Signals
@@ -53,6 +57,13 @@ Section 2; Signals
 | *** X=3 for now. Generic in upcomming versions                 |
 +----------------------------------------------------------------+
 
+
+OPB decoding notes:
+OPB_ABus<0:23> is check against C_BASEADDR, if equal and OPB_select='1' the device is selected.
+OPB_ABus<27:29> is used to decode register offset.
+OPB_ABus<30:31> and OPB_BE is used to verify that access is 32-bit.
+
+
 
 Section 3; Registers
 
@@ -71,8 +82,6 @@ Register map:
 |  0x14  | TX STATUS | Read/Write |
 +--------+-----------+------------+
 
-Note: ETH may or may not contain reserved and/or undocumented registers. 
-Access to non-specified registers may disrupt standard functionallity.
 
 ETH Base Address + 0x00 - RX FIFO Register (READ ONLY):
 
@@ -134,7 +143,8 @@ ETH Base Address + 0x14 - TX STATUS Register (WRITE MODE):
 | 30-31 | length_mod4   | Packet length in bytes modulo 4                  |
 +-------+---------------+--------------------------------------------------+
 
-Note: Any reserved/Undocumented TX/RX STATUS bits should be 0 on writes.
+Note: 
+Any Reserved/Undocumented TX/RX STATUS bits should be 0 on writes, and ignored on read.
 
 
 
