@@ -30,7 +30,7 @@ BENCH_ENTITY=bench_eth
 BENCH_ARCH=sim
 BENCH=$(BENCH_ENTITY):$(BENCH_ARCH)
 
-SIM_SRC = $(BENCH_ENTITY).vhd
+SIM_SRC = tb_debug_functions.vhd tb_opb_packet_loopback.vhd tb_mii_receiver_model.vhd $(BENCH_ENTITY).vhd
 SIM_TRG: $(SIM_SRC:%.vhd=tmp/.done.%.vhd.) RTL_TRG
 
 vcom:
