@@ -4,13 +4,12 @@ Overall:
 	- TX core unstable (many fixes applied recently)
 
 RTL simulations:
-	- Only minimal tests performed, need to write a OPB-behavioral model to simplify tests.
 	- Top module simulations appear OK
 	- RX core seems OK
-	- TX core, many recenent fixes. Possible bit order and/or CRC errors may still remain?
+	- TX core seems OK 
 	
 Real world tests:
 	- RX works, tests indicates that RX remains stable after several hours of (normal) ethernet traffic.
-	- TX fails real world tests
+	- TX works, first packet only. Error in VHDL-code or test software?
 
 
