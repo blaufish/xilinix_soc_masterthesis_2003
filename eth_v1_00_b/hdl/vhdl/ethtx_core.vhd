@@ -239,7 +239,7 @@ begin
 				tx_en <= tx_async_fifo_dout(data_pins);
 				tx_d <= tx_async_fifo_dout(data_pins-1 downto 0);
 
-				if tx_async_fifo_empty = '0' then
+				if tx_async_fifo_empty = '1' then
 					tx_en <= '0';
 				end if;
 			end if;
