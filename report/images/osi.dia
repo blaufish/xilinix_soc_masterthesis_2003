@@ -22,10 +22,10 @@
           <real val="2.82"/>
         </attribute>
         <attribute name="is_portrait">
-          <boolean val="false"/>
+          <boolean val="true"/>
         </attribute>
         <attribute name="scaling">
-          <real val="0.585401"/>
+          <real val="1.01721"/>
         </attribute>
         <attribute name="fitto">
           <boolean val="true"/>
@@ -40,137 +40,21 @@
     </attribute>
   </diagramdata>
   <layer name="Background" visible="true">
-    <object type="UML - LargePackage" version="0" id="O0">
+    <object type="Flowchart - Box" version="0" id="O0">
       <attribute name="obj_pos">
-        <point val="3,10"/>
+        <point val="-0.0002,13.85"/>
       </attribute>
       <attribute name="obj_bb">
-        <rectangle val="2.95,8.15;44.05,25.05"/>
+        <rectangle val="-0.0502,13.8;15.05,16.05"/>
       </attribute>
       <attribute name="elem_corner">
-        <point val="3,10"/>
+        <point val="-0.0002,13.85"/>
       </attribute>
       <attribute name="elem_width">
-        <real val="41"/>
+        <real val="15.0002"/>
       </attribute>
       <attribute name="elem_height">
-        <real val="15"/>
-      </attribute>
-      <attribute name="name">
-        <string>#Testbench#</string>
-      </attribute>
-      <attribute name="stereotype">
-        <string/>
-      </attribute>
-    </object>
-    <object type="Standard - Line" version="0" id="O1">
-      <attribute name="obj_pos">
-        <point val="24,16"/>
-      </attribute>
-      <attribute name="obj_bb">
-        <rectangle val="23.15,15.15;24.85,20.85"/>
-      </attribute>
-      <attribute name="conn_endpoints">
-        <point val="24,16"/>
-        <point val="24,20"/>
-      </attribute>
-      <attribute name="numcp">
-        <int val="1"/>
-      </attribute>
-      <attribute name="start_arrow">
-        <enum val="3"/>
-      </attribute>
-      <attribute name="start_arrow_length">
-        <real val="0.8"/>
-      </attribute>
-      <attribute name="start_arrow_width">
-        <real val="0.8"/>
-      </attribute>
-      <attribute name="end_arrow">
-        <enum val="3"/>
-      </attribute>
-      <attribute name="end_arrow_length">
-        <real val="0.8"/>
-      </attribute>
-      <attribute name="end_arrow_width">
-        <real val="0.8"/>
-      </attribute>
-      <connections>
-        <connection handle="0" to="O5" connection="13"/>
-        <connection handle="1" to="O7" connection="2"/>
-      </connections>
-    </object>
-    <object type="Standard - Line" version="0" id="O2">
-      <attribute name="obj_pos">
-        <point val="13.0568,14"/>
-      </attribute>
-      <attribute name="obj_bb">
-        <rectangle val="12.2068,13.15;17.85,14.85"/>
-      </attribute>
-      <attribute name="conn_endpoints">
-        <point val="13.0568,14"/>
-        <point val="17,14"/>
-      </attribute>
-      <attribute name="numcp">
-        <int val="1"/>
-      </attribute>
-      <attribute name="end_arrow">
-        <enum val="3"/>
-      </attribute>
-      <attribute name="end_arrow_length">
-        <real val="0.8"/>
-      </attribute>
-      <attribute name="end_arrow_width">
-        <real val="0.8"/>
-      </attribute>
-      <connections>
-        <connection handle="0" to="O4" connection="8"/>
-        <connection handle="1" to="O5" connection="7"/>
-      </connections>
-    </object>
-    <object type="Standard - Line" version="0" id="O3">
-      <attribute name="obj_pos">
-        <point val="31,14"/>
-      </attribute>
-      <attribute name="obj_bb">
-        <rectangle val="30.15,13.15;35.85,14.85"/>
-      </attribute>
-      <attribute name="conn_endpoints">
-        <point val="31,14"/>
-        <point val="35,14"/>
-      </attribute>
-      <attribute name="numcp">
-        <int val="1"/>
-      </attribute>
-      <attribute name="end_arrow">
-        <enum val="3"/>
-      </attribute>
-      <attribute name="end_arrow_length">
-        <real val="0.8"/>
-      </attribute>
-      <attribute name="end_arrow_width">
-        <real val="0.8"/>
-      </attribute>
-      <connections>
-        <connection handle="0" to="O5" connection="8"/>
-        <connection handle="1" to="O6" connection="7"/>
-      </connections>
-    </object>
-    <object type="Flowchart - Box" version="0" id="O4">
-      <attribute name="obj_pos">
-        <point val="4,12"/>
-      </attribute>
-      <attribute name="obj_bb">
-        <rectangle val="3.95,11.95;13.1068,16.05"/>
-      </attribute>
-      <attribute name="elem_corner">
-        <point val="4,12"/>
-      </attribute>
-      <attribute name="elem_width">
-        <real val="9.0568"/>
-      </attribute>
-      <attribute name="elem_height">
-        <real val="4"/>
+        <real val="2.15"/>
       </attribute>
       <attribute name="show_background">
         <boolean val="true"/>
@@ -181,8 +65,7 @@
       <attribute name="text">
         <composite type="text">
           <attribute name="string">
-            <string>#FILE stimuli.txt
-(RX Input)#</string>
+            <string>#1. Physical layer#</string>
           </attribute>
           <attribute name="font">
             <font name="Courier"/>
@@ -191,7 +74,187 @@
             <real val="0.8"/>
           </attribute>
           <attribute name="pos">
-            <point val="8.5284,13.8074"/>
+            <point val="7.4999,15.1324"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Flowchart - Box" version="0" id="O1">
+      <attribute name="obj_pos">
+        <point val="0,12"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="-0.05,11.95;15.05,14.05"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="0,12"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="15"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2"/>
+      </attribute>
+      <attribute name="show_background">
+        <boolean val="true"/>
+      </attribute>
+      <attribute name="padding">
+        <real val="0.5"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>#2. Link layer#</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="0.8"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="7.5,13.2074"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Flowchart - Box" version="0" id="O2">
+      <attribute name="obj_pos">
+        <point val="0,10"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="-0.05,9.95;15.05,12.05"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="0,10"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="15"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2"/>
+      </attribute>
+      <attribute name="show_background">
+        <boolean val="true"/>
+      </attribute>
+      <attribute name="padding">
+        <real val="0.5"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>#3. Network layer#</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="0.8"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="7.5,11.2074"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Flowchart - Box" version="0" id="O3">
+      <attribute name="obj_pos">
+        <point val="0,8"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="-0.05,7.95;15.05,10.05"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="0,8"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="15"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2"/>
+      </attribute>
+      <attribute name="show_background">
+        <boolean val="true"/>
+      </attribute>
+      <attribute name="padding">
+        <real val="0.5"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>#4. Transport layer#</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="0.8"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="7.5,9.20741"/>
+          </attribute>
+          <attribute name="color">
+            <color val="#000000"/>
+          </attribute>
+          <attribute name="alignment">
+            <enum val="1"/>
+          </attribute>
+        </composite>
+      </attribute>
+    </object>
+    <object type="Flowchart - Box" version="0" id="O4">
+      <attribute name="obj_pos">
+        <point val="0,6"/>
+      </attribute>
+      <attribute name="obj_bb">
+        <rectangle val="-0.05,5.95;15.05,8.05"/>
+      </attribute>
+      <attribute name="elem_corner">
+        <point val="0,6"/>
+      </attribute>
+      <attribute name="elem_width">
+        <real val="15"/>
+      </attribute>
+      <attribute name="elem_height">
+        <real val="2"/>
+      </attribute>
+      <attribute name="show_background">
+        <boolean val="true"/>
+      </attribute>
+      <attribute name="padding">
+        <real val="0.5"/>
+      </attribute>
+      <attribute name="text">
+        <composite type="text">
+          <attribute name="string">
+            <string>#5. Session layer#</string>
+          </attribute>
+          <attribute name="font">
+            <font name="Courier"/>
+          </attribute>
+          <attribute name="height">
+            <real val="0.8"/>
+          </attribute>
+          <attribute name="pos">
+            <point val="7.5,7.20741"/>
           </attribute>
           <attribute name="color">
             <color val="#000000"/>
@@ -204,19 +267,19 @@
     </object>
     <object type="Flowchart - Box" version="0" id="O5">
       <attribute name="obj_pos">
-        <point val="17,12"/>
+        <point val="0,4"/>
       </attribute>
       <attribute name="obj_bb">
-        <rectangle val="16.95,11.95;31.05,16.05"/>
+        <rectangle val="-0.05,3.95;15.05,6.05"/>
       </attribute>
       <attribute name="elem_corner">
-        <point val="17,12"/>
+        <point val="0,4"/>
       </attribute>
       <attribute name="elem_width">
-        <real val="14"/>
+        <real val="15"/>
       </attribute>
       <attribute name="elem_height">
-        <real val="4"/>
+        <real val="2"/>
       </attribute>
       <attribute name="show_background">
         <boolean val="true"/>
@@ -227,9 +290,7 @@
       <attribute name="text">
         <composite type="text">
           <attribute name="string">
-            <string>#DUT
-(Design Under Test)
-Ethernet peripheral#</string>
+            <string>#6. Presentation layer#</string>
           </attribute>
           <attribute name="font">
             <font name="Courier"/>
@@ -238,7 +299,7 @@ Ethernet peripheral#</string>
             <real val="0.8"/>
           </attribute>
           <attribute name="pos">
-            <point val="24,13.4074"/>
+            <point val="7.5,5.20741"/>
           </attribute>
           <attribute name="color">
             <color val="#000000"/>
@@ -251,19 +312,19 @@ Ethernet peripheral#</string>
     </object>
     <object type="Flowchart - Box" version="0" id="O6">
       <attribute name="obj_pos">
-        <point val="35,12"/>
+        <point val="0,2"/>
       </attribute>
       <attribute name="obj_bb">
-        <rectangle val="34.95,11.95;43.1372,16.05"/>
+        <rectangle val="-0.05,1.95;15.05,4.05"/>
       </attribute>
       <attribute name="elem_corner">
-        <point val="35,12"/>
+        <point val="0,2"/>
       </attribute>
       <attribute name="elem_width">
-        <real val="8.0872"/>
+        <real val="15"/>
       </attribute>
       <attribute name="elem_height">
-        <real val="4"/>
+        <real val="2"/>
       </attribute>
       <attribute name="show_background">
         <boolean val="true"/>
@@ -274,8 +335,7 @@ Ethernet peripheral#</string>
       <attribute name="text">
         <composite type="text">
           <attribute name="string">
-            <string>#Ethernet model
-(TX Output)#</string>
+            <string>#7. Application layer#</string>
           </attribute>
           <attribute name="font">
             <font name="Courier"/>
@@ -284,53 +344,7 @@ Ethernet peripheral#</string>
             <real val="0.8"/>
           </attribute>
           <attribute name="pos">
-            <point val="39.0436,13.8074"/>
-          </attribute>
-          <attribute name="color">
-            <color val="#000000"/>
-          </attribute>
-          <attribute name="alignment">
-            <enum val="1"/>
-          </attribute>
-        </composite>
-      </attribute>
-    </object>
-    <object type="Flowchart - Box" version="0" id="O7">
-      <attribute name="obj_pos">
-        <point val="17,20"/>
-      </attribute>
-      <attribute name="obj_bb">
-        <rectangle val="16.95,19.95;31.05,22.75"/>
-      </attribute>
-      <attribute name="elem_corner">
-        <point val="17,20"/>
-      </attribute>
-      <attribute name="elem_width">
-        <real val="14"/>
-      </attribute>
-      <attribute name="elem_height">
-        <real val="2.7"/>
-      </attribute>
-      <attribute name="show_background">
-        <boolean val="true"/>
-      </attribute>
-      <attribute name="padding">
-        <real val="0.5"/>
-      </attribute>
-      <attribute name="text">
-        <composite type="text">
-          <attribute name="string">
-            <string>#On-Chip Perhiperal Bus
-Loopback Model#</string>
-          </attribute>
-          <attribute name="font">
-            <font name="Courier"/>
-          </attribute>
-          <attribute name="height">
-            <real val="0.8"/>
-          </attribute>
-          <attribute name="pos">
-            <point val="24,21.1574"/>
+            <point val="7.5,3.20741"/>
           </attribute>
           <attribute name="color">
             <color val="#000000"/>

@@ -5,7 +5,8 @@
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
 \fancyhead[LO,RE]{\thepage}
 \fancyhead[RO,LE]{\leftmark}
-\cfoot{}
+\cfoot{\thepage}
+\hyphenation{Micro-Blaze}
 \end_preamble
 \language english
 \inputencoding auto
@@ -42,7 +43,7 @@ Network SoC solutions
 \newline 
 
 \emph on 
-Master Thesis in Computer Engineering
+Master's Thesis in Computer Engineering
 \emph default 
 
 \newline 
@@ -59,17 +60,24 @@ Peter Magnusson
 petmag-8@sm.luth.se
 \layout Abstract
 
-This thesis explores the possibility of implementing a System on Chip (SoC)
- solution for network applications.
- Xilinx MicroBlaze soft processor core and IBM CoreConnect On-Chip Peripheral
- Bus (OPB) peripherals are utilized in the SoC.
- The SoC is implemented in Virtex Field Programmable Gate Array (FPGA) circuits
- manufactured by Xilinx.
+This thesis aims to create a System on Chip solution for various network
+ devices.
+ A solution with network peripherals, processor core and network software
+ in a single chip is designed and evaluated.
+\newline 
+
 \layout Abstract
 
-Typical network SoC applications include Ethernet switches, Internet-connected
- embedded systems, small IP clients for handheld devices and simple Internet
- gateways.
+Typical applications of a network System on Chip include Ethernet switches,
+ Internet-enabled embedded systems, small Internet Protocol clients for
+ handheld devices and simple Internet gateways.
+\newline 
+
+\layout Abstract
+
+The the solution utilizes the Xilinx MicroBlaze soft processor core, MicroBlaze
+ Development Kit, IBM CoreConnect On-Chip Peripheral Bus (OPB) peripherals
+ and Xilinx Virtex Field Programmable Gate Array (FPGA).
 \layout Chapter*
 
 Acknowledgment
@@ -92,19 +100,18 @@ Ph.d Per Lindgren for supervising my thesis.
 Ph.d student Jonas Thor for feedback on various computer engineering topics.
 \layout Itemize
 
-MSc student Jens Eliasson for various MicroBlaze discussions.
+M.Sc student Jens Eliasson for various MicroBlaze discussions.
 \layout Itemize
 
-MSc.
- students Frederik Schmid, Jan Dahlberg, Johan Mattsson, Stefan Nilsson
+M.Sc students Frederik Schmid, Jan Dahlberg, Johan Mattsson, Stefan Nilsson
  and Jimmie Wiklander for reusing and verifying my Ethernet MAC.
 \layout Itemize
 
-MSc students Stefan Nilsson, Frederik Schmid and Jimmie Wiklander for MicroBlaze
+M.Sc students Stefan Nilsson, Frederik Schmid and Jimmie Wiklander for MicroBlaze
  lwIP implementation.
 \layout Itemize
 
-Jens Eliasson and Tim Johansson for proof-reading my thesis.
+Jens Eliasson, Tim Johansson and Sara Lidqvist for proof-reading my thesis.
 \layout Itemize
 
 Xilinx Inc for permitting reprint of figures originally published by Xilinx
@@ -112,7 +119,7 @@ Xilinx Inc for permitting reprint of figures originally published by Xilinx
 \layout Standard
 
 During the thesis work, I have taught MicroBlaze based System on Chip (SoC)
- development to MSc students in the Project in Digital Synthesis course
+ development to M.Sc students in the Project in Digital Synthesis course
  at CSEE.
  Additional credits goes to these students for valuable input.
 \layout Standard
@@ -252,7 +259,7 @@ were used to find facts and support statements.
  publications.
  Official publications by Xilinx Inc, researchers and other credible sources
  have been used whenever possible.
- Some times open forums such as 
+ Sometimes open forums such as 
 \emph on 
 Xilinx Embedded Processor Forum
 \emph default 
@@ -277,7 +284,7 @@ MicroBlaze Development Kit (MDK) 2.2 (Service Pack 2) has been used for this
 \layout Subsection
 
 Hardware
-\layout Subsubsection
+\layout Paragraph
 
 XESS XSV-100 / XSV-800 Prototyping Board
 \layout Standard
@@ -306,7 +313,7 @@ Two 512K
 \end_inset 
 
 16-Bit SRAM memory banks.
-\layout Subsubsection
+\layout Paragraph
 
 Platinum Virtex-E Prototyping Board
 \layout Standard
@@ -400,15 +407,8 @@ Chapter
 
 \end_inset 
 
- discusses the results and suggest some topics for future work.
-\layout Standard
-
-Chapter 
-\begin_inset LatexCommand \ref{cha:Conclusions}
-
-\end_inset 
-
- gives a number of conclusions drawn from the thesis.
+ discusses the results, suggest some topics for future work and gives a
+ number of conclusions drawn from the thesis.
 \layout Chapter
 
 
@@ -439,13 +439,13 @@ reduced device size
 A typical SoC includes one (or many) processor core(s), an arbitrary number
  of peripherals, some on-chip memory and a bus architecture which interconnects
  all these devices.
- The design goal is that a SoC should should be the only circuit required
- an application.
+ The System on Chip design goal is that only one circuit should required
+ for an application.
  In practice a SoC may also contain a large set of I/O interfaces to other
  circuits, for instance: 
 \layout Itemize
 
-memory chips 
+memory modules 
 \layout Itemize
 
 off-chip peripherals 
@@ -463,8 +463,8 @@ As SoCs usually are designed with a limited set of applications in mind,
  500 MHz - 3 GHz, the SoC CPU might operate at just a few megahertz.
  An ideal SoC processor core is operating at the minimum clock frequency
  needed to properly perform the desired task.
- By utiliziningutilizing a low clock frequency the power consumption and
- chip temperature is reduced.
+ By utilizing a low clock frequency the power consumption and chip temperature
+ is reduced.
  This allows SoCs to operate with less cooling devices and better battery/power
  utilization.
 \layout Subsection
@@ -511,11 +511,18 @@ application
  in ASIC terms) but also large designs such as SoCs.
 \layout Standard
 
-An ASIC is designed for a specific application and can be customized to
- reduce power dissipation, small or increase clock frequencies.
- Other important ASIC characteristics are low reconfigurability, long design
- phases, high startup costs and low mass production costs.
- This makes ASIC well suited for large scale manufacturing of well verified
+An ASIC is designed for a specific application.
+ An ASIC can therefor be customized for reduced power dissipation, less
+ chip area or greater clock frequencies.
+ ASICs usually have low mass production costs.
+\layout Standard
+
+ASIC drawbacks are low reconfigurability, long design phases and high startup
+ costs.
+ 
+\layout Standard
+
+This makes ASIC well suited for large scale manufacturing of well verified
  designs, but not well suited for prototypes.
 \layout Section
 
@@ -552,6 +559,49 @@ This makes FPGAs well suited for prototypes and small production volumes.
  applications are subject to change.
 \layout Section
 
+Hardware Description Language (HDL)
+\layout Standard
+
+Hardware Description Languages (HDL) provide ways to describe hardware.
+ Hardware Description Languages can be used for difference purposes.
+ 
+\layout Paragraph
+
+Synthesis.
+\layout Standard
+
+A common usage of HDL is to describe how hardware should be implemented.
+ Such descriptions can be translated into technology -dependent netlists
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Netlists are describe how ASIC or FPGA building blocks are interconnected
+ and configured.
+\end_inset 
+
+ by software.
+ The process of translating HDL descriptions to netlists is known as synthesis.
+\layout Paragraph
+
+VHSIC Hardware Description Language (VHDL)
+\layout Standard
+
+or 
+\begin_inset Quotes eld
+\end_inset 
+
+Very High Speed Integrated Circuit Hardware Description Language
+\begin_inset Quotes erd
+\end_inset 
+
+ is a commonly used HDL.
+ It is designed for military and space applications, but is also commonly
+ used in academic and commercial hardware project.
+ VHDL is similar to software languages such as Ada and Pascal.
+\layout Section
+
 
 \begin_inset LatexCommand \label{sec:Processor-cores}
 
@@ -568,7 +618,7 @@ collapsed false
 
 \layout Standard
 
-As opposed to a Microcontroller core which may include peripherals.
+As opposed to a microcontroller core which may include peripherals.
 \end_inset 
 
 
@@ -595,7 +645,7 @@ Soft core
 \end_inset 
 
  refer to cores delivered as a technology dependent gate-level netlist or
- synthesisable source code.
+ HDL source code.
 \layout Itemize
 
 
@@ -621,8 +671,56 @@ Hard core
  the design as a standard cell.
 \layout Standard
 
-Firm and hard cores mainly apply to ASICs.
- Soft cores are commonly used programmable logic as well.
+Firm and hard cores mainly apply to ASIC design.
+ Soft cores are commonly used with programmable logic as well.
+\layout Subsection
+
+Instruction Set Architectures
+\layout Standard
+
+An Instruction Set Architecture is a definition of how processor should
+ perform an instruction.
+ An instruction is a very short and basic command to the processor, such
+ as 
+\begin_inset Quotes eld
+\end_inset 
+
+add X with Y and store in Z
+\begin_inset Quotes erd
+\end_inset 
+
+ or 
+\begin_inset Quotes eld
+\end_inset 
+
+load X from memory Z
+\begin_inset Quotes erd
+\end_inset 
+
+.
+\layout Paragraph
+
+Reduced Instruction Set Computer (RISC)
+\layout Standard
+
+refers to instruction set architectures with all or most of the following
+ properties:
+\layout Itemize
+
+rapid execution of a small instruction set with simple instructions
+\layout Itemize
+
+uniform instruction length
+\layout Itemize
+
+all processor registers are general purpose
+\layout Itemize
+
+simple addressing modes.
+\layout Standard
+
+RISC architectures are commonly used in microcontrollers and System on Chip
+ cores.
 \layout Subsection
 
 Soft Processors
@@ -668,8 +766,8 @@ Almost any application may be implemented, without a processor or software,
  in application specific logic (e.g.
  ASIC) or programmable logic (e.g.
  FPGA).
- However, there two major reasons to utilize a processor core and run software
- on it.
+ There two major reasons to utilize a processor core and run software on
+ it:
 \layout Paragraph
 
 Simplicity.
@@ -684,7 +782,16 @@ Software often shorten design times and tend to be easier to develop.
 Simple, fast and remote upgrades.
 \layout Standard
 
-Software can often be upgraded during operation without system downtime.
+Software can often be upgraded during operation without system downtime
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Downtime is time which a system is off-line, unresponsive or otherwise useless.
+\end_inset 
+
+.
  Operating system software often support remote administration and can terminate
  and load a new application in a few microseconds.
  Programmable logic and application specific logic have different upgrade
@@ -709,12 +816,12 @@ n registers or programmable logic blocks included).
  If changes have not been anticipated, a new ASIC may have to be manufactured.
 \layout Standard
 
-The conclusion is that processor cores are preferred because software add
- flexibility, and shorten the time required for developing, reconfiguring
- and finding errors in the application.
+Software and processor cores are preferred to pure hardware (PLD/ASIC) solutions.
+ This is because software adds flexibility, shortens development cycles,
+ allows faster reconfigurations and simplifies debugging.
 \layout Section
 
-IBM CoreConnect
+IBM CoreConnect Bus architecture
 \layout Standard
 
 IBM CoreConnect 
@@ -722,7 +829,7 @@ IBM CoreConnect
 
 \end_inset 
 
- architecture is a small family of SoC busses.
+ architecture is a small set of busses intended for SoC designs.
  The design goal of CoreConnect is to provide different busses for different
  types of cores.
  By providing different busses, the overall design may be optimized for
@@ -742,7 +849,7 @@ On-Chip Peripheral Bus (OPB): a simple bus intended for use with peripherals
  which are slow or otherwise unsuited for PLB.
 \layout Itemize
 
-Device Control Register (DCR) Bus: a simple bus intended to distribute register
+Device Control Register Bus (DCR): a simple bus intended to distribute register
  values in an efficient manner.
 \layout Standard
 
@@ -753,36 +860,7 @@ An IBM CoreConnect system may utilize one, two or all three busses in a
 
 \end_inset 
 
- shows a system utilizing all three busses 
-\layout Standard
-
-A system utilizing two or three CoreConnect busses may use different system
- clocks - often OPB uses a slower clock than PLB.
- PLB and OPB may be interconnected using OPB-to-PLB and PLB-to-OPB bridges.
- The CoreConnect busses share important characteristics:
-\layout Itemize
-
-CoreConnect is fully synchronous
-\layout Itemize
-
-CoreConnect does not require tri-state drivers
-\layout Standard
-
-The IBM CoreConnect architecture heavily customizable and several CoreConnect
- architecture parameters may differ between different implementations.
- Therefor IBM CoreConnect cores may be incompatible unless designed for
- compliance with a specific CoreConnect implementation.
- Important CoreConnect implementations include: 
-\layout Itemize
-
-IBM Blue Logic
-\begin_inset Formula $^{\textrm{TM}}$
-\end_inset 
-
- Core library for ASIC SoC design.
-\layout Itemize
-
-Xilinx OPB for FPGA SoC design.
+ shows a system utilizing all three busses.
 \layout Standard
 
 
@@ -823,6 +901,56 @@ CoreConnect based SoC
 \end_inset 
 
 
+\layout Standard
+
+A system utilizing two or three CoreConnect busses may use different system
+ clocks - often OPB uses a slower clock than PLB.
+ PLB and OPB may be interconnected using OPB-to-PLB and PLB-to-OPB bridges.
+ The CoreConnect busses share important characteristics:
+\layout Itemize
+
+CoreConnect is fully synchronous
+\layout Itemize
+
+CoreConnect does not require tri-state
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Tri-state drivers are logic which may output boolean values ('0', '1') or
+ output no signal.
+ Tri-state drivers are notorious for causing design problems, but allows
+ several drivers to share a single wire.
+ To use or not to use tri-state drivers in bus design is a much debated
+ subject.
+\end_inset 
+
+ drivers
+\layout Standard
+
+IBM CoreConnect is heavily customizable and several CoreConnect architecture
+ parameters may differ between different implementations.
+ Therefor IBM CoreConnect cores may be incompatible unless designed for
+ compliance with a specific CoreConnect implementation.
+ Important CoreConnect implementations include: 
+\layout Itemize
+
+IBM Blue Logic
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+texttrademark
+\end_inset 
+
+\SpecialChar ~
+ Core library for ASIC SoC design.
+\layout Itemize
+
+Xilinx OPB for Xilinx FPGA System on Chip design.
 \layout Subsection
 
 
@@ -867,6 +995,44 @@ OPB Bus
 \end_inset 
 
  shows a small IBM CoreConnect OPB System.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:IBM-CoreConnect-OPB-Physical-Implementation}
+
+\end_inset 
+
+IBM CoreConnect OPB Physical Implementation
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/IBM_OPB_Physical_implementation.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\newline 
+(from 
+\begin_inset LatexCommand \cite{CoreConnect_WhitePaper}
+
+\end_inset 
+
+ page 6)
+\end_inset 
+
+
 \layout Standard
 
 The bus includes a data bus and an address bus.
@@ -907,46 +1073,6 @@ Bus Lock
  (also referred to as sequential access or bursts) to make several slave
  accesses per arbitrated bus grant.
  Utilization of sequential access keeps arbitration overhead to a minimum.
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:IBM-CoreConnect-OPB-Physical-Implementation}
-
-\end_inset 
-
-IBM CoreConnect OPB Physical Implementation
-\layout Standard
-\align center 
-
-\begin_inset Graphics FormatVersion 1
-	filename images/IBM_OPB_Physical_implementation.eps
-	display default
-	size_type 1
-	width 90text%
-	keepAspectRatio
-	rotateOrigin leftBaseline
-	lyxsize_type 0
-
-\end_inset 
-
-
-\newline 
-(from 
-\begin_inset LatexCommand \cite{CoreConnect_WhitePaper}
-
-\end_inset 
-
- page 6)
-\end_inset 
-
-
 \layout Subsection
 
 
@@ -1000,9 +1126,7 @@ Xilinx OPB requires that all slave/master peripherals set all output signals
 \end_inset 
 
 .
-\layout Standard
-
-
+ 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -1067,6 +1191,136 @@ OPB Usage Notes
  may be interconnected with some effort.
 \layout Section
 
+Networks and the OSI reference model
+\layout Paragraph
+
+The Open Systems Interconnect (OSI) reference model
+\layout Standard
+
+is an abstracted approach to computer networks.
+ It divides network hardware and software into seven layers.
+ The layers are shown in figure 
+\begin_inset LatexCommand \ref{cap:OSI-layers}
+
+\end_inset 
+
+.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:OSI-layers}
+
+\end_inset 
+
+OSI layers
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/osi.eps
+	display default
+	size_type 1
+	width 20page%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+ Layer 1, the physical layer, defines how signal is transmitted in cables,
+ optical fibers, air or space.
+ Layer 2, the Link layer, defines how data should be transmitted between
+ two devices.
+ Layer 3, the network layer, defines how data should be transmitted between
+ a network.
+ This thesis deals mainly with layer 2 and 3.
+\layout Paragraph
+
+The OSI model applied to Ethernet and Internet.
+\layout Standard
+
+Most network protocols can be consider in from an OSI point of view.
+ Figure 
+\begin_inset LatexCommand \ref{cap:OSI-view-of}
+
+\end_inset 
+
+ visualizes the protocols used in thesis in an OSI view.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:OSI-view-of}
+
+\end_inset 
+
+OSI view of Ethernet - IP network stacks
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/osi_ethernet_ip.eps
+	display default
+	size_type 1
+	width 20page%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+Ethernet is the link layer protocol.
+ 
+\layout Standard
+
+IP (Internet Protocol) is the network layer protocol.
+ 
+\layout Standard
+
+ICMP (Internet Control Message Protocol) is used to send control messages.
+ An example of such messages is 
+\begin_inset Quotes eld
+\end_inset 
+
+No such network
+\begin_inset Quotes erd
+\end_inset 
+
+, signaled when IP packets with non-existent destinations are detected.
+ 
+\layout Standard
+
+ARP (Address Resolution Protocol) translates network layer addresses into
+ link layer addresses.
+ ARP is sometimes considered to be a part of the link layer protocols, but
+ is better considered to be a glue which keeps link and network layer together.
+ 
+\layout Standard
+
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are
+ the transport layer protocols.
+\layout Section
+
 About Ethernet 10/100 MBit/s
 \layout Standard
 
@@ -1122,219 +1376,7 @@ padding
 \end_inset 
 
 .
- In a typical implementation, hardware manages access control, synchronization
- (PREAMBLE, SYNC) and error detection (FCS).
  
-\layout Subsection
-
-Link Speed
-\layout Standard
-
-Currently most Ethernet devices in use and available for sale are 10/100
- MBit/s; 100 MBit/s but may auto negotiate to 10 MBit/s when interfacing
- 10 MBit/s devices.
- Many old devices are 10 MBit/s only.
- 
-\layout Paragraph
-
-Auto Negotiation
-\layout Standard
-
-allows Ethernet devices to sense the link speed capabilities of the receiving
- device and adapt to them.
- The greatest link speed both parties are capable of will be selected.
-\layout Paragraph
-
-Link speed in switched full duplex networks
-\layout Standard
-
-may vary for each link.
- Figure 
-\begin_inset LatexCommand \ref{cap:Link-speeds-in-small-ethernets}
-
-\end_inset 
-
- shows a small network where end hosts Alice and Bob communicate through
- switches Smith and Summers.
- All are 100 MBit/s capable except Summers, thus the Smith
-\begin_inset Formula $\Leftrightarrow $
-\end_inset 
-
-Summers and the Summers
-\begin_inset Formula $\Leftrightarrow $
-\end_inset 
-
-Bob link speed is negotiated to 10 MBit/s.
- The Alice
-\begin_inset Formula $\Leftrightarrow $
-\end_inset 
-
-Smith link is negotiated to 100 MBit/s.
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:Link-speeds-in-small-ethernets}
-
-\end_inset 
-
-Link speeds in a small Ethernet network
-\layout Standard
-\align center 
-
-\begin_inset Graphics FormatVersion 1
-	filename images/ethernet_linkspeeds.eps
-	display default
-	size_type 1
-	width 90text%
-	keepAspectRatio
-	rotateOrigin leftBaseline
-	lyxsize_type 0
-
-\end_inset 
-
-
-\end_inset 
-
-
-\layout Subsection
-
-Duplex Mode
-\layout Standard
-
-An Ethernet device is either operating in Full Duplex or Half Duplex mode.
- Most Ethernet devices can be configured to Auto Negotiate duplex or to
- use a statically selected duplex mode.
- If possible, hosts will negotiate to Full Duplex.
-\layout Subsubsection
-
-Half Duplex
-\layout Standard
-
-In Half Duplex, an arbitrary number of Ethernet devices share a single Ethernet
- medium, using the CSMA/CD access protocol.
- Half Duplex does not offer any concurrency; only one device may transmit
- data at a time.
- Half Duplex is an old and inefficient Ethernet mode, although still in
- use in a decreasing number of legacy networks.
-\layout Paragraph
-
-CSMA/CD 
-\layout Standard
-
-is an abbreviation for the Carrier Sense Multiple Access with Collision
- Detect access protocol.
- In CSMA/CD no host may initiate a packet while carrier (transmitiontransmission
-) is detected.
- If two devices should initiate transmission at the same time, a collision
- has occurred.
- All hosts should detect collisions and randomly set a 
-\begin_inset Quotes eld
-\end_inset 
-
-back off
-\begin_inset Quotes erd
-\end_inset 
-
- timer and remain silent until it has timed out.
- If repeated collisions occur, greater 
-\begin_inset Quotes eld
-\end_inset 
-
-back off
-\begin_inset Quotes erd
-\end_inset 
-
- values should be randomly selected.
-\layout Subsubsection
-
-Full Duplex
-\layout Standard
-
-In Full Duplex mode each Ethernet device has a dedicated send medium and
- a dedicated receive medium.
- Interconnections are handled by network switches.
- A special Ethernet PAUSE frame is used to notify a sender that an Ethernet
- device is congested and may not receive more packets for a period of time.
- Depending on network design and switch capacities, Full Duplex may allow
- much more throughput than Half Duplex.
- This because several parallel mediums may be utilized concurrently instead
- of a single shared medium.
-\layout Subsection
-
-Ethernet destinations and promiscuous mode
-\layout Standard
-
-Hardware may or may not verify destination address (DA).
- Packets can be divided in three classes based upon destination address:
-\layout Itemize
-
-Broadcast packets; sent to all hosts
-\layout Itemize
-
-Multicast packets; sent to a group of hosts
-\layout Itemize
-
-Unicast packets; sent to a specific host
-\layout Standard
-
-An end host may consider a packet to be a stray if it is: 
-\layout Itemize
-
-a multicast packet sent to a group which the end host does not participate
- in
-\layout Itemize
-
-a unicast packet sent to a host other than the receiver
-\layout Standard
-
-Stray packets are common in Ethernet.
- Switches in full duplex networks will broadcast multicast/unicast packets,
- if it does not know where the packet should be sent
-\begin_inset Foot
-collapsed false
-
-\layout Standard
-
-This can be compared to a postman who has received mail for which the recipient'
-s address is unknown.
- Instead of discarding the mail, the postman gives a copy of the mail to
- everyone he can find in hope that the someone else will be able to deliver
- the mail.
-\end_inset 
-
-.
- Therefor switches will generate stray packets in full duplex Ethernet networks.
- In half duplex, everyone receives everything.
- Each packet sent will reach the receiver host, but all other hosts will
- receive a stray copy.
-\layout Standard
-
-Many end host Ethernet devices drop stray packets instead of passing them
- to software.
- To do the opposite, not drop stray packets, is commonly referred to as
- 
-\begin_inset Quotes eld
-\end_inset 
-
-promiscuous mode
-\begin_inset Quotes erd
-\end_inset 
-
-.
- Several end host Ethernet peripherals can enable/disable promiscuous mode
- by software.
- Interconnected devices, such as network switches, can be considered to
- always operate in promiscuous mode.
-\layout Standard
-
-
 \begin_inset Float figure
 wide false
 collapsed false
@@ -1541,7 +1583,217 @@ bytes
 
 \end_inset 
 
+ In a typical implementation, hardware manages access control, synchronization
+ (PREAMBLE, SYNC) and error detection (FCS).
+ 
+\layout Subsection
 
+Link Speed
+\layout Standard
+
+Currently most Ethernet devices in use and available for sale are 10/100
+ MBit/s; 100 MBit/s but may auto negotiate to 10 MBit/s when interfacing
+ 10 MBit/s devices.
+ Many old devices are 10 MBit/s only.
+ 
+\layout Paragraph
+
+Auto Negotiation
+\layout Standard
+
+allows Ethernet devices to sense the link speed capabilities of the receiving
+ device and adapt to them.
+ The greatest link speed both parties are capable of will be selected.
+\layout Paragraph
+
+Link speed in switched full duplex networks
+\layout Standard
+
+may vary for each link.
+ Figure 
+\begin_inset LatexCommand \ref{cap:Link-speeds-in-small-ethernets}
+
+\end_inset 
+
+ shows a small network where end hosts Alice and Bob communicate through
+ switches Smith and Summers.
+ All are 100 MBit/s capable except Summers, thus the Smith
+\begin_inset Formula $\Leftrightarrow $
+\end_inset 
+
+Summers and the Summers
+\begin_inset Formula $\Leftrightarrow $
+\end_inset 
+
+Bob link speed is negotiated to 10 MBit/s.
+ The Alice
+\begin_inset Formula $\Leftrightarrow $
+\end_inset 
+
+Smith link is negotiated to 100 MBit/s.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Link-speeds-in-small-ethernets}
+
+\end_inset 
+
+Link speeds in a small Ethernet network
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/ethernet_linkspeeds.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+Duplex Mode
+\layout Standard
+
+An Ethernet device is either operating in Full Duplex or Half Duplex mode.
+ Most Ethernet devices can be configured to Auto Negotiate duplex or to
+ use a statically selected duplex mode.
+ If possible, hosts will negotiate to Full Duplex.
+\layout Subsubsection
+
+Half Duplex
+\layout Standard
+
+In Half Duplex, an arbitrary number of Ethernet devices share a single Ethernet
+ medium, using the CSMA/CD access protocol.
+ Half Duplex does not offer any concurrency; only one device may transmit
+ data at a time.
+ Half Duplex is an old and inefficient Ethernet mode, although still in
+ use in a decreasing number of legacy networks.
+\layout Paragraph
+
+CSMA/CD 
+\layout Standard
+
+is an abbreviation for the Carrier Sense Multiple Access with Collision
+ Detect access protocol.
+ In CSMA/CD no host may initiate a packet while carrier (transmission) is
+ detected.
+ If two devices should initiate transmission at the same time, a collision
+ has occurred.
+ All hosts should detect collisions and randomly set a 
+\begin_inset Quotes eld
+\end_inset 
+
+back off
+\begin_inset Quotes erd
+\end_inset 
+
+ timer and remain silent until it has timed out.
+ If repeated collisions occur, greater 
+\begin_inset Quotes eld
+\end_inset 
+
+back off
+\begin_inset Quotes erd
+\end_inset 
+
+ values should be randomly selected.
+\layout Subsubsection
+
+Full Duplex
+\layout Standard
+
+In Full Duplex mode each Ethernet device has a dedicated send medium and
+ a dedicated receive medium.
+ Interconnections are handled by network switches.
+ A special Ethernet PAUSE frame is used to notify a sender that an Ethernet
+ device is congested and may not receive more packets for a period of time.
+ Depending on network design and switch capacities, Full Duplex may allow
+ much more throughput than Half Duplex.
+ This because several parallel mediums may be utilized concurrently instead
+ of a single shared medium.
+\layout Subsection
+
+Ethernet destinations and promiscuous mode
+\layout Standard
+
+Hardware may or may not verify destination address (DA).
+ Packets can be divided in three classes based upon destination address:
+\layout Itemize
+
+Broadcast packets; sent to all hosts
+\layout Itemize
+
+Multicast packets; sent to a group of hosts
+\layout Itemize
+
+Unicast packets; sent to a specific host
+\layout Standard
+
+An end host may consider a packet to be a stray if it is: 
+\layout Itemize
+
+a multicast packet sent to a group which the end host does not participate
+ in
+\layout Itemize
+
+a unicast packet sent to a host other than the receiver
+\layout Standard
+
+Stray packets are common in Ethernet.
+ Switches in full duplex networks will broadcast multicast/unicast packets,
+ if it does not know where the packet should be sent
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+This can be compared to a postman who has received mail for which the recipient'
+s address is unknown.
+ Instead of discarding the mail, the postman gives a copy of the mail to
+ everyone he can find.
+ The postman does so in hope that someone else will be able to deliver the
+ mail correctly.
+\end_inset 
+
+.
+ Therefor switches will generate stray packets in full duplex Ethernet networks.
+ In half duplex, everyone receives everything.
+ Each packet sent will reach the receiver host, but all other hosts will
+ receive a stray copy.
+\layout Standard
+
+Many end host Ethernet devices drop stray packets instead of passing them
+ to software.
+ To do the opposite, not drop stray packets, is commonly referred to as
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+promiscuous mode
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Several end host Ethernet peripherals can enable/disable promiscuous mode
+ by software.
+ Interconnected devices, such as network switches, can be considered to
+ always operate in promiscuous mode.
 \layout Subsection
 
 
@@ -1610,7 +1862,7 @@ collapsed false
 
 \layout Standard
 
-the number of chip pins utilized.
+The number of chip pins utilized.
 \end_inset 
 
 .
@@ -1867,7 +2119,7 @@ Xilinx MicroBlaze bus interfaces
 The MicroBlaze core contains two OPB master interfaces, IOPB which provides
  an instruction path and DOPB which provides a data path.
  The core also contains two Local Memory Buses (LMB) interfaces, ILMB which
- provide an instruction path and DLMB which provides a data path.
+ provides an instruction path and DLMB which provides a data path.
  
 \layout Standard
 
@@ -1961,9 +2213,6 @@ IOPB and DOPB interconnect configuration (figure
 tly.
  It is a simple, slow and cheap solution.
  
-\layout Standard
-
-
 \begin_inset Float figure
 wide false
 collapsed false
@@ -1993,9 +2242,6 @@ MicroBlaze OPB Configuration - Dual Port RAM
 
 
 \end_inset 
-
-
-\layout Standard
 
 
 \begin_inset Float figure
@@ -2029,9 +2275,6 @@ MicroBlaze OPB Configuration - OPB Bridge
 \end_inset 
 
 
-\layout Standard
-
-
 \begin_inset Float figure
 wide false
 collapsed false
@@ -2061,9 +2304,6 @@ MicroBlaze OPB Configuration - ROM
 
 
 \end_inset 
-
-
-\layout Standard
 
 
 \begin_inset Float figure
@@ -2138,8 +2378,8 @@ MicroBlaze peripherals included in MDK
 
 MDK includes ten standard OPB peripherals, such as Memory Controller, UART,
  Watchdog, JTAG_UART, and Interrupt controller.
- One of the peripherals is an OPB Arbitrator which allows up to 16 masters
- to share the OPB Bus.
+ One peripheral is an OPB Arbitrator which allows up to 16 masters to share
+ the OPB Bus.
  Xilinx also provides documentation and tutorials on the subject of designing
  custom OPB Slaves for MicroBlaze platforms.
 \layout Subsection
@@ -2194,9 +2434,19 @@ Several GNU tools, such as the C compiler, behaves similar to common UNIX
 .
 \layout Standard
 
-The debugger is interfaced by JTAG or RS232.
- Any debugger supporting either the GDB Remote Protocol or the Unified Debugging
- Interface standard may be used to debug MicroBlaze platforms.
+The debugger is interfaced by JTAG
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+JTAG is a chip test interface.
+ Often is used to verify successful ASIC manufacturing.
+\end_inset 
+
+ or RS-232 serial line interface.
+ Any debugger supporting either the GNU Debugger Remote Protocol or the
+ Unified Debugging Interface standard may be used to debug MicroBlaze platforms.
  This allows a broad range of debuggers and debugger GUIs to be used with
  a MicroBlaze platform.
 \layout Paragraph
@@ -2310,8 +2560,8 @@ This was discussed in
 
  where Xilinx staff replied that it would be fixed before the end of summer
  2002.
- Apparently Xilinx did not to update MDK but put their efforts into EDK
- instead.
+ Apparently Xilinx did not to update MDK.
+ Possibly Xilinx put their efforts into EDK instead.
 \layout Subsubsection
 
 MDK platform tailoring limitations - buffers and pads configuration
@@ -2333,7 +2583,7 @@ pad
  These pads are specifically used for clock signals.
  Each pad is in turn connected to a buffer.
  The buffer-pad combination decides how a pin may be interfaced by the design.
- There are a number of different buffers which each has it's own purpose
+ There are a number of different buffers which each has its own purpose
  and characteristics.
  
 \layout Paragraph
@@ -2369,36 +2619,19 @@ There are cases when the design require specific buffers.
  An example of this is when a designer wish to implement a synchronous Ethernet
  peripheral on a prototype board with RX_CLK, TX_CLK or REF_CLK connected
  to a global clock pad.
- Then the designer must use the not so common buffer type 
-\begin_inset Quotes eld
-\end_inset 
-
-IBUFG
-\begin_inset Quotes erd
-\end_inset 
-
-, because the common 
-\begin_inset Quotes eld
-\end_inset 
-
-IBUF
-\begin_inset Quotes erd
-\end_inset 
-
- buffer cannot be connected to a global clock pad.
- 
+ An input which is not used as a clock will be buffered with an Input Buffers
+ (IBUF).
+ But an IBUF cannot be connected to global clock pad.
+ In this case a Dedicated Input Buffer (IBUFG) must be used.
 \layout Paragraph
 
 Solutions.
 \layout Standard
 
 This problem can be solved by not inserting buffers and utilizing a small
- a wrapper as the top entity.
+ wrapper as the top entity.
  Scripted modifications of generated top entities can also be used.
  
-\layout Standard
-
-
 \begin_inset Float table
 wide false
 collapsed false
@@ -2535,9 +2768,7 @@ Another issue is that tristate buffers in peripherals must be written as
  Specifically it may limit which third party OPB components (distributed
  as netlists or source code) which are easy to utilize in a MicroBlaze periphera
 l design.
-\layout Standard
-
-
+ 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -2584,14 +2815,15 @@ MicroBlaze as a SoC system
 The MicroBlaze Development Kit is geared at developing System on Chip solutions.
  All standard peripherals are implemented on the same chip (FPGA) as the
  MicroBlaze core.
- It also contains typical I/O interfaces for microcontrollers and SoCs,
- such as: serial (RS232), memory (SRAM/FlashRAM) and General Purpose I/O.
+ It also contains typical I/O peripherals for microcontrollers and SoCs,
+ such as RS-232 serial line interface, memory controller (intended for SRAM
+ and FlashRAM), General Purpose I/O and others.
 \layout Section
 
 MicroBlaze Network Support
 \layout Standard
 
-MicroBlaze does not include any network peripherals.
+MicroBlaze Development Kit does not include any network peripherals.
  This is obviously a drawback when designing network SoCs.
  However there are two MicroBlaze compatible OPB Ethernet peripherals available
  for sale at Xilinx.
@@ -2716,9 +2948,7 @@ To simplify design and verification, no asynchronous logic is used in the
 \end_inset 
 
  pattern) is detected and output is triggered by rising edge.
-\layout Standard
-
-
+ 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -2762,9 +2992,7 @@ It should be noted that due to this design choice, Ethernet Interface clocks
 \end_inset 
 
  shows the interface clocks and resulting minimal system clock frequency.
-\layout Standard
-
-
+ 
 \begin_inset Float table
 wide false
 collapsed false
@@ -2932,7 +3160,7 @@ Why synchronous and single edge triggered flipflops?
 One reason is that asynchronous logic and systems triggered both edges are
  harder to verify.
  Asynchronous operations may introduce hard to find race conditions and
- errors which rarely occur in RTL-simulations.
+ errors which rarely occur in simulations.
 \layout Standard
 
 Another reason is that asynchronous logic in Xilinx Virtex FPGA implementations
@@ -2944,7 +3172,8 @@ Another reason is that asynchronous logic in Xilinx Virtex FPGA implementations
 \end_inset 
 
 .
- Synchronous solutions are therefor enables Virtex multi-interface designs.
+ Synchronous solutions therefor enables multi-interface designs in Xilinx
+ Virtex FPGA.
 \layout Subsubsection
 
 System Clock and Performance Impact
@@ -2975,7 +3204,7 @@ Utilizing a Place And Route overall effort of 5.
 , this only enables 10 MBit/s implementations.
 \layout Standard
 
-Eth Version 1.00 Revision A bus is operating at 50 MHz, 32-bit datawidth
+Eth Version 1.00 Revision A bus is operating at 50 MHz, 32-bit data-width
  and three cycle access time.
  This yields a maximum switching capacity of 
 \layout Standard
@@ -2999,13 +3228,13 @@ To provide a simple, extendible and reusable interface, each component is
  
 \layout Standard
 
-All receive-logic is placed in a receive (RX) core (figure 
-\begin_inset LatexCommand \prettyref{cap:RX-Core}
+All send-logic in a transmit (TX) core (figure 
+\begin_inset LatexCommand \prettyref{cap:TX-Core}
 
 \end_inset 
 
-), and all send-logic in a transmit (TX) core (figure 
-\begin_inset LatexCommand \prettyref{cap:TX-Core}
+) and all receive-logic is placed in a receive (RX) core (figure 
+\begin_inset LatexCommand \prettyref{cap:RX-Core}
 
 \end_inset 
 
@@ -3218,7 +3447,7 @@ This peripheral utilizes three out of four Xilinx Virtex
 Reduced power dissipation.
 \layout Standard
 
-Thanks to it's asynchronous design, a large part of the design may operate
+Thanks to its asynchronous design, a large part of the design may operate
  at low clock frequencies.
  These low, system clock independent, clock frequencies allows reduced power
  dissipation.
@@ -3258,51 +3487,6 @@ This formula may be rewritten as:
 \end_inset 
 
 
-\layout Standard
-
-It is reasonable to assume 
-\begin_inset Formula $\left|d_{sysclk}\right|$
-\end_inset 
-
- to be small because a system clock oscillator is usually very exact.
- 
-\begin_inset Formula $\left|d_{phyclk}\right|$
-\end_inset 
-
-may however be large; Ethernet receiver clocks must synchronize against
- Ethernet transmitter clocks which could possibly be skewed.
- During synchronization, Ethernet clocks will drift.
- Assuming clock drift worst case of 
-\begin_inset Formula $\pm 19\%$
-\end_inset 
-
- 
-\begin_inset Foot
-collapsed false
-
-\layout Standard
-
-A simulation testbench for verification of academic Ethernet peripherals
- (supplied by Robert Wikander of Switchcore AB) have a 
-\begin_inset Formula $\frac{\left|d_{phyclk}\right|}{t_{phyclk}}<19\%$
-\end_inset 
-
- worst case clock drift.
- The testbench simulate interface clock drift but assume system clock drift
- to be zero.
-\end_inset 
-
- yields that system clock must be 23% faster than interface clock.
-\layout Standard
-
-Figure 
-\begin_inset LatexCommand \ref{cap:Open-Loop-Race-Condition}
-
-\end_inset 
-
- illustrates the race condition which eventually will occur if the timing
- requirements requirement is not met; the system clock domain fails to sample
- valid data.
 \layout Standard
 
 
@@ -3481,10 +3665,50 @@ System clock drift, worst case
 
 \end_inset 
 
+ It is reasonable to assume 
+\begin_inset Formula $\left|d_{sysclk}\right|$
+\end_inset 
+
+ to be small because a system clock oscillator is usually very exact.
+ 
+\begin_inset Formula $\left|d_{phyclk}\right|$
+\end_inset 
+
+may however be large; Ethernet receiver clocks must synchronize against
+ Ethernet transmitter clocks which could possibly be skewed.
+ During synchronization, Ethernet clocks will drift.
+ Assuming clock drift worst case of 
+\begin_inset Formula $\pm 19\%$
+\end_inset 
+
+ 
+\begin_inset Foot
+collapsed false
 
 \layout Standard
 
+A simulation testbench for verification of academic Ethernet peripherals
+ (supplied by Robert Wikander of Switchcore AB) have a 
+\begin_inset Formula $\frac{\left|d_{phyclk}\right|}{t_{phyclk}}<19\%$
+\end_inset 
 
+ worst case clock drift.
+ The testbench simulate interface clock drift but assume system clock drift
+ to be zero.
+\end_inset 
+
+ yields that system clock must be 23% faster than interface clock.
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{cap:Open-Loop-Race-Condition}
+
+\end_inset 
+
+ illustrates the race condition which eventually will occur if the timing
+ requirements requirement is not met; the system clock domain fails to sample
+ valid data.
+ 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -3504,7 +3728,7 @@ Open Loop Race Condition
 	filename images/openloop_worstcase.eps
 	display default
 	size_type 1
-	width 90text%
+	width 40page%
 	keepAspectRatio
 	rotateOrigin leftBaseline
 	lyxsize_type 0
@@ -3523,7 +3747,11 @@ Verification
 Testbench
 \layout Standard
 
-
+The testbench was designed to be modular and to be able to simulated different
+ input.
+ This was archived by abstracting input/output verification into two submodules,
+ and by reading Ethernet input from file.
+ The testbench design is shown in 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -3547,18 +3775,21 @@ Modular Testbench
 
 \end_inset 
 
-
+.
+ The testbench were also designed to allow commonly performed quick tests
+ (regression test).
+ 
 \layout Subsubsection
 
 Regression tests
 \layout Standard
 
-Testbenches are written to be highly automated and generate logfiles containing
- assertion notes, warnings and errors.
- Human inspection of waveforms are therefor rarely needed to verify that
+Testbenches were automated and generate logfiles containing assertion notes,
+ warnings and errors.
+ Human inspection of waveforms were therefor rarely needed to verify that
  recently added code does not break previous functionality.
  Regression tests proved to be a highly useful tool and shortened verification
- cycles considerably by automatically finding errors in design.
+ cycles considerably by automatically finding errors in designs.
 \layout Subsubsection
 
 Modular testbench: Ethernet Model
@@ -3632,20 +3863,7 @@ ions between the Test PC and the Ethernet peripheral.
 \end_inset 
 
 .
-\layout Standard
-
-Ethereal efficiently detected several types of bad layer 3 packets.
- This proved useful for tracking software errors.
-\layout Standard
-
-The switch and the Ethernet peripheral on the Test PC drop bad Ethernet
- packets, without showing them to Ethereal.
- Peripheral errors usually cause bad Ethernet packets.
- Because bad Ethernet packets are dropped, Ethereal was not very useful
- for detecting errors in the peripheral.
-\layout Standard
-
-
+ 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -3665,7 +3883,7 @@ Network Test Setup
 	filename images/testsetup1.eps
 	display default
 	size_type 2
-	scale 75
+	scale 50
 	rotateOrigin leftBaseline
 	lyxsize_type 0
 
@@ -3675,6 +3893,17 @@ Network Test Setup
 \end_inset 
 
 
+\layout Standard
+
+Ethereal efficiently detected several types of bad layer 3 packets.
+ This proved useful for tracking software errors.
+\layout Standard
+
+The switch and the Ethernet peripheral on the Test PC drop bad Ethernet
+ packets, without showing them to Ethereal.
+ Peripheral errors usually cause bad Ethernet packets.
+ Because bad Ethernet packets are dropped, Ethereal was not very useful
+ for detecting errors in the peripheral.
 \layout Subsection
 
 Real World Tests
@@ -3736,9 +3965,15 @@ A number of Ethernet peripherals have been compared: EMAC Lite - Xilinx
  OPB Ethernet Lite Media Access Controller, EMAC - Xilinx OPB Ethernet Media
  Access Controller, EthMac - Opencores.org 10/100 Ethernet MAC, Eth Version
  1.00 Revision A and Eth Version 1.00 Revision C.
+\layout Paragraph
+
+EthMac and WISHBONE.
 \layout Standard
 
-EthMac is an WISHBONE peripheral.
+WISHBONE is a simple bus standard maintained by opencores.org.
+ WISHBONE and OPB is similar, both are intended to be an easy to use System
+ on Chip bus.
+ EthMac is an WISHBONE peripheral.
  MicroBlaze cannot use it because MicroBlaze does not support the WISHBONE
  bus.
  EthMac has been included because it is a well verified MAC, has been used
@@ -3757,16 +3992,17 @@ The following set of features has been compared in table
 :
 \layout Itemize
 
-Asynchronous, e.g.
- the peripheral make use of MII/RMII clock signals to clock flipflops/registers.
- This is common practice to reach 100 MBit but has major a drawback: In
- several FPGAs, you only have a few clock input pins.
+Asynchronous - does the peripheral make use of MII/RMII clock signals to
+ clock flipflops/registers? This is often used to reach 100 MBit/s while
+ maintaining low system clock requirements.
+ But it has a major drawback: In several FPGAs, you only have a few clock
+ input nets.
  Utilizing MII/RMII clocks in a peripheral may limit the application to
  a single Ethernet peripheral.
 \layout Itemize
 
 System bus.
- OPB is preferred since it is the only native I/O bus in MicroBlaze.
+ OPB is preferred since it is the only native peripheral bus in MicroBlaze.
 \layout Itemize
 
 DMA.
@@ -3804,9 +4040,7 @@ s.
  require a full scale DMA-capable interface.
  Peripherals such as EMAC Lite and Eth Version 1.00 Revision A and C are
  preferable if only a simple peripheral is required.
-\layout Standard
-
-
+ 
 \begin_inset Float table
 wide false
 collapsed false
@@ -4340,7 +4574,7 @@ speed
 ).
  Then the netlist is passed through the Xilinx Place & Route flow (overall
  effort set to 5, extra effort set to 2) utilizing a set of Ethernet timing
- constraints (table
+ constraints (table 
 \begin_inset LatexCommand \ref{cap:Ethernet-timing-constraints}
 
 \end_inset 
@@ -4373,7 +4607,13 @@ For EMAC and EMAC Lite, the corresponding values are extracted from the
  specification.
 \layout Standard
 
+The results are shown in table 
+\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-performance}
 
+\end_inset 
+
+.
+ 
 \begin_inset Float table
 wide false
 collapsed false
@@ -4433,10 +4673,7 @@ NET "rx_d<0>" NODELAY;
 NET "rx_dv" NODELAY; 
 \end_inset 
 
-
-\layout Standard
-
-
+ 
 \begin_inset Float table
 wide false
 collapsed false
@@ -4460,18 +4697,7 @@ TIMESPEC "TS_opb_clk" = PERIOD "opb_clk" 7.5 ns HIGH 50 %;
 NET "opb_rst" TIG; 
 \end_inset 
 
-
-\layout Standard
-
-The results are shown in table 
-\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-performance}
-
-\end_inset 
-
-.
-\layout Standard
-
-
+ 
 \begin_inset Float table
 wide false
 collapsed false
@@ -5026,8 +5252,8 @@ Slices
 \layout Standard
 
 are the main Virtex-E resource.
- This is blocks of programmable logic in which most parts are implemented
- in.
+ These are blocks of programmable logic.
+ Most things are implemented in slices.
  Table 
 \begin_inset LatexCommand \ref{cap:Ethernet-peripherals-area}
 
@@ -5063,9 +5289,7 @@ are routing nets which provide clock signals to logic (e.g.
  shows that all synchronous MACs in the test utilize one GCLK (system clock).
  All asynchronous MACs used in test utilize three GCLKs (System, transmit
  and receive clocks).
-\layout Standard
-
-
+ 
 \begin_inset Float table
 wide false
 collapsed false
@@ -5331,7 +5555,7 @@ EMAC Lite - Xilinx OPB Ethernet Lite Media Access Controller
 \layout Standard
 
 EMAC Lite is a simple Ethernet MAC provided by Xilinx.
- It is a OPB device and easily used in MicroBlaze applications.
+ It is an OPB device and easily used in MicroBlaze applications.
  It is marketed as a simpler and smaller device than EMAC.
 \layout Standard
 
@@ -5361,7 +5585,7 @@ EMAC - Xilinx OPB Ethernet Media Access Controller
 \layout Standard
 
 EMAC is an advanced and full-featured MAC provided by Xilinx.
- It is a OPB device and easily used in MicroBlaze applications.
+ It is an OPB device and easily used in MicroBlaze applications.
  It has features which enables great performance (such as DMA and multiple
  packets per FIFO) and useful options (MII Management, autopad, promiscuous
  mode).
@@ -5403,8 +5627,7 @@ EthMac - Opencores.org 10/100 Ethernet MAC
 
 EthMac is an advanced and full featured MAC developed in the Open Source
  community Opencores.org.
- EthMac uses a WISHBONE data bus for I/O (WISHBONE is a simple bus standard
- maintained by opencores.org).
+ EthMac uses a WISHBONE data bus for I/O.
 \layout Standard
 
 Features:
@@ -5475,10 +5698,11 @@ Therefore, we define a number of characteristics preferred in a small TCP/IP
 The stack should be general and reusable, not designed for a single application.
 \layout Itemize
 
-The TCP/IP stack should provide two buffers: one for receiving and one sending
- packets.
- These buffers may be as small as a single packet, which enable simple interface
-s for handling datagram oriented stacks (ARP, ICMP, UDP and others).
+The TCP/IP stack should provide two buffers: one for receiving and one for
+ sending packets.
+ These buffers may be as small as a single packet.
+ These buffers enable simple interfaces for handling datagram oriented stacks
+ (ARP, ICMP, UDP and others).
  These buffers may be reused by all datagram functions to save memory.
 \layout Itemize
 
@@ -5519,7 +5743,7 @@ Xilinx XilNet
 
 Xilinx XilNet is a small TCP/IP stack included in MDK.
  It is provided to demonstrate the networking capabilities of MicroBlaze.
- However XilNet suffers a number drawbacks:
+ However XilNet suffers a number of drawbacks:
 \layout Itemize
 
 No network peripheral is included in MicroBlaze, so it is not possible to
@@ -5599,7 +5823,7 @@ c,
 tcp.c
 \emph default 
  etc).
- However there are several interdependency, especially in the file 
+ However there are several interdependencies, especially in the file 
 \emph on 
 ip.c
 \emph default 
@@ -5789,7 +6013,7 @@ has been provided through the Eth Version 1.00 set of peripherals which were
 Ethernet peripherals
 \layout Standard
 
-have been analytically analyzed.
+have been analyzed.
  Because each peripheral has a unique set of features and drawbacks, no
  peripheral can be selected to be considered the best.
  Eth Version 1.00 performed especially well in performance benchmarks, while
@@ -5862,10 +6086,13 @@ e for Network applications.
 
 .
  These objectives have all been met.
+\layout Paragraph*
+
+No multi-interface prototyping board.
 \layout Standard
 
 An important setback was that the Platinum prototyping board did not become
- available during the work on this thesis due to development/manufacturing
+ available during the work on this thesis due to development and manufacturing
  problems.
  Because Platinum was not available, RMII capabilities of the network peripheral
  Eth could not be verified.
@@ -5894,7 +6121,7 @@ Embedded Development Kit (EDK)
 
 was not used in this evaluation.
  All experiments have been performed using the MDK environment.
- An re-evaluation using EDK would be useful.
+ A re-evaluation using EDK would be useful.
  EDK might remedy the problems found in the MDK platform tailoring utilities.
 \layout Paragraph
 
@@ -5921,7 +6148,7 @@ The OpenCores.org 10/100 Ethernet MAC
 
 is well verified and has been used by a large set of developers.
  It has been used in professional projects.
- This MAC is therefor of production quality and available for free in GPL
+ This MAC is therefor of production quality and is available for free (GPL
  
 \begin_inset Quotes eld
 \end_inset 
@@ -5930,22 +6157,22 @@ copyleft
 \begin_inset Quotes erd
 \end_inset 
 
- open source license.
+ open source license).
 \layout Standard
 
-The MAC uses the Wishbone as it's system I/O bus.
+The MAC uses the WISHBONE as its system bus.
  It would be interesting to port this MAC to Xilinx OPB.
  A port may be of interest to developers with limited funding or with previous
  experience of this MAC.
 \layout Standard
 
-There are at least two ways to port the Wishbone MAC:
+There are at least two ways to port the WISHBONE MAC:
 \layout Itemize
 
 Rewrite the top module (and some of the components) for Xilinx OPB.
 \layout Itemize
 
-Create a Wishbone 
+Create a WISHBONE 
 \begin_inset Formula $\Leftrightarrow $
 \end_inset 
 
@@ -5954,7 +6181,7 @@ Create a Wishbone
 
 The later approach may be much more beneficial because then the port would
  not break upon changes in the OpenCores MAC source code.
- It may also be simpler, as it require only basic understanding of Wishbone
+ It may also be simpler, as it require only basic understanding of WISHBONE
  and OPB.
  The 
 \begin_inset Quotes eld
@@ -5990,8 +6217,8 @@ Utilizing more clock edges in Eth Version 1.00.
 
 Revision A is single edge triggered and synchronous.
  Revision C is asynchronous and all flipflops are triggered by rising edge.
- By utilizing both edges minimum clock frequency and power dissipation may
- be reduced.
+ Minimum Clock frequency and power dissipation may be reduced by utilizing
+ both edges.
  This is most likely performed in other peripherals (e.g.
  Xilinx EMAC) which synchronously detect MII rising edges at half the frequency
  of Eth Revision A.
@@ -6001,15 +6228,19 @@ Independent and professional verification of Eth Version 1.00.
 \layout Standard
 
 Eth would benefit from an independent and professional verification.
- As of current date, it has only been used and verified in student projects
- which are known to have loosely defined quality demands.
+ As of current date it has been reused, modified and verified in a few student
+ projects.
+ But student project tend to keep loose quality standards.
  Professional engineers would not consider Eth to be of production quality.
-\layout Chapter
+\layout Paragraph
 
+More interesting proof-of-concept applications.
+\layout Standard
 
-\begin_inset LatexCommand \label{cha:Conclusions}
-
-\end_inset 
+Implementing a network switch or other multi-interface design would be nice.
+ With access to a multi-interface FPGA prototyping board, this should be
+ easy.
+\layout Section
 
 Conclusions
 \layout Paragraph
@@ -6061,7 +6292,13 @@ Prentice Hall, 1998.
 
 \emph on 
 The CoreConnect
-\begin_inset Formula $^{\textrm{TM}}$
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+texttrademark
 \end_inset 
 
  Bus Architecture (White Paper)
@@ -6076,11 +6313,25 @@ http://www.chips.ibm.com/products/coreconnect/
 \layout Bibliography
 \bibitem [VIRTEX]{VIRTEX}
 
+
+\emph on 
 Virtex
-\begin_inset Formula $^{\textrm{TM}}$
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+texttrademark
 \end_inset 
 
+
+\emph on 
  2.5 V Field Programmable Gate Arrays
+\emph default 
+
 \newline 
 Xilinx Inc., 2002.
 \layout Bibliography
@@ -6089,7 +6340,13 @@ Xilinx Inc., 2002.
 
 \emph on 
 MicroBlaze
-\begin_inset Formula $^{\textrm{TM}}$
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+texttrademark
 \end_inset 
 
  Hardware Reference Guide (version 2.2)
@@ -6098,19 +6355,19 @@ MicroBlaze
 \newline 
 Xilinx Inc., 2002.
  
-\newline 
-
-\emph on 
-http://www.xilinx.com/ipcenter/processor_central/
-\newline 
-microblaze/doc/hwref.pdf
 \layout Bibliography
 \bibitem [XMB2]{MB_SWREF}
 
 
 \emph on 
 MicroBlaze
-\begin_inset Formula $^{\textrm{TM}}$
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+texttrademark
 \end_inset 
 
  Software Reference Guide (version 2.2)
@@ -6118,12 +6375,6 @@ MicroBlaze
 .
 \newline 
 Xilinx Inc, 2002.
-\newline 
-
-\emph on 
-http://www.xilinx.com/ipcenter/processor_central/
-\newline 
-microblaze/doc/swref.pdf
 \layout Bibliography
 \bibitem [XMB3]{MB_TUTORIAL}
 
@@ -6134,28 +6385,16 @@ MicroBlaze Development Kit Tutorial (version 2.2).
 
 \newline 
 Xilinx Inc, 2002.
-\newline 
-
-\emph on 
-http://www.xilinx.com/ipcenter/processor_central/
-\newline 
-microblaze/doc/mb_tutorial_c2bits.pdf
 \layout Bibliography
 \bibitem [XMB4]{MB_OPB_TUTORIAL}
 
 
 \emph on 
-Designing Custom OPB Slave Peripherals for MicroBlaze.
+Designing Custom OPB Slave Peripherals for MicroBlaze (version 2.2).
 \emph default 
 
 \newline 
 Xilinx Inc, 2002.
-\newline 
-
-\emph on 
-http://www.xilinx.com/ipcenter/processor_central/
-\newline 
-microblaze/doc/opb_tutorial.pdf
 \layout Bibliography
 \bibitem [XMB5]{MicroBlaze_WWW}
 
@@ -6167,7 +6406,8 @@ MicroBlaze Soft Processor
 \newline 
 Xilinx Inc, 2002.
 \newline 
-
+4th November 2003.
+ 
 \emph on 
 http://www.xilinx.com/xlnx/xil_prodcat_product.jsp?title=microblaze
 \layout Bibliography
@@ -6254,7 +6494,7 @@ lwIP - A Lightweight TCP/IP Stack
 \emph default 
 .
 \newline 
-2003.
+4th November 2003.
  
 \emph on 
 http://www.sics.se/~adam/lwip/
@@ -6279,7 +6519,7 @@ FOLDOC - Free On-Line Dictionary of Computing.
 \newline 
 Imperial Collage Department of Computing.
 \newline 
-1993-2003.
+4th November 2003.
  
 \emph on 
 http://foldoc.doc.ic.ac.uk/foldoc/
@@ -6289,7 +6529,7 @@ http://foldoc.doc.ic.ac.uk/foldoc/
 FPGA CPU News.
  
 \newline 
-2003.
+4th November 2003.
  
 \emph on 
 http://www.fpgacpu.org/
@@ -6298,7 +6538,7 @@ http://www.fpgacpu.org/
 
 OPENCORES.ORG.
 \newline 
-2003.
+4th November 2003.
  
 \emph on 
 http://www.opencores.org/
@@ -6947,7 +7187,13 @@ List of acronyms and abbreviations
 ASIC - Application Specific Integrated Circuit
 \layout Itemize
 
+ARP - Address Resolution Protocol
+\layout Itemize
+
 AUI - Attachment Unit Interface
+\layout Itemize
+
+BUFGP - Primary Global Buffer for Driving Clocks or Longlines
 \layout Itemize
 
 CPU - Central Processing Unit
@@ -6963,7 +7209,7 @@ CSMA/CD - Carrier Sense Multiple Access / Collision Detect
 DA - Destination Address
 \layout Itemize
 
-DCR - Device Control Register bus
+DCR - Device Control Register Bus (IBM CoreConnect)
 \layout Itemize
 
 DMA - Direct Memory Access
@@ -6996,7 +7242,31 @@ FPGA - Field Programmable Gate Array
 GHz - Giga Hertz
 \layout Itemize
 
+GNU - GNU is Not Unix
+\layout Itemize
+
+GPL - General Public License
+\layout Itemize
+
+GUI - Graphical User Interface
+\layout Itemize
+
 I/O - Input/Output
+\layout Itemize
+
+IBUF - Input Buffer
+\layout Itemize
+
+IBUFG - Dedicated Input Buffer
+\layout Itemize
+
+IOBUF - Bi-Directional Buffer
+\layout Itemize
+
+JTAG - Joint Test Action Group
+\layout Itemize
+
+HDL - Hardware Description Language
 \layout Itemize
 
 IBM - International Business Machines Corporation
@@ -7035,13 +7305,19 @@ MHz - Mega Hertz
 MII - Medium Independent Interface
 \layout Itemize
 
-OPB - IBM CoreConnect On-Chip Peripheral Bus
+OBUF - Output Buffer
+\layout Itemize
+
+OPB - On-Chip Peripheral Bus (IBM CoreConnect)
+\layout Itemize
+
+OSI - Open Systems Interconnect
 \layout Itemize
 
 PHY - Physical Layer Device
 \layout Itemize
 
-PLB - Processor Local Bus
+PLB - Processor Local Bus (IBM CoreConnect)
 \layout Itemize
 
 PLD - Programmable Logic Device
@@ -7053,10 +7329,16 @@ PROM - Programmable Read-Only Memory
 RAM - Random Access Memory
 \layout Itemize
 
+RISC - Reduced Instruction Set Computer
+\layout Itemize
+
 RMII - Reduced Medium Independent Interface
 \layout Itemize
 
 ROM - Read-Only Memory
+\layout Itemize
+
+RS-232 - Recommended Standard 232 (asynchronous serial line standard)
 \layout Itemize
 
 SA - Source Address
@@ -7081,7 +7363,16 @@ TYPE - Type-field (Ethernet frames)
 SYNC - Synchronization bits (Ethernet frames)
 \layout Itemize
 
+UART - Universal Asynchronous Receiver/Transmitter
+\layout Itemize
+
 UDP - User Datagram Protocol
+\layout Itemize
+
+VHDL - Very High Speed Integrated Circuit (VHSIC) Hardware Description Language.
+\layout Itemize
+
+VHSIC -Very High Speed Integrated Circuit (VHDL)
 \layout Itemize
 
 XST - Xilinx Synthesis Technology
