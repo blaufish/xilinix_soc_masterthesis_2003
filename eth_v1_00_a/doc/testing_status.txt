@@ -1,7 +1,8 @@
 Overall:
 	- Top entity seems to work well
 	- RX core seems OK
-	- TX core unstable (many fixes applied recently)
+	- TX core seems OK
+	- Inmature; many recent fixes applied
 
 RTL simulations:
 	- Top module simulations appear OK
@@ -9,7 +10,5 @@ RTL simulations:
 	- TX core seems OK 
 	
 Real world tests:
-	- RX works, tests indicates that RX remains stable after several hours of (normal) ethernet traffic.
-	- TX works, first packet only. Error in VHDL-code or test software?
-
+	- OK. More advanced tests needed.
 
