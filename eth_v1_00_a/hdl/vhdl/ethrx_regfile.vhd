@@ -90,7 +90,7 @@ begin
 
 
 	fifo_rd <= reg_fifo_rd and SR_packet_buffered;
-	fifo_wr <= '1' when (not reg_status_wr and not SR_packet_buffered)='1' and core_dv_bytes /= "000" else '0';
+	fifo_wr <= '1' when reg_status_wr='0' and SR_packet_buffered='0' and SR_packet_preambled='1' and core_dv_bytes /= "000" else '0';
 	fifo_d  <= core_data;
 	
 
@@ -142,7 +142,7 @@ begin
 						SR_packet_buffered <= '1';
 					end if;	
 	
-					if core_pkt_start = '1' then
+					if core_pkt_start = '1' and SR_packet_length="00000000000" then
 						SR_packet_preambled <= '1';
 					end if;
 				end if;
