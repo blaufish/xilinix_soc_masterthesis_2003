@@ -1,0 +1,174 @@
+Eth V 1.00 Revision A Specification
+
+
+Section 0; Features
+	- IBM CoreConnect / Xilinx MicroBlaze compatible device
+	- Fully synchronous
+	- Utilizes Virtex Select BlockRAM for 2 x 2048 byte FIFOs
+	- Full Duplex only
+	- Simple academic design for future extensions
+	- MII (4 bit), RMII (2 bit) and 8 bit Ethernet PHY supported, MII verified.
+
+
+Section 1; Parameters
+
++---------------------+----------------+-------------------+---------+------------------+
+| Feature/Description | Parameter name | Allowable values  | Default | VHDL type        |
++---------------------+----------------+-------------------+---------+------------------+
+| Eth Base Address    | C_BASEADDR     | Valid addr. range |         | std_logic_vector |
+| Eth High Address    | C_HIGHADDR     | Valid addr. range |         | std_logic_vector |
+| OPB Addr. Bus Width | C_OPB_AWIDTH   | 32                | 32      | integer          |
+| OPB Data Bus Width  | C_OPB_AWIDTH   | 32                | 32      | integer          |
++---------------------+----------------+-------------------+---------+------------------+
+(generic PHY-width will be added)
+
+
+Section 2; Signals
+
++----------------+-----------+-----+-----------------------------+
+| Signal Name    | Interface | I/O | Description                 |
++----------------+-----------+-----+-----------------------------+
+| OPB_Clk        | OPB       |  I  | OPB Clock                   |
+| OPB_Rst        | OPB       |  I  | OPB Reset                   |
+| OPB_ABus<0:31> | OPB       |  I  | OPB Address Buss            |
+| OPB_BE<0:3>    | OPB       |  I  | OPB Byte Enables            |
+| OPB_DBus<0:31> | OPB       |  I  | OPB Data Bus                |
+| OPB_RNW        | OPB       |  I  | OPB Read Not Write          |
+| OPB_select     | OPB       |  I  | OPB Select                  |
+| OPB_seqaddr    | OPB       |  I  | OPB Sequential Address (*)  |
+| ETH_DBus<0:31> | OPB       |  O  | ETH Data Bus                |
+| ETH_errAck     | OPB       |  O  | ETH Error Acknowledge (**)  |
+| ETH_retry      | OPB       |  O  | ETH Retry (**)              |
+| ETH_toutSup    | OPB       |  O  | ETH Timeout Suppress (**)   |
+| ETH_xferAck    | OPB       |  O  | ETH Transfer Acknowledge    |
+| RX_CLK         | External  |  I  | PHY RX Clock                |
+| RX_DV          | External  |  I  | PHY RX Data Valid           |
+| RX_D<X:0>      | External  |  I  | PHY RX Data (***)           |
+| TX_CLK         | External  |  I  | PHY TX Clock                |
+| TX_D<X:0>      | External  |  O  | PHY TX Data (***)           |
+| TX_EN          | External  |  O  | PHY TX Enable               |
++----------------+-----------+-----+-----------------------------+
+| * Unused/Ignored                                               |
+| ** Grounded/Unused                                             |
+| *** X=3 for now. Generic in upcomming versions                 |
++----------------------------------------------------------------+
+
+
+Section 3; Registers
+
+ETH provides a short set of registers for to the OPB Bus. Each register is 32 bits wide 
+and conforms to the MicroBlaze Big Endian format (as specified in MicroBlaze Hardware
+Reference Guide). Non-32bit access is ignored.
+
+Register map:
+
++--------+-----------+------------+
+| Offset | Register  | Access     |
++--------+-----------+------------+
+|  0x00  | RX FIFO   | Read       |
+|  0x04  | RX STATUS | Read/Write |
+|  0x10  | TX FIFO   | Write      |
+|  0x14  | TX STATUS | Read/Write |
++--------+-----------+------------+
+
+Note: ETH may or may not contain reserved and/or undocumented registers. 
+Access to non-specified registers may disrupt standard functionallity.
+
+ETH Base Address + 0x00 - RX FIFO Register (READ ONLY):
+
++-------+-------+------------------------------------------------------+-------------+
+| Bits  | Name  | Description                                          | Reset value |
++-------+-------+------------------------------------------------------+-------------+
+| 0-7   | Data0 | Byte (N*4)+0 of Ethernet Frame. Big Endian bit order | 0           |
+| 8-15  | Data1 | Byte (N*4)+1 of Ethernet Frame. Big Endian bit order | 0           |
+| 16-23 | Data2 | Byte (N*4)+2 of Ethernet Frame. Big Endian bit order | 0           |
+| 24-31 | Data3 | Byte (N*4)+3 of Ethernet Frame. Big Endian bit order | 0           |
++-------+-------+------------------------------------------------------+-------------+
+
+ETH Base Address + 0x04 - RX STATUS Register (READ MODE):
+
++-------+---------------+----------------------------------------------+-------------+
+| Bits  | Name          | Description                                  | Reset value |
++-------+---------------+----------------------------------------------+-------------+
+| 0     | pkt_buffered  | A packet has been stored in RX FIFO          | 0           |
+| 1     | fifo_overflow | An errornously large packet received         | 0           |
+| 2-20  | reserved      | Reserved/Undocumented                        | 0           |
+| 21-31 | pkt_length    | Paket Length (in bytes)                      | 0           |
++-------+---------------+----------------------------------------------+-------------+
+
+ETH Base Address + 0x04 - RX STATUS Register (WRITE MODE):
+
++-------+----------+---------------------------------------------------------+
+| Bits  | Name     | Description                                             |
++-------+----------+---------------------------------------------------------+
+| 0-31  | rx_reset | Clear/Re-enable RX FIFO / RX STATUS at any write access |
++-------+----------+---------------------------------------------------------+
+
+ETH Base Address + 0x10 - TX FIFO Register (WRITE ONLY):
+
++-------+-------+------------------------------------------------------+-------------+
+| Bits  | Name  | Description                                          | Reset value |
++-------+-------+------------------------------------------------------+-------------+
+| 0-7   | Data0 | Byte (N*4)+0 of Ethernet Frame. Big Endian bit order | 0           |
+| 8-15  | Data1 | Byte (N*4)+1 of Ethernet Frame. Big Endian bit order | 0           |
+| 16-23 | Data2 | Byte (N*4)+2 of Ethernet Frame. Big Endian bit order | 0           |
+| 24-31 | Data3 | Byte (N*4)+3 of Ethernet Frame. Big Endian bit order | 0           |
++-------+-------+------------------------------------------------------+-------------+
+
+ETH Base Address + 0x14 - TX STATUS Register (READ MODE):
+
++-------+---------------+--------------------------------------------------+-------------+
+| Bits  | Name          | Description                                      | Reset value |
++-------+---------------+--------------------------------------------------+-------------+
+| 0     | pkt_buffered  | A packet is in TX FIFO, transmition not finished | 0           |
+| 1-31  | reserved      | Reserved/Undocumented                            | 0           |
++-------+---------------+--------------------------------------------------+-------------+
+
+ETH Base Address + 0x14 - TX STATUS Register (WRITE MODE):
++-------+---------------+--------------------------------------------------+
+| Bits  | Name          | Description                                      |
++-------+---------------+--------------------------------------------------+
+| 0     | pkt_buffered  | Send packet                                      |
+| 1     | append_fcs    | Append Frame Check Sequence to packet            |
+| 2-29  | reserved      | Reserved/Undocumented                            |
+| 30-31 | length_mod4   | Packet length in bytes modulo 4                  |
++-------+---------------+--------------------------------------------------+
+
+Note: Any reserved/Undocumented TX/RX STATUS bits should be 0 on writes.
+
+
+
+Appendix A; MII/RMII Ethernet PHY Interface signal specification
+
+Input:
+	TX_CLK
+	RX_CLK
+	RX_DV
+	RX_D< datawidth-1 : 0 >
+
+Output:
+	TX_EN
+	TX_D< datawidth-1 : 0 >
+	
+TX_D/RX_D Bit order:
+	The interfaces have MSB to the left, LSB to the right ("Big Endian")
+	This is because PHYs are expected to send TX_D<datawidth-1> first, TX_D<0> last.
+	Therefore ethernet device output conform to IEEE Bit Transmition Order(*).
+
+TX_D/RX_D Nibble order:
+	The interfaces will recieve the LEAST significant nibble of a byte first.
+	Therefore ethernet device output conform to IEEE Bit Transmition Order(*). 
+
+TX_D/RX_D Byte order:
+	The interfaces will recieve the first byte of a frame first.
+	Subfields Source, Destination and Type will be in Ethernet Byte Order(**).
+	
+TX_D/RX_D Frame Check Sequence (Cannonical Format):
+	In each byte of the FCS is reversed before it enters the send-register, 
+	thus the send module will send FCS in compliance with cannonical format(***)
+	
+* IEEE Bit Transmition Order: Little Endian bit order. LSB is sent first, MSB last.
+** Ethernet Byte order: Big Endian byte order. MSByte is sent first, LSByte last.
+*** Cannonical Format: Big Endian byte and bit order. MSB is sent first, LSB last.
+
+
