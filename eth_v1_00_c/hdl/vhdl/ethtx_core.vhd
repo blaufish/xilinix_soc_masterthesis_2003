@@ -27,6 +27,9 @@ end ethtx_core;
 architecture RTL of ethtx_core is
 
         component ethtx_statemachine is
+	generic (
+		data_pins	: natural := 4
+	);
         port (
                 tx_clk         : in std_logic; -- rising edge
                 sys_reset       : in std_logic; -- synchronous reset on 1
@@ -215,9 +218,12 @@ begin
 				
 
 	state : ethtx_statemachine
-        port map (
-                tx_clk         => tx_clk,
-                sys_reset       => sys_reset,
+ 	generic map (
+		data_pins => data_pins
+	)
+	port map (
+        	tx_clk         	=> tx_clk,
+		sys_reset       => sys_reset,
 
 		packet_buffered => packet_buffered_TXCLK,
 		packet_sent  	=> packet_sent,
