@@ -85,6 +85,7 @@ begin
 
 						if data_count /= 0 then
 							null; -- align error <= '1';
+							assert false report "Receive -- align error" severity warning;
 						end if;
 				
 					elsif sample_rx='1' and rx_dvalid='1' then
@@ -93,6 +94,7 @@ begin
 						if data_count = words then
 							-- bugfix: race condition
 							data_count <= 1;
+							byte_dvalid <= '1'; -- should this be here or not?
 						else
 							-- normal action
 							data_count <= data_count + 1;
