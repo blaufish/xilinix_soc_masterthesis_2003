@@ -12,7 +12,7 @@ lib eth_v1_00_c ethrx_byte_to_word
 lib eth_v1_00_c ethrx_regfile
 lib eth_v1_00_c ethrx_core
 
-lib eth_v1_00_c ethtx_clk_sampler
+lib eth_v1_00_c ethtx_clkdomain
 lib eth_v1_00_c ethtx_regfile
 lib eth_v1_00_c ethtx_statemachine
 lib eth_v1_00_c ethtx_word_to_byte
