@@ -10,5 +10,5 @@ RTL simulations:
 	- TX core seems OK 
 	
 Real world tests:
-	- OK. More advanced tests needed.
+	- OK. Design stable after several hours of testing.
 
