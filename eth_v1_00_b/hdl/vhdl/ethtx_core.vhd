@@ -165,7 +165,7 @@ architecture RTL of ethtx_core is
   	end component;
 
 	signal	tx_async_fifo_full, 
-		tx_async_fifo_full_inv,
+		tx_async_fifo_wren,
 		tx_async_fifo_empty,
 		tx_async_fifo_empty_inv : std_logic;
 		
@@ -219,7 +219,7 @@ begin
     		port map (
 			reset	=> sys_reset,
         	  	wr_clk	=> sys_clk,
-          		wr_en	=> tx_async_fifo_full_inv,
+          		wr_en	=> tx_async_fifo_wren,
 	          	wr_data	=> tx_async_fifo_din,
         	  	rd_clk	=> tx_clk,
           		rd_en	=> tx_async_fifo_empty_inv,
@@ -229,7 +229,17 @@ begin
          	);
 
 		tx_clock_pulse <= not tx_async_fifo_full;
-		tx_async_fifo_full_inv <= not tx_async_fifo_full;
+
+		process (sys_clk) begin
+			if rising_edge(sys_clk) then
+				if sys_reset='1' then
+					tx_async_fifo_wren <= '0';
+				else
+					tx_async_fifo_wren <= tx_clock_pulse;
+				end if;
+			end if;
+		end process;
+
 		tx_async_fifo_empty_inv <= not tx_async_fifo_empty;
 
 		tx_async_fifo_din <= tx_en_s & tx_d_s;
