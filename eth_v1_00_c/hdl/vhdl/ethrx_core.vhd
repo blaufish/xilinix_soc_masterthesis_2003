@@ -150,7 +150,7 @@ begin
     	generic map (
 		data_bits  => 37,
              	addr_bits  => 2,
-             	block_type => 0,
+             	block_type => 2,
              	fifo_arch  => 0 ) -- 0=Generic architecture, 
                 	                   -- 1=Xilinx XAPP131, 
                         	           -- 2=Xilinx XAPP131 w/carry mux
