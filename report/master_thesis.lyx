@@ -1,6 +1,13 @@
 #LyX 1.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 220
 \textclass report
+\begin_preamble
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+
+\lhead{\thepage}
+\cfoot{}
+\rhead{\leftmark}
+\end_preamble
 \language english
 \inputencoding auto
 \fontscheme default
@@ -22,7 +29,7 @@
 \quotes_times 2
 \papercolumns 1
 \papersides 1
-\paperpagestyle default
+\paperpagestyle fancy
 
 \layout Title
 
@@ -997,49 +1004,11 @@ The MicroBlaze core contains two OPB master interfaces, IOPB which provides
  
 \layout Standard
 
-A MicroBlaze system may utilize all four buses (as shown in figure 
-\begin_inset LatexCommand \prettyref{cap:MicroBlaze}
-
-\end_inset 
-
-).
- A MicroBlaze platform must include a data path and an instruction path
- to the MicroBlaze core, therefor it will utilize 2, 3 or 4 busses.
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed true
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:MicroBlaze}
-
-\end_inset 
-
-MicroBlaze Core with Bus Connections
-\layout Standard
-\align center 
-
-\begin_inset Graphics FormatVersion 1
-	filename images/microblaze_busconfig.eps
-	display default
-	size_type 2
-	scale 75
-	rotateOrigin leftBaseline
-	lyxsize_type 0
-
-\end_inset 
-
-
-\end_inset 
-
-
+A MicroBlaze platform must include a data path and an instruction path to
+ the MicroBlaze core, therefor it will utilize 2, 3 or 4 busses.
 \layout Subsubsection
 
-Local Memory Buses (LMBs)
+Local Memory Busses (LMBs)
 \layout Standard
 
 The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
@@ -1052,7 +1021,12 @@ A MicroBlaze platform with only LMB access is extremly efficient, however
  
 \layout Subsubsection
 
-On-Chip Periperal buses (OPBs)
+
+\begin_inset LatexCommand \label{sub:Microblaze-OPBs}
+
+\end_inset 
+
+On-Chip Periperal busses (OPBs)
 \layout Standard
 
 Xilinx MicroBlaze is compatible with several other OPB devices, as stated
@@ -1062,6 +1036,191 @@ Xilinx MicroBlaze is compatible with several other OPB devices, as stated
 \end_inset 
 
 .
+ MicroBlaze's use of a dedicated data path (DOPB) and a dedicated instruction
+ path (IOPB) allows several different bus configurations.
+ The MicroBlaze platform may be configured to utilize the MicroBlaze architectur
+e in a manner optimized for the application.
+ 
+\layout Standard
+
+Example of customized bus configurations are:
+\layout Itemize
+
+Dual Port RAM configuration (figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-OPB-Configuration-DP-RAM}
+
+\end_inset 
+
+).
+ IOPB and DOPB both interface a singel Dual Port RAM, to provide a shared,
+ high speed instruction / data memory space.
+ IOPB and DOPB may act concurrently and independantly.
+ This is configuration is similar to the LMB architecture which also utilize
+ a Dual Port RAM.
+ The downside is that Dual Port RAM's tend to be more expensive than singel
+ port RAM.
+\layout Itemize
+
+DOPB to IOPB Bridge configuration (figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-OPB-Configuration-OPB-Bridge}
+
+\end_inset 
+
+).
+ IOPB and DOPB is bridged, and the bridge will act as a DOPB slave and a
+ IOPB master.The bridge allows IOPB and DOPB to act concurrently and independantl
+y except when DOPB access IOPB memory.
+ This is less expensive than a Dual Port RAM while as almost as fast in
+ applications which does not read/write to memory often.
+ 
+\layout Itemize
+
+IOPB ROM configuration (figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-OPB-Configuration-ROM}
+
+\end_inset 
+
+).
+ This configuration utilize that many application never need to rewrite
+ instruction memory, and thus may store it in a Read-Only Memory (ROM).
+ IOPB and DOPB may act concurrently indendently.
+\layout Itemize
+
+IOPB and DOPB interconnect configuration (figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-OPB-Configuration-connected}
+
+\end_inset 
+
+).
+ This is a low speed configuration.
+ DOPB and IOPB are connected to the same bus, and they may not operate concurren
+tly.
+ It is a simple, slow and cheap solution.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze-OPB-Configuration-DP-RAM}
+
+\end_inset 
+
+MicroBlaze OPB Configuration - Dual Port RAM
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_config_dpram.eps
+	display default
+	size_type 1
+	width 75text%
+	scale 25
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze-OPB-Configuration-OPB-Bridge}
+
+\end_inset 
+
+MicroBlaze OPB Configuration - OPB Bridge
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_config_bridge.eps
+	display default
+	size_type 1
+	width 75text%
+	scale 25
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze-OPB-Configuration-ROM}
+
+\end_inset 
+
+MicroBlaze OPB Configuration - ROM
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_config_rom.eps
+	display default
+	size_type 1
+	width 75text%
+	scale 25
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze-OPB-Configuration-connected}
+
+\end_inset 
+
+MicroBlaze OPB Configuration - IOPB & DOPB interconnected
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_config_connected.eps
+	display default
+	size_type 1
+	width 75text%
+	scale 25
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
 \layout Section
 
 Embedded Development Kit (EDK)
@@ -1160,8 +1319,8 @@ MDK Documentation
 One problem with MDK is that is difficult to find information about MDK.
  Most searches at Xilinx (or common internet search enginees such as Google
  or Altavista) usually return information about EDK.
- While the MDK documentation is fine for beginner applications, in depth
- information is hard to find.
+ While the documentation included in MDK is fine for beginner applications,
+ in depth information is hard to find.
 \layout Subsubsection
 
 MDK platform tailoring limitations - OPB bus configuration
@@ -1169,32 +1328,43 @@ MDK platform tailoring limitations - OPB bus configuration
 
 MDK can be configured to use no OPB bus, an instruction bus (IOPB), a data
  bus (DOPB) or both OPB busses.
- Unfortunately, the MDK offers no configuration options for controlling
- if - or how - busses should be interconnected.
+ MicroBlaze may utilize IOPB and DOPB in several different ways, allowing
+ application specific customization as described in section 
+\begin_inset LatexCommand \ref{sub:Microblaze-OPBs}
+
+\end_inset 
+
+.
+\layout Standard
+
+However, MDK only allow the designer to specify which OPB/LMB interfaces
+ to implement.
+ MDK does not offer any configuration options for controlling if - or how
+ - busses should be interconnected.
  
 \layout Standard
 
-If both DOPB and IOPB is used, they will share the same bus.
+If both DOPB and IOPB is used, they will be connected to the same bus (shown
+ in figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-OPB-Configuration-connected}
+
+\end_inset 
+
+).
  When executing software on IOPB the shared bus will be highly utilizied,
  bus delays will increase and data throughput will dramaticly decrease.
  Shared bus has a significant negative performance impact.
 \layout Standard
 
+Additionally, MDK does not include any OPB-to-OPB Bridge.
+\layout Standard
+
 EDK offers a number of meassures to remedy these problems through a set
  of MHS directives which are not available in MDK.
- To implement the same in MDK, a designer must venture beyond platgen and
- modify automaticly generated VHDL files.
-\layout Standard
-
-One solution is a dedicated IOPB and a dedicated DOPB.
- This is a usefull solution if instructions are stored in ROM memory, or
- if a dual port RAM memory is used.
-\layout Standard
-
-Another solution is a DOPB to IOPB bridge, which allows a DOPB slave to
- act as a IOPB master.
- This solution allows DOPB to write to IOPB memory, and busses can operate
- concurrently except during DOPB to IOPB access.
+ To customize OPB in MDK, a designer must venture beyond platgen and modify
+ automaticly generated VHDL files.
+ This means that when making advanced MDK designs, a designer loose a lot
+ of time and effort saving automatization.
 \layout Subsubsection
 
 MDK platform tailoring limitations - buffers and pads configuration
@@ -1929,7 +2099,7 @@ Eth Version 1.00 Revision A, RX Core
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1959,7 +2129,7 @@ Eth Version 1.00 Revision A, TX Core
 
 \layout Subsection
 
-Eth V 1.00, Revision C
+Eth Version 1.00 Revision C
 \layout Standard
 
 This is a redisign of Eth V.100 Revision A.
@@ -1997,7 +2167,7 @@ collapsed true
 
 \begin_inset Float algorithm
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
