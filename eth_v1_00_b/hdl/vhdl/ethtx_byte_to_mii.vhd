@@ -102,10 +102,12 @@ begin
 				elsif tx_clock_pulse='1' and send_state=state_preamble then
 					tx_en   <= '1';
 					tx_data <= preamble_seq;
+					count <= (others => '0');
 
 				elsif tx_clock_pulse='1' and send_state=state_sync then
 					tx_en   <= '1';
 					tx_data <= preamble_sfd;
+					count <= (others => '0');
 
 				elsif tx_clock_pulse='1' and send_state=state_send then
 					tx_en   <= '1';
