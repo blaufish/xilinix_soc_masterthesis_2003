@@ -20,7 +20,7 @@ RTL_SRC1+= ethrx_clk_sampler.vhd ethrx_mii_to_byte.vhd
 RTL_SRC1+= ethrx_byte_to_word.vhd ethrx_statemachine.vhd
 RTL_SRC1+= ethrx_debug.vhd ethrx_regfile.vhd
 #building blocks
-RTL_SRC0 = blockram_dp.vhd blockram_fifo.vhd crc.vhd fdre.vhd
+RTL_SRC0 = blockram_dp.vhd blockram_fifo.vhd crc.vhd fdre.vhd ramlib_sim.vhd freefifo.vhd
 
 RTL_SRC = $(RTL_SRC0) $(RTL_SRC1) $(RTL_SRC2) $(RTL_SRC3)
 RTL_TRG: $(RTL_SRC:%.vhd=tmp/.done.%.vhd.)
