@@ -53,7 +53,12 @@ architecture RTL of ethtx_byte_to_mii is
 
 	signal fcs_byte_BadOrder, fcs_byte : std_logic_vector(7 downto 0);
 
+	signal packet_sent_REG : std_logic;
+
 begin
+
+	packet_sent <= packet_sent_REG;
+
 	process (fcs, fcs_count) begin
 		case fcs_count(1 downto 0) is
 		when "00"  => fcs_byte_BadOrder <= fcs(31 downto 24);
@@ -77,8 +82,8 @@ begin
 	process (sys_clk) 
 	begin
 		if rising_edge(sys_clk) then
-			packet_sent <= '0';
-			byte_rd     <= '0';
+			packet_sent_REG <= '0';
+			byte_rd         <= '0';
 			
 		
 			if sys_reset='1' then
@@ -128,9 +133,19 @@ begin
 					if (append_fcs='0' and count="000" and byte_valid='0') 
 					or (append_fcs='1' and fcs_count="100" and count="000") then
 						
-						packet_sent <= '1';
+						packet_sent_REG <= '1';
 						count <= (others => '0');
+
+						-- race condition fix
+						if tx_clock_pulse='1' then
+							tx_en <= '0';
+						end if;
 					end if;
+				end if;
+
+				-- race condition fix
+				if packet_sent_REG = '1' and tx_clock_pulse='1' then
+					tx_en <= '0';
 				end if;
 
 	
