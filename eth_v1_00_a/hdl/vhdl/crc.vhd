@@ -126,7 +126,7 @@ begin
 	begin
 		if rising_edge(CLK) then
 
-			if (RST or softreset)='1' then
+			if RST='1' or softreset='1' then
 				crc_reg <= (others => '1');
 
 			elsif dvalid='1' then
