@@ -329,25 +329,41 @@ A typical SoC includes one (or many) processor core(s), an arbitrary number
 \layout Standard
 
 As SoCs usually are designed with a limited set of applications in mind
- they tend to need less CPU power than a general purpose computer.
+ they tend to need less processing power than a general purpose computer.
  While a modern workstation operates with clock frequencies in the range
  of 500 MHz - 3 GHz, the SoC CPU might operate at just a few megahertz.
- An ideal SoC CPU is operating at the minimum clock frequency needed to
- properly perform the desired application.
+ An ideal SoC processor core is operating at the minimum clock frequency
+ needed to properly perform the desired application.
  By maintaining a low clock frequency the power consumption and chip temperature
  is reduced.
  This allows SoCs to operate with less cooling devices and better battery/power
  utilization.
 \layout Subsection
 
-Microcontrollers
+System on Chip or Microcontroller?
 \layout Standard
 
-A typical microcontroller consists of a single processor core, some memory
- and a few simple peripherals.
- Most microcontrollers share the following properties: they are cheap, they
- are energy efficient and they are more or less general purpose.
- Therefor microcontrollers can be considered to be a subset of SoCs.
+
+\begin_inset LatexCommand \cite{FOLDOC}
+
+\end_inset 
+
+ define Microcontroller as:
+\layout Quotation
+
+A microprocessor on a single integrated circuit intended to operate as an
+ embedded system.
+ As well as a CPU, a microcontroller typically includes small amounts of
+ RAM and PROM and timers and I/O ports.
+ An example is the Intel 8751.
+ 
+\layout Standard
+
+To make a destinction between microcontrollers and SoCs is hard; the words
+ are synomical.
+ The word SoC is currently more frequently used in reference to designs
+ which are customized for a limited set of applications, while microcontroller
+ tend to be used in reference to more general purpose embedded designs.
 \layout Section
 
 Application Specific Integrated Circuit (ASIC)
@@ -5239,6 +5255,152 @@ Eth would benefit greatly from an independant and professional verification.
  As of current date, it has only been used and vertified in student projects
  which are known to have loosely defined quality demands.
  Professional engineers would not consider Eth to be of production quality.
+\layout Chapter
+
+Acronyms
+\layout Itemize
+
+ASIC - Application Specific Integrated Circuit
+\layout Itemize
+
+AUI - Attachment Unit Interface
+\layout Itemize
+
+Bandung - Bandung Institute of Technology 10/100 Ethernet MAC
+\layout Itemize
+
+CPU - Central Processing Unit
+\layout Itemize
+
+CSEE - Department of Computer Science and Electrical Engineering at Luleå
+ University of Technology.
+\layout Itemize
+
+DA - Destination Address
+\layout Itemize
+
+DCR - Device Control Register bus
+\layout Itemize
+
+DMA - Direct Memory Access
+\layout Itemize
+
+EDK - Embedded Development Kit
+\layout Itemize
+
+EISLAB - Embedded Internet Systems Laboratory
+\layout Itemize
+
+EMAC - Xilinx OPB Ethernet Media Access Controller
+\layout Itemize
+
+EMAC Lite - Xilinx OPB Ethernet Lite Media Access Controller
+\layout Itemize
+
+EthMac - Opencores.org 10/100 Ethernet MAC
+\layout Itemize
+
+FCS - Frame Check Sequence
+\layout Itemize
+
+FlashRAM - Flashable (Non-Volatile) Random Access Memory
+\layout Itemize
+
+FPGA - Field Programmable Gate Array
+\layout Itemize
+
+GHz - Giga Hertz
+\layout Itemize
+
+I/O - Input/Output
+\layout Itemize
+
+IBM - International Bussniess Machines Coproration
+\layout Itemize
+
+ICMP - Internet Control Message Protocoll
+\layout Itemize
+
+IP - Internet Protocol
+\layout Itemize
+
+IPv4 - Internet Protocol Version 4
+\layout Itemize
+
+LMB - Local Memory Bus
+\layout Itemize
+
+lwIP - Light Weight Internet Protocol
+\layout Itemize
+
+MAC - Media Access Controller
+\layout Itemize
+
+MAU - Medium Attachment Unit
+\layout Itemize
+
+MBit/s - Mega Bit per second
+\layout Itemize
+
+MDK - MicroBlaze Development Kit
+\layout Itemize
+
+MHz - Mega Hertz
+\layout Itemize
+
+MII - Medium Indepentent Interface
+\layout Itemize
+
+OPB - IBM CoreConnect On-Chip Peripheral Bus
+\layout Itemize
+
+PHY - Physical Layer Device
+\layout Itemize
+
+PLB - Processor Local Bus
+\layout Itemize
+
+PLD - Programmable Logic Device
+\layout Itemize
+
+PROM - Programmable Read-Only Memory
+\layout Itemize
+
+RAM - Random Access Memory
+\layout Itemize
+
+RMII - Reduced Medium Indepentent Interface
+\layout Itemize
+
+ROM - Read-Only Memory
+\layout Itemize
+
+SA - Source Address
+\layout Itemize
+
+SoC - System on Chip
+\layout Itemize
+
+SRAM - Static Random Access Memory
+\layout Itemize
+
+TCP - Transmission Control Protocol
+\layout Itemize
+
+TCP/IP - Internet Protocol Version 4 based network stacks (TCP, UDP, ICMP
+ etc.)
+\layout Itemize
+
+TYPE - Type-field (Ethernet frames)
+\layout Itemize
+
+SYNC - Synchronization bits (Ethernet frames)
+\layout Itemize
+
+UDP - User Datagram Protocol
+\layout Itemize
+
+XST - Xilinx Synthesis Technology
 \layout Bibliography
 \bibitem [ETHERNET]{Book-Gigabit-Ethernet}
 
@@ -5405,6 +5567,19 @@ In
 Xilinx Embedded Processor Forum
 \emph default 
 , 2003.
+\layout Bibliography
+\bibitem [FOLDOC]{FOLDOC}
+
+Denis Howe et.al.
+\newline 
+FOLDOC - Free On-Line Dictionary of Computing.
+\newline 
+Imperial Collage Department of Computing.
+\newline 
+1993-2003.
+ 
+\emph on 
+http://foldoc.doc.ic.ac.uk/foldoc/
 \layout Bibliography
 \bibitem [FPGACPU]{Site-fpgacpu.org}
 
