@@ -162,7 +162,11 @@ architecture RTL of ethrx_core is
          	);
   	end component;
 
-	signal rx_async_fifo_full, rx_async_fifo_empty : std_logic;
+	signal 
+		rx_async_fifo_full, 
+		rx_async_fifo_full_inv,
+		rx_async_fifo_empty,
+		rx_async_fifo_empty_inv : std_logic;
 	signal rx_async_fifo_din, rx_async_fifo_dout : std_logic_vector(rx_data_pins downto 0);
 	
 	signal rx_clock_FDR  : std_logic;
@@ -210,10 +214,10 @@ begin
     		port map (
 			reset	=> sys_reset,
         	  	wr_clk	=> rx_clock,
-          		wr_en	=> not rx_async_fifo_full,
+          		wr_en	=> rx_async_fifo_full_inv,
 	          	wr_data	=> rx_async_fifo_din,
         	  	rd_clk	=> sys_clk,
-          		rd_en	=> not rx_async_fifo_empty,
+          		rd_en	=> rx_async_fifo_empty_inv,
           		rd_data	=> rx_async_fifo_dout,
           		full	=> rx_async_fifo_full,
           		empty	=> rx_async_fifo_empty
@@ -221,6 +225,10 @@ begin
 		rx_async_fifo_din <= rx_dvalid & rx_data;
 		rx_dvalid_FDR <= rx_async_fifo_dout(rx_data_pins);
 		rx_data_FDR <= rx_async_fifo_dout(rx_data_pins-1 downto 0);
+
+		rx_async_fifo_full_inv <= not rx_async_fifo_full;
+		rx_async_fifo_empty_inv <= not rx_async_fifo_empty;
+		
 		rx_clock_pulse <= not rx_async_fifo_empty;
 		
 	end generate gen1;
