@@ -162,7 +162,7 @@ architecture RTL of ethrx_core is
          	);
   	end component;
 
-	signal rx_async_fifo_empty : std_logic;
+	signal rx_async_fifo_full, rx_async_fifo_empty : std_logic;
 	signal rx_async_fifo_din, rx_async_fifo_dout : std_logic_vector(rx_data_pins downto 0);
 	
 	signal rx_clock_FDR  : std_logic;
@@ -210,12 +210,12 @@ begin
     		port map (
 			reset	=> sys_reset,
         	  	wr_clk	=> rx_clock,
-          		wr_en	=> '1',
+          		wr_en	=> not rx_async_fifo_empty,
 	          	wr_data	=> rx_async_fifo_din,
         	  	rd_clk	=> sys_clk,
           		rd_en	=> not rx_async_fifo_empty,
           		rd_data	=> rx_async_fifo_dout,
-          		full	=> open,
+          		full	=> rx_async_fifo_full,
           		empty	=> rx_async_fifo_empty
          	);
 		rx_async_fifo_din <= rx_dvalid & rx_data;
