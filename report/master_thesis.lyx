@@ -208,7 +208,11 @@ Xilinx MicroBlaze
 
 Xilinx MicroBlaze is a small processor core geared for implementation in
  Xilinx FPGAs and embedded applications.
- MicroBlaze is a highly optimized 
+ A MicroBlaze platform consists of one or several MicroBlaze cores, interconnect
+ed with a set of peripherals through a bus architecture.
+\layout Standard
+
+The MicroBlaze core is a highly optimized 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -237,7 +241,7 @@ The MicroBlaze core contains two OPB buses (OPB instruction path, OPB data
  data path).
  The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
  Port Block RAM support for dual single cycle access.
- A MicroBlaze system with only LMB access is extremly efficient, however
+ A MicroBlaze platform with only LMB access is extremly efficient, however
  an FPGA conatins only a few kilobytes of Block RAM.
  A MicroBlaze system may utilize all four buses (as shown in figure 
 \begin_inset LatexCommand \prettyref{cap:MicroBlaze}
@@ -245,8 +249,8 @@ The MicroBlaze core contains two OPB buses (OPB instruction path, OPB data
 \end_inset 
 
 ).
- A MicroBlaze system must include a data path and an instruction path to
- the MicroBlaze core, therefor it will utilize 2, 3 or 4 buses.
+ A MicroBlaze platform must include a data path and an instruction path
+ to the MicroBlaze core, therefor it will utilize 2, 3 or 4 buses.
 \layout Standard
 
 Xilinx provides software and documentation allowing developers to utilize
@@ -254,7 +258,7 @@ Xilinx provides software and documentation allowing developers to utilize
  JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
  1 to 16 masters to share an OPB Bus).
  Xilinx also provides documentation and tutorials on the subject of designing
- custom OPB Slaves for MicroBlaze systems.
+ custom OPB Slaves for MicroBlaze platforms.
 \layout Standard
 
 
@@ -849,7 +853,7 @@ Microblaze is a part of the Xilinx Embedded Development Kit (EDK) which
 MDK platform tailoring utilities
 \layout Standard
 
-A Microblaze system is specified in a Microblaze Hardware Specification
+A Microblaze platform is specified in a Microblaze Hardware Specification
  (MHS) configuration file.
  A PERL-script platgen (
 \begin_inset Quotes eld
@@ -859,15 +863,246 @@ Platform Generator
 \begin_inset Quotes erd
 \end_inset 
 
-) build the hardware specification.
- Typicall MHS options are which bus configuration to use and which peripherals
- to include.
-\layout Subsubsection
-
-Bus configuration limitations
+) build platform top modules and synthesis them according to the MHS specificati
+on.
+ Typicall MHS options include which bus configuration to use and which periphera
+ls to interface.
+ 
 \layout Standard
 
-IOPB and DOPB ....
+MDK platgen is moderately simple while able to cope with most MDK beginners
+ design issues.
+ However there are several limitationd in MDK platgen and some bugs.
+ Some of these problem are described in the following subsections.
+\layout Standard
+
+The limitations and problems with MDK platgen are encountered during normal
+ design cycles and make MDK platgen, increase implementation and debugging
+ times.
+ Overall MDK platgen is a pretty good tool.
+ But when designing more advanced platforms, time and effort is required
+ to make it work.
+ This have a negative impact on ease of use and the perceived quality of
+ MDK as whole.
+\layout Subsubsection
+
+MDK platform tailoring limitations - OPB bus configuration
+\layout Standard
+
+MDK can be configured to use no OPB bus, an instruction bus (IOPB), a data
+ bus (DOPB) or both OPB busses.
+ Unfortunately, the MDK offers no configuration options for controlling
+ if - or how - busses should be interconnected.
+ 
+\layout Standard
+
+If both DOPB and IOPB is used, they will share the same bus.
+ When executing software on IOPB the shared bus will be highly utilizied,
+ bus delays will increase and data throughput will dramaticly decrease.
+ Shared bus has a significant negative performance impact.
+\layout Standard
+
+EDK offers a number of meassures to remedy these problems through a set
+ of MHS directives which are not available in MDK.
+ To implement the same in MDK, a designer must venture beyond platgen and
+ modify automaticly generated VHDL files.
+\layout Standard
+
+One solution is a dedicated IOPB and a dedicated DOPB.
+ This is a usefull solution if instructions are stored in ROM memory, or
+ if a dual port RAM memory is used.
+\layout Standard
+
+Another solution is a DOPB to IOPB bridge, which allows a DOPB slave to
+ act as a IOPB master.
+ This solution allows DOPB to write to IOPB memory, and busses can operate
+ concurrently except during DOPB to IOPB access.
+\layout Subsubsection
+
+MDK platform tailoring limitations - buffers and pads configuration
+\layout Standard
+
+A Virtex FPGA input/output pin is connected to a 
+\begin_inset Quotes eld
+\end_inset 
+
+pad
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Each Virtex FPGA contains four global clock pads.
+ These pads are specificly used for clock signals.
+ Each pad is in turn connected to a buffer which handles how pad is interfaced
+ by the design.
+ However, there are a number of different buffers which each has it's own
+ purpose and charistics.
+ 
+\layout Standard
+
+It is likely that a designer needs to control which buffert to use.
+ An example of this is when a designer wish to implement a synchronous ethernet
+ peripheral on a prototype board with RX_CLK, TX_CLK or REF_CLK connected
+ to a global clock pad.
+ Then the designer must use the not so common buffer type 
+\begin_inset Quotes eld
+\end_inset 
+
+IBUFG
+\begin_inset Quotes erd
+\end_inset 
+
+, because the common 
+\begin_inset Quotes eld
+\end_inset 
+
+IBUF
+\begin_inset Quotes erd
+\end_inset 
+
+ buffer cannot be connected to a global clock pad.
+ 
+\layout Standard
+
+MDK platgen can be configured weather to insert buffers or not.
+ MDK platgen will auto-insert buffers as stated in table 
+\begin_inset LatexCommand \ref{cap:Auto-inserted-buffers}
+
+\end_inset 
+
+.
+ In the second option, platgen will generate a black box for implementation
+ in larger designs, or merely to be used in a small wrapper which defines
+ buffer should be used for each I/O signal.
+\layout Standard
+
+Another issue is that tristate buffers in peripherals must be written as
+ a set of three I/O signals (input, output and tristate control).
+ Although this is not a major drawback, it is an uneccesary restriction
+ in how designers may choose to implement their design.
+ Specificly, it may limit which blackboxes and source codes which are possible
+ to easily utilize in a Microblaze peripheral design.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Auto-inserted-buffers}
+
+\end_inset 
+
+Auto-inserted buffers
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="left" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Buffer
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Inserted at I/O signals used as
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+BUFGP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Clock signals
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IBUF
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+General input
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+OBUF
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+General output
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IOBUF
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Tristate input/output
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
 \layout Subsection
 
 MDK software development tools
@@ -876,15 +1111,15 @@ MDK software development tools
 MDK includes most common development tools, such as an assembler, a compiler,
  a linker, a debugger and some other utilities.
  All these tools are based on famous and well verified GNU tools.
- This is a mayor benefit, as most developers have previous experience with
+ This is a major benefit, as most developers have previous experience with
  the tools.
 \layout Standard
 
 The debugger is interfaced by JTAG or RS232.
  Any debugger familiar with either the GDB Remote Protocol or the Unified
- Debugging Interface standard may be used to debug Microblaze systems.
+ Debugging Interface standard may be used to debug Microblaze platforms.
  This allows a broad range of debuggers and debugger GUIs to be used with
- a Microblaze system.
+ a Microblaze platform.
 \layout Standard
 
 Microblaze software utilize a small set of standard libraries (libc, libm
@@ -901,33 +1136,6 @@ Microblaze software utilize a small set of standard libraries (libc, libm
 
 The project source code is compiled and linked with access to all associated
  .h files and the modified libc library.
-\layout Section
-
-...
-\layout Standard
-
-Microblaze is based upon OPB which is easy to use.
- The bus is memory mapped to Microblaze, which makes it simple to interface
- peripherals by pointers in software.
- A great number of usefull (although sometimes limited) peripherals is included
- with Microblaze.
- Software development environement is based upon popular GNU tools (gcc,
- gdb) which many developers are allready familiar with.
- Documentation and example codes are sometimes a bit unclear, but overall
- impression is good.
-\layout Standard
-
-It is obvious that Xilinx has put a lot of effort into making Microblaze
- an easy to use environment, and have included what most developers will
- need in an initial project.
- 
-\layout Standard
-
-That Microblaze is FPGA based is ideal for prototypes and first generation
- small scale manufacturing.
- An important question is how much trouble it is to transition a Microblaze
- design from FPGA to ASIC, to lower chip cost and power consumption.
- 
 \layout Section
 
 Microblaze as a SoC system
@@ -958,9 +1166,9 @@ However, custom design of an Ethernet peripheral may be adviceable.
  A custom made peripheral yields a number of interesting properties:
 \layout Itemize
 
-Cheep.
+Cheap.
  Basic core design and verification can be one or two students as a part
- of a thesis or course.
+ of a thesis or project course.
 \layout Itemize
 
 May be customized for specific application.
@@ -1000,7 +1208,7 @@ Classification, validation, and special handling of certain ethernet frames
 ity may be reduced.
 \layout Chapter
 
-Development of MicroBlaze Ethernet devices
+Development of MicroBlaze Ethernet peripherals
 \layout Section
 
 Design requirements and limitations
