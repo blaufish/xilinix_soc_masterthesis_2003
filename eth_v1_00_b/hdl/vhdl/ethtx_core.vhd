@@ -207,7 +207,7 @@ begin
 	        );
 	end generate gen0;
 	
-	gen0 : if async = true generate
+	gen1 : if async = true generate
 		tx_async_fifo :  fifo_async
     		generic map (
 			data_bits  => data_pins+1,
@@ -246,7 +246,7 @@ begin
 		end process;
 					
 
-	end generate gen0;
+	end generate gen1;
 
 
 	state : ethtx_statemachine
