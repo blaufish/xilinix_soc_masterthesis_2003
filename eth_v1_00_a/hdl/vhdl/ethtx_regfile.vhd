@@ -35,8 +35,8 @@ architecture RTL of ethtx_regfile is
 	signal status_fifo_words       : unsigned(8 downto 0);
 	signal status_fifo_BILW        : unsigned(2 downto 0);
 
-	signal status_fifo_words_p1    : unsigned(8 downto 0);
-	signal status_fifo_words_p1_c3 : unsigned(0 downto 0);
+	--signal status_fifo_words_p1    : unsigned(8 downto 0);
+	--signal status_fifo_words_p1_c3 : unsigned(0 downto 0);
 
 	signal output_set : std_logic;
 
@@ -110,6 +110,7 @@ begin
 			fifo_reset <= '0';
 			fifo_wr    <= '0';
 			--fifo_rd    <= '0';
+			fifo_d     <= (others => '0');
 	
 			if sys_reset='1' or packet_sent='1' then
 				status_packet_buffered <= '0';
