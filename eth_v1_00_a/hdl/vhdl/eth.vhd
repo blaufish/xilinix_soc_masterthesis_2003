@@ -4,10 +4,11 @@ use ieee.numeric_std.all;
 
 entity ETH is
 	generic (
+		C_BASEADDR : std_logic_vector(0 to 31) := X"FFFF_8000";
+		C_HIGHADDR : std_logic_vector(0 to 31) := X"FFFF_80FF";
 		C_OPB_AWIDTH : integer := 32;
 		C_OPB_DWIDTH : integer := 32;
-		C_BASEADDR : std_logic_vector(0 to 31) := X"FFFF_8000";
-		C_HIGHADDR : std_logic_vector(0 to 31) := X"FFFF_80FF"
+		C_PHY_WIDTH : integer := 4
 	);
 	port (
 		-- Global signals
@@ -28,9 +29,9 @@ entity ETH is
 		-- PHY signals
 		RX_CLK : in std_logic;
 		RX_DV  : in std_logic;
-		RX_D   : in std_logic_vector(3 downto 0);
+		RX_D   : in std_logic_vector(C_PHY_WIDTH-1 downto 0);
 		TX_CLK : in std_logic;
-		TX_D   : out std_logic_vector(3 downto 0);
+		TX_D   : out std_logic_vector(C_PHY_WIDTH-1 downto 0);
 		TX_EN  : out std_logic
 	);
 end ETH;
@@ -39,7 +40,7 @@ architecture RTL of ETH is
 
 	component ethrx_core is
 	generic (
-		rx_data_pins : natural := 4
+		rx_data_pins : natural := C_PHY_WIDTH
 	);
 	port (
 		sys_clk		: in std_logic; -- rising edge
@@ -71,7 +72,7 @@ architecture RTL of ETH is
 
 	component ethtx_core is
         generic (
-                data_pins : natural := 4
+                data_pins : natural := C_PHY_WIDTH
 	);
         port (
                 sys_clk         : in std_logic; -- rising edge
