@@ -1,0 +1,4320 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: Adobe Illustrator(TM) 3.2
+%%AI8_CreatorVersion: 10.0
+%%For: (Exjobbare) (Exjobbare)
+%%Title: (microblaze_core_block_diagram.eps)
+%%CreationDate: 5/21/2003 3:36 PM
+%%BoundingBox: 109 323 488 510
+%%DocumentProcessColors: Black
+%%DocumentFonts: Helvetica
+%%+ Helvetica-Oblique
+%%DocumentNeededFonts: Helvetica
+%%+ Helvetica-Oblique
+%%DocumentSuppliedResources: procset Adobe_packedarray 2.0 0
+%%+ procset Adobe_cshow 1.1 0
+%%+ procset Adobe_customcolor 1.0 0
+%%+ procset Adobe_typography_AI3 1.0 1
+%%+ procset Adobe_pattern_AI3 1.0 0
+%%+ procset Adobe_Illustrator_AI3 1.0 1
+%AI3_ColorUsage: Color
+%AI3_IncludePlacedImages
+%AI3_TemplateBox: 298.5 420.3896 298.5 420.3896
+%AI3_TileBox: 13 13 582 829
+%AI3_DocumentPreview: Header
+%%PageOrigin:13 13
+%%AI3_PaperRect:-13 829 582 -13
+%%AI3_Margin:13 -13 -13 13
+%AI7_GridSettings: 72 8 72 8 1 0 0.8 0.8 0.8 0.9 0.9 0.9
+%AI9_Flatten: 1
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Adobe_packedarray 2.0 0
+%%Title: (Packed Array Operators)
+%%Version: 2.0 0
+%%CreationDate: (8/2/90) ()
+%%Copyright: ((C) 1987-1996 Adobe Systems Incorporated All Rights Reserved)
+userdict /Adobe_packedarray 5 dict dup begin put
+/initialize
+{
+/packedarray where
+	{
+	pop
+	}
+	{
+	Adobe_packedarray begin
+	Adobe_packedarray
+		{
+		dup xcheck
+			{
+			bind
+			} if
+		userdict 3 1 roll put
+		} forall
+ end
+	} ifelse
+} def
+/terminate
+{
+} def
+/packedarray
+{
+array astore readonly
+} def
+/setpacking
+{
+pop
+} def
+/currentpacking
+{
+false
+} def
+currentdict readonly pop end
+%%EndResource
+Adobe_packedarray /initialize get exec
+%%BeginResource: procset Adobe_cshow 1.1 0
+%%Title: (cshow Operator)
+%%Version: 1.1 0
+%%CreationDate: (1/23/89) ()
+%%Copyright: ((C) 1987-1996 Adobe Systems Incorporated All Rights Reserved)
+currentpacking true setpacking
+userdict /Adobe_cshow 3 dict dup begin put
+/initialize
+{
+/cshow where
+	{
+	pop
+	}
+	{
+	userdict /Adobe_cshow_vars 1 dict dup begin put
+	/_cshow
+		{} def
+	Adobe_cshow begin
+	Adobe_cshow
+		{
+		dup xcheck
+			{
+			bind
+			} if
+		userdict 3 1 roll put
+		} forall
+ end
+ end
+	} ifelse
+} def
+/terminate
+{
+} def
+/cshow
+{
+exch
+Adobe_cshow_vars
+	exch /_cshow
+	exch put
+	{
+	0 0 Adobe_cshow_vars /_cshow get exec
+	} forall
+} def
+currentdict readonly pop end
+setpacking
+%%EndResource
+%%BeginResource: procset Adobe_customcolor 1.0 0
+%%Title: (Custom Color Operators)
+%%Version: 1.0 0
+%%CreationDate: (5/9/88) ()
+%%Copyright: ((C) 1987-1996 Adobe Systems Incorporated All Rights Reserved)
+currentpacking true setpacking
+userdict /Adobe_customcolor 5 dict dup begin put
+/initialize
+{
+/setcustomcolor where
+	{
+	pop
+	}
+	{
+	Adobe_customcolor begin
+	Adobe_customcolor
+		{
+		dup xcheck
+			{
+			bind
+			} if
+		pop pop
+		} forall
+ end
+	Adobe_customcolor begin
+	} ifelse
+} def
+/terminate
+{
+currentdict Adobe_customcolor eq
+	{
+ end
+	} if
+} def
+/findcmykcustomcolor
+{
+5 packedarray
+}  def
+/setcustomcolor
+{
+exch
+aload pop pop
+4
+	{
+	4 index mul 4 1 roll
+	} repeat
+5 -1 roll pop
+setcmykcolor
+} def
+/setoverprint
+{
+pop
+} def
+currentdict readonly pop end
+setpacking
+%%EndResource
+%%BeginResource: procset Adobe_typography_AI3 2.0 0
+%%Title: (Typography Operators)
+%%Version: 2.0 0
+%%CreationDate:(5/31/90) ()
+%%Copyright: ((C) 1987-1996 Adobe Systems Incorporated All Rights Reserved)
+currentpacking true setpacking
+userdict /Adobe_typography_AI3 48 dict dup begin put
+/initialize
+{
+/TZ
+ where
+	{
+	pop
+	}
+	{
+	Adobe_typography_AI3 begin
+	Adobe_typography_AI3
+		{
+		dup xcheck
+			{
+			bind
+			} if
+		pop pop
+		} forall
+ end
+	Adobe_typography_AI3 begin
+	} ifelse
+} def
+/terminate
+{
+currentdict Adobe_typography_AI3 eq
+	{
+ end
+	} if
+} def
+/modifyEncoding
+{
+	/_tempEncode exch ddef
+	
+	/_pntr 0 ddef
+	
+	{
+		counttomark -1 roll
+		dup type dup /marktype eq 		
+		{
+			pop pop exit
+		}
+		{
+			/nametype eq
+			{
+				_tempEncode /_pntr dup load dup 3 1 roll 1 add ddef 3 -1 roll
+				put
+			}
+			{
+				/_pntr exch ddef					
+			}
+			ifelse
+		}
+		ifelse
+	}
+	loop	
+	
+	_tempEncode
+}
+def
+/TE
+{
+	StandardEncoding 256 array copy modifyEncoding 
+	/_nativeEncoding exch def
+} def
+%
+/TZ		
+{
+	dup type /arraytype eq {/_wv exch def} {/_wv 0 def} ifelse 
+	/_useNativeEncoding exch def
+	pop pop
+	
+	findfont _wv type /arraytype eq {_wv makeblendedfont} if dup length 2 add dict
+	
+ begin
+	
+		mark exch
+		{
+			1 index /FID ne { def } if cleartomark mark
+		}
+		forall
+		pop
+		
+		/FontName exch def
+		
+		counttomark 0 eq
+		{
+			1 _useNativeEncoding eq
+			{
+				/Encoding _nativeEncoding def
+			}
+			if
+			cleartomark
+		}
+		{	
+			/Encoding load 256 array copy 
+			modifyEncoding /Encoding exch def
+		}
+		ifelse		
+		FontName currentdict
+ end
+	
+	definefont pop
+}
+def
+/tr
+{
+_ax _ay 3 2 roll
+} def
+/trj
+{
+_cx _cy _sp _ax _ay 6 5 roll
+} def
+/a0
+{
+/Tx
+	{
+	dup 
+	currentpoint 3 2 roll
+	tr _psf
+	newpath moveto
+	tr _ctm _pss
+	} ddef
+/Tj
+	{
+	dup
+	currentpoint 3 2 roll
+	trj _pjsf
+	newpath moveto
+	trj _ctm _pjss
+	} ddef
+	
+} def
+/a1
+{
+/Tx
+	{
+	dup currentpoint 4 2 roll gsave
+	dup currentpoint 3 2 roll
+	tr _psf
+	newpath moveto
+	tr _ctm _pss
+	grestore 3 1 roll moveto tr sp
+	} ddef
+/Tj
+	{
+	dup currentpoint 4 2 roll gsave
+	dup currentpoint 3 2 roll
+	trj _pjsf
+	newpath moveto
+	trj _ctm _pjss
+	grestore 3 1 roll moveto tr sp
+	} ddef
+	
+} def
+/e0
+{
+/Tx
+	{
+	tr _psf
+	} ddef
+/Tj
+	{
+	trj _pjsf
+	} ddef
+} def
+/e1
+{
+/Tx
+	{
+	dup currentpoint 4 2 roll gsave 
+	tr _psf  
+	grestore 3 1 roll moveto tr sp 
+	} ddef
+/Tj
+	{
+	dup currentpoint 4 2 roll gsave 
+	trj _pjsf
+	grestore 3 1 roll moveto tr sp 
+	} ddef
+} def
+/i0
+{
+/Tx
+	{
+	tr sp
+	} ddef
+/Tj
+	{
+	trj jsp
+	} ddef
+} def
+/i1
+{
+W N
+} def
+/o0
+{
+/Tx
+	{
+	tr sw rmoveto
+	} ddef
+/Tj
+	{
+	trj swj rmoveto
+	} ddef
+} def
+/r0
+{
+/Tx
+	{
+	tr _ctm _pss
+	} ddef
+/Tj
+	{
+	trj _ctm _pjss
+	} ddef
+} def
+/r1
+{
+/Tx
+	{
+	dup currentpoint 4 2 roll currentpoint gsave newpath moveto
+	tr _ctm _pss 
+	grestore 3 1 roll moveto tr sp 
+	} ddef
+/Tj
+	{
+	dup currentpoint 4 2 roll currentpoint gsave newpath moveto
+	trj _ctm _pjss
+	grestore 3 1 roll moveto tr sp 
+	} ddef
+} def
+/To
+{
+	pop _ctm currentmatrix pop
+} def
+/TO
+{
+	iTe _ctm setmatrix newpath
+} def
+/Tp
+{
+	pop _tm astore pop _ctm setmatrix 
+	_tDict begin /W {} def /h {} def
+} def
+/TP
+{
+ end
+	iTm 0 0 moveto
+} def
+/Tr
+{
+	_render 3 le {currentpoint newpath moveto} if
+	dup 8 eq {pop 0} {dup 9 eq {pop 1} if} ifelse
+	dup /_render exch ddef
+	_renderStart exch get load exec
+} def
+/iTm
+{
+_ctm setmatrix _tm concat 0 _rise translate _hs 1 scale
+} def
+/Tm
+{
+_tm astore pop iTm 0 0 moveto
+} def
+/Td
+{
+_mtx translate _tm _tm concatmatrix pop iTm 0 0 moveto
+} def
+/iTe
+{
+	_render -1 eq {} {_renderEnd _render get dup null ne {load exec} {pop} ifelse} ifelse
+	/_render -1 ddef
+} def
+/Ta
+{
+pop
+} def
+/Tf
+{
+dup 1000 div /_fScl exch ddef
+exch findfont exch scalefont setfont
+} def
+/Tl
+{
+pop
+0 exch _leading astore pop
+} def
+/Tt
+{
+pop
+} def
+/TW
+{
+3 npop
+} def
+/Tw
+{
+/_cx exch ddef
+} def
+/TC
+{
+3 npop
+} def
+/Tc
+{
+/_ax exch ddef
+} def
+/Ts
+{
+/_rise exch ddef
+currentpoint
+iTm
+moveto
+} def
+/Ti
+{
+3 npop
+} def
+/Tz
+{
+100 div /_hs exch ddef
+iTm
+} def
+/TA
+{
+pop
+} def
+/Tq
+{
+pop
+} def
+/Th
+{
+pop pop pop pop pop
+} def
+/TX {pop} def
+%/Tx
+%/Tj
+/Tk
+{
+exch pop _fScl mul neg 0 rmoveto
+} def
+/TK
+{
+2 npop
+} def
+/T*
+{
+_leading aload pop neg Td
+} def
+/T*-
+{
+_leading aload pop Td
+} def
+/T-
+{
+_hyphen Tx
+} def
+/T+
+{} def
+/TR
+{
+_ctm currentmatrix pop 	
+_tm astore pop 
+iTm 0 0 moveto 
+} def
+/TS
+{
+0 eq {Tx} {Tj} ifelse
+} def
+currentdict readonly pop end
+setpacking
+%%EndResource
+%%BeginResource: procset Adobe_pattern_AI3 1.1 0
+%%Title: (Adobe Illustrator (R) Version 3.0 Pattern Operators)
+%%Version: 1.1 0
+%%CreationDate: (7/21/89) ()
+%%Copyright: ((C) 1987-1996 Adobe Systems Incorporated All Rights Reserved)
+currentpacking true setpacking
+userdict /Adobe_pattern_AI3 16 dict dup begin put
+/initialize
+{
+/definepattern where
+	{
+	pop
+	}
+	{
+	Adobe_pattern_AI3 begin
+	Adobe_pattern_AI3
+		{
+		dup xcheck
+			{
+			bind
+			} if
+		pop pop
+		} forall
+	mark
+	cachestatus 7 1 roll pop pop pop pop exch pop exch
+		{
+		{
+		10000 add
+		dup 2 index gt
+			{
+			exit
+			} if
+		dup setcachelimit
+		} loop
+		} stopped
+	cleartomark
+	} ifelse
+} def
+/terminate
+{
+currentdict Adobe_pattern_AI3 eq
+	{
+ end
+	} if
+} def
+errordict
+/nocurrentpoint
+{
+pop
+stop
+} put
+errordict
+/invalidaccess
+{
+pop
+stop
+} put
+/patternencoding
+256 array def
+0 1 255
+{
+patternencoding exch ( ) 2 copy exch 0 exch put cvn put
+} for
+/definepattern
+{
+17 dict begin
+/uniform exch def
+/cache exch def
+/key exch def
+/procarray exch def
+/mtx exch matrix invertmatrix def
+/height exch def
+/width exch def
+/ctm matrix currentmatrix def
+/ptm matrix def
+/str 32 string def
+/slice 9 dict def
+slice /s 1 put
+slice /q 256 procarray length div sqrt floor cvi put
+slice /b 0 put
+/FontBBox [0 0 0 0] def
+/FontMatrix mtx matrix copy def
+/Encoding patternencoding def
+/FontType 3 def
+/BuildChar
+	{
+	exch
+ begin
+	/setstrokeadjust where {pop true setstrokeadjust} if
+	slice begin
+	dup q dup mul mod s idiv /i exch def
+	dup q dup mul mod s mod /j exch def
+	q dup mul idiv procarray exch get
+	/xl j width s div mul def
+	/xg j 1 add width s div mul def
+	/yl i height s div mul def
+	/yg i 1 add height s div mul def
+	uniform
+		{
+		1 1
+		}
+		{
+		width 0 dtransform
+		dup mul exch dup mul add sqrt dup 1 add exch div
+		0 height dtransform
+		dup mul exch dup mul add sqrt dup 1 add exch div
+		} ifelse
+	width 0 cache
+		{
+		xl 4 index mul yl 4 index mul xg 6 index mul yg 6 index mul
+		setcachedevice
+		}
+		{
+		setcharwidth
+		} ifelse
+	gsave
+	scale
+	newpath
+	xl yl moveto
+	xg yl lineto
+	xg yg lineto
+	xl yg lineto
+	closepath
+	clip
+	newpath
+ end
+ end
+	exec
+	grestore
+	} def
+key currentdict definefont
+end
+} def
+/patterncachesize
+{
+gsave
+newpath
+0 0 moveto
+width 0 lineto
+width height lineto
+0 height lineto
+closepath
+patternmatrix setmatrix
+pathbbox
+exch ceiling 4 -1 roll floor sub 3 1 roll
+ceiling exch floor sub
+mul 1 add
+grestore
+} def
+/patterncachelimit
+{
+cachestatus 7 1 roll 6 npop 8 mul
+} def
+/patternpath
+{
+exch dup begin setfont
+ctm setmatrix
+concat
+slice exch /b exch slice /q get dup mul mul put
+FontMatrix concat
+uniform
+	{
+	width 0 dtransform round width div exch round width div exch
+	0 height dtransform round height div exch height div exch
+	0 0 transform round exch round exch
+	ptm astore setmatrix
+	}
+	{
+	ptm currentmatrix pop
+	} ifelse
+{currentpoint} stopped not
+	{
+	2 npop
+	pathbbox
+	true
+	4 index 3 index eq
+	4 index 3 index eq
+	and
+		{
+		pop false
+			{
+			{2 npop}
+			{3 npop true}
+			{7 npop true}
+			{pop true}
+			pathforall
+			} stopped
+			{
+			5 npop true
+			} if
+		} if
+		{
+		height div ceiling height mul 4 1 roll
+		width div ceiling width mul 4 1 roll
+		height div floor height mul 4 1 roll
+		width div floor width mul 4 1 roll
+		2 index sub height div ceiling cvi exch
+		3 index sub width div ceiling cvi exch
+		4 2 roll moveto
+		FontMatrix mtx invertmatrix
+		dup dup 4 get exch 5 get rmoveto
+		ptm ptm concatmatrix pop
+		slice /s
+		patterncachesize patterncachelimit div ceiling sqrt ceiling cvi
+		dup slice /q get gt
+			{
+			pop slice /q get
+			} if
+		put
+		0 1 slice /s get dup mul 1 sub
+			{
+			slice /b get add
+			gsave
+			0 1 str length 1 sub
+				{
+				str exch 2 index put
+				} for
+			pop
+			dup
+				{
+				gsave
+				ptm setmatrix
+				1 index str length idiv {str show} repeat
+				1 index str length mod str exch 0 exch getinterval show
+				grestore
+				0 height rmoveto
+				} repeat
+			grestore
+			} for
+		2 npop
+		}
+		{
+		4 npop
+		} ifelse
+	} if
+end
+} def
+/patternclip
+{
+clip
+} def
+/patternstrokepath
+{
+strokepath
+} def
+/patternmatrix
+matrix def
+/patternfill
+{
+dup type /dicttype eq
+	{
+	Adobe_pattern_AI3 /patternmatrix get
+	} if
+gsave
+patternclip
+Adobe_pattern_AI3 /patternpath get exec
+grestore
+newpath
+} def
+/patternstroke
+{
+dup type /dicttype eq
+	{
+	Adobe_pattern_AI3 /patternmatrix get
+	} if
+gsave
+patternstrokepath
+true
+	{
+		{
+			{
+			newpath 
+			moveto
+			}
+			{
+			lineto
+			}
+			{
+			curveto
+			}
+			{
+			closepath
+			3 copy
+			Adobe_pattern_AI3 /patternfill get exec
+			} pathforall
+		3 npop
+		} stopped
+			{
+			5 npop
+			patternclip
+			Adobe_pattern_AI3 /patternfill get exec
+			} if
+	}
+	{
+	patternclip
+	Adobe_pattern_AI3 /patternfill get exec
+	} ifelse
+grestore
+newpath
+} def
+/patternashow
+{
+3 index type /dicttype eq
+	{
+	Adobe_pattern_AI3 /patternmatrix get 4 1 roll
+	} if
+	{
+	2 npop (0) exch
+	2 copy 0 exch put pop
+	gsave
+	false charpath currentpoint
+	6 index 6 index 6 index
+	Adobe_pattern_AI3 /patternfill get exec
+	grestore
+	newpath moveto
+	2 copy rmoveto
+	} exch cshow
+5 npop
+} def
+/patternawidthshow
+{
+6 index type /dicttype eq
+	{
+	Adobe_pattern_AI3 /patternmatrix get 7 1 roll
+	} if
+	{
+	2 npop (0) exch
+	2 copy 0 exch put 
+	gsave
+	_sp eq {5 index 5 index rmoveto} if
+	false charpath currentpoint
+	9 index 9 index 9 index
+	Adobe_pattern_AI3 /patternfill get exec
+	grestore
+	newpath moveto
+	2 copy rmoveto
+	} exch cshow
+8 npop
+} def
+/patternashowstroke
+{
+4 index type /dicttype eq
+	{
+	patternmatrix /patternmatrix get 5 1 roll
+	} if
+4 1 roll
+	{
+	2 npop (0) exch
+	2 copy 0 exch put pop
+	gsave
+	false charpath
+	currentpoint
+	4 index setmatrix
+	7 index 7 index 7 index
+	Adobe_pattern_AI3 /patternstroke get exec
+	grestore
+	newpath moveto
+	2 copy rmoveto
+	} exch cshow
+6 npop
+} def
+/patternawidthshowstroke
+{
+7 index type /dicttype eq
+	{
+	patternmatrix /patternmatrix get 8 1 roll
+	} if
+7 1 roll
+	{
+	2 npop (0) exch
+	2 copy 0 exch put
+	gsave
+	_sp eq {5 index 5 index rmoveto} if
+	false charpath currentpoint
+	7 index setmatrix
+	10 index 10 index 10 index
+	Adobe_pattern_AI3 /patternstroke get exec
+	grestore
+	newpath moveto
+	2 copy rmoveto
+	} exch cshow
+9 npop
+} def
+currentdict readonly pop end
+setpacking
+%%EndResource
+%%BeginResource: procset Adobe_Illustrator_AI3 1.1 0
+%%Title: (Adobe Illustrator (R) Version 3.0 Full Prolog)
+%%Version: 1.1 0
+%%CreationDate: (3/7/1994) ()
+%%Copyright: ((C) 1987-1996 Adobe Systems Incorporated All Rights Reserved)
+currentpacking true setpacking
+userdict /Adobe_Illustrator_AI3 71 dict dup begin put
+/initialize
+{
+userdict /Adobe_Illustrator_AI3_vars 67 dict dup begin put
+/_lp /none def
+/_pf {} def
+/_ps {} def
+/_psf {} def
+/_pss {} def
+/_pjsf {} def
+/_pjss {} def
+/_pola 0 def
+/_doClip 0 def
+/cf	currentflat def
+/_tm matrix def
+/_renderStart [/e0 /r0 /a0 /o0 /e1 /r1 /a1 /i0] def 
+/_renderEnd [null null null null /i1 /i1 /i1 /i1] def
+/_render -1 def
+/_rise 0 def
+/_ax 0 def
+/_ay 0 def
+/_cx 0 def
+/_cy 0 def
+/_leading [0 0] def
+/_ctm matrix def
+/_mtx matrix def
+/_sp 16#020 def
+/_hyphen (-) def
+/_fScl 0 def
+/_cnt 0 def
+/_hs 1 def
+/_nativeEncoding 0 def
+/_useNativeEncoding 0 def
+/_tempEncode 0 def
+/_pntr 0 def
+/_tDict 2 dict def
+/_wv 0 def
+/Tx {} def
+/Tj {} def
+/CRender {} def
+/_AI3_savepage {} def
+/_gf null def
+/_cf 4 array def
+/_if null def
+/_of false def
+/_fc {} def
+/_gs null def
+/_cs 4 array def
+/_is null def
+/_os false def
+/_sc {} def
+/_pd 1 dict def
+/_ed 15 dict def
+/_pm matrix def
+/_fm null def
+/_fd null def
+/_fdd null def
+/_sm null def
+/_sd null def
+/_sdd null def
+/_i null def
+Adobe_Illustrator_AI3 begin
+Adobe_Illustrator_AI3 dup /nc get begin
+	{
+	dup xcheck
+		{
+		bind
+		} if
+	pop pop
+	} forall
+end
+end
+end
+Adobe_Illustrator_AI3 begin
+Adobe_Illustrator_AI3_vars begin
+newpath
+} def
+/terminate
+{
+end
+end
+} def
+/_
+null def
+/ddef
+{
+Adobe_Illustrator_AI3_vars 3 1 roll put
+} def
+/xput
+{
+dup load dup length exch maxlength eq
+	{
+	dup dup load dup
+	length 2 mul dict copy def
+	} if
+load begin def end
+} def
+/npop
+{
+	{
+	pop
+	} repeat
+} def
+/sw
+{
+dup length exch stringwidth
+exch 5 -1 roll 3 index mul add
+4 1 roll 3 1 roll mul add
+} def
+/swj
+{
+dup 4 1 roll
+dup length exch stringwidth 
+exch 5 -1 roll 3 index mul add
+4 1 roll 3 1 roll mul add 
+6 2 roll /_cnt 0 ddef
+{1 index eq {/_cnt _cnt 1 add ddef} if} forall pop
+exch _cnt mul exch _cnt mul 2 index add 4 1 roll 2 index add 4 1 roll pop pop
+} def
+/ss
+{
+4 1 roll
+	{
+	2 npop 
+	(0) exch 2 copy 0 exch put pop
+	gsave
+	false charpath currentpoint
+	4 index setmatrix
+	stroke
+	grestore
+	moveto
+	2 copy rmoveto
+	} exch cshow
+3 npop
+} def
+/jss
+{
+4 1 roll
+	{
+	2 npop 
+	(0) exch 2 copy 0 exch put 
+	gsave
+	_sp eq 
+		{
+		exch 6 index 6 index 6 index 5 -1 roll widthshow  
+		currentpoint
+		}
+		{
+		false charpath currentpoint
+		4 index setmatrix stroke
+		}ifelse
+	grestore
+	moveto
+	2 copy rmoveto
+	} exch cshow
+6 npop
+} def
+/sp
+{
+	{
+	2 npop (0) exch
+	2 copy 0 exch put pop
+	false charpath
+	2 copy rmoveto
+	} exch cshow
+2 npop
+} def
+/jsp
+{
+	{
+	2 npop 
+	(0) exch 2 copy 0 exch put 
+	_sp eq 
+		{
+		exch 5 index 5 index 5 index 5 -1 roll widthshow  
+		}
+		{
+		false charpath
+		}ifelse
+	2 copy rmoveto
+	} exch cshow
+5 npop
+} def
+/pl
+{
+transform
+0.25 sub round 0.25 add exch
+0.25 sub round 0.25 add exch
+itransform
+} def
+/setstrokeadjust where
+	{
+	pop true setstrokeadjust
+	/c
+	{
+	curveto
+	} def
+	/C
+	/c load def
+	/v
+	{
+	currentpoint 6 2 roll curveto
+	} def
+	/V
+	/v load def
+	/y
+	{
+	2 copy curveto
+	} def
+	/Y
+	/y load def
+	/l
+	{
+	lineto
+	} def
+	/L
+	/l load def
+	/m
+	{
+	moveto
+	} def
+	}
+	{
+	/c
+	{
+	pl curveto
+	} def
+	/C
+	/c load def
+	/v
+	{
+	currentpoint 6 2 roll pl curveto
+	} def
+	/V
+	/v load def
+	/y
+	{
+	pl 2 copy curveto
+	} def
+	/Y
+	/y load def
+	/l
+	{
+	pl lineto
+	} def
+	/L
+	/l load def
+	/m
+	{
+	pl moveto
+	} def
+	} ifelse
+/d
+{
+setdash
+} def
+/cf	{} def
+/i
+{
+dup 0 eq
+	{
+	pop cf
+	} if
+setflat
+} def
+/j
+{
+setlinejoin
+} def
+/J
+{
+setlinecap
+} def
+/M
+{
+setmiterlimit
+} def
+/w
+{
+setlinewidth
+} def
+/H
+{} def
+/h
+{
+closepath
+} def
+/N
+{
+_pola 0 eq 
+	{
+	_doClip 1 eq {clip /_doClip 0 ddef} if 
+	newpath
+	} 
+	{
+	/CRender {N} ddef
+	}ifelse
+} def
+/n
+{N} def
+/F
+{
+_pola 0 eq 
+	{
+	_doClip 1 eq 
+		{
+		gsave _pf grestore clip newpath /_lp /none ddef _fc 
+		/_doClip 0 ddef
+		}
+		{
+		_pf
+		}ifelse
+	} 
+	{
+	/CRender {F} ddef
+	}ifelse
+} def
+/f
+{
+closepath
+F
+} def
+/S
+{
+_pola 0 eq 
+	{
+	_doClip 1 eq 
+		{
+		gsave _ps grestore clip newpath /_lp /none ddef _sc 
+		/_doClip 0 ddef
+		}
+		{
+		_ps
+		}ifelse
+	} 
+	{
+	/CRender {S} ddef
+	}ifelse
+} def
+/s
+{
+closepath
+S
+} def
+/B
+{
+_pola 0 eq 
+	{
+	_doClip 1 eq
+	gsave F grestore 
+		{
+		gsave S grestore clip newpath /_lp /none ddef _sc
+		/_doClip 0 ddef
+		} 
+		{
+		S
+		}ifelse
+	}
+	{
+	/CRender {B} ddef
+	}ifelse
+} def
+/b
+{
+closepath
+B
+} def
+/W
+{
+/_doClip 1 ddef
+} def
+/*
+{
+count 0 ne 
+	{
+	dup type (stringtype) eq {pop} if
+	} if 
+_pola 0 eq {newpath} if
+} def
+/u
+{} def
+/U
+{} def
+/q
+{
+_pola 0 eq {gsave} if
+} def
+/Q
+{
+_pola 0 eq {grestore} if
+} def
+/*u
+{
+_pola 1 add /_pola exch ddef
+} def
+/*U
+{
+_pola 1 sub /_pola exch ddef 
+_pola 0 eq {CRender} if
+} def
+/D
+{pop} def
+/*w
+{} def
+/*W
+{} def
+/`
+{
+/_i save ddef
+6 1 roll 4 npop
+concat pop
+userdict begin
+/showpage {} def
+0 setgray
+0 setlinecap
+1 setlinewidth
+0 setlinejoin
+10 setmiterlimit
+[] 0 setdash
+/setstrokeadjust where {pop false setstrokeadjust} if
+newpath
+0 setgray
+false setoverprint
+} def
+/~
+{
+end
+_i restore
+} def
+/@
+{} def
+/&
+{} def
+/O
+{
+0 ne
+/_of exch ddef
+/_lp /none ddef
+} def
+/R
+{
+0 ne
+/_os exch ddef
+/_lp /none ddef
+} def
+/g
+{
+/_gf exch ddef
+/_fc
+{
+_lp /fill ne
+	{
+	_of setoverprint
+	_gf setgray
+	/_lp /fill ddef
+	} if
+} ddef
+/_pf
+{
+_fc
+fill
+} ddef
+/_psf
+{
+_fc
+ashow
+} ddef
+/_pjsf
+{
+_fc
+awidthshow
+} ddef
+/_lp /none ddef
+} def
+/G
+{
+/_gs exch ddef
+/_sc
+{
+_lp /stroke ne
+	{
+	_os setoverprint
+	_gs setgray
+	/_lp /stroke ddef
+	} if
+} ddef
+/_ps
+{
+_sc
+stroke
+} ddef
+/_pss
+{
+_sc
+ss
+} ddef
+/_pjss
+{
+_sc
+jss
+} ddef
+/_lp /none ddef
+} def
+/k
+{
+_cf astore pop
+/_fc
+{
+_lp /fill ne
+	{
+	_of setoverprint
+	_cf aload pop setcmykcolor
+	/_lp /fill ddef
+	} if
+} ddef
+/_pf
+{
+_fc
+fill
+} ddef
+/_psf
+{
+_fc
+ashow
+} ddef
+/_pjsf
+{
+_fc
+awidthshow
+} ddef
+/_lp /none ddef
+} def
+/K
+{
+_cs astore pop
+/_sc
+{
+_lp /stroke ne
+	{
+	_os setoverprint
+	_cs aload pop setcmykcolor
+	/_lp /stroke ddef
+	} if
+} ddef
+/_ps
+{
+_sc
+stroke
+} ddef
+/_pss
+{
+_sc
+ss
+} ddef
+/_pjss
+{
+_sc
+jss
+} ddef
+/_lp /none ddef
+} def
+/x
+{
+/_gf exch ddef
+findcmykcustomcolor
+/_if exch ddef
+/_fc
+{
+_lp /fill ne
+	{
+	_of setoverprint
+	_if _gf 1 exch sub setcustomcolor
+	/_lp /fill ddef
+	} if
+} ddef
+/_pf
+{
+_fc
+fill
+} ddef
+/_psf
+{
+_fc
+ashow
+} ddef
+/_pjsf
+{
+_fc
+awidthshow
+} ddef
+/_lp /none ddef
+} def
+/X
+{
+/_gs exch ddef
+findcmykcustomcolor
+/_is exch ddef
+/_sc
+{
+_lp /stroke ne
+	{
+	_os setoverprint
+	_is _gs 1 exch sub setcustomcolor
+	/_lp /stroke ddef
+	} if
+} ddef
+/_ps
+{
+_sc
+stroke
+} ddef
+/_pss
+{
+_sc
+ss
+} ddef
+/_pjss
+{
+_sc
+jss
+} ddef
+/_lp /none ddef
+} def
+/dp
+{
+dup null eq
+{
+pop
+_dp 0 ne
+	{
+	0 1 _dp 1 sub _dl mod
+		{
+		_da exch get 3 get
+		} for
+	_dp 1 sub _dl mod 1 add packedarray
+	_da 0 get aload pop 8 -1 roll 5 -1 roll pop 4 1 roll
+	definepattern pop
+	} if
+}
+{
+_dp 0 ne _dp _dl mod 0 eq and
+	{
+	null dp
+	} if
+7 packedarray _da exch _dp _dl mod exch put
+_dp _dl mod _da 0 get 4 get 2 packedarray
+/_dp _dp 1 add def
+} ifelse
+} def
+/E
+{
+_ed begin
+dup 0 get type /arraytype ne
+	{
+	0
+		{
+		dup 1 add index type /arraytype eq
+			{
+			1 add
+			}
+			{
+			exit
+			} ifelse
+		} loop
+	array astore
+	} if
+/_dd exch def
+/_ury exch def
+/_urx exch def
+/_lly exch def
+/_llx exch def
+/_n exch def
+/_y 0 def
+/_dl 4 def
+/_dp 0 def
+/_da _dl array def
+0 1 _dd length 1 sub
+	{
+	/_d exch _dd exch get def
+	0 2 _d length 2 sub
+		{
+		/_x exch def
+		/_c _d _x get _ ne def
+		/_r _d _x 1 add get cvlit def
+		_r _ ne
+			{
+			_urx _llx sub _ury _lly sub [1 0 0 1 0 0] 
+				[
+				/save cvx
+				_llx neg _lly neg /translate cvx
+				_c
+					{
+					nc /begin cvx
+					} if
+				_r dup type /stringtype eq
+					{
+					cvx
+					}
+					{
+					{exec} /forall cvx
+					} ifelse
+				_c
+					{
+					/end cvx
+					} if
+				/restore cvx
+				] cvx
+			/_fn 12 _n length add string def
+			_y _fn cvs pop
+			/_y _y 1 add def
+			_fn 12 _n putinterval
+			_fn _c false dp
+			_d exch _x 1 add exch put
+			} if
+		} for
+	} for
+null dp
+_n _dd /_pd
+end xput
+} def
+/fc
+{
+_fm dup concatmatrix pop
+} def
+/p
+{
+/_fm exch ddef
+9 -2 roll _pm translate fc
+7 -2 roll _pm scale fc
+5 -1 roll _pm rotate fc
+4 -2 roll exch 0 ne
+	{
+	dup _pm rotate fc
+	1 -1 _pm scale fc
+	neg _pm rotate fc
+	}
+	{
+	pop
+	} ifelse
+dup _pm rotate fc
+exch dup sin exch cos div 1 0 0 1 0 6 2 roll
+_pm astore fc
+neg _pm rotate fc
+_pd exch get /_fdd exch ddef
+/_pf
+{
+save
+/_doClip 0 ddef
+0 1 _fdd length 1 sub
+	{
+	/_fd exch _fdd exch get ddef
+	_fd
+	0 2 _fd length 2 sub
+		{
+		gsave
+		2 copy get dup _ ne
+			{
+			cvx exec _fc
+			}
+			{
+			pop
+			} ifelse
+		2 copy 1 add get dup _ ne
+			{
+			aload pop findfont _fm
+			patternfill
+			}
+			{
+			pop
+			fill
+			} ifelse
+		grestore
+		pop
+		} for
+	pop
+	} for
+restore
+newpath
+} ddef
+/_psf
+{
+save
+/_doClip 0 ddef
+0 1 _fdd length 1 sub
+	{
+	/_fd exch _fdd exch get ddef
+	_fd
+	0 2 _fd length 2 sub
+		{
+		gsave
+		2 copy get dup _ ne
+			{
+			cvx exec _fc
+			}
+			{
+			pop
+			} ifelse
+		2 copy 1 add get dup _ ne
+			{
+			aload pop findfont _fm
+			9 copy 6 npop patternashow
+			}
+			{
+			pop
+			6 copy 3 npop ashow
+			} ifelse
+		grestore
+		pop
+		} for
+	pop
+	} for
+restore
+%3 npop newpath
+sw rmoveto
+} ddef
+/_pjsf
+{
+save
+/_doClip 0 ddef
+0 1 _fdd length 1 sub
+	{
+	/_fd exch _fdd exch get ddef
+	_fd
+	0 2 _fd length 2 sub
+		{
+		gsave
+		2 copy get dup _ ne
+			{
+			cvx exec _fc
+			}
+			{
+			pop
+			} ifelse
+		2 copy 1 add get dup _ ne
+			{
+			aload pop findfont _fm
+			12 copy 6 npop patternawidthshow
+			}
+			{
+			pop 9 copy 3 npop awidthshow
+			} ifelse
+		grestore
+		pop
+		} for
+	pop
+	} for
+restore
+swj rmoveto
+} ddef
+/_lp /none ddef
+} def
+/sc
+{
+_sm dup concatmatrix pop
+} def
+/P
+{
+/_sm exch ddef
+9 -2 roll _pm translate sc
+7 -2 roll _pm scale sc
+5 -1 roll _pm rotate sc
+4 -2 roll exch 0 ne
+	{
+	dup _pm rotate sc
+	1 -1 _pm scale sc
+	neg _pm rotate sc
+	}
+	{
+	pop
+	} ifelse
+dup _pm rotate sc
+exch dup sin exch cos div 1 0 0 1 0 6 2 roll
+_pm astore sc
+neg _pm rotate sc
+_pd exch get /_sdd exch ddef
+/_ps
+{
+save
+/_doClip 0 ddef
+0 1 _sdd length 1 sub
+	{
+	/_sd exch _sdd exch get ddef
+	_sd
+	0 2 _sd length 2 sub
+		{
+		gsave
+		2 copy get dup _ ne
+			{
+			cvx exec _sc
+			}
+			{
+			pop
+			} ifelse
+		2 copy 1 add get dup _ ne
+			{
+			aload pop findfont _sm
+			patternstroke
+			}
+			{
+			pop stroke
+			} ifelse
+		grestore
+		pop
+		} for
+	pop
+	} for
+restore
+newpath
+} ddef
+/_pss
+{
+save
+/_doClip 0 ddef
+0 1 _sdd length 1 sub
+	{
+	/_sd exch _sdd exch get ddef
+	_sd
+	0 2 _sd length 2 sub
+		{
+		gsave
+		2 copy get dup _ ne
+			{
+			cvx exec _sc
+			}
+			{
+			pop
+			} ifelse
+		2 copy 1 add get dup _ ne
+			{
+			aload pop findfont _sm
+			10 copy 6 npop patternashowstroke
+			}
+			{
+			pop 7 copy 3 npop ss
+			} ifelse
+		grestore
+		pop
+		} for
+	pop
+	} for
+restore
+pop sw rmoveto
+} ddef
+/_pjss
+{
+save
+/_doClip 0 ddef
+0 1 _sdd length 1 sub
+	{
+	/_sd exch _sdd exch get ddef
+	_sd
+	0 2 _sd length 2 sub
+		{
+		gsave
+		2 copy get dup _ ne
+			{
+			cvx exec _sc
+			}
+			{
+			pop
+			} ifelse
+		2 copy 1 add get dup _ ne
+			{
+			aload pop findfont _sm
+			13 copy 6 npop patternawidthshowstroke
+			}
+			{
+			pop 10 copy 3 npop jss
+			} ifelse
+		grestore
+		pop
+		} for
+	pop
+	} for
+restore
+pop swj rmoveto
+} ddef
+/_lp /none ddef
+} def
+/A
+{
+pop
+} def
+/nc 3 dict def
+nc begin
+/setgray
+{
+pop
+} bind def
+/setcmykcolor
+{
+4 npop
+} bind def
+/setcustomcolor
+{
+2 npop
+} bind def
+currentdict readonly pop end
+currentdict readonly pop end
+setpacking
+/annotatepage
+{
+} def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeFont: Helvetica
+%%IncludeFont: Helvetica-Oblique
+Adobe_cshow /initialize get exec
+Adobe_customcolor /initialize get exec
+Adobe_typography_AI3 /initialize get exec
+Adobe_pattern_AI3 /initialize get exec
+Adobe_Illustrator_AI3 /initialize get exec
+[
+39/quotesingle 96/grave 130/quotesinglbase/florin/quotedblbase/ellipsis
+/dagger/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE 145/quoteleft
+/quoteright/quotedblleft/quotedblright/bullet/endash/emdash/tilde/trademark
+/scaron/guilsinglright/oe/dotlessi 159/Ydieresis /space 164/currency 166/brokenbar
+168/dieresis/copyright/ordfeminine 172/logicalnot/hyphen/registered/macron/ring
+/plusminus/twosuperior/threesuperior/acute/mu 183/periodcentered/cedilla
+/onesuperior/ordmasculine 188/onequarter/onehalf/threequarters 192/Agrave
+/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute
+/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex/Idieresis/Eth/Ntilde
+/Ograve/Oacute/Ocircumflex/Otilde/Odieresis/multiply/Oslash/Ugrave
+/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave/aacute
+/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute/ecircumflex
+/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve/oacute
+/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis
+TE
+%AI3_BeginEncoding: _Helvetica Helvetica
+[/_Helvetica/Helvetica 0 0 1 TZ%AI3_EndEncoding AdobeType
+%AI3_BeginEncoding: _Helvetica-Oblique Helvetica-Oblique
+[/_Helvetica-Oblique/Helvetica-Oblique 0 0 1 TZ%AI3_EndEncoding AdobeType
+%AI3_BeginPattern: (Azure Rings)
+(Azure Rings) 22.5 22.5 58.5 58.5 [
+%AI3_Tile
+(0 O 0 R 0.9569 0.9294 0 0 k
+ 0.9569 0.9294 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1.75 w 4 M []0 d40.5 58.5 m
+40.5 48.5586 32.4409 40.5 22.5 40.5 c
+12.5591 40.5 4.5 48.5586 4.5 58.5 c
+4.5 68.4414 12.5591 76.5 22.5 76.5 c
+32.4409 76.5 40.5 68.4414 40.5 58.5 c
+s40.5 22.5 m
+40.5 12.5586 32.4409 4.5 22.5 4.5 c
+12.5591 4.5 4.5 12.5586 4.5 22.5 c
+4.5 32.4414 12.5591 40.5 22.5 40.5 c
+32.4409 40.5 40.5 32.4414 40.5 22.5 c
+s40.5 40.5 m
+40.5 30.5586 32.4409 22.5 22.5 22.5 c
+12.5591 22.5 4.5 30.5586 4.5 40.5 c
+4.5 50.4414 12.5591 58.5 22.5 58.5 c
+32.4409 58.5 40.5 50.4414 40.5 40.5 c
+s58.5 58.5 m
+58.5 48.5586 50.4409 40.5 40.5 40.5 c
+30.5591 40.5 22.5 48.5586 22.5 58.5 c
+22.5 68.4414 30.5591 76.5 40.5 76.5 c
+50.4409 76.5 58.5 68.4414 58.5 58.5 c
+s58.5 22.5 m
+58.5 12.5586 50.4409 4.5 40.5 4.5 c
+30.5591 4.5 22.5 12.5586 22.5 22.5 c
+22.5 32.4414 30.5591 40.5 40.5 40.5 c
+50.4409 40.5 58.5 32.4414 58.5 22.5 c
+s58.5 40.5 m
+58.5 30.5586 50.4409 22.5 40.5 22.5 c
+30.5591 22.5 22.5 30.5586 22.5 40.5 c
+22.5 50.4414 30.5591 58.5 40.5 58.5 c
+50.4409 58.5 58.5 50.4414 58.5 40.5 c
+s76.5 58.5 m
+76.5 48.5586 68.4409 40.5 58.5 40.5 c
+48.5591 40.5 40.5 48.5586 40.5 58.5 c
+40.5 68.4414 48.5591 76.5 58.5 76.5 c
+68.4409 76.5 76.5 68.4414 76.5 58.5 c
+s76.5 22.5 m
+76.5 12.5586 68.4409 4.5 58.5 4.5 c
+48.5591 4.5 40.5 12.5586 40.5 22.5 c
+40.5 32.4414 48.5591 40.5 58.5 40.5 c
+68.4409 40.5 76.5 32.4414 76.5 22.5 c
+s76.5 40.5 m
+76.5 30.5586 68.4409 22.5 58.5 22.5 c
+48.5591 22.5 40.5 30.5586 40.5 40.5 c
+40.5 50.4414 48.5591 58.5 58.5 58.5 c
+68.4409 58.5 76.5 50.4414 76.5 40.5 c
+s%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%AI3_BeginPattern: (Camouflage)
+(Camouflage) 1 1 73 73 [
+%AI3_Tile
+(0 O 0 R 0.6039 0.1412 0.9333 0.0275 k
+ 0.6039 0.1412 0.9333 0.0275 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d1 73 m
+1 1 L
+73 1 L
+73 73 L
+1 73 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.4941 0.3529 0.9451 0.2 k
+ 0.4941 0.3529 0.9451 0.2 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d18.5449 73 m
+18.5449 1 L
+46.7832 1 L
+46.7832 73 L
+18.5449 73 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.1882 0.1098 0.898 0.0157 k
+ 0.1882 0.1098 0.898 0.0157 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d11.9512 1 m
+11.9512 4.7129 9.2314 2.8813 9.2314 6.5938 c
+9.2314 10.2334 4.25 10.2334 4.25 13.8735 c
+4.25 17.4858 10.0313 17.4858 10.0313 21.0991 c
+10.0313 24.832 10.208 24.832 10.208 28.5654 c
+10.208 32.3071 5.5205 32.3071 5.5205 36.0469 c
+5.5205 39.7021 11.8838 39.7021 11.8838 43.356 c
+11.8838 47.0566 7.4609 47.0566 7.4609 50.7568 c
+7.4609 54.4043 5.7959 54.4043 5.7959 58.0542 c
+5.7959 61.7686 4.6631 61.7686 4.6631 65.4805 c
+4.6631 69.1636 11.9512 69.3184 11.9512 73 C
+27.9268 73 L
+27.9268 69.3184 22.0635 69.1636 22.0635 65.4805 c
+22.0635 61.7686 28.6631 61.7686 28.6631 58.0542 c
+28.6631 54.4043 25.1553 54.4043 25.1553 50.7568 c
+25.1553 47.0566 28.8145 47.0566 28.8145 43.356 c
+28.8145 39.7021 22.1191 39.7021 22.1191 36.0469 c
+22.1191 32.3071 26.3945 32.3071 26.3945 28.5654 c
+26.3945 24.832 24.4248 24.832 24.4248 21.0991 c
+24.4248 17.4858 20.3838 17.4858 20.3838 13.8735 c
+20.3838 10.2334 24.6055 10.2334 24.6055 6.5938 c
+24.6055 2.8813 27.9268 4.7129 27.9268 1 C
+11.9512 1 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9216 0.2157 0.9294 0.0745 k
+ 0.9216 0.2157 0.9294 0.0745 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d41.875 1 m
+41.875 4.7134 42.3867 2.8818 42.3867 6.5938 c
+42.3867 10.2334 40.5947 10.2334 40.5947 13.8735 c
+40.5947 17.4858 41.5742 17.4858 41.5742 21.0991 c
+41.5742 24.832 43.6484 24.832 43.6484 28.5659 c
+43.6484 32.3076 39.1709 32.3076 39.1709 36.0469 c
+39.1709 39.7026 39.7549 39.7026 39.7549 43.356 c
+39.7549 47.0566 45.3896 47.0566 45.3896 50.7568 c
+45.3896 54.4043 40.1055 54.4043 40.1055 58.0542 c
+40.1055 61.7686 40.6289 61.7686 40.6289 65.4805 c
+40.6289 69.1636 41.875 69.3184 41.875 73 C
+59.0752 73 L
+59.0752 69.4219 53.4805 70.1934 53.4805 66.6143 c
+53.4805 62.9136 55.8945 62.9136 55.8945 59.2153 c
+55.8945 55.502 61.0059 55.502 61.0059 51.7886 c
+61.0059 48.1489 60.5635 48.1489 60.5635 44.5103 c
+60.5635 40.897 59.9277 40.897 59.9277 37.2842 c
+59.9277 33.5508 56.3662 33.5508 56.3662 29.8169 c
+56.3662 26.0762 61.0908 26.0762 61.0908 22.3354 c
+61.0908 18.6812 52.6025 18.6812 52.6025 15.0264 c
+52.6025 11.3262 55.7461 11.3262 55.7461 7.6265 c
+55.7461 3.978 59.0752 4.6484 59.0752 1 C
+41.875 1 L
+f%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%AI3_BeginPattern: (Honeycomb)
+(Honeycomb) 12.9819 14.6548 65.8066 60.6758 [
+%AI3_Tile
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d52.3345 28.1372 m
+40.6475 21.3906 L
+40.6475 7.9009 L
+52.3345 1.1543 L
+64.0161 7.9009 L
+64.0161 21.3906 L
+52.3345 28.1372 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d43.9536 19.4839 m
+43.9536 9.8081 L
+52.3345 4.9702 L
+60.7153 9.8081 L
+60.7153 19.4839 L
+52.3345 24.3218 L
+43.9536 19.4839 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d25.7944 28.1406 m
+14.1099 21.3911 L
+14.1099 7.9014 L
+25.7944 1.1548 L
+37.479 7.9014 L
+37.479 21.394 L
+25.7944 28.1406 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d17.4126 19.4839 m
+17.4126 9.8081 L
+25.7944 4.9702 L
+34.1743 9.8081 L
+34.1743 19.4839 L
+25.7944 24.3218 L
+17.4126 19.4839 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d12.6846 50.7852 m
+1 44.0356 L
+1 30.5459 L
+12.6846 23.7993 L
+24.3691 30.5459 L
+24.3691 44.0386 L
+12.6846 50.7852 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d4.3027 42.1284 m
+4.3027 32.4526 L
+12.6846 27.6147 L
+21.0645 32.4526 L
+21.0645 42.1284 L
+12.6846 46.9663 L
+4.3027 42.1284 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d65.603 51.1226 m
+53.9185 44.3765 L
+53.9185 30.8843 L
+65.603 24.1382 L
+77.2871 30.8843 L
+77.2871 44.3774 L
+65.603 51.1226 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d57.2202 42.4692 m
+57.2202 32.7915 L
+65.603 27.9536 L
+73.9819 32.7915 L
+73.9819 42.4692 L
+65.603 47.3081 L
+57.2202 42.4692 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d39.0649 51.1235 m
+27.3774 44.3765 L
+27.3774 30.8843 L
+39.0649 24.1382 L
+50.7471 30.8843 L
+50.7471 44.3774 L
+39.0649 51.1235 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d30.6821 42.4692 m
+30.6821 32.7915 L
+39.0649 27.9517 L
+47.4438 32.7915 L
+47.4438 42.4702 L
+39.0649 47.3091 L
+30.6821 42.4692 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d25.7944 74.1074 m
+14.1099 67.3599 L
+14.1099 53.8682 L
+25.7944 47.1221 L
+37.479 53.8682 L
+37.479 67.3599 L
+25.7944 74.1074 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d17.4126 65.4526 m
+17.4126 55.7749 L
+25.7944 50.937 L
+34.1743 55.7749 L
+34.1772 65.4526 L
+25.7944 70.2905 L
+17.4126 65.4526 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3686 0.949 0.9137 0.3451 k
+ 0.3686 0.949 0.9137 0.3451 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 2 w 4 M []0 d52.3345 74.1074 m
+40.6475 67.3599 L
+40.6475 53.8682 L
+52.3345 47.1221 L
+64.0161 53.8682 L
+64.0161 67.3599 L
+52.3345 74.1074 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.0235 0.6941 0.9137 0 k
+ 0.0235 0.6941 0.9137 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.5 w 4 M []0 d43.9536 65.4526 m
+43.9536 55.7749 L
+52.3345 50.937 L
+60.7153 55.7749 L
+60.7153 65.4526 L
+52.3345 70.2905 L
+43.9536 65.4526 L
+s%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%AI3_BeginPattern: (Jungle Stripes)
+(Jungle Stripes) 37 19 73 55 [
+%AI3_Tile
+(0 O 0 R 0.9255 0.0745 0.9373 0.0118 k
+ 0.9255 0.0745 0.9373 0.0118 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 18 w 4 M []0 d37 37 m
+73 37 l
+S%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.3451 0.0118 0.6863 0 k
+ 0.3451 0.0118 0.6863 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 9 w 4 M []0 d37 37 m
+73 37 l
+S%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%AI3_BeginPattern: (Mediterranean Tiles)
+(Mediterranean Tiles) 4.9482 11.5332 39.291 45.8818 [
+%AI3_Tile
+(0 O 0 R 0 0 0 0 k
+ 0 0 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d0.1499 40.748 m
+10.0083 40.749 L
+16.9673 33.79 L
+16.9702 23.9297 L
+10.0093 16.9697 L
+0.1509 16.9688 L
+0.1499 40.748 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9569 0.9294 0 0 k
+ 0.9569 0.9294 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d0.1499 40.748 m
+10.0083 40.749 L
+16.9673 33.79 L
+16.9702 23.9297 L
+10.0093 16.9697 L
+0.1509 16.9688 L
+0.1499 40.748 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0 0 0 0 k
+ 0 0 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d16.9712 0.1504 m
+10.0122 7.1094 L
+10.0093 16.9697 L
+16.9702 23.9297 L
+26.8296 23.9307 L
+33.7915 16.9727 L
+33.7915 7.1123 L
+26.8335 0.1514 L
+16.9712 0.1504 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9569 0.9294 0 0 k
+ 0.9569 0.9294 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d16.9712 0.1504 m
+10.0122 7.1094 L
+10.0093 16.9697 L
+16.9702 23.9297 L
+26.8296 23.9307 L
+33.7915 16.9727 L
+33.7915 7.1123 L
+26.8335 0.1514 L
+16.9712 0.1504 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0 0 0 0 k
+ 0 0 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d16.9673 33.79 m
+10.0083 40.749 L
+10.0054 50.6084 L
+16.9663 57.5693 L
+26.8257 57.5703 L
+33.7876 50.6113 L
+33.7876 40.752 L
+26.8296 33.791 L
+16.9673 33.79 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9569 0.9294 0 0 k
+ 0.9569 0.9294 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d16.9673 33.79 m
+10.0083 40.749 L
+10.0054 50.6084 L
+16.9663 57.5693 L
+26.8257 57.5703 L
+33.7876 50.6113 L
+33.7876 40.752 L
+26.8296 33.791 L
+16.9673 33.79 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0 0 0 0 k
+ 0 0 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d33.7915 16.9727 m
+26.8296 23.9307 L
+26.8296 33.791 L
+33.7876 40.752 L
+43.6475 40.7529 L
+50.6094 33.7939 L
+50.6094 23.9336 L
+43.6494 16.9736 L
+33.7915 16.9727 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9569 0.9294 0 0 k
+ 0.9569 0.9294 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 0.3 w 4 M []0 d33.7915 16.9727 m
+26.8296 23.9307 L
+26.8296 33.791 L
+33.7876 40.752 L
+43.6475 40.7529 L
+50.6094 33.7939 L
+50.6094 23.9336 L
+43.6494 16.9736 L
+33.7915 16.9727 L
+s%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9569 0.8275 0 0 k
+ 0.9569 0.8275 0 0 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d43.6514 7.1123 m
+43.6514 16.9727 L
+33.7915 16.9727 L
+33.7915 7.1123 L
+43.6514 7.1123 L
+f26.8296 23.9307 m
+26.8296 33.791 L
+16.9702 33.791 L
+16.9702 23.9307 L
+26.8296 23.9307 L
+f10.0093 7.1094 m
+10.0093 16.9697 L
+0.1538 16.9697 L
+0.1538 7.1094 L
+10.0093 7.1094 L
+f43.6494 40.752 m
+43.6494 50.6113 L
+33.7876 50.6113 L
+33.7876 40.752 L
+43.6494 40.752 L
+f10.0083 40.749 m
+10.0083 50.6084 L
+0.1499 50.6084 L
+0.1499 40.749 L
+10.0083 40.749 L
+f%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%AI3_BeginPattern: (Pyramids)
+(Pyramids) 1 1 19.5 19.5 [
+%AI3_Tile
+(0 O 0 R 0.1882 0.1294 0.102 0.0118 k
+ 0.1882 0.1294 0.102 0.0118 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d1 19.5 m
+10.25 10.25 l
+19.5 19.5 l
+1 19.5 l
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.6235 0.4863 0.4863 0.4784 k
+ 0.6235 0.4863 0.4863 0.4784 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d19.5 1 m
+10.25 10.25 l
+1 1 l
+19.5 1 l
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.349 0.2549 0.2235 0.0667 k
+ 0.349 0.2549 0.2235 0.0667 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d1 1 m
+10.25 10.25 l
+1 19.5 l
+1 1 l
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.4902 0.3647 0.3451 0.2196 k
+ 0.4902 0.3647 0.3451 0.2196 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d19.5 19.5 m
+10.25 10.25 l
+19.5 1 l
+19.5 19.5 l
+f%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%AI3_BeginPattern: (Unnamed Pattern 2)
+(Unnamed Pattern 2) 1 1 73 73 [
+%AI3_Tile
+(0 O 0 R 0.6 0.1412 0.9373 0.0275 k
+ 0.6 0.1412 0.9373 0.0275 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d1 73 m
+1 1 L
+73 1 L
+73 73 L
+1 73 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.4941 0.3529 0.9529 0.2 k
+ 0.4941 0.3529 0.9529 0.2 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d18.5449 73 m
+18.5449 1 L
+46.7832 1 L
+46.7832 73 L
+18.5449 73 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.1882 0.1098 0.9059 0.0157 k
+ 0.1882 0.1098 0.9059 0.0157 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d11.9512 1 m
+11.9512 4.7129 9.2314 2.8813 9.2314 6.5938 c
+9.2314 10.2334 4.25 10.2334 4.25 13.8735 c
+4.25 17.4858 10.0313 17.4858 10.0313 21.0991 c
+10.0313 24.832 10.208 24.832 10.208 28.5654 c
+10.208 32.3071 5.5205 32.3071 5.5205 36.0469 c
+5.5205 39.7021 11.8838 39.7021 11.8838 43.356 c
+11.8838 47.0566 7.4609 47.0566 7.4609 50.7568 c
+7.4609 54.4043 5.7959 54.4043 5.7959 58.0542 c
+5.7959 61.7686 4.6631 61.7686 4.6631 65.4805 c
+4.6631 69.1636 11.9512 69.3184 11.9512 73 C
+27.9268 73 L
+27.9268 69.3184 22.0635 69.1636 22.0635 65.4805 c
+22.0635 61.7686 28.6631 61.7686 28.6631 58.0542 c
+28.6631 54.4043 25.1553 54.4043 25.1553 50.7568 c
+25.1553 47.0566 28.8145 47.0566 28.8145 43.356 c
+28.8145 39.7021 22.1191 39.7021 22.1191 36.0469 c
+22.1191 32.3071 26.3945 32.3071 26.3945 28.5654 c
+26.3945 24.832 24.4248 24.832 24.4248 21.0991 c
+24.4248 17.4858 20.3838 17.4858 20.3838 13.8735 c
+20.3838 10.2334 24.6055 10.2334 24.6055 6.5938 c
+24.6055 2.8813 27.9268 4.7129 27.9268 1 C
+11.9512 1 L
+f%AI6_EndPatternLayer
+) &
+(0 O 0 R 0.9216 0.2157 0.9451 0.0745 k
+ 0.9216 0.2157 0.9451 0.0745 K
+) @
+(
+%AI6_BeginPatternLayer
+0 J 0 j 1 w 4 M []0 d41.875 1 m
+41.875 4.7134 42.3867 2.8818 42.3867 6.5938 c
+42.3867 10.2334 40.5947 10.2334 40.5947 13.8735 c
+40.5947 17.4858 41.5742 17.4858 41.5742 21.0991 c
+41.5742 24.832 43.6484 24.832 43.6484 28.5659 c
+43.6484 32.3076 39.1709 32.3076 39.1709 36.0469 c
+39.1709 39.7026 39.7549 39.7026 39.7549 43.356 c
+39.7549 47.0566 45.3896 47.0566 45.3896 50.7568 c
+45.3896 54.4043 40.1055 54.4043 40.1055 58.0542 c
+40.1055 61.7686 40.6289 61.7686 40.6289 65.4805 c
+40.6289 69.1636 41.875 69.3184 41.875 73 C
+59.0752 73 L
+59.0752 69.4219 53.4805 70.1934 53.4805 66.6143 c
+53.4805 62.9136 55.8945 62.9136 55.8945 59.2153 c
+55.8945 55.502 61.0059 55.502 61.0059 51.7886 c
+61.0059 48.1489 60.5635 48.1489 60.5635 44.5103 c
+60.5635 40.897 59.9277 40.897 59.9277 37.2842 c
+59.9277 33.5508 56.3662 33.5508 56.3662 29.8169 c
+56.3662 26.0762 61.0908 26.0762 61.0908 22.3354 c
+61.0908 18.6812 52.6025 18.6812 52.6025 15.0264 c
+52.6025 11.3262 55.7461 11.3262 55.7461 7.6265 c
+55.7461 3.978 59.0752 4.6484 59.0752 1 C
+41.875 1 L
+f%AI6_EndPatternLayer
+) &
+] E
+%AI3_EndPattern
+%%EndSetup
+0 A
+0 O
+0 g
+0 J 0 j 1 w 4 M []0 d406.5 449.3799 m
+415.7402 449.3799 L
+415.7402 449.8604 L
+406.5 449.8604 L
+406.5 449.3799 L
+f415.2598 449.6201 m
+415.2598 454.7803 L
+424.7402 445.2998 L
+424.9805 445.1797 L
+415.2598 435.46 L
+415.2598 436.1797 L
+424.3799 445.2998 L
+424.7402 444.9404 L
+424.3799 444.9404 L
+415.3799 453.9404 L
+415.7402 454.2998 L
+415.7402 449.6201 L
+F415.2598 436.1797 m
+415.7402 436.1797 L
+415.7402 440.8604 L
+415.2598 440.8604 L
+415.2598 436.1797 L
+f406.2598 440.3799 m
+415.5 440.3799 L
+415.5 440.8604 L
+406.2598 440.8604 L
+406.2598 440.3799 L
+f406.2598 440.6201 m
+406.7402 440.6201 L
+406.7402 449.8604 L
+406.2598 449.8604 L
+406.2598 440.6201 L
+f406.5 345.9404 m
+415.7402 345.9404 L
+415.7402 346.4199 L
+406.5 346.4199 L
+406.5 345.9404 L
+f415.2598 346.1797 m
+415.2598 351.2197 L
+424.7402 341.7402 L
+424.9805 341.6201 L
+415.2598 331.9004 L
+415.2598 332.6201 L
+424.3799 341.7402 L
+424.7402 341.3799 L
+424.3799 341.3799 L
+415.3799 350.3799 L
+415.7402 350.7402 L
+415.7402 346.1797 L
+F415.2598 332.6201 m
+415.7402 332.6201 L
+415.7402 337.4199 L
+415.2598 337.4199 L
+415.2598 332.6201 L
+f406.2598 336.9404 m
+415.5 336.9404 L
+415.5 337.4199 L
+406.2598 337.4199 L
+406.2598 336.9404 L
+f406.2598 337.1797 m
+406.7402 337.1797 L
+406.7402 346.4199 L
+406.2598 346.4199 L
+406.2598 337.1797 L
+f415.2598 377.3799 m
+424.5 377.3799 L
+424.5 377.8604 L
+415.2598 377.8604 L
+415.2598 377.3799 L
+f415.2598 377.6201 m
+415.2598 382.1797 L
+415.3799 382.2998 L
+415.7402 381.9404 L
+406.7402 372.9404 L
+406.3799 372.9404 L
+406.7402 373.2998 L
+415.7402 364.2998 L
+415.7402 363.5801 L
+406.1396 373.1797 L
+406.3799 373.2998 L
+415.7402 382.6602 L
+415.7402 377.6201 L
+F415.2598 364.1797 m
+415.7402 364.1797 L
+415.7402 368.8604 L
+415.2598 368.8604 L
+415.2598 364.1797 L
+f415.5 368.3799 m
+424.7402 368.3799 L
+424.7402 368.8604 L
+415.5 368.8604 L
+415.5 368.3799 L
+f424.2598 368.6201 m
+424.7402 368.6201 L
+424.7402 377.8604 L
+424.2598 377.8604 L
+424.2598 368.6201 L
+f311.9404 363.9404 m
+321.1797 363.9404 L
+321.1797 364.4199 L
+311.9404 364.4199 L
+311.9404 363.9404 L
+f320.7002 364.1797 m
+320.7002 369.2197 L
+330.1797 359.7402 L
+330.4199 359.6201 L
+320.7002 349.9004 L
+320.7002 350.6201 L
+329.8203 359.7402 L
+330.1797 359.3799 L
+329.8203 359.3799 L
+320.8203 368.3799 L
+321.1797 368.7402 L
+321.1797 364.1797 L
+F320.7002 350.6201 m
+321.1797 350.6201 L
+321.1797 355.4199 L
+320.7002 355.4199 L
+320.7002 350.6201 L
+f311.7002 354.9404 m
+320.9404 354.9404 L
+320.9404 355.4199 L
+311.7002 355.4199 L
+311.7002 354.9404 L
+f311.7002 355.1797 m
+312.1797 355.1797 L
+312.1797 364.4199 L
+311.7002 364.4199 L
+311.7002 355.1797 L
+f311.9404 449.3799 m
+321.1797 449.3799 L
+321.1797 449.8604 L
+311.9404 449.8604 L
+311.9404 449.3799 L
+f320.7002 449.6201 m
+320.7002 454.7803 L
+330.1797 445.2998 L
+330.4199 445.1797 L
+320.7002 435.46 L
+320.7002 436.1797 L
+329.8203 445.2998 L
+330.1797 444.9404 L
+329.8203 444.9404 L
+320.8203 453.9404 L
+321.1797 454.2998 L
+321.1797 449.6201 L
+F320.7002 436.1797 m
+321.1797 436.1797 L
+321.1797 440.8604 L
+320.7002 440.8604 L
+320.7002 436.1797 L
+f311.7002 440.3799 m
+320.9404 440.3799 L
+320.9404 440.8604 L
+311.7002 440.8604 L
+311.7002 440.3799 L
+f311.7002 440.6201 m
+312.1797 440.6201 L
+312.1797 449.8604 L
+311.7002 449.8604 L
+311.7002 440.6201 L
+f239.9399 363.9404 m
+249.1797 363.9404 L
+249.1797 364.4199 L
+239.9399 364.4199 L
+239.9399 363.9404 L
+f248.7002 364.1797 m
+248.7002 369.2197 L
+258.1797 359.7402 L
+258.4199 359.6201 L
+248.7002 349.9004 L
+248.7002 350.6201 L
+257.8203 359.7402 L
+258.1797 359.3799 L
+257.8203 359.3799 L
+248.8198 368.3799 L
+249.1797 368.7402 L
+249.1797 364.1797 L
+F248.7002 350.6201 m
+249.1797 350.6201 L
+249.1797 355.4199 L
+248.7002 355.4199 L
+248.7002 350.6201 L
+f239.7002 354.9404 m
+248.9399 354.9404 L
+248.9399 355.4199 L
+239.7002 355.4199 L
+239.7002 354.9404 L
+f239.7002 355.1797 m
+240.1802 355.1797 L
+240.1802 364.4199 L
+239.7002 364.4199 L
+239.7002 355.1797 L
+f172.3799 363.9404 m
+181.6201 363.9404 L
+181.6201 364.4199 L
+172.3799 364.4199 L
+172.3799 363.9404 L
+f181.1401 364.1797 m
+181.1401 369.2197 L
+190.6201 359.7402 L
+190.8599 359.6201 L
+181.1401 349.9004 L
+181.1401 350.6201 L
+190.2598 359.7402 L
+190.6201 359.3799 L
+190.2598 359.3799 L
+181.2598 368.3799 L
+181.6201 368.7402 L
+181.6201 364.1797 L
+F181.1401 350.6201 m
+181.6201 350.6201 L
+181.6201 355.4199 L
+181.1401 355.4199 L
+181.1401 350.6201 L
+f172.1401 354.9404 m
+181.3799 354.9404 L
+181.3799 355.4199 L
+172.1401 355.4199 L
+172.1401 354.9404 L
+f172.1401 355.1797 m
+172.6201 355.1797 L
+172.6201 364.4199 L
+172.1401 364.4199 L
+172.1401 355.1797 L
+f181.1401 449.3799 m
+190.3799 449.3799 L
+190.3799 449.8604 L
+181.1401 449.8604 L
+181.1401 449.3799 L
+f181.1401 449.6201 m
+181.1401 454.1797 L
+181.2598 454.2998 L
+181.6201 453.9404 L
+172.6201 444.9404 L
+172.2598 444.9404 L
+172.6201 445.2998 L
+181.6201 436.2998 L
+181.6201 435.5801 L
+172.1401 445.0596 L
+172.2598 445.2998 L
+181.6201 454.6602 L
+181.6201 449.6201 L
+F181.1401 436.1797 m
+181.6201 436.1797 L
+181.6201 440.8604 L
+181.1401 440.8604 L
+181.1401 436.1797 L
+f181.3799 440.3799 m
+190.6201 440.3799 L
+190.6201 440.8604 L
+181.3799 440.8604 L
+181.3799 440.3799 L
+f190.1401 440.6201 m
+190.6201 440.6201 L
+190.6201 449.8604 L
+190.1401 449.8604 L
+190.1401 440.6201 L
+f248.7002 476.3799 m
+329.9404 476.3799 L
+329.9404 476.8604 L
+248.7002 476.8604 L
+248.7002 476.3799 L
+f248.7002 476.6201 m
+248.7002 481.1797 L
+248.8198 481.2998 L
+249.1797 480.9404 L
+240.1802 471.9404 L
+239.8198 471.9404 L
+240.1802 472.2998 L
+249.1797 463.2998 L
+249.1797 462.5801 L
+239.7002 472.0596 L
+239.8198 472.2998 L
+249.1797 481.6602 L
+249.1797 476.6201 L
+F248.7002 463.1797 m
+249.1797 463.1797 L
+249.1797 467.8604 L
+248.7002 467.8604 L
+248.7002 463.1797 L
+f248.9399 467.3799 m
+330.1797 467.3799 L
+330.1797 467.8604 L
+248.9399 467.8604 L
+248.9399 467.3799 L
+f329.7002 467.6201 m
+330.1797 467.6201 L
+330.1797 476.8604 L
+329.7002 476.8604 L
+329.7002 467.6201 L
+f109.3799 467.3799 m
+136.6201 467.3799 L
+136.6201 467.8604 L
+109.3799 467.8604 L
+109.3799 467.3799 L
+f136.1401 467.6201 m
+136.1401 472.7803 L
+145.6201 463.2998 L
+145.8599 463.1797 L
+136.1401 453.46 L
+136.1401 454.1797 L
+145.2598 463.2998 L
+145.6201 462.9404 L
+145.2598 462.9404 L
+136.2598 471.9404 L
+136.6201 472.2998 L
+136.6201 467.6201 L
+F136.1401 454.1797 m
+136.6201 454.1797 L
+136.6201 458.8604 L
+136.1401 458.8604 L
+136.1401 454.1797 L
+f109.1401 458.3799 m
+136.3799 458.3799 L
+136.3799 458.8604 L
+109.1401 458.8604 L
+109.1401 458.3799 L
+f109.1401 458.6201 m
+109.6201 458.6201 L
+109.6201 467.8604 L
+109.1401 467.8604 L
+109.1401 458.6201 L
+f487.3799 341.3799 m
+478.3799 350.3799 L
+478.2598 350.6201 L
+478.2598 351.2197 L
+487.7402 341.7402 L
+F478.2598 345.9404 m
+478.7402 345.9404 L
+478.7402 350.6201 L
+478.2598 350.6201 L
+478.2598 345.9404 L
+f460.2598 345.9404 m
+478.5 345.9404 L
+478.5 346.4199 L
+460.2598 346.4199 L
+460.2598 345.9404 L
+f460.2598 346.1797 m
+460.2598 350.6201 L
+460.3799 350.7402 L
+460.7402 350.3799 L
+451.7402 341.3799 L
+451.3799 341.3799 L
+451.7402 341.7402 L
+460.7402 332.7402 L
+460.7402 332.0195 L
+451.1396 341.6201 L
+451.3799 341.7402 L
+460.7402 351.0996 L
+460.7402 346.1797 L
+F460.2598 332.6201 m
+460.7402 332.6201 L
+460.7402 337.4199 L
+460.2598 337.4199 L
+460.2598 332.6201 L
+f460.5 336.9404 m
+478.7402 336.9404 L
+478.7402 337.4199 L
+460.5 337.4199 L
+460.5 336.9404 L
+f478.7402 337.1797 m
+478.7402 332.3799 L
+478.3799 332.7402 L
+487.3799 341.7402 L
+487.7402 341.7402 L
+487.9805 341.5 L
+487.7402 341.3799 L
+478.2598 331.9004 L
+478.2598 337.1797 L
+F109.3799 341.3799 m
+136.6201 341.3799 L
+136.6201 341.8604 L
+109.3799 341.8604 L
+109.3799 341.3799 L
+f136.1401 341.6201 m
+136.1401 346.7803 L
+145.6201 337.2998 L
+145.8599 337.1797 L
+136.1401 327.46 L
+136.1401 328.1797 L
+145.2598 337.2998 L
+145.6201 336.9404 L
+145.2598 336.9404 L
+136.2598 345.9404 L
+136.6201 346.2998 L
+136.6201 341.6201 L
+F136.1401 328.1797 m
+136.6201 328.1797 L
+136.6201 332.8604 L
+136.1401 332.8604 L
+136.1401 328.1797 L
+f109.1401 332.3799 m
+136.3799 332.3799 L
+136.3799 332.8604 L
+109.1401 332.8604 L
+109.1401 332.3799 L
+f109.1401 332.6201 m
+109.6201 332.6201 L
+109.6201 341.8604 L
+109.1401 341.8604 L
+109.1401 332.6201 L
+f487.3799 462.9404 m
+478.3799 471.9404 L
+478.2598 472.1797 L
+478.2598 472.7803 L
+487.7402 463.2998 L
+F478.2598 467.3799 m
+478.7402 467.3799 L
+478.7402 472.1797 L
+478.2598 472.1797 L
+478.2598 467.3799 L
+f460.2598 467.3799 m
+478.5 467.3799 L
+478.5 467.8604 L
+460.2598 467.8604 L
+460.2598 467.3799 L
+f460.2598 467.6201 m
+460.2598 472.1797 L
+460.3799 472.2998 L
+460.7402 471.9404 L
+451.7402 462.9404 L
+451.3799 462.9404 L
+451.7402 463.2998 L
+460.7402 454.2998 L
+460.7402 453.5801 L
+451.1396 463.1797 L
+451.3799 463.2998 L
+460.7402 472.6602 L
+460.7402 467.6201 L
+F460.2598 454.1797 m
+460.7402 454.1797 L
+460.7402 458.8604 L
+460.2598 458.8604 L
+460.2598 454.1797 L
+f460.5 458.3799 m
+478.7402 458.3799 L
+478.7402 458.8604 L
+460.5 458.8604 L
+460.5 458.3799 L
+f478.7402 458.6201 m
+478.7402 453.9404 L
+478.3799 454.2998 L
+487.3799 463.2998 L
+487.7402 463.2998 L
+487.9805 463.0596 L
+487.7402 462.9404 L
+478.2598 453.46 L
+478.2598 458.6201 L
+F212.7002 395.6201 m
+213.1802 395.6201 L
+213.1802 404.8604 L
+212.7002 404.8604 L
+212.7002 395.6201 L
+f212.9399 404.3799 m
+207.8999 404.3799 L
+217.2598 413.7402 L
+217.5 413.8604 L
+226.98 404.3799 L
+226.2598 404.3799 L
+217.2598 413.3799 L
+217.6201 413.7402 L
+217.6201 413.3799 L
+208.6201 404.3799 L
+208.2598 404.7402 L
+208.3799 404.8604 L
+212.9399 404.8604 L
+F221.7002 404.3799 m
+226.3799 404.3799 L
+226.3799 404.8604 L
+221.7002 404.8604 L
+221.7002 404.3799 L
+f221.7002 395.3799 m
+222.1802 395.3799 L
+222.1802 404.6201 L
+221.7002 404.6201 L
+221.7002 395.3799 L
+f212.7002 395.3799 m
+221.9399 395.3799 L
+221.9399 395.8604 L
+212.7002 395.8604 L
+212.7002 395.3799 L
+f347.7002 391.1797 m
+348.1797 391.1797 L
+348.1797 400.4199 L
+347.7002 400.4199 L
+347.7002 391.1797 L
+f347.9404 399.9404 m
+343.0195 399.9404 L
+352.3799 409.2998 L
+352.5 409.54 L
+362.0996 399.9404 L
+361.3799 399.9404 L
+352.3799 408.9404 L
+352.7402 409.2998 L
+352.7402 408.9404 L
+343.7402 399.9404 L
+343.3799 400.2998 L
+343.5 400.4199 L
+347.9404 400.4199 L
+F356.7002 399.9404 m
+361.5 399.9404 L
+361.5 400.4199 L
+356.7002 400.4199 L
+356.7002 399.9404 L
+f356.7002 390.9404 m
+357.1797 390.9404 L
+357.1797 400.1797 L
+356.7002 400.1797 L
+356.7002 390.9404 L
+f347.7002 390.9404 m
+356.9404 390.9404 L
+356.9404 391.4199 L
+347.7002 391.4199 L
+347.7002 390.9404 L
+f383.7002 399.9404 m
+384.1797 399.9404 L
+384.1797 409.1797 L
+383.7002 409.1797 L
+383.7002 399.9404 L
+f383.9404 399.9404 m
+379.3799 399.9404 L
+379.7402 400.2998 L
+388.7402 391.2998 L
+388.7402 390.9404 L
+388.3799 391.2998 L
+397.5 400.4199 L
+398.2197 400.4199 L
+388.6201 390.8203 L
+388.3799 390.9404 L
+378.9004 400.4199 L
+383.9404 400.4199 L
+F392.7002 399.9404 m
+397.5 399.9404 L
+397.5 400.4199 L
+392.7002 400.4199 L
+392.7002 399.9404 L
+f392.7002 400.1797 m
+393.1797 400.1797 L
+393.1797 409.4199 L
+392.7002 409.4199 L
+392.7002 400.1797 L
+f383.7002 408.9404 m
+392.9404 408.9404 L
+392.9404 409.4199 L
+383.7002 409.4199 L
+383.7002 408.9404 L
+f1 g
+329.9404 485.6201 m
+406.3799 485.6201 L
+406.3799 409.2998 L
+329.9404 409.2998 L
+329.9404 485.6201 L
+f0 g
+329.46 486.0996 m
+330.4199 486.0996 L
+330.4199 409.1797 L
+329.46 409.1797 L
+329.46 486.0996 L
+f329.9404 486.0996 m
+406.9805 486.0996 L
+406.9805 485.1396 L
+329.9404 485.1396 L
+329.9404 486.0996 L
+f406.0195 485.6201 m
+406.9805 485.6201 L
+406.9805 408.7002 L
+406.0195 408.7002 L
+406.0195 485.6201 L
+f329.46 409.6602 m
+406.5 409.6602 L
+406.5 408.7002 L
+329.46 408.7002 L
+329.46 409.6602 L
+f1 g
+190.3799 485.6201 m
+239.8198 485.6201 L
+239.8198 413.7402 L
+190.3799 413.7402 L
+190.3799 485.6201 L
+f0 g
+189.8999 486.0996 m
+190.8599 486.0996 L
+190.8599 413.6201 L
+189.8999 413.6201 L
+189.8999 486.0996 L
+f190.3799 486.0996 m
+240.4199 486.0996 L
+240.4199 485.1396 L
+190.3799 485.1396 L
+190.3799 486.0996 L
+f239.46 485.6201 m
+240.4199 485.6201 L
+240.4199 413.1396 L
+239.46 413.1396 L
+239.46 485.6201 L
+f189.8999 414.0996 m
+239.9399 414.0996 L
+239.9399 413.1396 L
+189.8999 413.1396 L
+189.8999 414.0996 L
+f1 g
+329.9404 391.1797 m
+406.3799 391.1797 L
+406.3799 323.7402 L
+329.9404 323.7402 L
+329.9404 391.1797 L
+f0 g
+329.46 391.6602 m
+330.4199 391.6602 L
+330.4199 323.6201 L
+329.46 323.6201 L
+329.46 391.6602 L
+f329.9404 391.6602 m
+406.9805 391.6602 L
+406.9805 390.7002 L
+329.9404 390.7002 L
+329.9404 391.6602 L
+f406.0195 391.1797 m
+406.9805 391.1797 L
+406.9805 323.1396 L
+406.0195 323.1396 L
+406.0195 391.1797 L
+f329.46 324.0996 m
+406.5 324.0996 L
+406.5 323.1396 L
+329.46 323.1396 L
+329.46 324.0996 L
+f1 g
+190.3799 395.6201 m
+239.8198 395.6201 L
+239.8198 323.7402 L
+190.3799 323.7402 L
+190.3799 395.6201 L
+f0 g
+189.8999 396.0996 m
+190.8599 396.0996 L
+190.8599 323.6201 L
+189.8999 323.6201 L
+189.8999 396.0996 L
+f190.3799 396.0996 m
+240.4199 396.0996 L
+240.4199 395.1396 L
+190.3799 395.1396 L
+190.3799 396.0996 L
+f239.46 395.6201 m
+240.4199 395.6201 L
+240.4199 323.1396 L
+239.46 323.1396 L
+239.46 395.6201 L
+f189.8999 324.0996 m
+239.9399 324.0996 L
+239.9399 323.1396 L
+189.8999 323.1396 L
+189.8999 324.0996 L
+f301.7402 359.6201 m
+301.7402 361.1797 L
+302.3398 361.0596 L
+307.3799 359.6201 L
+302.3398 358.1797 L
+301.7402 358.0596 L
+301.7402 358.6602 L
+302.0996 359.1396 L
+305.46 360.0996 L
+305.7002 359.1396 L
+305.46 359.1396 L
+302.0996 360.0996 L
+302.3398 361.0596 L
+302.7002 360.5801 L
+302.7002 359.6201 L
+F301.7402 359.6201 m
+302.7002 359.6201 L
+302.7002 358.6602 L
+301.7402 358.6602 L
+301.7402 359.6201 L
+f302.2197 359.6201 m
+302.2197 360.5801 L
+305.5801 359.6201 L
+302.2197 358.6602 L
+F289.2598 359.8604 m
+289.5 359.8604 L
+289.5 359.3799 L
+289.2598 359.3799 L
+289.2598 359.8604 L
+f301.6201 359.3799 m
+301.8604 359.3799 L
+301.8604 359.8604 L
+301.6201 359.8604 L
+301.6201 359.3799 L
+f289.5 359.3799 m
+301.6201 359.3799 L
+301.6201 359.8604 L
+289.5 359.8604 L
+289.5 359.3799 L
+f301.7402 449.6201 m
+301.7402 451.4199 L
+302.3398 451.1797 L
+305.7002 450.0996 L
+307.3799 449.6201 L
+302.3398 448.1797 L
+301.7402 448.0596 L
+301.7402 448.6602 L
+302.0996 449.1396 L
+305.46 450.0996 L
+305.7002 449.1396 L
+305.46 449.1396 L
+302.0996 450.2197 L
+302.3398 451.1797 L
+302.7002 450.7002 L
+302.7002 449.6201 L
+F301.7402 449.6201 m
+302.7002 449.6201 L
+302.7002 448.6602 L
+301.7402 448.6602 L
+301.7402 449.6201 L
+f302.2197 449.6201 m
+302.2197 450.7002 L
+305.5801 449.6201 L
+302.2197 448.6602 L
+F289.2598 449.8604 m
+289.5 449.8604 L
+289.5 449.3799 L
+289.2598 449.3799 L
+289.2598 449.8604 L
+f301.6201 449.3799 m
+301.8604 449.3799 L
+301.8604 449.8604 L
+301.6201 449.8604 L
+301.6201 449.3799 L
+f289.5 449.3799 m
+301.6201 449.3799 L
+301.6201 449.8604 L
+289.5 449.8604 L
+289.5 449.3799 L
+f1 g
+257.9404 458.6201 m
+311.8203 458.6201 L
+311.8203 323.7402 L
+257.9404 323.7402 L
+257.9404 458.6201 L
+f0 g
+257.46 459.0996 m
+258.4199 459.0996 L
+258.4199 323.6201 L
+257.46 323.6201 L
+257.46 459.0996 L
+f257.9404 459.0996 m
+312.4199 459.0996 L
+312.4199 458.1396 L
+257.9404 458.1396 L
+257.9404 459.0996 L
+f311.46 458.6201 m
+312.4199 458.6201 L
+312.4199 323.1396 L
+311.46 323.1396 L
+311.46 458.6201 L
+f257.46 324.0996 m
+311.9404 324.0996 L
+311.9404 323.1396 L
+257.46 323.1396 L
+257.46 324.0996 L
+f0 To
+1 0 0 1 420.0596 502.0605 0 Tp
+TP
+0 Tr
+/_Helvetica-Oblique 9 Tf
+0 Ts
+100 Tz
+0 Tt
+0 TA
+0 0 100 TC
+100 100 100 TW
+0 0 0 Ti
+0 Ta
+0 Tq
+0 0 Tl
+0 Tc
+0 Tw
+(Da) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 431.5986 502.0605 0 Tp
+TP
+0 Tr
+(ta) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 439.0225 502.0605 0 Tp
+TP
+0 Tr
+(-s) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 446.5811 502.0605 0 Tp
+TP
+0 Tr
+(i) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 448.5 502.0605 0 Tp
+TP
+0 Tr
+(d) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 453.54 502.0605 0 Tp
+TP
+0 Tr
+(e) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 131.2202 502.0605 0 Tp
+TP
+0 Tr
+4 Tt
+0.036 Tc
+(In) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 138.6812 502.0605 0 Tp
+TP
+0 Tr
+(str) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 148.7603 502.0605 0 Tp
+TP
+0 Tr
+(u) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 153.6807 502.0605 0 Tp
+TP
+0 Tr
+(cti) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 162.6802 502.0605 0 Tp
+TP
+0 Tr
+(o) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 167.7202 502.0605 0 Tp
+TP
+0 Tr
+(n) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 172.6401 502.0605 0 Tp
+TP
+0 Tr
+(-) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 175.6401 502.0605 0 Tp
+TP
+0 Tr
+(si) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 182.0986 502.0605 0 Tp
+TP
+0 Tr
+(de) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 458.8203 460.4199 0 Tp
+TP
+0 Tr
+/_Helvetica 7.9195 Tf
+5 Tt
+0.0396 Tc
+(DLM) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 475.7402 460.4199 0 Tp
+TP
+0 Tr
+(B) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 458.2197 338.7402 0 Tp
+TP
+0 Tr
+8 Tt
+0.0634 Tc
+(DOP) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 475.499 338.7402 0 Tp
+TP
+0 Tr
+(B) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 114.1807 460.2998 0 Tp
+TP
+0 Tr
+-5 Tt
+-0.0396 Tc
+(IL) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 120.7803 460.2998 0 Tp
+TP
+0 Tr
+(M) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 127.5 460.2998 0 Tp
+TP
+0 Tr
+(B) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 113.4609 334.2998 0 Tp
+TP
+0 Tr
+10 Tt
+0.0792 Tc
+(IOP) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 127.2607 334.2998 0 Tp
+TP
+0 Tr
+(B) Tx 
+(\r) TX 
+TO
+1 g
+145.3799 485.6201 m
+172.2598 485.6201 L
+172.2598 323.7402 L
+145.3799 323.7402 L
+145.3799 485.6201 L
+f0 g
+145.3799 485.1396 m
+172.8599 485.1396 L
+172.8599 486.0996 L
+145.3799 486.0996 L
+145.3799 485.1396 L
+f171.8999 323.1396 m
+172.8599 323.1396 L
+172.8599 485.6201 L
+171.8999 485.6201 L
+171.8999 323.1396 L
+f144.8999 323.1396 m
+172.3799 323.1396 L
+172.3799 324.0996 L
+144.8999 324.0996 L
+144.8999 323.1396 L
+f144.8999 323.6201 m
+145.8599 323.6201 L
+145.8599 486.0996 L
+144.8999 486.0996 L
+144.8999 323.6201 L
+f1 g
+424.5 485.6201 m
+451.3799 485.6201 L
+451.3799 323.7402 L
+424.5 323.7402 L
+424.5 485.6201 L
+f0 g
+424.5 485.1396 m
+451.9805 485.1396 L
+451.9805 486.0996 L
+424.5 486.0996 L
+424.5 485.1396 L
+f451.0195 323.1396 m
+451.9805 323.1396 L
+451.9805 485.6201 L
+451.0195 485.6201 L
+451.0195 323.1396 L
+f424.0195 323.1396 m
+451.5 323.1396 L
+451.5 324.0996 L
+424.0195 324.0996 L
+424.0195 323.1396 L
+f424.0195 323.6201 m
+424.9805 323.6201 L
+424.9805 486.0996 L
+424.0195 486.0996 L
+424.0195 323.6201 L
+f0 To
+1 0 0 1 134.9399 492.2197 0 Tp
+TP
+0 Tr
+/_Helvetica-Oblique 9 Tf
+-10 Tt
+104 104 104 TW
+-0.09 Tc
+0.1001 Tw
+(bu) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 144.8965 492.2197 0 Tp
+TP
+0 Tr
+(s i) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 153.8696 492.2197 0 Tp
+TP
+0 Tr
+(n) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 158.9097 492.2197 0 Tp
+TP
+0 Tr
+(te) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 166.3643 492.2197 0 Tp
+TP
+0 Tr
+(r) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 169.3638 492.2197 0 Tp
+TP
+0 Tr
+(f) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 171.8838 492.2197 0 Tp
+TP
+0 Tr
+(ac) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 181.3608 492.2197 0 Tp
+TP
+0 Tr
+(e) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 413.9209 492.2197 0 Tp
+TP
+0 Tr
+(b) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 418.8408 492.2197 0 Tp
+TP
+0 Tr
+(u) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 423.8809 492.2197 0 Tp
+TP
+0 Tr
+(s) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 428.4414 492.2197 0 Tp
+TP
+0 Tr
+( ) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 430.8418 492.2197 0 Tp
+TP
+0 Tr
+(i) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 432.8818 492.2197 0 Tp
+TP
+0 Tr
+(n) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 437.9219 492.2197 0 Tp
+TP
+0 Tr
+(te) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 445.376 492.2197 0 Tp
+TP
+0 Tr
+(r) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 448.376 492.2197 0 Tp
+TP
+0 Tr
+(f) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 450.8955 492.2197 0 Tp
+TP
+0 Tr
+(a) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 455.9355 492.2197 0 Tp
+TP
+0 Tr
+(c) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 460.375 492.2197 0 Tp
+TP
+0 Tr
+(e) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 194.9404 362.0195 0 Tp
+TP
+0 Tr
+/_Helvetica 9 Tf
+3 Tt
+100 100 100 TW
+0.027 Tc
+0 Tw
+(Ins) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 206.9326 362.0195 0 Tp
+TP
+0 Tr
+(t) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 209.4526 362.0195 0 Tp
+TP
+0 Tr
+(ru) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 217.3931 362.0195 0 Tp
+TP
+0 Tr
+(cti) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 226.3613 362.0195 0 Tp
+TP
+0 Tr
+(o) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 231.4014 362.0195 0 Tp
+TP
+0 Tr
+(n) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 202.8604 352.54 0 Tp
+TP
+0 Tr
+(Buf) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 216.1992 352.54 0 Tp
+TP
+0 Tr
+(f) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 218.7192 352.54 0 Tp
+TP
+0 Tr
+(er) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 198.3003 450.8203 0 Tp
+TP
+0 Tr
+1 Tt
+0.009 Tc
+(Pro) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 212.2402 450.8203 0 Tp
+TP
+0 Tr
+(g) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 217.2803 450.8203 0 Tp
+TP
+0 Tr
+(ram) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 199.3799 441.46 0 Tp
+TP
+0 Tr
+4 Tt
+0.036 Tc
+(C) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 205.8599 441.46 0 Tp
+TP
+0 Tr
+(oun) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 220.853 441.46 0 Tp
+TP
+0 Tr
+(ter) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 343.6201 366.2197 0 Tp
+TP
+0 Tr
+3 Tt
+99 99 99 TW
+0.027 Tc
+-0.025 Tw
+(R) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 350.1006 366.2197 0 Tp
+TP
+0 Tr
+(e) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 355.1406 366.2197 0 Tp
+TP
+0 Tr
+(g) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 360.0605 366.2197 0 Tp
+TP
+0 Tr
+(i) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 362.1006 366.2197 0 Tp
+TP
+0 Tr
+(s) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 366.541 366.2197 0 Tp
+TP
+0 Tr
+(t) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 369.0605 366.2197 0 Tp
+TP
+0 Tr
+(er F) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 385.043 366.2197 0 Tp
+TP
+0 Tr
+(ile) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 350.2197 356.0205 0 Tp
+TP
+0 Tr
+-9 Tt
+104 104 104 TW
+-0.081 Tc
+0.1001 Tw
+(32) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 360.1807 356.0205 0 Tp
+TP
+0 Tr
+( X) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 368.7012 356.0205 0 Tp
+TP
+0 Tr
+( 32) Tj 
+(\r) TX 
+TO
+0 To
+1 0 0 1 381.1816 356.0205 0 Tp
+TP
+0 Tr
+(b) Tj 
+(\r) TX 
+TO
+1 g
+334.5 481.1797 m
+401.8203 481.1797 L
+401.8203 458.7402 L
+334.5 458.7402 L
+334.5 481.1797 L
+f0 g
+334.5 480.9404 m
+402.1797 480.9404 L
+402.1797 481.4199 L
+334.5 481.4199 L
+334.5 480.9404 L
+f401.7002 458.3799 m
+402.1797 458.3799 L
+402.1797 481.1797 L
+401.7002 481.1797 L
+401.7002 458.3799 L
+f334.2598 458.3799 m
+401.9404 458.3799 L
+401.9404 458.8604 L
+334.2598 458.8604 L
+334.2598 458.3799 L
+f334.2598 458.6201 m
+334.7402 458.6201 L
+334.7402 481.4199 L
+334.2598 481.4199 L
+334.2598 458.6201 L
+f1 g
+334.5 458.6201 m
+401.8203 458.6201 L
+401.8203 436.2998 L
+334.5 436.2998 L
+334.5 458.6201 L
+f0 g
+334.5 458.3799 m
+402.1797 458.3799 L
+402.1797 458.8604 L
+334.5 458.8604 L
+334.5 458.3799 L
+f401.7002 435.9404 m
+402.1797 435.9404 L
+402.1797 458.6201 L
+401.7002 458.6201 L
+401.7002 435.9404 L
+f334.2598 435.9404 m
+401.9404 435.9404 L
+401.9404 436.4199 L
+334.2598 436.4199 L
+334.2598 435.9404 L
+f334.2598 436.1797 m
+334.7402 436.1797 L
+334.7402 458.8604 L
+334.2598 458.8604 L
+334.2598 436.1797 L
+f1 g
+334.5 436.1797 m
+401.8203 436.1797 L
+401.8203 413.7402 L
+334.5 413.7402 L
+334.5 436.1797 L
+f0 g
+334.5 435.9404 m
+402.1797 435.9404 L
+402.1797 436.4199 L
+334.5 436.4199 L
+334.5 435.9404 L
+f401.7002 413.3799 m
+402.1797 413.3799 L
+402.1797 436.1797 L
+401.7002 436.1797 L
+401.7002 413.3799 L
+f334.2598 413.3799 m
+401.9404 413.3799 L
+401.9404 413.8604 L
+334.2598 413.8604 L
+334.2598 413.3799 L
+f334.2598 413.6201 m
+334.7402 413.6201 L
+334.7402 436.4199 L
+334.2598 436.4199 L
+334.2598 413.6201 L
+f0 To
+1 0 0 1 351.6602 467.2598 0 Tp
+TP
+0 Tr
+2 Tt
+100 100 100 TW
+0.018 Tc
+0 Tw
+(Add) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 367.6221 467.2598 0 Tp
+TP
+0 Tr
+(/) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 370.1416 467.2598 0 Tp
+TP
+0 Tr
+(Sub) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 344.5801 444.4609 0 Tp
+TP
+0 Tr
+3 Tt
+0.027 Tc
+(Sh) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 355.5303 444.4609 0 Tp
+TP
+0 Tr
+(ift/) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 365.0137 444.4609 0 Tp
+TP
+0 Tr
+(Log) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 379.9961 444.4609 0 Tp
+TP
+0 Tr
+(ic) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 386.4609 444.4609 0 Tp
+TP
+0 Tr
+(al) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 354.2998 421.9004 0 Tp
+TP
+0 Tr
+5 Tt
+0.045 Tc
+(M) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 361.7402 421.9004 0 Tp
+TP
+0 Tr
+(u) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 366.7803 421.9004 0 Tp
+TP
+0 Tr
+(lt) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 371.2188 421.9004 0 Tp
+TP
+0 Tr
+(ipl) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 380.2217 421.9004 0 Tp
+TP
+0 Tr
+(y) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 264.2998 398.8604 0 Tp
+TP
+0 Tr
+-7 Tt
+-0.063 Tc
+(I) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 266.8193 398.8604 0 Tp
+TP
+0 Tr
+(n) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 271.8594 398.8604 0 Tp
+TP
+0 Tr
+(st) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 278.8135 398.8604 0 Tp
+TP
+0 Tr
+(r) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 281.8125 398.8604 0 Tp
+TP
+0 Tr
+(u) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 286.8525 398.8604 0 Tp
+TP
+0 Tr
+(ct) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 293.8066 398.8604 0 Tp
+TP
+0 Tr
+(io) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 300.7773 398.8604 0 Tp
+TP
+0 Tr
+(n) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 269.7002 389.0205 0 Tp
+TP
+0 Tr
+-4 Tt
+-0.036 Tc
+(De) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 281.1982 389.0205 0 Tp
+TP
+0 Tr
+(co) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 290.6992 389.0205 0 Tp
+TP
+0 Tr
+(d) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 295.6191 389.0205 0 Tp
+TP
+0 Tr
+(e) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 430.5 415.9004 0 Tp
+TP
+0 Tr
+2 Tt
+0.018 Tc
+(Bus) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 433.8594 406.3008 0 Tp
+TP
+0 Tr
+(IF) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 151.0195 415.0605 0 Tp
+TP
+0 Tr
+(Bus) Tx 
+(\r) TX 
+TO
+0 To
+1 0 0 1 154.8599 405.3398 0 Tp
+TP
+0 Tr
+(IF) Tx 
+(\r) TX 
+TO
+%%PageTrailer
+gsave annotatepage grestore showpage
+%%Trailer
+Adobe_Illustrator_AI3 /terminate get exec
+Adobe_pattern_AI3 /terminate get exec
+Adobe_typography_AI3 /terminate get exec
+Adobe_customcolor /terminate get exec
+Adobe_cshow /terminate get exec
+Adobe_packedarray /terminate get exec
+%%EOF
