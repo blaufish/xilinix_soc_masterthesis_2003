@@ -111,11 +111,11 @@ architecture sim of bench_eth is
 	--signal rx_dvalid	: std_logic;
 
 
-	type t_rx_state is (rx_await_tx, rx_sleep, read_rx_fifo, read_rx_status);
-	signal rx_state : t_rx_state;
+	--type t_rx_state is (rx_await_tx, rx_sleep, read_rx_fifo, read_rx_status);
+	--signal rx_state : t_rx_state;
 
-	type t_tx_state is (tx_init, tx_send1, tx_w1, tx_send2, tx_w2, tx_status, tx_sleep);
-	signal tx_state : t_tx_state;
+	--type t_tx_state is (tx_init, tx_send1, tx_w1, tx_send2, tx_w2, tx_status, tx_sleep);
+	--signal tx_state : t_tx_state;
 	
 	component tb_mii_reciever_model is
         generic (
@@ -127,6 +127,29 @@ architecture sim of bench_eth is
                 mii_rxd  : std_logic_vector(3 downto 0)
         );
 	end component tb_mii_reciever_model;
+
+
+	component tb_opb_packet_loopback is
+	generic (
+		A_RX_FIFO   : std_logic_vector(0 to 31) := X"FFFF_8000";
+		A_RX_STATUS : std_logic_vector(0 to 31) := X"FFFF_8004";
+		A_TX_FIFO   : std_logic_vector(0 to 31) := X"FFFF_8010";
+		A_TX_STATUS : std_logic_vector(0 to 31) := X"FFFF_8014";
+		cutfcs      : std_logic := '1'
+	);
+	port (
+                OPB_Clk     : in std_logic;
+                OPB_Rst     : in std_logic;
+                OPB_ABus    : out std_logic_vector(0 to 31);
+                OPB_BE      : out std_logic_vector(0 to 3);
+                OPB_DBus    : out std_logic_vector(0 to 31);
+                OPB_RNW     : out std_logic;
+                OPB_select  : out std_logic;
+                ETH_DBus    : in std_logic_vector(0 to 31);
+                ETH_xferAck : in std_logic
+	);
+	end component tb_opb_packet_loopback;
+
 
 begin  -- sim
 
@@ -140,69 +163,28 @@ begin  -- sim
 			mii_rxd => tx_data0
 		);
 
+	loopback : tb_opb_packet_loopback
+		generic map (
+			A_RX_FIFO   => A_RX_FIFO,
+			A_RX_STATUS => A_RX_STATUS,
+			A_TX_FIFO   => A_TX_FIFO,
+			A_TX_STATUS => A_TX_STATUS,
+			cutfcs      => '1'
+		)
+		port map(
+        	        OPB_Clk     => OPB_Clk,
+                	OPB_Rst     => OPB_Rst,
+	                OPB_ABus    => OPB_ABus,
+        	        OPB_BE      => OPB_BE,
+                	OPB_DBus    => OPB_DBus,
+	                OPB_RNW     => OPB_RNW,
+        	        OPB_select  => OPB_select,
+                	ETH_DBus    => ETH_DBus,
+	                ETH_xferAck => ETH_xferAck
+		);
 
-	fake_bus : process (OPB_Clk) 
-		--variable i : integer;
-		variable status : std_logic_vector(0 to 31) := X"0000_0000";
-		--variable fifo : std_logic_vector(0 to 31) := X"0000_0000";
-	begin
-		if rising_edge(OPB_Clk) then
-			if (OPB_Rst='1') then
-				rx_state <= rx_await_tx;
-				tx_state <= tx_init;
-				OPB_select <= '0';
-				OPB_BE     <= X"F";
-			else
 
 
-				if tx_state=tx_init then
-					OPB_ABus   <= A_TX_FIFO;
-					OPB_select <= '1';
-					OPB_RNW    <= '0';
-					OPB_DBus   <= X"12345678";
-					tx_state   <= tx_send1;
-				
-				elsif tx_state=tx_send1 then
-					OPB_select <= '0';
-					tx_state   <= tx_w1;
-
-				elsif tx_state=tx_w1 then
-					OPB_select <= '1';
-					OPB_DBus   <= X"9abcdef0";
-					tx_state   <= tx_send2;
-
-				elsif tx_state=tx_send2 then
-					OPB_select <= '0';
-					tx_state   <= tx_w2;
-					
-				elsif tx_state=tx_w2 then
-					OPB_ABus   <= A_TX_STATUS;
-					OPB_select <= '1';
-					OPB_DBus   <= X"C0000002";
-					tx_state   <= tx_status;	
-
-				elsif tx_state=tx_status then
-					OPB_select <= '0';
-					tx_state   <= tx_sleep;
-			
-				elsif rx_state=rx_await_tx then
-					rx_state <= rx_sleep;
-
-				elsif rx_state=rx_sleep and status(0)='0' then
-					OPB_ABus   <= A_RX_STATUS;
-					OPB_select <= '1';
-					OPB_RNW    <= '1';
-					rx_state   <= read_rx_status;
-				
-				elsif rx_state=read_rx_status and ETH_xferAck='1' then
-					status := ETH_DBus;
-					rx_state <= rx_sleep;
-				
-				end if;
-				
-			end if;
-		end if;
-	end process;
 
 	
 	Eth0 : ETH
