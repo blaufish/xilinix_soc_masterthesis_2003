@@ -117,13 +117,13 @@ begin
 			when RECV =>
 			  if mii_dv='0' then
 					assert (count mod 2)=0 report (msg&"RECV/Length: alignment error! count="&natural'image(count)) severity warning;
-					assert (count/2 >= 58) report (msg&"RECV/Length: short packet! length="&natural'image(count/4)) severity warning;
-					assert (count/2 <= 1518) report (msg&"RECV/Length: Long packet! length="&natural'image(count/4)) severity warning;
+					assert (count/2 >= 58) report (msg&"RECV/Length: short packet! length="&natural'image(count/2)) severity warning;
+					assert (count/2 <= 1518) report (msg&"RECV/Length: Long packet! length="&natural'image(count/2)) severity warning;
 					--assert (count/4 < 58) or (count > 1518*4) report (msg&"RECV: Packet received: "&packet2hex(packet));
 					
-					if (count mod 4)=0 and (count/4 >= 58) and (count/4 < 1518) then
-						rawcrc := crc_iter_n(raw(2*count-1 downto 32) & not raw(31 downto 0));		
-						assert false report (msg&"RECV: Packet received, Length: " & natural'image(count/4) & " FCS: " & unsigned2hex(raw(31 downto 0)) & " CRC: " & unsigned2hex(rawcrc) & " DATA: " & unsigned2hex(packet((count - count mod 4)*2-1 downto 0))) severity note;
+					if (count mod 2)=0 and (count/2 >= 58) and (count/2 < 1518) then
+						rawcrc := not crc_iter_n(raw(4*count-1 downto 32) ); --& not raw(31 downto 0));		
+						assert false report (msg&"RECV: Packet received, Length: " & natural'image(count/2) & " FCS: " & unsigned2hex(raw(31 downto 0)) & " CRC: " & unsigned2hex(rawcrc) & " DATA: " & unsigned2hex(packet((count - count mod 2)*4-1 downto 0))) severity note;
 					end if;	
 					state <= IPG;
 					count := 0;
