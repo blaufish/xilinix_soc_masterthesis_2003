@@ -1,0 +1,31 @@
+SELECT slave eth
+# Generics for vhdl or parameters for verilog
+cset attribute C_BASEADDR = 0x20000000, std_logic_vector
+cset attribute C_HIGHADDR = 0x200000FF, std_logic_vector
+cset attribute C_OPB_DWIDTH = 32, integer
+cset attribute C_OPB_AWIDTH = 32, integer
+cset attribute C_PHY_WIDTH = 4, integer
+# Global ports
+CSET signal OPB_Clk = "", in
+CSET signal OPB_Rst = OPB_Rst, in
+# OPB signals
+CSET signal OPB_ABus = OPB_ABus, in, [0:C_OPB_AWIDTH-1]
+CSET signal OPB_BE = OPB_BE, in, [0:C_OPB_DWIDTH/8-1]
+CSET signal OPB_DBus = OPB_DBus, in, [0:C_OPB_DWIDTH-1]
+CSET signal OPB_RNW = OPB_RNW, in
+CSET signal OPB_select = OPB_select, in
+CSET signal OPB_seqAddr = OPB_seqAddr, in
+CSET signal ETH_DBus = Sl_DBus, out, [0:C_OPB_DWIDTH-1]
+CSET signal ETH_errAck = Sl_errAck, out
+CSET signal ETH_retry = Sl_retry, out
+CSET signal ETH_toutSup = Sl_toutSup, out
+CSET signal ETH_xferAck = Sl_xferAck, out
+# ethrx signals
+CSET signal RX_CLK  = "", in
+CSET signal RX_DV   = "", in
+CSET signal RX_D = "", in, [7:0]
+CSET signal TX_CLK = "", in
+CSET signal TX_D = "", out, [7:0]
+CSET signal TX_EN = "", out
+END
+

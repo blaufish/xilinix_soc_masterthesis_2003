@@ -1,0 +1,24 @@
+lib eth_v1_00_b ramlib_xil
+lib eth_v1_00_b freefifo
+
+lib eth_v1_00_b blockram_dp
+lib eth_v1_00_b blockram_fifo
+lib eth_v1_00_b crc
+lib eth_v1_00_b fdre
+
+lib eth_v1_00_b ethrx_clk_sampler
+lib eth_v1_00_b ethrx_statemachine
+lib eth_v1_00_b ethrx_mii_to_byte
+lib eth_v1_00_b ethrx_byte_to_word
+lib eth_v1_00_b ethrx_debug
+lib eth_v1_00_b ethrx_regfile
+lib eth_v1_00_b ethrx_core
+
+lib eth_v1_00_b ethtx_clk_sampler
+lib eth_v1_00_b ethtx_regfile
+lib eth_v1_00_b ethtx_statemachine
+lib eth_v1_00_b ethtx_word_to_byte
+lib eth_v1_00_b ethtx_byte_to_mii
+lib eth_v1_00_b ethtx_core
+
+lib eth_v1_00_b eth
