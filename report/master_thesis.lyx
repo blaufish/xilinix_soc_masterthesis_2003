@@ -32,7 +32,21 @@
 
 \layout Title
 
-Evaluating Xilinx MicroBlaze for Network SoC solutions
+Evaluating Xilinx MicroBlaze for 
+\newline 
+Network SoC solutions
+\newline 
+\SpecialChar ~
+
+\newline 
+
+\emph on 
+Master Thesis in Computer Engineering
+\emph default 
+
+\newline 
+\SpecialChar ~
+
 \newline 
 --- DRAFT - WORK IN PROGRESS ---
 \newline 
@@ -132,6 +146,77 @@ Introduction
 \end_inset 
 
 Limitations
+\layout Section
+
+Time
+\layout Standard
+
+This Master Thesis work has been performed during a period of 6 months.
+\layout Section
+
+Software
+\layout Itemize
+
+MicroBlaze Development Kit (MDK) 2.2 (Service Pack 2) has been used for this
+ evalutation.
+ Currently it remains the most recent release.
+\layout Itemize
+
+The report is written in LyX 1.2.1.
+\layout Itemize
+
+Other tools which has been used include: Xilinx ISE, Cadence Simulation
+ Tools, Synplicity Synplify Pro, Modeltech ModelSim.
+\layout Section
+
+Hardware
+\layout Subsection
+
+XESS XSV-100 / XSV-800 Prototyping Board
+\layout Standard
+
+These are Xilinx Virtex based prototyping board.
+ XSV-100 is equipped with a Virtex 100, XSV-800 with a Virtex 800.
+ The Virtex chip is connected to a large set of interfaces, including:
+\layout Itemize
+
+Programmable 100 MHz oscillator, 
+\begin_inset Formula $f=100/n$
+\end_inset 
+
+ MHz, 
+\begin_inset Formula $n=1,2,3,4,...$
+\end_inset 
+
+
+\layout Itemize
+
+An MII PHY connected to a twisted pair cable socket.
+\layout Itemize
+
+Two 512K
+\begin_inset Formula $*$
+\end_inset 
+
+16 Bit SRAM memory banks.
+\layout Subsection
+
+Platina Virtex-E Prototyping Board
+\layout Standard
+
+This is a proptyping board developed at Luleå University of Technology and
+ intended to be available to this thesis work.
+ Unfortunately, it was not verified in time to be used in the thesis.
+ 
+\layout Standard
+
+Platina connects the Virtex-E chip with the following interfaces:
+\layout Itemize
+
+Four RMII PHYs, connected to twisted pair cable sockets.
+\layout Itemize
+
+Motorola Microcontroller.
 \layout Chapter
 
 Thesis outline
@@ -199,7 +284,7 @@ Chapter
 \end_inset 
 
  compares the Ethernet peripherals designed to a number of other Ethernet
- peripherals..
+ peripherals.
 \layout Standard
 
 Chapter 
@@ -338,7 +423,7 @@ collapsed false
 
 \layout Standard
 
-As opposed to a Micro Controller core which may include peripherals.
+As opposed to a Microcontroller core which may include peripherals.
 \end_inset 
 
 
@@ -349,7 +434,7 @@ As opposed to a Micro Controller core which may include peripherals.
  a single chip.
 \layout Subsection
 
-Soft, firm, hard cores
+Soft, firm and hard cores
 \layout Standard
 
 The terms soft, firm and hard cores are ASIC manufacturing jargon.
@@ -364,7 +449,7 @@ Soft core
 \begin_inset Quotes erd
 \end_inset 
 
- refer to ASIC cores delivered as a technology dependent gate-level netlist.
+ refer to cores delivered as a technology dependent gate-level netlist.
 \layout Itemize
 
 
@@ -375,7 +460,7 @@ Firm core
 \begin_inset Quotes erd
 \end_inset 
 
- refer to ASIC cores delivered as a library element.
+ refer to cores delivered as a library element.
 \layout Itemize
 
 
@@ -386,8 +471,12 @@ Hard core
 \begin_inset Quotes erd
 \end_inset 
 
- refer to ASIC cores which has a fixed physical layout and is incorporated
- into the design as a standard cell.
+ refer to cores which has a fixed physical layout and is incorporated into
+ the design as a standard cell.
+\layout Standard
+
+Firm and hard core apply to ASIC only.
+ Soft cores are used in ASICs as well as programmable logic.
 \layout Subsection
 
 Soft Processors
@@ -474,9 +563,9 @@ Overall processor cores and software support add flexibility and shorten
 On-Chip Peripheral Bus (OPB)
 \layout Standard
 
-The IBM Core Connect On-Chip Peripheral bus
+The IBM Core Connect On-Chip Peripheral Bus
 \begin_inset Foot
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -542,7 +631,7 @@ When several OPB masters share a bus, an OPB Arbiter is used to grant exclusive
 Xilinx OPB
 \layout Standard
 
-Xilinx implements the IBM CoreConnect On-Chip Peripheral bus with most configura
+Xilinx implements the IBM CoreConnect On-Chip Peripheral Bus with most configura
 ble OPB parameters set to specific values.
  Important parameters include datawidth which is set to 32 and addresswidth
  which also is set to 32.
@@ -570,7 +659,7 @@ OPB Usage Notes
  may be interconnected given some work.
 \layout Section
 
-About Ethernet 10/100 MBit
+About Ethernet 10/100 MBit/s
 \layout Standard
 
 Ethernet
@@ -587,9 +676,9 @@ Ethernet
 \begin_inset Quotes erd
 \end_inset 
 
- in this paper refers to the 10/100 MBit Ethernet standards.
- Gigabit Ethernet, Experimental Ethernet and other none 10/100 MBit versions
- of Ethernet are not in the scope of this paper.
+ in this paper refers to the 10/100 MBit/s Ethernet standards.
+ Gigabit Ethernet, 10 Gigabit Ehernet, Experimental Ethernet and other none
+ 10/100 MBit/s versions of Ethernet are not in the scope of this paper.
 \end_inset 
 
  
@@ -621,7 +710,7 @@ padding
 
  bytes.
  The value of the padding is arbitrary, often the value 0x00 is used.
- More humorous paddings such as 0xBADDCAFE and 0xDEADBEEF is also in use.
+ More humorous paddings such as 0xBADDCAFE and 0xDEADBEEF are also in use.
 \end_inset 
 
 .
@@ -630,16 +719,16 @@ padding
  
 \layout Subsection
 
-10 MBit, 100 MBit or Auto Negotiation
+10 MBit/s, 100 MBit/s or Auto Negotiation
 \layout Standard
 
-Today 10 MBit Ethernet devices are still available for sale, but the faster
- 100 MBit Ethernet is by far more common.
- However, many old devices are 10 MBit only.
- Most 100 MBit devices will Auto Negotiate to 100 MBit unless negotiating
- with a 10 MBit device.
- Most (if not all) 100 MBit Ethernet devices support 10/100 MBit Auto Negotiatio
-n.
+Today 10 MBit/s Ethernet devices are still available for sale, but the faster
+ 100 MBit/s Ethernet is by far more common.
+ However, many old devices are 10 MBit/s only.
+ Most 100 MBit/s devices will Auto Negotiate to 100 MBit/s unless negotiating
+ with a 10 MBit/s device.
+ Most (if not all) 100 MBit/s Ethernet devices support 10/100 MBit/s Auto
+ Negotiation.
 \layout Subsection
 
 Full Duplex, Half Duplex, and Auto negotiation
@@ -963,8 +1052,8 @@ collapsed false
 
 \layout Standard
 
-Physical Layer Device (PHY) is used in Ethernet 10/100 MBit references.
- Medium Attachment Unit (MAU) is used in Ethernet 10 MBit references.
+Physical Layer Device (PHY) is used in Ethernet 10/100 MBit/s references.
+ Medium Attachment Unit (MAU) used in Ethernet 10-only MBit/s references.
  In this paper, the term PHY is loosely used in reference to both MAU and
  PHY.
 \end_inset 
@@ -994,19 +1083,19 @@ There are three common PHYs: AUI, MII and RMII.
  
 \layout Standard
 
-AUI is an old 10 MBit interface only.
+AUI is an old 10 MBit/s interface only.
  
 \layout Standard
 
-MII was defined as the 10/100 MBit Ethernet was introduced.
+MII was defined as the 10/100 MBit/s Ethernet was introduced.
  An MII design goal appears to provide a high level of parallelism (data
- width), offering 100 MBit at a 25 MHz interface clock.
+ width), offering 100 MBit/s at a 25 MHz interface clock.
  
 \layout Standard
 
 Reduced-MII (RMII) was invented to reduce interface pin count
 \begin_inset Foot
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -1017,13 +1106,13 @@ the number of chip pins utilized.
  A high pin count raises production costs and power dissipation.
  Reducing pin count is a major design concern in switches and other multi-interf
 ace ASIC/FPGA designs.
- RMII provides 100 MBit at a 50 MHz interface clock.
+ RMII provides 100 MBit/s at a 50 MHz interface clock.
 \layout Standard
 
 
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1073,7 +1162,7 @@ Width
 
 \layout Standard
 
-MBit
+MBit/s
 \end_inset 
 </cell>
 </row>
@@ -1448,12 +1537,6 @@ Many FPGAs contain only a few kilobytes of Block RAM.
  
 \layout Standard
 
-Small FPGAs contain sufficient Block RAM for small applications only.
-\layout Standard
-
-Large FPGAs contain sufficient Block RAM for large applications.
-\layout Standard
-
 Applications with large buffers requirements such as network switches or
  routers fits badly even in expensive FPGA.
 \layout Standard
@@ -1634,7 +1717,8 @@ This was discussed in
 
 \end_inset 
 
- and Xilinx staff replied that it would be fixed before the end of summer.
+ and Xilinx staff replied that it would be fixed before the end of summer
+ 2002.
  It appears that Xilinx instead chose to discontinue MDK updates and put
  their efforts into EDK.
 \layout Subsubsection
@@ -1830,8 +1914,8 @@ Another issue is that tristate buffers in peripherals must be written as
  Although this is not a major drawback when designing custom components,
  it is an unnecessary design restriction.
  Specifically it may limit which third party OPB components (distributed
- as black boxes or source code) which are easy to utilize in a MicroBlaze
- peripheral design.
+ as netlists or source code) which are easy to utilize in a MicroBlaze periphera
+l design.
 \layout Chapter
 
 
@@ -1958,20 +2042,60 @@ Eth Version 1.00 Revision A is designed to be a very simple MAC, portable
  to most FPGA and prototype boards.
 \layout Subsubsection
 
-Fully synchronous
+Fully synchronous, single edge triggered
 \layout Standard
 
 To simplify design and verification, no asynchronous logic is used in the
  design.
- Asynchronous logic, such as an asynchronous FIFO, is often harder to verify
- and less architecture independent.
- Asynchronous logic in FPGA implementations require a clock net dedicated
- to the Ethernet clocks.
- Therefore this design decision places less requirements upon the design
- of target prototype board and simplify verification.
+ Additionally, only flip flops triggered upon system clock rising edge are
+ used.
+ Figure 
+\begin_inset LatexCommand \ref{cap:EthV100A-InputToOutput-illustration}
+
+\end_inset 
+
+ illustrates how an input clock rising edge (a 
+\begin_inset Quotes eld
+\end_inset 
+
+001
+\begin_inset Quotes erd
+\end_inset 
+
+ pattern) is detected and output is triggered upon rising edge.
 \layout Standard
 
-Additionally, only rising edge flip flops are used.
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:EthV100A-InputToOutput-illustration}
+
+\end_inset 
+
+Eth Version 1.00 Revision A, Input to Output illustration
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/ethv100a_txclocking.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
 \layout Standard
 
 It should be noted that due to this design choice, Ethernet Interface clocks
@@ -1985,9 +2109,12 @@ It should be noted that due to this design choice, Ethernet Interface clocks
 \end_inset 
 
  shows the interface clocks and resulting minimal system clock frequency.
+\layout Standard
+
+
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2144,6 +2271,25 @@ RMII 100 MBit
 \end_inset 
 
 
+\layout Paragraph
+
+Why synchronous and single edge triggered flipflops?
+\layout Standard
+
+Asynchronous logic and systems triggered both edges are harder to verify.
+ Asynchronous logic in Xilinx Virtex FPGA implementations require a global
+ clock net dedicated to the Ethernet clocks.
+ Therefore asynchronous solution requirements upon the design of target
+ prototype board and consume scarce
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Several Virtex FPGAs only have 4 global clock pads.
+\end_inset 
+
+ global clock pads.
 \layout Subsubsection
 
 System Clock and Performance Impact
@@ -2171,7 +2317,7 @@ Utilizing a Place And Route overall effort of 5.
 
 \end_inset 
 
-, this only enables 10 MBit implementations.
+, this only enables 10 MBit/s implementations.
 \layout Standard
 
 Eth Version 1.00 Revision bus is operating at 50 MHz, 32-bit datawidth and
@@ -2186,7 +2332,7 @@ Eth Version 1.00 Revision bus is operating at 50 MHz, 32-bit datawidth and
 .
 \layout Standard
 
-This should be enough for a very large number of 10 MBit devices.
+This should be enough for a very large number of 10 MBit/s devices.
  
 \layout Subsubsection
 
@@ -2455,19 +2601,46 @@ Asynchronous
 The asynchronous solution clock most of the design upon Ethernet PHY clock
  which is significantly slower than the 50 MHz system clock.
  Only the register files and the top module is clocked upon system clock.
- The design utilize open loop 
+ 
+\layout Paragraph
+
+Open Loop and minimum system clock frequency.
+\layout Standard
+
+The design utilize an open loop 
 \begin_inset LatexCommand \cite{XTE-Asynchronous}
 
 \end_inset 
 
- to move from Ethernet clock domain to system clock domain, thus the minimum
- system clock is can be calculated as shown in formula 
-\begin_inset LatexCommand \prettyref{cap:EthV1.00C-minsysclk}
+ to move from Ethernet clock domains to system clock domain.
+ The open loop requires system clock to always be faster than interface
+ clocks.
+ Utilizing the variables in table 
+\begin_inset LatexCommand \ref{cap:Open-Loop-MinSysClk}
 
 \end_inset 
 
-.
- A clock drift worst case of 
+ the timing requirements may be expressed as:
+\layout Standard
+\align center 
+
+\begin_inset Formula $t_{sysclk}+\left|d_{sysclk}\right|\leq t_{phyclk}-\left|d_{phyclk}\right|$
+\end_inset 
+
+
+\layout Standard
+
+This formula may be rewritten as:
+\layout Standard
+\align center 
+
+\begin_inset Formula $f_{sysclk}\geq \frac{1}{t_{phyclk}-\left|d_{phyclk}\right|-\left|d_{sysclk}\right|}$
+\end_inset 
+
+
+\layout Standard
+
+A clock drift worst case of 
 \begin_inset Formula $\pm 19\%$
 \end_inset 
 
@@ -2477,42 +2650,47 @@ collapsed true
 
 \layout Standard
 
-A simulation model for verification of academic Ethernet peripherals (supplied
- by Robert Wikander of Switchcore AB) have a 
-\begin_inset Formula $\pm 19\%$
+A simulation testbench for verification of academic Ethernet peripherals
+ (supplied by Robert Wikander of Switchcore AB) have a 
+\begin_inset Formula $\frac{\left|d_{phyclk}\right|}{t_{phyclk}}<19\%$
 \end_inset 
 
  worst case clock drift.
+ The testbench simulate interface clock drift but assume system clock drift
+ to be zero.
 \end_inset 
 
  yields that system clock must be 23% faster than interface clock.
 \layout Standard
 
+Figure 
+\begin_inset LatexCommand \ref{cap:Open-Loop-Race-Condition}
 
-\begin_inset Float algorithm
+\end_inset 
+
+ illustrates the race condition which eventually occure if the timing requiremen
+ts requirement is not met; the system clock domain fails to sample valid
+ data.
+\layout Standard
+
+
+\begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
 
-\begin_inset LatexCommand \label{cap:EthV1.00C-minsysclk}
+\begin_inset LatexCommand \label{cap:Open-Loop-MinSysClk}
 
 \end_inset 
 
-Eth V1.00 Revision C minimum system clock frequency
-\layout Standard
-\align center 
-
-\begin_inset Formula $f_{sysclk}\geq \frac{1}{t_{phyclk}-\left|t_{phydrift}\right|-\left|t_{sysdrift}\right|}$
-\end_inset 
-
-
+Open Loop - Minimum system clock frequency
 \layout Standard
 \align center 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="5" columns="2">
+<lyxtabular version="3" rows="6" columns="2">
 <features>
 <column alignment="center" valignment="top" leftline="true" width="0pt">
 <column alignment="left" valignment="top" leftline="true" rightline="true" width="0pt">
@@ -2530,7 +2708,7 @@ Variable
 
 \layout Standard
 
-Meaning
+Denotes
 \end_inset 
 </cell>
 </row>
@@ -2578,8 +2756,34 @@ System clock frequency
 
 \layout Standard
 
-Ethernet PHY Clock period 
+Ethernet PHY clock period 
 \begin_inset Formula $\left(s\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $t_{sysclk}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+System clock period 
+\begin_inset Formula $(s)$
 \end_inset 
 
 
@@ -2593,7 +2797,7 @@ Ethernet PHY Clock period
 \layout Standard
 
 
-\begin_inset Formula $t_{phydrift}$
+\begin_inset Formula $d_{phyclk}$
 \end_inset 
 
 
@@ -2604,7 +2808,7 @@ Ethernet PHY Clock period
 
 \layout Standard
 
-Ethernet PHY Clock drift, estimated worst case 
+Ethernet PHY clock drift, worst case 
 \begin_inset Formula $\left(s\right)$
 \end_inset 
 
@@ -2619,7 +2823,7 @@ Ethernet PHY Clock drift, estimated worst case
 \layout Standard
 
 
-\begin_inset Formula $t_{sysdrift}$
+\begin_inset Formula $d_{sysdrift}$
 \end_inset 
 
 
@@ -2630,7 +2834,7 @@ Ethernet PHY Clock drift, estimated worst case
 
 \layout Standard
 
-System clock drift 
+System clock drift, worst case 
 \begin_inset Formula $\left(s\right)$
 \end_inset 
 
@@ -2639,6 +2843,39 @@ System clock drift
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Open-Loop-Race-Condition}
+
+\end_inset 
+
+Open Loop Race Condition
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/openloop_worstcase.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
 
 \end_inset 
 
@@ -2814,7 +3051,7 @@ To verify hardware robustness, the Ethernet devices were used in a number
  of real world tests.
  Some of them, such as a simple ICMP Echo Request / ICMP Echo Reply test
 \begin_inset Foot
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -2826,7 +3063,15 @@ ICMP ping
 \begin_inset Quotes erd
 \end_inset 
 
- and performed by the commando ping, included in most operating systems.
+ and performed by the command line tool 
+\begin_inset Quotes eld
+\end_inset 
+
+ping
+\begin_inset Quotes erd
+\end_inset 
+
+ which is included in most operating systems.
 \end_inset 
 
 , was performed for several hours with 0 packet loss.
@@ -4286,8 +4531,7 @@ The Eth Version 1.00 revisions has been reused by a small number of students.
 \layout Standard
 
 There is not much information regarding verification and reuse Bandung MAC.
- Comments on the Bandung MAC homepage seems to indicate that the project
- was terminated prior to completion.
+ Comments on the Bandung MAC homepage indicate that the design is incomplete.
  Bandung quality therefor is considered poor.
 \layout Section
 
@@ -4473,11 +4717,11 @@ s for handling datagram oriented stacks (ARP, ICMP, UDP and others).
 
 The stack should not be multi-user oriented
 \begin_inset Foot
-collapsed false
+collapsed true
 
 \layout Standard
 
-There are usually no user, or a single user, in SoCs and embedded applications.
+There are usually no user (or a single user) in SoCs and embedded applications.
  Providing memory protection and multi-user handling is memory expensive
  and serve no purpose in this context.
 \end_inset 
@@ -4492,12 +4736,11 @@ The stack should be modular.
 
 The stack should be available as well commented/documented source code
 \begin_inset Foot
-collapsed false
+collapsed true
 
 \layout Standard
 
-Because it is possible that developers may wish to tweak the stack for the
- specific application.
+Because developers may wish to tweak the stack for the specific application.
 \end_inset 
 
 .
@@ -4653,6 +4896,92 @@ Conclusions
 \end_inset 
 
 Future work
+\layout Section
+
+Embedded Development Kit
+\layout Standard
+
+For this evaluation EDK was not available.
+ All experiments have been perfomed in the MDK environment.
+ An re-evaluation using EDK would be usefull.
+ EDK could possibly remedy several of the problems associated with MDK.
+\layout Section
+
+Porting OpenCores 10/100 Ethernet MAC to OPB
+\layout Standard
+
+The OpenCore 10/100 Ethernet MAC is well verified and has been used by a
+ large set of developers and has been used in professional projects.
+ Therefore this MAC is of production quality and at the same time it is
+ free and released as a GPL open source core.
+\layout Standard
+
+The MAC use the Wishbone as I/O bus.
+ It would be interesting to port this MAC to Xilinx OPB.
+ A port may be of interest to developers with limited funding or with previous
+ experience of this MAC.
+\layout Standard
+
+There are at least two ways to port the Wishbone MAC:
+\layout Itemize
+
+Rewrite the top module (and some of the components) for Xilinx OPB.
+\layout Itemize
+
+Create a Wishbone 
+\begin_inset Formula $\Leftrightarrow $
+\end_inset 
+
+ OPB bridge for the MAC.
+\layout Standard
+
+The later approach may be much more beneficial because then the port would
+ not break upon changes in the OpenCores MAC source code.
+ It may also be simpler, as it require only basic understanding of Wishbone
+ and OPB.
+ The 
+\begin_inset Quotes eld
+\end_inset 
+
+OPB Usage Notes
+\begin_inset Quotes erd
+\end_inset 
+
+ provided by Xilinx, intended to aid briding Xilinx OPB with other OPBs,
+ might also be used in the development of the bridge.
+\layout Section
+
+Improving Eth Version 1.00
+\layout Standard
+
+These peripherals may be extended with several features;
+\layout Itemize
+
+Half Duplex (CSMA/CD) support
+\layout Itemize
+
+None-promiscuous mode
+\layout Itemize
+
+MII Management
+\layout Itemize
+
+PAUSE frame support
+\layout Standard
+
+Revision A is single edge triggered and synchronous.
+ Revision C is asynchronous and all flipflops triggered on rising edge.
+ By utilizing both egdes minimum clock frequency and power dissipation may
+ be reduced.
+ This is most likely performed in other peripherals (e.g.
+ Xilinx EMAC) which synchronously detect MII rising edges at half the frequency
+ of Eth Revision A.
+\layout Standard
+
+Eth would benefit greatly from an independant and professional verification.
+ As of current date, it has only been used and vertified in student projects
+ which are known to have loosely defined quality demands.
+ Professional engineers would not consider Eth to be of production quality.
 \layout Bibliography
 \bibitem [ETHERNET]{Book-Gigabit-Ethernet}
 
