@@ -20,7 +20,8 @@ architecture sim of bench_eth is
 		C_OPB_AWIDTH : integer := 32;
 		C_OPB_DWIDTH : integer := 32;
 		C_BASEADDR : std_logic_vector(0 to 31) := X"FFFF_8000";
-		C_HIGHADDR : std_logic_vector(0 to 31) := X"FFFF_80FF"
+		C_HIGHADDR : std_logic_vector(0 to 31) := X"FFFF_80FF";
+		C_PHY_WIDTH : integer := 4
 	);
 	port (
 		-- Global signals
@@ -41,9 +42,9 @@ architecture sim of bench_eth is
 		-- PHY signals
 		RX_CLK : in std_logic;
 		RX_DV  : in std_logic;
-		RX_D   : in std_logic_vector(3 downto 0);
+		RX_D   : in std_logic_vector(7 downto 0);
 		TX_CLK : in std_logic;
-		TX_D   : out std_logic_vector(3 downto 0);
+		TX_D   : out std_logic_vector(7 downto 0);
 		TX_EN  : out std_logic
 	);
 	end component eth;
@@ -70,6 +71,7 @@ architecture sim of bench_eth is
 	type testarray is array (natural range <>) of vector;
 
 	signal rx_data0 : std_logic_vector(3 downto 0);
+	signal rx_data0_i : std_logic_vector(7 downto 0);
 	signal rx_dv0   : std_logic;
 	signal phy_clk  : std_logic := '0';
 	signal rx_clk0  : std_logic;
@@ -95,8 +97,9 @@ architecture sim of bench_eth is
 	--signal rx_dv1   : std_logic;
 	signal tx_clk0  : std_logic;
 	--signal tx_clk1  : std_logic;
-	signal tx_data0 : std_logic_vector(3 downto 0);
-	signal tx_en0   : std_logic;
+	signal tx_data0   : std_logic_vector(3 downto 0);
+	signal tx_data0_i : std_logic_vector(7 downto 0);
+	signal tx_en0     : std_logic;
 	--signal tx_data1 : std_logic_vector(3 downto 0);
 	--signal tx_en1   : std_logic;
 
@@ -211,11 +214,14 @@ begin  -- sim
 		-- PHY signals
 		RX_CLK => rx_clk0,
 		RX_DV  => rx_dv0,
-		RX_D   => rx_data0,
+		RX_D   => rx_data0_i,
 		TX_CLK => tx_clk0,
-		TX_D   => tx_data0,
+		TX_D   => tx_data0_i,
 		TX_EN  => tx_en0
 	);
+
+	rx_data0_i <= "0000" & rx_data0;
+	tx_data0 <= tx_data0_i(3 downto 0);
 
 	halt_sim : process begin
 		wait for 500000 ns;
