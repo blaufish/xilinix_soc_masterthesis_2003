@@ -139,6 +139,7 @@ architecture RTL of ethrx_core is
 	signal fifo_rden  : std_logic;
 	signal fifo_rdd   : std_logic_vector(36 downto 0);
 	signal fifo_empty : std_logic;
+	signal to_reg_en  : std_logic;
 	signal to_reg     : std_logic_vector(36 downto 0);
 
 	signal rx_clock_FDR  : std_logic;
@@ -166,9 +167,21 @@ begin
          	);
 
 	fifo_wren <= '1' when (word_pkt_start & word_pkt_end & word_dv_bytes) /= "00000" else '0';
-	fifo_wrd  <= core_pkt_start & word_pkt_end & word_data & word_dv_bytes;
+	fifo_wrd  <= word_pkt_start & word_pkt_end & word_data & word_dv_bytes;
 	fifo_rden <= not fifo_empty;
-	to_reg    <= fifo_rdd when fifo_rden = '1' else (others=>'0');
+	
+	to_reg_en <= fifo_rden;
+	--process (sys_clk) begin
+	--	if rising_edge(sys_clk) then
+	--		if sys_reset = '1' then
+	--			to_reg_en <= '0';
+	--		else
+	--			to_reg_en <= fifo_rden;
+	--		end if;
+	--	end if;
+	--end process;
+	
+	to_reg <= fifo_rdd when to_reg_en = '1' else (others=>'0');
 
 	core_pkt_start <= to_reg(36);
 	core_pkt_end   <= to_reg(35);
