@@ -1,5 +1,5 @@
 Eth V 1.00 Revision A Specification
-$Id: specification.txt,v 1.2 2003/02/21 11:22:21 petmag-8 Exp $
+$Id: specification.txt,v 1.3 2003/02/21 11:32:03 petmag-8 Exp $
 
 Author: Peter Magnusson < petmag-8 at sm.luth.se >
 
@@ -21,42 +21,40 @@ Section 1; Parameters
 | Eth High Address    | C_HIGHADDR     | Valid addr. range |         | std_logic_vector |
 | OPB Addr. Bus Width | C_OPB_AWIDTH   | 32                | 32      | integer          |
 | OPB Data Bus Width  | C_OPB_AWIDTH   | 32                | 32      | integer          |
+| Ethernet PHY Width  | C_PHY_WIDTH    | 2, 4, 8           | 4       | integer          |
 +---------------------+----------------+-------------------+---------+------------------+
-(generic PHY-width will be added)
 
 
 
 
 Section 2; Signals
 
-+----------------+-----------+-----+-----------------------------+
-| Signal Name    | Interface | I/O | Description                 |
-+----------------+-----------+-----+-----------------------------+
-| OPB_Clk        | OPB       |  I  | OPB Clock                   |
-| OPB_Rst        | OPB       |  I  | OPB Reset                   |
-| OPB_ABus<0:31> | OPB       |  I  | OPB Address Buss            |
-| OPB_BE<0:3>    | OPB       |  I  | OPB Byte Enables            |
-| OPB_DBus<0:31> | OPB       |  I  | OPB Data Bus                |
-| OPB_RNW        | OPB       |  I  | OPB Read Not Write          |
-| OPB_select     | OPB       |  I  | OPB Select                  |
-| OPB_seqaddr    | OPB       |  I  | OPB Sequential Address (*)  |
-| ETH_DBus<0:31> | OPB       |  O  | ETH Data Bus                |
-| ETH_errAck     | OPB       |  O  | ETH Error Acknowledge (**)  |
-| ETH_retry      | OPB       |  O  | ETH Retry (**)              |
-| ETH_toutSup    | OPB       |  O  | ETH Timeout Suppress (**)   |
-| ETH_xferAck    | OPB       |  O  | ETH Transfer Acknowledge    |
-| RX_CLK         | External  |  I  | PHY RX Clock                |
-| RX_DV          | External  |  I  | PHY RX Data Valid           |
-| RX_D<X:0>      | External  |  I  | PHY RX Data (***)           |
-| TX_CLK         | External  |  I  | PHY TX Clock                |
-| TX_D<X:0>      | External  |  O  | PHY TX Data (***)           |
-| TX_EN          | External  |  O  | PHY TX Enable               |
-+----------------+-----------+-----+-----------------------------+
-| * Unused/Ignored                                               |
-| ** Grounded/Unused                                             |
-| *** X=3 for now. Generic in upcomming versions                 |
-+----------------------------------------------------------------+
-
++-----------------------+-----------+-----+-----------------------------+
+| Signal Name           | Interface | I/O | Description                 |
++-----------------------+-----------+-----+-----------------------------+
+| OPB_Clk               | OPB       |  I  | OPB Clock                   |
+| OPB_Rst               | OPB       |  I  | OPB Reset                   |
+| OPB_ABus<0:31>        | OPB       |  I  | OPB Address Buss            |
+| OPB_BE<0:3>           | OPB       |  I  | OPB Byte Enables            |
+| OPB_DBus<0:31>        | OPB       |  I  | OPB Data Bus                |
+| OPB_RNW               | OPB       |  I  | OPB Read Not Write          |
+| OPB_select            | OPB       |  I  | OPB Select                  |
+| OPB_seqaddr           | OPB       |  I  | OPB Sequential Address (*)  |
+| ETH_DBus<0:31>        | OPB       |  O  | ETH Data Bus                |
+| ETH_errAck            | OPB       |  O  | ETH Error Acknowledge (**)  |
+| ETH_retry             | OPB       |  O  | ETH Retry (**)              |
+| ETH_toutSup           | OPB       |  O  | ETH Timeout Suppress (**)   |
+| ETH_xferAck           | OPB       |  O  | ETH Transfer Acknowledge    |
+| RX_CLK                | External  |  I  | PHY RX Clock                |
+| RX_DV                 | External  |  I  | PHY RX Data Valid           |
+| RX_D<C_PHY_WIDTH-1:0> | External  |  I  | PHY RX Data                 |
+| TX_CLK                | External  |  I  | PHY TX Clock                |
+| TX_D<C_PHY_WIDTH-1:0> | External  |  O  | PHY TX Data                 |
+| TX_EN                 | External  |  O  | PHY TX Enable               |
++-----------------------+-----------+-----+-----------------------------+
+| * Unused/Ignored                                                      |
+| ** Grounded/Unused                                                    |
++-----------------------------------------------------------------------+
 
 OPB decoding notes:
 OPB_ABus<0:23> equals C_BASEADDR<0:23>, address is considered to match.
@@ -154,11 +152,11 @@ Input:
 	TX_CLK
 	RX_CLK
 	RX_DV
-	RX_D< datawidth-1 : 0 >
+	RX_D< C_PHY_WIDTH-1 : 0 >
 
 Output:
 	TX_EN
-	TX_D< datawidth-1 : 0 >
+	TX_D< C_PHY_WIDTH-1 : 0 >
 	
 TX_D/RX_D Bit order:
 	The interfaces have MSB to the left, LSB to the right ("Big Endian")

@@ -4,6 +4,7 @@ cset attribute C_BASEADDR = 0x20000000, std_logic_vector
 cset attribute C_HIGHADDR = 0x200000FF, std_logic_vector
 cset attribute C_OPB_DWIDTH = 32, integer
 cset attribute C_OPB_AWIDTH = 32, integer
+cset attribute C_PHY_WIDTH = 4, integer
 # Global ports
 CSET signal OPB_Clk = "", in
 CSET signal OPB_Rst = OPB_Rst, in
@@ -22,9 +23,9 @@ CSET signal ETH_xferAck = Sl_xferAck, out
 # ethrx signals
 CSET signal RX_CLK  = "", in
 CSET signal RX_DV   = "", in
-CSET signal RX_D = "", in, [3:0]
+CSET signal RX_D = "", in, [C_PHY_WIDTH-1:0]
 CSET signal TX_CLK = "", in
-CSET signal TX_D = "", out, [3:0]
+CSET signal TX_D = "", out, [C_PHY_WIDTH-1:0]
 CSET signal TX_EN = "", out
 END
 
