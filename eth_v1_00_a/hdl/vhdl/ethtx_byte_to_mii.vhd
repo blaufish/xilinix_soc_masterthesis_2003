@@ -110,7 +110,7 @@ begin
 				end if;
 
 
-				if count="000" then
+				if send_state=state_send and count="000" then
 					if byte_valid='1' then
 						byte_rd <= '1';
 						data <= byte_data;
