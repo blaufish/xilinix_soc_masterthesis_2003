@@ -48,6 +48,7 @@ begin
 					word_data     <= word & X"00";
 					word_dv_bytes <= std_logic_vector( to_unsigned( count, 3 ) );
 					word          <= (others => '0');
+					count         <= 0;
 
 
 				elsif byte_dvalid = '1' then
