@@ -1,0 +1,119 @@
+This document describes how Eth V1.00.c has been implemented in MicroBlaze
+and Xilinx Design Manager flows. 
+
+Design flow be improved; this is merely a flow which has been proven to work.
+Multitask paramater to PAR may yield significantly shorter flow times.
+
+Target technology: 
+* XESS XSV prototype card
+* Xilinx Virtex 800 HQ2400 -4
+* Intel Level One LXT970AQC (MII PHY) 
+
+Synthesis computer:
+* Athlon 800 MHz
+* 256 MB of RAM
+* Xilinx ISE 4.2 with service packs
+* MDK with services packs
+
+Overall wall time clock for all flows: 2 hours (approx.)
+
+====================================================
+== 1. Microblaze Development Kit (Synthesis flow) ==
+====================================================
+
+Ethernet device is placed in <project>/opb_peripherals/eth_v1_00_c.
+Ethernet devices is mapped in <project>/<project>.mhs, e.g.
+
+	SELECT SLAVE eth
+	CSET attribute HW_VER = 1.00.c
+	CSET attribute INSTANCE = eth1
+	CSET attribute C_HIGHADDR = 0xFFFFC0FF
+	CSET attribute C_BASEADDR = 0xFFFFC000
+	CSET signal RX_D = ETH_RX_D
+	CSET signal RX_DV = ETH_RX_DV
+	CSET signal RX_CLK = ETH_RX_CLK
+	CSET signal TX_EN = ETH_TX_EN
+	CSET signal TX_D = ETH_TX_D
+	CSET signal TX_CLK = ETH_TX_CLK
+	CSET signal OPB_Clk = sys_clk
+	END
+
+Xflow software flow (libgen, gcc) is executed with default paramaters.
+Xflow hardware flow (platgen) is executed without -flat (because we later 
+will revinvoke the XST synthesis flow) 
+
+
+
+==========================
+== 2. Re-Synthesis flow ==
+==========================
+
+Platgen assumes optimal Virtex speedgrade and therefore optimize badly. To 
+archive optimization based on real speedgrade, a Makefile is used to 
+resynthisize the design using XST:
+
+	(cat synthesis/$(PROJECT).scr ; echo "-speedgrade 4" ) \
+	> synthesis/$(PROJECT)_resynth.scr
+	xst -ifn synthesis/$(PROJECT)_resynth.scr \
+	-ofn synthesis/$(PROJECT)_resynth.log
+
+
+=========================================
+== 3. First Xilinx Design Manager Flow == 
+=========================================
+
+
+The following user constraints (UCF file) is used.
+
+	NET "sys_clk" TNM_NET = "sys_clk";
+	TIMESPEC "TS_sys_clk" = PERIOD "sys_clk" 20 ns HIGH 50 %;
+	# Additional timing constraints, copied from EMAC Lite specification
+	NET "eth_rx_clk" TNM_NET = "RXCLK_GRP";
+	NET "eth_tx_clk" TNM_NET = "TXCLK_GRP";
+	TIMESPEC "TSTXOUT" = FROM "TXCLK_GRP" TO "PADS" 10 ns;
+	TIMESPEC "TSRXIN" = FROM "PADS" TO "RXCLK_GRP" 6 ns;
+	NET "sys_reset" TIG;
+	NET "eth_rx_clk" USELOWSKEWLINES;
+	NET "eth_tx_clk" USELOWSKEWLINES;
+	NET "eth_tx_clk" MAXSKEW= 2.0 ns;
+	NET "eth_rx_clk" MAXSKEW= 2.0 ns;
+	NET "eth_rx_clk" PERIOD = 40 ns HIGH 14 ns;
+	NET "eth_tx_clk" PERIOD = 40 ns HIGH 14 ns;
+	NET "eth_rx_d<3>" NODELAY;
+	NET "eth_rx_d<2>" NODELAY;
+	NET "eth_rx_d<1>" NODELAY;
+	NET "eth_rx_d<0>" NODELAY;
+	NET "eth_rx_dv" NODELAY;
+
+These constraints utilize a 50 MHz system clock (sys_clk) and a 25 MHz MII
+100 MBit interface. These constrains gaurantee that the design will work with
+any MII compatible interface, but they may also impact on Place&Route (PAR). 
+
+** NOTICE **
+Modification of the user constraints may yield significantly faster PAR.
+
+In this flow, PAR effort 2 was used and design did not meet the following
+constraints:
+
+	TS_sys_clk = PERIOD TIMEGRP "sys_clk"  20 nS   HIGH 50.000000 %
+	Actual: 20.059ns
+	
+	TSTXOUT = MAXDELAY FROM TIMEGRP "TXCLK_GRP" TO TIMEGRP "PADS" 10 nS
+	Actual: 12.576ns    
+
+	TSRXIN = MAXDELAY FROM TIMEGRP "PADS" TO TIMEGRP "RXCLK_GRP" 6 nS
+	Actual: 6.453ns
+
+Flow time: Less than 20 minutes.
+
+
+==========================================
+== 4. Second Xilinx Design Manager Flow ==
+==========================================
+
+New revision, effort level 5 (highest), use previous flow (revision) as guide,
+enable guide, disable "Match Guide Exactly". Constraints met!
+
+Flow time: 1 hour, 20 minutes.
+
+
