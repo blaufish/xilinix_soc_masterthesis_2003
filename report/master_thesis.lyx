@@ -1894,7 +1894,7 @@ On-Chip Peripheral Bus (OPB)
 \layout Standard
 
 Xilinx MicroBlaze is compatible with several other OPB devices, as stated
- in subsection 
+ in section 
 \begin_inset LatexCommand \ref{sub:Xilinx-OPB}
 
 \end_inset 
@@ -2582,7 +2582,7 @@ MicroBlaze as a SoC system
 \layout Standard
 
 The MicroBlaze Development Kit is geared at developing System on Chip solutions.
- All standard peripherals are implemented in the same chip (FPGA) as the
+ All standard peripherals are implemented on the same chip (FPGA) as the
  MicroBlaze core.
  It also contains typical I/O interfaces for microcontrollers and SoCs,
  such as: serial (RS232), memory (SRAM/FlashRAM) and General Purpose I/O.
@@ -2591,28 +2591,29 @@ The MicroBlaze Development Kit is geared at developing System on Chip solutions.
 MicroBlaze Network Support
 \layout Standard
 
-MicroBlaze does not include any network device.
- This is obviously a major drawback when designing network SoCs.
+MicroBlaze does not include any network peripherals.
+ This is obviously a drawback when designing network SoCs.
  However there are two MicroBlaze compatible OPB Ethernet peripherals available
  for sale at Xilinx.
- One of these is a small, simple Ethernet MAC.
- The other is a professional Ethernet MAC which is highly configurable and
- support most Ethernet modes.
- In a commercial SoC project, buying either of these MACs is simple way
- to get a well verified peripheral.
+ One of these is a small and simple Ethernet peripheral.
+ The other is a professional Ethernet peripheral which is highly configurable
+ and support most Ethernet modes.
+ In a commercial SoC project, buying either of these peripherals is simple
+ way to get a well verified peripheral.
 \layout Subsection
 
 Customized Ethernet peripheral
 \layout Standard
 
-However, custom design of an Ethernet peripheral may be preferred.
- A custom made peripheral yields a number of interesting properties:
+Custom design of an Ethernet peripheral may be preferred in SoC design,
+ especially in application specific SoCs.
+ A custom made peripheral may yield a number of interesting properties:
 \layout Itemize
 
 Cheap
 \layout Itemize
 
-May be customized for a specific application.
+Area, performance and features may be customized for a specific application
 \layout Standard
 
 The level of application specific customization is of interest in a large
@@ -2651,8 +2652,8 @@ It may also be performed in software.
  actions upon receipt of Ethernet PAUSE frames.
  It would not be difficult to extend such a classification module to also
  handle layer 3 frames (such as IPv4) to reduce MicroBlaze CPU utilization.
- By lowering CPU utilization the software application may be simplified
- or power dissipation reduced.
+ By decreasing CPU utilization the software application can be simplified
+ or power dissipation may be reduced.
 \layout Chapter
 
 
@@ -2678,10 +2679,10 @@ In principal, supporting the entire range of Full/Half/Auto Duplex combinations
 Ethernet Interfaces (PHY): MII and RMII
 \layout Standard
 
-The Ethernet devices were designed to be used on two different prototype
- boards, one which was based on an MII Ethernet Interface, one which was
- based on a Reduced MII (RMII) Ethernet Interface.
- Therefore, the designs needed to be capable to manage both interfaces.
+The Ethernet peripherals were designed to be used on two different prototype
+ boards, one based on an MII Ethernet Interface and one based on a Reduced
+ MII (RMII) Ethernet Interface.
+ The designs therefor needed to support both interfaces.
 \layout Section
 
 Implementation
@@ -2699,7 +2700,7 @@ Fully synchronous, single edge triggered
 
 To simplify design and verification, no asynchronous logic is used in the
  design.
- Additionally, only flip flops triggered upon system clock rising edge are
+ Additionally, only flip flops triggered by system clock rising edge are
  used.
  Figure 
 \begin_inset LatexCommand \ref{cap:EthV100A-InputToOutput-illustration}
@@ -2714,7 +2715,7 @@ To simplify design and verification, no asynchronous logic is used in the
 \begin_inset Quotes erd
 \end_inset 
 
- pattern) is detected and output is triggered upon rising edge.
+ pattern) is detected and output is triggered by rising edge.
 \layout Standard
 
 
@@ -2753,8 +2754,8 @@ Eth Version 1.00 Revision A, Input to Output illustration
 It should be noted that due to this design choice, Ethernet Interface clocks
  must be sampled fast enough to detect rising edge and change values prior
  to falling edge.
- Thus, system clock must be approximately 5 times faster than Ethernet interface
- clocks.
+ The system clock must therefor be approximately 5 times faster than Ethernet
+ interface clocks.
  Table 
 \begin_inset LatexCommand \prettyref{cap:Min-SysClk}
 
@@ -2928,24 +2929,29 @@ RMII 100 MBit
 Why synchronous and single edge triggered flipflops?
 \layout Standard
 
-Asynchronous logic and systems triggered both edges are harder to verify.
- Asynchronous logic in Xilinx Virtex FPGA implementations require a global
- clock net dedicated to the Ethernet clocks.
- Therefore asynchronous solution requirements upon the design of target
- prototype board and consume scarce clock pads; Xilinx Virtex only provide
- four dedicated clock pads 
+One reason is that asynchronous logic and systems triggered both edges are
+ harder to verify.
+ Asynchronous operations may introduce hard to find race conditions and
+ errors which rarely occur in RTL-simultations.
+\layout Standard
+
+Another reason is that asynchronous logic in Xilinx Virtex FPGA implementations
+ require a global clock net dedicated each interface clock (MII uses two
+ clocks, RMII uses one).
+ Xilinx Virtex only provide four dedicated clock pads 
 \begin_inset LatexCommand \cite{VIRTEX}
 
 \end_inset 
 
 .
+ Synchronous solutions are therefor enables Virtex multi-interface designs.
 \layout Subsubsection
 
 System Clock and Performance Impact
 \layout Standard
 
-Eth Version 1.00 Revision A, the OPB bus and the MicroBlaze core was included
- in a MicroBlaze platform.
+A MicroBlaze platform consisting of Eth Version 1.00 Revision A, the OPB
+ bus and the MicroBlaze core was created.
  The platform was synthesized and implemented for a Virtex 800 speedgrade
  4 FPGA.
  
@@ -2969,13 +2975,13 @@ Utilizing a Place And Route overall effort of 5.
 , this only enables 10 MBit/s implementations.
 \layout Standard
 
-Eth Version 1.00 Revision bus is operating at 50 MHz, 32-bit datawidth and
- two cycle access times.
+Eth Version 1.00 Revision A bus is operating at 50 MHz, 32-bit datawidth
+ and three cycle access time.
  This yields a maximum switching capacity of 
 \layout Standard
 \align center 
 
-\begin_inset Formula $\frac{32\, \textrm{bit}\, *50\, \textrm{M}\, \textrm{cycles/s}}{2\, \textrm{cycles}}=800\, \textrm{MBit/s}$
+\begin_inset Formula $\frac{32\, \textrm{bit}\, *50\, \textrm{M}\, \textrm{cycles/s}}{3\, \textrm{cycles}}=533\, \textrm{MBit/s}$
 \end_inset 
 
 .
@@ -2993,12 +2999,12 @@ To provide a simple, extendible and reusable interface, each component is
  
 \layout Standard
 
-All receive-logic is placed in an RX core (figure 
+All receive-logic is placed in a receive (RX) core (figure 
 \begin_inset LatexCommand \prettyref{cap:RX-Core}
 
 \end_inset 
 
-), and all send-logic in an TX core (figure 
+), and all send-logic in a transmit (TX) core (figure 
 \begin_inset LatexCommand \prettyref{cap:TX-Core}
 
 \end_inset 
@@ -3010,8 +3016,8 @@ All receive-logic is placed in an RX core (figure
 
 \end_inset 
 
-, all parts of the design have successfully been kept at a small number
- of short and easily read VHDL files.
+, all parts of the design have been kept at a small number of short and
+ easily read VHDL files.
 \layout Standard
 
 
@@ -3187,16 +3193,19 @@ e -4 with system clock set to 50 MHz.
 Asynchronous
 \layout Standard
 
-The asynchronous solution clock most of the design upon Ethernet PHY clock
- which is significantly slower than the 50 MHz system clock.
- Only the register files and the top module is clocked upon system clock.
- 
+This peripheral utilizes three clocks: the OPB system clock, the MII RX_CLK
+ and the MII TX_CLK.
+ The MII clocks are significantly slower (25 MHz at 100 MBit/s) than the
+ system clock.
+ This is utilized to reduce most of the peripheral's clock frequency.
+ Only the register files and the top module is clocked by system clock,
+ most of the design is clocked by MII clocks.
 \layout Paragraph
 
 Clock pad utilization.
 \layout Standard
 
-This design utilize three out of four Xilinx Virtex 
+This peripheral utilizes three out of four Xilinx Virtex 
 \begin_inset LatexCommand \cite{VIRTEX}
 
 \end_inset 
@@ -3209,8 +3218,8 @@ This design utilize three out of four Xilinx Virtex
 Reduced power dissipation.
 \layout Standard
 
-Due to it's asynchronous design, a large part of the design may operate
- at low frequencies.
+Thanks to it's asynchronous design, a large part of the design may operate
+ at low clock frequencies.
  These low, system clock independent, clock frequencies allows reduced power
  dissipation.
 \layout Paragraph
@@ -3218,12 +3227,12 @@ Due to it's asynchronous design, a large part of the design may operate
 Open Loop and minimum system clock frequency.
 \layout Standard
 
-The design utilize an open loop 
+The design utilizes open loop 
 \begin_inset LatexCommand \cite{XTE-Asynchronous}
 
 \end_inset 
 
- to move from Ethernet clock domains to system clock domain.
+ solutions to move from Ethernet clock domains to system clock domain.
  The open loop requires system clock to always be faster than interface
  clocks.
  Utilizing the variables in table 
@@ -3261,7 +3270,7 @@ It is reasonable to assume
 \end_inset 
 
 may however be large; Ethernet receiver clocks must synchronize against
- Ethernet transmitter clocks which possibly could be skewed.
+ Ethernet transmitter clocks which could possibly be skewed.
  During synchronization, Ethernet clocks will drift.
  Assuming clock drift worst case of 
 \begin_inset Formula $\pm 19\%$
@@ -3544,12 +3553,12 @@ Modular Testbench
 Regression tests
 \layout Standard
 
-Testbenches are written to be highly automated and generate logfiles of
- assert notes, warnings and errors.
- Therefore, human inspection of waveforms are rarely needed to verify that
+Testbenches are written to be highly automated and generate logfiles containing
+ assertion notes, warnings and errors.
+ Human inspection of waveforms are therefor rarely needed to verify that
  recently added code does not break previous functionality.
- Regression tests proved to be a highly useful tool and considerably shortened
- verification cycles by automatically finding errors in design.
+ Regression tests proved to be a highly useful tool and shortened verification
+ cycles considerably by automatically finding errors in design.
 \layout Subsubsection
 
 Modular testbench: Ethernet Model
@@ -3559,8 +3568,9 @@ To simplify the main testbench, verification of Ethernet correctness is
  performed in a stand alone model.
  The model identifies short packets, long packets, short interframe gaps,
  incorrect FCS and a number of other Ethernet violations.
- Such errors are asserted as warnings, and packets are outputed is asserted
- as notes in hexadecimal notation.
+ Ethernet violations will cause warning assertions.
+ Corret packets will cause assertion notes, representing the packet in hexadecim
+al notation.
 \layout Subsubsection
 
 Modular testbench: OPB Model / Loopback
@@ -3577,15 +3587,15 @@ Verification of OPB behavior correctness is performed in the OPB Loopback
  Model.
  The model is able to identify several possible violations of the OPB bus.
  This part of the model is not directly Eth Version 1.00 specific.
- However improvements must be made before it is reusable as a general purpose
+ Improvements must however be made before it is reusable as a general purpose
  Xilinx OPB verification model.
 \layout Subsubsection*
 
 Loopback
 \layout Standard
 
-Additionally the model also acts as a loopback device: Any packet received
- by the device will be outputed by the device, without modification.
+The model also acts as a loopback device: Any packet received by the model,
+ will also be transmited by the model.
 \layout Subsection
 
 Multiple Compilation and Synthesis
@@ -3595,7 +3605,7 @@ Ethernet devices were compiled and simulated with two common simulation
  environments, Modeltech Modelsim and Cadence Logic Verification.
  Ethernet devices were compiled and synthesized with Xilinx Synthesis Technology
  (XST) and Synplicity Synplify Pro.
- By testing code in a large number of different tools, none portable VHDL
+ By testing code in a large number of different tools, non-portable VHDL
  constructs have been identified and removed, as well as most code constructs
  which cause warnings in any of the tools used.
 \layout Subsection
@@ -3612,9 +3622,9 @@ Ethereal
 \end_inset 
 
 ) was used to capture Ethernet packets, efficiently monitoring network conversat
-ions between Test PC and Ethernet peripheral.
+ions between the Test PC and the Ethernet peripheral.
  Ethereal tests were usually performed in a simple network consisting of
- a Test PC, a network switch and a prototype board (with a FPGA configured
+ a Test PC, a network switch and a prototype board (with an FPGA configured
  with a MicroBlaze platform).
  This setup is shown in figure 
 \begin_inset LatexCommand \ref{cap:Network-Test-Setup}
@@ -3697,7 +3707,7 @@ ping
  which is included in most operating systems.
 \end_inset 
 
-, was performed for several hours with 0 packet loss.
+, were performed for several hours with no packet loss.
  All real world tests indicates that the final designs are robust.
 \layout Chapter
 
@@ -3710,16 +3720,16 @@ Comparing Ethernet peripherals
 \layout Standard
 
 Comparing peripherals is hard.
- Feature requirements, area requirements, system clock requirements may
+ Feature requirements, area requirements and system clock requirements may
  be different for each SoC project.
  A SoC is also likely to have high quality requirements, but quality is
  hard to measure.
 \layout Standard
 
-Given all these set of factors, it is not feasible to name a single peripheral
+Given all these factors, it is not feasible to name a single peripheral
  which is optimal for all applications.
- However it is possible to compare peripherals and reason which is best
- for certain applications.
+ However it is possible to compare peripherals and determine which is best
+ suitedfor certain applications.
 \layout Standard
 
 A number of Ethernet peripherals have been compared: EMAC Lite - Xilinx
@@ -3729,13 +3739,13 @@ A number of Ethernet peripherals have been compared: EMAC Lite - Xilinx
  A and Eth Version 1.00 Revision C.
 \layout Standard
 
-Neither EthMac nor Bandung is an OPB device.
+Neither EthMac nor Bandung is an OPB peripheral.
  Bandung has been included because it is a published student project and
  therefor created under conditions similar to Eth Version 1.00.
- EthMac has been included because it is a well verified MAC, has been in
- real world use, and is open source.
- It is reasonable that given some work, both Bandung and EthMac could be
- converted into OPB devices.
+ EthMac has been included because it is a well verified MAC, has been used
+ in real world applications, and is open source.
+ Bandung and EthMac could probably be converted into OPB peripherals with
+ some effort.
 \layout Section
 
 Feature comparison
@@ -3758,7 +3768,7 @@ Asynchronous, e.g.
 \layout Itemize
 
 System bus.
- OPB is preferred because as it is the only native I/O bus in MicroBlaze.
+ OPB is preferred since it is the only native I/O bus in MicroBlaze.
 \layout Itemize
 
 DMA.
@@ -3782,13 +3792,14 @@ herals designs such as switches.
 
 The only RMII peripherals are Eth Version 1.00 Revision A and C.
  This is a major advantage in multi-interface designs.
- EMAC Lite and Eth Version 1.00 Revision A are synchronous designs.
- This gives it future advantage in multi-interface designs since it does
- not utilize clock pins (which are scarce in some FPGA).
+ EMAC, EMAC Lite and Eth Version 1.00 Revision A are synchronous designs.
+ This gives them further advantage in multi-interface designs since they
+ do not utilize additional clock nets (which are scarce in some FPGA such
+ as Xilinx Virtex).
 \layout Standard
 
-The peripherals can be divided into a set of simple peripherals and advanced
- peripherals.
+The peripherals can be divided into a simple peripherals and advanced peripheral
+s.
  EMAC and EthMac support a large set of features (DMA, MII Management, PAUSE
  frames) while the others does not.
  Therefor peripherals such as EMAC and EthMac are preferable if an application
@@ -4345,10 +4356,11 @@ Reduced MII interface support
 Speed comparison
 \layout Standard
 
-Speed comparison is performed against a Xilinx Virtex-E FPGA (chip xsv2000e-8-FG
-1156).
- One reason for using this particular FPGA is that one prototype board available
- for during the evaluation was Virtex-E based.
+Speed comparison was based on extimated performance for Xilinx Virtex-E
+ FPGA (chip xsv2000e-8-FG1156) implementations.
+ One reason for using this particular FPGA is that the Platinum prototype
+ board which was supposed to be available for thid evaluation was Virtex-E
+ based.
  Another reason is that speed/area statistics for this particular FPGA is
  included in EMAC / EMAC Lite documentation.
 \layout Standard
@@ -4357,7 +4369,7 @@ Speed comparison is performed against a Xilinx Virtex-E FPGA (chip xsv2000e-8-FG
 \begin_inset Formula $f_{max}$
 \end_inset 
 
- is the maximum system clock frequency.
+ is the estimated maximum system clock frequency.
  For configurable designs (such as EMAC / EMAC Lite), the greatest value
  for 
 \begin_inset Formula $f_{max}$
@@ -4371,8 +4383,8 @@ Speed comparison is performed against a Xilinx Virtex-E FPGA (chip xsv2000e-8-FG
 \begin_inset Formula $f_{max}$
 \end_inset 
 
- is derived by synthesizing the design with XST (optimization level 2 and
- optimization mode 
+ was estimated by synthesizing the design with XST (optimization level 2
+ and optimization mode 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -4389,15 +4401,15 @@ speed
 \end_inset 
 
 ) used by Xilinx in EMAC documentation.
- The system constraint is tweaked a minimum period is found for which all
- constraints are met.
+ The system clock period constraint was tweaked until a minimum period was
+ found for which all constraints were met.
 \layout Standard
 
 Then 
 \begin_inset Formula $f_{max}$
 \end_inset 
 
- is calculated as 
+ was calculated as 
 \begin_inset Formula $f_{max}=\frac{1000}{system\, clock\, period\, (nanoseconds)}$
 \end_inset 
 
@@ -5134,11 +5146,11 @@ TO BE WRITTEN
 Quality comparison
 \layout Standard
 
-EMAC Lite and EMAC is considered production quality by the Xilinx cooperation.
+EMAC Lite and EMAC is considered production quality by the Xilinx corperation.
  EthMac is considered production quality by the opencores.org developers.
  These three MACs have been tested by developers as well as number of users/cust
 omers.
- Therefor, they are by far the best verified devices.
+ Therefor, they are by far the most well verified peripherals.
 \layout Standard
 
 Bandung and Eth Version 1.00 Revision A, C are not as well verified.
@@ -5147,15 +5159,16 @@ Bandung and Eth Version 1.00 Revision A, C are not as well verified.
 
 The Eth Version 1.00 revisions has been reused by a small number of students.
  Eth has also passed a number of verification tests.
- Therefor the Eth 1.00 revisions are considered to be of good academic quality
+ The Eth 1.00 revisions are therefor considered to be of good academic quality
  but more tests are needed before they can be considered to be of production
  quality.
  
 \layout Standard
 
-There is not much information regarding verification and reuse Bandung MAC.
+There is not much information regarding verification and reuse of the Bandung
+ MAC.
  Comments on the Bandung MAC homepage indicate that the design is incomplete.
- Bandung quality therefor is considered poor.
+ Bandung quality is therefor considered poor.
 \layout Section
 
 Details about the devices used in analysis
@@ -5260,12 +5273,13 @@ Bandung - Bandung Institute of Technology 10/100 Ethernet MAC
 \layout Standard
 
 The Bandung MAC is a simple Ethernet MAC.
- It is not designed for SoC implementation, instead it is externally interfaced
- using the prototype board's SRAM as a shared medium.
- A PC controls the MAC utilizing the shared medium.
+ It is not designed for SoC implementation, instead it uses the prototype
+ board's SRAM as a shared medium.
+ A PC controls the MAC by writing or reading the shared medium through a
+ parallel cable which is connected to a small SRAM interface module.
 \layout Standard
 
-The transmit modules of The Bandung MAC are broken.
+The transmit module of The Bandung MAC is broken.
  The Bandung MAC homepage states: 
 \begin_inset Quotes eld
 \end_inset 
@@ -5319,20 +5333,21 @@ how small is a small TCP/IP stack?
 \end_inset 
 
 .
- The answer is simple - it depends upon what you are comparing to.
- Extreme application specific stacks may only contain 256 bytes of code,
- a general stack is hard to make small.
+ The answer is simple - it depends on what you are comparing with regard
+ to.
+ Some application specific stacks may only contain 256 bytes of code, but
+ a general stack is hard to make that small.
 \layout Standard
 
 Therefore, we define a number of characteristics preferred in a small TCP/IP
- stack:
+ stack for MicroBlaze:
 \layout Itemize
 
 The stack should be general and reusable, not designed for a single application.
 \layout Itemize
 
 The TCP/IP stack should provide two buffers: one for receiving and one sending
- packet.
+ packets.
  These buffers may be as small as a single packet, which enable simple interface
 s for handling datagram oriented stacks (ARP, ICMP, UDP and others).
  These buffers may be reused by all datagram functions to save memory.
@@ -5346,7 +5361,7 @@ collapsed false
 
 There are usually no user (or a single user) in SoCs and embedded applications.
  Providing memory protection and multi-user handling is memory expensive
- and serve no purpose in this context.
+ and serves no purpose in this context.
 \end_inset 
 
 .
@@ -5363,7 +5378,7 @@ collapsed false
 
 \layout Standard
 
-Because developers may wish to tweak the stack for the specific application.
+Because developers may wish to tweak the stack for a specific application.
 \end_inset 
 
 .
@@ -5374,25 +5389,26 @@ Xilinx XilNet
 \layout Standard
 
 Xilinx XilNet is a small TCP/IP stack included in MDK.
- It is provided to demonstrate MicroBlaze networking capabilities.
+ It is provided to demonstrate the networking capabilities of MicroBlaze.
  However XilNet suffers a number drawbacks:
 \layout Itemize
 
-No networking device is included in MicroBlaze, so it is not impossible
- to use XilNet with MDK peripherals only.
+No network peripheral is included in MicroBlaze, so it is not possible to
+ use XilNet with MDK peripherals only.
 \layout Itemize
 
 The requirements on MAC send/receive functions are unspecified.
- No example of such functions are provided for reference.
+ No example of such functions is provided for reference.
 \layout Itemize
 
-No example application utilizing XilNet is provided.
+No example applications utilizing XilNet are provided.
 \layout Itemize
 
 XilNet is unsupported, as opposed to all other MDK libraries.
 \layout Itemize
 
-XilNet documentation is of low quality and only function oriented.
+XilNet documentation is of low quality and only describe the function calls.
+ No usage notes nor general design description is provided.
 \layout Subsubsection
 
 Several issues with XilNet
@@ -5405,23 +5421,29 @@ Attempts were made to make XilNet work.
 \end_inset 
 
 .
- MAC functions were simple to design, and ARP was successfully tested.
- IPv4/ICMP tests failed.
+ MAC functions were easily implemented.
+ 
+\layout Standard
+
+ARP was successfully tested but IPv4/ICMP tests failed.
  XilNet was able to receive ICMP Echo Request packets, but the following
  errors were observed on the corresponding ICMP Echo Reply packets:
 \layout Itemize
 
-IPv4 checksum incorrect.
+IPv4 checksum was incorrect.
 \layout Itemize
 
-ICMP length incorrect.
+IPv4 total length was incorrect.
 \layout Itemize
 
-ICMP checksum incorrect.
+ICMP checksum was incorrect.
+\layout Itemize
+
+ICMP data was incorrect.
 \layout Standard
 
-These errors may be due to incorrect implementation / utilization of XilNet
- or a flaw in XilNet itself.
+These errors may be due to incorrect implementation / usage of XilNet or
+ a flaw in XilNet itself.
  Xilinx Embedded Processor Forum was searched for a solution, but no relevant
  information was found.
  The forum indicates that there are issues 
@@ -5429,7 +5451,7 @@ These errors may be due to incorrect implementation / utilization of XilNet
 
 \end_inset 
 
- even in recent XilNet versions included in EDK.
+ even with recent XilNet versions included in EDK.
 \layout Subsubsection
 
 Modularity
@@ -5447,7 +5469,7 @@ c,
 \emph on 
 tcp.c
 \emph default 
- and such).
+ etc).
  However there are several interdependency, especially in the file 
 \emph on 
 ip.c
@@ -5468,7 +5490,7 @@ ip.c
 Functionality
 \layout Standard
 
-XilNet TCP support is limited.
+XilNet's TCP support is limited.
  It supports only a single concurrent TCP connection.
 \layout Subsubsection
 
@@ -5476,9 +5498,14 @@ Overall
 \layout Standard
 
 XilNet is a very small TCP/IP stack.
- It is approximately 8 KB large, but without TCP and UDP it is 5 KB large.
+ XilNet is 8 KB large, but a small testapplication (appendix 
+\begin_inset LatexCommand \ref{cha:XilNet-implementation-for-eth}
+
+\end_inset 
+
+) with XilNet but without TCP and UDP support is only 5 KB large.
  This makes XilNet well suited for applications with very little RAM.
- However, several users have experienced problems utilizing XilNet.
+ However, several users have experienced problems using XilNet.
 \layout Subsection
 
 lwIP
@@ -5543,8 +5570,33 @@ Overall
 \layout Standard
 
 lwIP uses 40 KB RAM, which is a lot in (low cost) SoC applications.
- Either the SoC contain more than 40 KB of interal RAM, or external memory
+ Either the SoC contains more than 40 KB of interal RAM, or external memory
  must be used.
+\layout Section
+
+Operating Systems for MicroBlaze
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features>
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+TO BE WRITTEN
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
 \layout Chapter
 
 
@@ -5587,11 +5639,11 @@ were evaluated.
 The MDK software development tools
 \layout Standard
 
-proved to be easy to use - partially due to their similarities to standard
+proved to be easy to use - partially thanks to their similarities with standard
  UNIX tools.
  MicroBlaze software development is usually simple and straight-forward
  programming in the C language.
- The GNU Debugger (GDB) allowed remote on-chip debugging.
+ The GNU Debugger (GDB) allows remote on-chip debugging which is usefull.
 \layout Paragraph
 
 The MDK platform tailoring tools
@@ -5607,8 +5659,8 @@ Network connectivity
 
 has been provided through the Eth Version 1.00 set of peripherals which were
  designed in this thesis work.
- A number of different customizations of Eth has been demonstrated.
- MII and RMII is supported in all customizations and MII has been verified
+ A number of different customizations of Eth have been demonstrated.
+ MII and RMII are supported in all customizations and MII has been verified
  on prototyping boards.
  RMII capabilities could only be verified in simulations.
 \layout Paragraph
@@ -5617,8 +5669,8 @@ Ethernet peripherals
 \layout Standard
 
 have been analytically analyzed.
- Because each peripheral have a unique set of features, no peripheral can
- be selected to be the best peripheral.
+ Because each peripheral has a unique set of features and drawbacks, no
+ peripheral can be selected to be considered the best.
  Eth Version 1.00 performed especially well in performance benchmarks, while
  other peripherals were concluded to support more features and to be better
  verified.
@@ -5633,19 +5685,19 @@ TCP/IP stack was evaluated.
 \emph on 
 Xilinx Embedded Processor Forum
 \emph default 
- also experienced problems with XilNet.
+ various experienced problems with XilNet.
 \layout Paragraph
 
 lwIP
 \layout Standard
 
-was successfully evaluated for MicroBlaze.
+was evaluated for MicroBlaze.
  
 \begin_inset LatexCommand \cite{MB-lwIP}
 
 \end_inset 
 
- demonstrated a lwIP based webserver on MicroBlaze.
+ demonstrated a lwIP based webserver running on MicroBlaze.
 \layout Chapter
 
 
@@ -5681,26 +5733,26 @@ the industry's fastest soft processing solution
 
 When this thesis work set out, the overall goal was to evaluate Xilinx MicroBlaz
 e for Network applications.
- A number of key objectives to reach this goal were identified in chapter
+ A number of key objectives for reaching this goal were identified in chapter
  
 \begin_inset LatexCommand \ref{cha:Introduction}
 
 \end_inset 
 
 .
- These objectives have successfully been met.
+ These objectives have all been met.
 \layout Standard
 
-An important setback occurred during the thesis work.
- The Platinum prototyping board did not become available to thesis work
- due to development/manufacturing problems.
+An important setback was that the Platinum prototyping board did not become
+ available during the work on this thesis due to development/manufacturing
+ problems.
  Because Platinum was not available, RMII capabilities of the network peripheral
  Eth could not be verified.
  A large set of applications which requires several network interfaces could
  not be demonstrated without the Platinum prototyping board.
 \layout Standard
 
-This setback did not have a major effect to the evaluation, but a number
+This setback did not have a major impact to the evaluation, but a number
  of simple 
 \begin_inset Quotes eld
 \end_inset 
@@ -5709,7 +5761,8 @@ proof of concept
 \begin_inset Quotes erd
 \end_inset 
 
- applications such as network switches could not be implemented.
+ multi-interface applications, such as network switches, could not be implemente
+d.
 \layout Section
 
 Future work
@@ -5719,10 +5772,9 @@ Embedded Development Kit (EDK)
 \layout Standard
 
 was not used in this evaluation.
- All experiments have been performed in the MDK environment.
+ All experiments have been performed using the MDK environment.
  An re-evaluation using EDK would be useful.
- EDK could possibly remedy the problems found in the MDK platform tailoring
- utilities.
+ EDK might remedy the problems found in the MDK platform tailoring utilities.
 \layout Paragraph
 
 XilNet
@@ -5730,7 +5782,7 @@ XilNet
 
 sent bad IP and ICMP packets in this evaluation.
  The cause of bad packets is not known.
- Getting XilNet to send correct packets would be very usefull.
+ Making XilNet send correct packets would be usefull.
  More recent versions of XilNet included in EDK could be evaluated.
 \layout Paragraph
 
@@ -5746,13 +5798,21 @@ on.
 The OpenCores.org 10/100 Ethernet MAC
 \layout Standard
 
-is well verified and has been used by a large set of developers and has
- been used in professional projects.
- Therefore this MAC is of production quality and at the same time it is
- free and released as a GPL open source core license.
+is well verified and has been used by a large set of developers.
+ It has been used in professional projects.
+ This MAC is therefor of production quality and available for free in GPL
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+copyleft
+\begin_inset Quotes erd
+\end_inset 
+
+ open source license.
 \layout Standard
 
-The MAC use the Wishbone as I/O bus.
+The MAC uses the Wishbone as it's system I/O bus.
  It would be interesting to port this MAC to Xilinx OPB.
  A port may be of interest to developers with limited funding or with previous
  experience of this MAC.
@@ -5768,7 +5828,7 @@ Create a Wishbone
 \begin_inset Formula $\Leftrightarrow $
 \end_inset 
 
- OPB bridge for the MAC.
+ OPB bridge for the MAC to use.
 \layout Standard
 
 The later approach may be much more beneficial because then the port would
@@ -5789,26 +5849,26 @@ OPB Usage Notes
 \end_inset 
 
  provided by Xilinx, intended to aid bridging Xilinx OPB with other OPB
- implementations, might also be used in the development of the bridge.
+ implementations, might also be used in the development of such a bridge.
 \layout Paragraph
 
 Adding features to Eth Version 1.00 revisions.
 \layout Standard
 
-The Eth 1.00 revisions are simple Ethernet peripherals and may be extended
+The Eth 1.00 revisions are simple Ethernet peripherals and can be extended
  with several features.
  Some new features might include:
 \layout Itemize
 
-Half Duplex (CSMA/CD) support, none-promiscuous mode, MII Management, PAUSE
- frame support
+Half Duplex (CSMA/CD) support, non-promiscuous mode, MII Management and
+ PAUSE frame support
 \layout Paragraph
 
 Utilizing more clock edges in Eth Version 1.00.
 \layout Standard
 
 Revision A is single edge triggered and synchronous.
- Revision C is asynchronous and all flipflops triggered on rising edge.
+ Revision C is asynchronous and all flipflops are triggered by rising edge.
  By utilizing both edges minimum clock frequency and power dissipation may
  be reduced.
  This is most likely performed in other peripherals (e.g.
@@ -5819,7 +5879,7 @@ Revision A is single edge triggered and synchronous.
 Independent and professional verification of Eth Version 1.00.
 \layout Standard
 
-Eth would benefit greatly from an independent and professional verification.
+Eth would benefit from an independent and professional verification.
  As of current date, it has only been used and verified in student projects
  which are known to have loosely defined quality demands.
  Professional engineers would not consider Eth to be of production quality.
@@ -5846,8 +5906,8 @@ Xilinx MicroBlaze is a powerful soft core processor well suited for Network
 Software.
 \layout Standard
 
-A large set of software is available or may be ported to Xilinx MicroBlaze.
- A small number of operating systems is already available to MicroBlaze.
+A large set of software is available or can be ported to Xilinx MicroBlaze.
+ A small number of operating systems are already available to MicroBlaze.
  TCP/IP stacks for embedded applications, such as lwIP, are easily ported
  to MicroBlaze.
  
@@ -5858,8 +5918,8 @@ Development kits for MicroBlaze.
 
 The MicroBlaze Development Kit (MDK) gives a good overall impression and
  is easy to use.
- Some issues with MDK has been found, but the Embedded Development Kit (EDK)
- is believed to remedy at least one of them.
+ Some issues with MDK have been found, but the Embedded Development Kit
+ (EDK) is believed to remedy at least one of them.
 \layout Bibliography
 \bibitem [ETHERNET]{Book-Gigabit-Ethernet}
 
@@ -6284,7 +6344,7 @@ int main( void ) {
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -6300,7 +6360,10 @@ void xilnet_mac_send_frame( unsigned char* frame, int len) {
         while (! ETH_HWDR_TX_EMPTY(xilnet_base) ) ;
 \layout LyX-Code
 
-                 for (i=0; i<len; i++) {
+        
+\layout LyX-Code
+
+        for (i=0; i<len; i++) {
 \layout LyX-Code
 
                 switch(i&3) {
