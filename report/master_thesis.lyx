@@ -61,9 +61,9 @@ petmag-8@sm.luth.se
 This thesis explores the possibility of implementing a System on Chip (SoC)
  solution for network applications.
  Xilinx MicroBlaze soft processor core and IBM CoreConnect On-Chip Peripheral
- bus peripherals is utilized in the SoC.
- The SoC is implemented in Virtex and Virtex-E Field Programmable Arrays
- (FPGA) manufactured by Xilinx.
+ Bus (OPB) peripherals are utilized in the SoC.
+ The SoC is implemented in Virtex Field Programmable Gate Array (FPGA) circuits
+ manufactured by Xilinx.
 \layout Abstract
 
 Typical network SoC applications include Ethernet switches, Internet-connected
@@ -71,7 +71,7 @@ Typical network SoC applications include Ethernet switches, Internet-connected
  gateways.
 \layout Chapter*
 
-Preface
+Acknowledgement
 \layout Standard
 
 The evaluation of the Xilinx MicroBlaze has been performed as a Master Thesis
@@ -100,11 +100,14 @@ MS.c.
 MS.c.
  students Jan Dahlberg, Johan Mattsson and Frederik Schmid for reusing and
  verifying my Ethernet MAC.
+\layout Itemize
+
+Jens Eliasson and Tim Johansson for proof-reading my thesis.
 \layout Standard
 
 During my work on the thesis, I have taught MicroBlaze based System on Chip
  (SoC) development to MS.c.
- students in the Digital Synthesis course at CSEE.
+ students in the Digital Synthesis Project course at CSEE.
  Additional credits goes to these students for valuable input.
 \layout Standard
 
@@ -138,21 +141,49 @@ During my work on the thesis, I have taught MicroBlaze based System on Chip
 \end_inset 
 
 Introduction
-\layout Chapter
+\layout Section
 
+Objectives
+\layout Section
 
-\begin_inset LatexCommand \label{cha:Limitation}
+Method
+\layout Paragraph
+
+Simple MicroBlaze systems
+\layout Standard
+
+were created using MicroBlaze Development Kit.
+ Microblaze development tutorials 
+\begin_inset LatexCommand \cite{MB_TUTORIAL,MB_OPB_TUTORIAL}
 
 \end_inset 
 
-Limitations
+ was used to learn building MicroBlaze systems.
+\layout Paragraph
+
+Ethernet peripherals
+\layout Standard
+
+were developed network enable the MicroBlaze systems.
+ These peripherals were developed for dual purposes:
+\layout Itemize
+
+to network enable MicroBlaze (MDK does not include network peripherals)
+\layout Itemize
+
+to futher verify that custom designed peripherals functioned properly (Network
+ applications are easily monitored by remote for long periods of time, as
+ opposed to several other peripherals)
 \layout Section
+
+Limitations
+\layout Subsection
 
 Time
 \layout Standard
 
 This Master Thesis work has been performed during a period of 6 months.
-\layout Section
+\layout Subsection
 
 Software
 \layout Standard
@@ -160,10 +191,10 @@ Software
 MicroBlaze Development Kit (MDK) 2.2 (Service Pack 2) has been used for this
  evalutation.
  Currently it remains the most recent release.
-\layout Section
+\layout Subsection
 
 Hardware
-\layout Subsection
+\layout Subsubsection
 
 XESS XSV-100 / XSV-800 Prototyping Board
 \layout Standard
@@ -192,9 +223,9 @@ Two 512K
 \end_inset 
 
 16 Bit SRAM memory banks.
-\layout Subsection
+\layout Subsubsection
 
-Platina Virtex-E Prototyping Board
+Platinum Virtex-E Prototyping Board
 \layout Standard
 
 This is a proptyping board developed at Luleå University of Technology and
@@ -203,7 +234,7 @@ This is a proptyping board developed at Luleå University of Technology and
  
 \layout Standard
 
-Platina connects the Virtex-E chip with the following interfaces:
+Platinum connects the Virtex-E chip with the following interfaces:
 \layout Itemize
 
 Four RMII PHYs, connected to twisted pair cable sockets.
@@ -226,17 +257,8 @@ Chapter
 
  gives a general introduction to the thesis and the work performed to evaluate
  Xilinx MicroBlaze.
- 
-\layout Standard
-
-Chapter 
-\begin_inset LatexCommand \ref{cha:Limitation}
-
-\end_inset 
-
- covers what how the evaluation have been constrained and what thesis does
- not cover.
- 
+ It also covers the objectives of the thesis work and the methods used.
+ Limitations to work is also covered in this chapter.
 \layout Standard
 
 Chapter 
@@ -717,7 +739,12 @@ OPB Bus
  is an easy to use bus.
  OPB allows an arbitrary number of masters to read from / write to an arbitrary
  number of slaves.
- 
+ Figure 
+\begin_inset LatexCommand \ref{cap:IBM-CoreConnect-OPB-Physical-Implementation}
+
+\end_inset 
+
+ shows a small IBM CoreConnect OPB System.
 \layout Standard
 
 The bus includes a data bus and an address bus.
@@ -757,6 +784,46 @@ Bus Lock
  (also referred to as sequential access or bursts) to make several slave
  accesses per arbitrated bus grant.
  Utilization of sequential access keeps arbitration overhead to a minimum.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:IBM-CoreConnect-OPB-Physical-Implementation}
+
+\end_inset 
+
+IBM CoreConnect OPB Physical Implementation
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/IBM_OPB_Physical_implementation.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\newline 
+(from 
+\begin_inset LatexCommand \cite{CoreConnect_WhitePaper}
+
+\end_inset 
+
+ page 6)
+\end_inset 
+
+
 \layout Subsection
 
 
@@ -780,7 +847,10 @@ Timeout supppress
 \end_inset 
 
  signal.
- Figure 
+ 
+\layout Standard
+
+Figure 
 \begin_inset LatexCommand \ref{cap:Xilinx-OPB-physical}
 
 \end_inset 
@@ -811,7 +881,7 @@ Xilinx OPB requires that all slave/master peripherals set all output signals
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -828,6 +898,8 @@ Xilinx OPB physical implementation
 	filename images/xilinx_opb_physical_implementation.eps
 	display default
 	size_type 1
+	width 90text%
+	keepAspectRatio
 	rotateOrigin leftBaseline
 	lyxsize_type 0
 
@@ -2786,66 +2858,6 @@ OPB Slave
 </cell>
 </row>
 </lyxtabular>
-
-\end_inset 
-
-
-\end_inset 
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:RX-Core}
-
-\end_inset 
-
-Eth Version 1.00 Revision A, RX Core
-\layout Standard
-\align center 
-
-\begin_inset Graphics FormatVersion 1
-	filename images/ethrx-core-hack.eps
-	display default
-	size_type 1
-	width 40page%
-	height 90page%
-	rotateOrigin leftBaseline
-	lyxsize_type 0
-
-\end_inset 
-
-
-\end_inset 
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:TX-Core}
-
-\end_inset 
-
-Eth Version 1.00 Revision A, TX Core
-\layout Standard
-\align center 
-
-\begin_inset Graphics FormatVersion 1
-	filename images/ethtx-core-hack.eps
-	display default
-	size_type 1
-	width 60page%
-	height 25page%
-	rotateOrigin leftBaseline
-	lyxsize_type 0
 
 \end_inset 
 
@@ -5255,152 +5267,6 @@ Eth would benefit greatly from an independant and professional verification.
  As of current date, it has only been used and vertified in student projects
  which are known to have loosely defined quality demands.
  Professional engineers would not consider Eth to be of production quality.
-\layout Chapter
-
-Acronyms
-\layout Itemize
-
-ASIC - Application Specific Integrated Circuit
-\layout Itemize
-
-AUI - Attachment Unit Interface
-\layout Itemize
-
-Bandung - Bandung Institute of Technology 10/100 Ethernet MAC
-\layout Itemize
-
-CPU - Central Processing Unit
-\layout Itemize
-
-CSEE - Department of Computer Science and Electrical Engineering at Luleå
- University of Technology.
-\layout Itemize
-
-DA - Destination Address
-\layout Itemize
-
-DCR - Device Control Register bus
-\layout Itemize
-
-DMA - Direct Memory Access
-\layout Itemize
-
-EDK - Embedded Development Kit
-\layout Itemize
-
-EISLAB - Embedded Internet Systems Laboratory
-\layout Itemize
-
-EMAC - Xilinx OPB Ethernet Media Access Controller
-\layout Itemize
-
-EMAC Lite - Xilinx OPB Ethernet Lite Media Access Controller
-\layout Itemize
-
-EthMac - Opencores.org 10/100 Ethernet MAC
-\layout Itemize
-
-FCS - Frame Check Sequence
-\layout Itemize
-
-FlashRAM - Flashable (Non-Volatile) Random Access Memory
-\layout Itemize
-
-FPGA - Field Programmable Gate Array
-\layout Itemize
-
-GHz - Giga Hertz
-\layout Itemize
-
-I/O - Input/Output
-\layout Itemize
-
-IBM - International Bussniess Machines Coproration
-\layout Itemize
-
-ICMP - Internet Control Message Protocoll
-\layout Itemize
-
-IP - Internet Protocol
-\layout Itemize
-
-IPv4 - Internet Protocol Version 4
-\layout Itemize
-
-LMB - Local Memory Bus
-\layout Itemize
-
-lwIP - Light Weight Internet Protocol
-\layout Itemize
-
-MAC - Media Access Controller
-\layout Itemize
-
-MAU - Medium Attachment Unit
-\layout Itemize
-
-MBit/s - Mega Bit per second
-\layout Itemize
-
-MDK - MicroBlaze Development Kit
-\layout Itemize
-
-MHz - Mega Hertz
-\layout Itemize
-
-MII - Medium Indepentent Interface
-\layout Itemize
-
-OPB - IBM CoreConnect On-Chip Peripheral Bus
-\layout Itemize
-
-PHY - Physical Layer Device
-\layout Itemize
-
-PLB - Processor Local Bus
-\layout Itemize
-
-PLD - Programmable Logic Device
-\layout Itemize
-
-PROM - Programmable Read-Only Memory
-\layout Itemize
-
-RAM - Random Access Memory
-\layout Itemize
-
-RMII - Reduced Medium Indepentent Interface
-\layout Itemize
-
-ROM - Read-Only Memory
-\layout Itemize
-
-SA - Source Address
-\layout Itemize
-
-SoC - System on Chip
-\layout Itemize
-
-SRAM - Static Random Access Memory
-\layout Itemize
-
-TCP - Transmission Control Protocol
-\layout Itemize
-
-TCP/IP - Internet Protocol Version 4 based network stacks (TCP, UDP, ICMP
- etc.)
-\layout Itemize
-
-TYPE - Type-field (Ethernet frames)
-\layout Itemize
-
-SYNC - Synchronization bits (Ethernet frames)
-\layout Itemize
-
-UDP - User Datagram Protocol
-\layout Itemize
-
-XST - Xilinx Synthesis Technology
 \layout Bibliography
 \bibitem [ETHERNET]{Book-Gigabit-Ethernet}
 
@@ -5610,4 +5476,222 @@ All products and company names are service marks, trademarks or registered
  purposes.
  All images included from copyrighted materials are the property of their
  respective owners.
+\layout Chapter
+\start_of_appendix 
+Eth Version 1.00 Revision A Schematics
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:TX-Core}
+
+\end_inset 
+
+Eth Version 1.00 Revision A, TX Core
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/ethtx-core-hack.eps
+	display default
+	size_type 1
+	width 95text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:RX-Core}
+
+\end_inset 
+
+Eth Version 1.00 Revision A, RX Core
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/ethrx-core-hack.eps
+	display default
+	size_type 1
+	height 70page%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Chapter
+
+List of acronyms
+\layout Itemize
+
+ASIC - Application Specific Integrated Circuit
+\layout Itemize
+
+AUI - Attachment Unit Interface
+\layout Itemize
+
+Bandung - Bandung Institute of Technology 10/100 Ethernet MAC
+\layout Itemize
+
+CPU - Central Processing Unit
+\layout Itemize
+
+CSEE - Department of Computer Science and Electrical Engineering at Luleå
+ University of Technology
+\layout Itemize
+
+CSMA/CD - Carrier Sense Multiple Access / Collision Detect
+\layout Itemize
+
+DA - Destination Address
+\layout Itemize
+
+DCR - Device Control Register bus
+\layout Itemize
+
+DMA - Direct Memory Access
+\layout Itemize
+
+EDK - Embedded Development Kit
+\layout Itemize
+
+EISLAB - Embedded Internet Systems Laboratory
+\layout Itemize
+
+EMAC - Xilinx OPB Ethernet Media Access Controller
+\layout Itemize
+
+EMAC Lite - Xilinx OPB Ethernet Lite Media Access Controller
+\layout Itemize
+
+EthMac - Opencores.org 10/100 Ethernet MAC
+\layout Itemize
+
+FCS - Frame Check Sequence
+\layout Itemize
+
+FlashRAM - Flashable (Non-Volatile) Random Access Memory
+\layout Itemize
+
+FPGA - Field Programmable Gate Array
+\layout Itemize
+
+GHz - Giga Hertz
+\layout Itemize
+
+I/O - Input/Output
+\layout Itemize
+
+IBM - International Bussniess Machines Coproration
+\layout Itemize
+
+ICMP - Internet Control Message Protocoll
+\layout Itemize
+
+IP - Internet Protocol
+\layout Itemize
+
+IPv4 - Internet Protocol Version 4
+\layout Itemize
+
+LMB - Local Memory Bus
+\layout Itemize
+
+lwIP - Light Weight Internet Protocol
+\layout Itemize
+
+MAC - Media Access Controller
+\layout Itemize
+
+MAU - Medium Attachment Unit
+\layout Itemize
+
+MBit/s - Mega Bit per second
+\layout Itemize
+
+MDK - MicroBlaze Development Kit
+\layout Itemize
+
+MHz - Mega Hertz
+\layout Itemize
+
+MII - Medium Indepentent Interface
+\layout Itemize
+
+OPB - IBM CoreConnect On-Chip Peripheral Bus
+\layout Itemize
+
+PHY - Physical Layer Device
+\layout Itemize
+
+PLB - Processor Local Bus
+\layout Itemize
+
+PLD - Programmable Logic Device
+\layout Itemize
+
+PROM - Programmable Read-Only Memory
+\layout Itemize
+
+RAM - Random Access Memory
+\layout Itemize
+
+RMII - Reduced Medium Indepentent Interface
+\layout Itemize
+
+ROM - Read-Only Memory
+\layout Itemize
+
+SA - Source Address
+\layout Itemize
+
+SoC - System on Chip
+\layout Itemize
+
+SRAM - Static Random Access Memory
+\layout Itemize
+
+TCP - Transmission Control Protocol
+\layout Itemize
+
+TCP/IP - The Internet Protocol Version 4 protocol suite (TCP, UDP, ICMP
+ etc)
+\layout Itemize
+
+TYPE - Type-field (Ethernet frames)
+\layout Itemize
+
+SYNC - Synchronization bits (Ethernet frames)
+\layout Itemize
+
+UDP - User Datagram Protocol
+\layout Itemize
+
+XST - Xilinx Synthesis Technology
 \the_end
