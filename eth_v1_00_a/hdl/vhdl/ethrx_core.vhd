@@ -17,10 +17,10 @@ entity ethrx_core is
 		reg_status_wr	: in std_logic;
 		reg_status	: out std_logic_vector(0 to 31);
 		reg_fifo_rd	: in std_logic;
-		reg_fifo	: out std_logic_vector(0 to 31);
+		reg_fifo	: out std_logic_vector(0 to 31)
 
-		debugfile0	: out std_logic_vector(0 to 31);
-		debugfile1	: out std_logic_vector(0 to 31)
+		--debugfile0	: out std_logic_vector(0 to 31);
+		--debugfile1	: out std_logic_vector(0 to 31)
 
 	);
 end ethrx_core;
@@ -186,23 +186,19 @@ begin
 		sample_rx	=> sample_rx
 	);
 
-	debug : ethrx_debug
-	generic map (
-		data_pins	=> rx_data_pins
-	)
-	port map (
-		sys_clk		=> sys_clk, -- rising edge
-		sys_reset	=> sys_reset, -- synchronous reset on 1
-
-		rx_clock_pulse	=> rx_clock_pulse,
-		rx_data		=> rx_data_FDR,
-		rx_dvalid	=> rx_dvalid_FDR,
-
-		debugfile0	=> debugfile0,
-		debugfile1	=> debugfile1
-
-		
-	);
+	--debug : ethrx_debug
+	--generic map (
+	--	data_pins	=> rx_data_pins
+	--)
+	--port map (
+	--	sys_clk		=> sys_clk, -- rising edge
+	--	sys_reset	=> sys_reset, -- synchronous reset on 1
+	--	rx_clock_pulse	=> rx_clock_pulse,
+	--	rx_data		=> rx_data_FDR,
+	--	rx_dvalid	=> rx_dvalid_FDR,
+	--	debugfile0	=> debugfile0,
+	--	debugfile1	=> debugfile1
+	--);
 	
 
 	bytemaker : ethrx_mii_to_byte

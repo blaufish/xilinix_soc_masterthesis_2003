@@ -53,11 +53,7 @@ architecture RTL of ETH is
 		reg_status_wr	: in std_logic;
 		reg_status	: out std_logic_vector(0 to 31);
 		reg_fifo_rd	: in std_logic;
-		reg_fifo	: out std_logic_vector(0 to 31);
-
-		debugfile0	: out std_logic_vector(0 to 31);
-		debugfile1	: out std_logic_vector(0 to 31)		
-
+		reg_fifo	: out std_logic_vector(0 to 31)
 	);
 	end component ethrx_core;	
 
@@ -223,9 +219,7 @@ begin -- architecture RTL
 		reg_status_wr	=> RX_reg_status_wr,
 		reg_status	=> RX_reg_status,
 		reg_fifo_rd	=> RX_reg_fifo_rd,
-		reg_fifo	=> RX_reg_fifo,
-		debugfile0	=> RX_debugfile0,
-		debugfile1	=> RX_debugfile1
+		reg_fifo	=> RX_reg_fifo
 	);
 
 	TX_core : ethtx_core
