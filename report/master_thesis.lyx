@@ -2262,8 +2262,8 @@ The documentation
 MDK platform tailoring limitations - OPB bus configuration
 \layout Standard
 
-MDK can be configured to use no OPB bus, an instruction bus (IOPB), a data
- bus (DOPB) or both OPB busses.
+MDK can be configured to use no OPB bus, an instruction bus (IOPB) only,
+ a data bus (DOPB) only or both OPB busses.
  MicroBlaze may utilize IOPB and DOPB in several different ways, allowing
  application specific customization as described in section 
 \begin_inset LatexCommand \ref{sub:Microblaze-OPBs}
@@ -2280,27 +2280,27 @@ However, MDK only allow the designer to specify which OPB/LMB interfaces
  
 \layout Standard
 
-If both DOPB and IOPB is used, they will be connected to the same bus (shown
+If both DOPB and IOPB are used, they will be connected to the same bus (shown
  in figure 
 \begin_inset LatexCommand \ref{cap:MicroBlaze-OPB-Configuration-connected}
 
 \end_inset 
 
 ).
- When executing software on IOPB the shared bus will be highly utilized,
- bus delays will increase and data throughput will dramatically decrease.
- Shared bus has a significant negative performance impact.
+ When executing software from the shared bus it will be heavily utilized,
+ bus delays will increase and data throughput will decrease.
+ A shared bus has a significant negative performance impact.
 \layout Standard
 
-Additionally, MDK does not include any OPB-to-OPB Bridge.
+Additionally, MDK does not include any OPB-to-OPB bridge.
 \layout Standard
 
 EDK offers a number of measures to remedy these problems through a set of
  MHS directives which are not available in MDK.
  To customize OPB in MDK, a designer must venture beyond platgen and modify
  automatically generated VHDL files.
- This means that when making advanced MDK designs, a designer loose a lot
- of time and effort saving automation.
+ This means that when designing advanced MicroBlaze platform, a designer
+ loose a lot of time and effort saving automation.
 \layout Standard
 
 This was discussed in 
@@ -2308,13 +2308,16 @@ This was discussed in
 
 \end_inset 
 
- and Xilinx staff replied that it would be fixed before the end of summer
+ where Xilinx staff replied that it would be fixed before the end of summer
  2002.
  Apperently Xilinx did not to update MDK but put their efforts into EDK
  instead.
 \layout Subsubsection
 
 MDK platform tailoring limitations - buffers and pads configuration
+\layout Paragraph
+
+Buffers.
 \layout Standard
 
 A Virtex FPGA input/output pin is connected to a 
@@ -2333,23 +2336,33 @@ pad
  There are a number of different buffers which each has it's own purpose
  and characteristics.
  
+\layout Paragraph
+
+MDK platgen buffer options.
 \layout Standard
 
-MDK platgen can be configured weather to insert buffers or not.
- MDK platgen will auto-insert buffers as stated in table 
+MDK platgen can be configured to insert buffers or not insert buffers.
+ 
+\layout Standard
+
+When insering buffers, MDK platgen will auto-insert buffers as stated in
+ table 
 \begin_inset LatexCommand \ref{cap:Auto-inserted-buffers}
 
 \end_inset 
 
 .
- This is the common buffers which are usually what the design requires.
+ These are the common buffers usually required by a design.
 \layout Standard
 
-When configured to not insert buffers, MDK platgen will generate a black
- box.
- Black boxes may be utilized as components in a larger design.
- A black box may also to be used in a small wrapper which defines buffer
- should be used for each I/O signal.
+When configured to not insert buffers, MDK platgen will generate a netlist
+ without pads (often referred to as black box or soft core).
+ The netlist may be utilized as a component in a larger design.
+ The netlist can also be used in a small wrapper top entity which defines
+ which buffer should be used for each I/O signal.
+\layout Paragraph
+
+The buffer problem.
 \layout Standard
 
 There are cases when the design require specific buffers.
@@ -2374,11 +2387,14 @@ IBUF
 
  buffer cannot be connected to a global clock pad.
  
+\layout Paragraph
+
+Solutions.
 \layout Standard
 
 This problem can be solved by not inserting buffers and utilizing a small
- a wrapper top entity.
- Scripted modifications of generated top entities could also be used.
+ a wrapper as the top entity.
+ Scripted modifications of generated top entities can also be used.
  
 \layout Standard
 
@@ -2507,12 +2523,51 @@ MDK platform tailoring limitations - Tristate design style
 \layout Standard
 
 Another issue is that tristate buffers in peripherals must be written as
- a set of three I/O signals (input, output and tristate control).
+ a set of three I/O signals (input, output and tristate control) as shown
+ in figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-platform-with-tristate}
+
+\end_inset 
+
+.
  Although this is not a major drawback when designing custom components,
  it is an unnecessary design restriction.
  Specifically it may limit which third party OPB components (distributed
  as netlists or source code) which are easy to utilize in a MicroBlaze periphera
 l design.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze-platform-with-tristate}
+
+\end_inset 
+
+MicroBlaze platform with tristate peripheral
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/tristate_peripheral.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\end_inset 
+
+
 \layout Chapter
 
 
