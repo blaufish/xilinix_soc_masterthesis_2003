@@ -157,7 +157,7 @@ The overall goal of this thesis is to evaluate the Xilinx MicroBlaze soft
  create a MicroBlaze based System On Chip (SoC).
  The SoC should be based on a well verified and evaluated platform.
  Possible future improvement should be well documented.
- To reach these overall goals, a numer of objectives were identified:
+ To reach these overall goals, a number of objectives were identified:
 \layout Itemize
 
 The MicroBlaze Development Kit should be evaluated.
@@ -400,7 +400,7 @@ Chapter
 
 \end_inset 
 
- discusses the results and sugest some topics for future work.
+ discusses the results and suggest some topics for future work.
 \layout Standard
 
 Chapter 
@@ -451,7 +451,7 @@ memory chips
 off-chip peripherals 
 \layout Itemize
 
-radio tranceivers 
+radio transceivers 
 \layout Itemize
 
 network interfaces
@@ -463,8 +463,8 @@ As SoCs usually are designed with a limited set of applications in mind,
  500 MHz - 3 GHz, the SoC CPU might operate at just a few megahertz.
  An ideal SoC processor core is operating at the minimum clock frequency
  needed to properly perform the desired task.
- By utilizining a low clock frequency the power consumption and chip temperature
- is reduced.
+ By utiliziningutilizing a low clock frequency the power consumption and
+ chip temperature is reduced.
  This allows SoCs to operate with less cooling devices and better battery/power
  utilization.
 \layout Subsection
@@ -488,7 +488,7 @@ A microprocessor on a single integrated circuit intended to operate as an
  
 \layout Standard
 
-Distingushing between microcontrollers from SoCs is hard; the words are
+Distinguishing between microcontrollers from SoCs is hard; the words are
  synonyms.
  The word SoC is frequently used in reference to designs which are customized
  for a limited set of applications, while microcontroller tend to be used
@@ -512,7 +512,7 @@ application
 \layout Standard
 
 An ASIC is designed for a specific application and can be customized to
- reduce power dissipation, small or increace clock frequencies.
+ reduce power dissipation, small or increase clock frequencies.
  Other important ASIC characteristics are low reconfigurability, long design
  phases, high startup costs and low mass production costs.
  This makes ASIC well suited for large scale manufacturing of well verified
@@ -564,7 +564,7 @@ A processor core refers to a processor,
 \emph on 
 excluding
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -835,7 +835,7 @@ On-Chip Peripheral Bus (OPB)
 
 The IBM CoreConnect On-Chip Peripheral Bus
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -991,7 +991,7 @@ enable
 
 -outputs
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -1005,7 +1005,7 @@ Xilinx OPB requires that all slave/master peripherals set all output signals
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1041,7 +1041,7 @@ Xilinx OPB physical implementation
 
 \layout Standard
 
-Because Xilinx OPB devices share the same OPB paramaters they are compatible.
+Because Xilinx OPB devices share the same OPB parameters they are compatible.
  Xilinx OPB devices include Xilinx MicroBlaze soft core processor, Xilinx
  PicoBlaze soft core processor and a large set of OPB peripherals.
  Xilinx also provides a bridge which allows the IBM PPC 440 processor core,
@@ -1131,13 +1131,13 @@ Link Speed
 \layout Standard
 
 Currently most Ethernet devices in use and available for sale are 10/100
- MBit/s; 100 MBit/s but may auto negociate to 10 MBit/s when interfacing
+ MBit/s; 100 MBit/s but may auto negotiate to 10 MBit/s when interfacing
  10 MBit/s devices.
  Many old devices are 10 MBit/s only.
  
 \layout Paragraph
 
-Auto Negociation
+Auto Negotiation
 \layout Standard
 
 allows Ethernet devices to sense the link speed capabilities of the receiving
@@ -1156,7 +1156,7 @@ may vary for each link.
 
  shows a small network where end hosts Alice and Bob communicate through
  switches Smith and Summers.
- All are 100 MBit/s capble except Summers, thus the Smith
+ All are 100 MBit/s capable except Summers, thus the Smith
 \begin_inset Formula $\Leftrightarrow $
 \end_inset 
 
@@ -1164,12 +1164,12 @@ Summers and the Summers
 \begin_inset Formula $\Leftrightarrow $
 \end_inset 
 
-Bob link speed is negociated to 10 MBit/s.
+Bob link speed is negotiated to 10 MBit/s.
  The Alice
 \begin_inset Formula $\Leftrightarrow $
 \end_inset 
 
-Smith link is negociated to 100 MBit/s.
+Smith link is negotiated to 100 MBit/s.
 \layout Standard
 
 
@@ -1230,10 +1230,10 @@ CSMA/CD
 
 is an abbreviation for the Carrier Sense Multiple Access with Collision
  Detect access protocol.
- In CSMA/CD no host may initiate a packet while carrier (transmition) is
- detected.
- If two devices should initiate transmition at the same time, a collision
- has occured.
+ In CSMA/CD no host may initiate a packet while carrier (transmitiontransmission
+) is detected.
+ If two devices should initiate transmission at the same time, a collision
+ has occurred.
  All hosts should detect collisions and randomly set a 
 \begin_inset Quotes eld
 \end_inset 
@@ -1262,7 +1262,7 @@ In Full Duplex mode each Ethernet device has a dedicated send medium and
  Interconnections are handled by network switches.
  A special Ethernet PAUSE frame is used to notify a sender that an Ethernet
  device is congested and may not receive more packets for a period of time.
- Depending on network design and switch capacities, Full Deuplex may allow
+ Depending on network design and switch capacities, Full Duplex may allow
  much more throughput than Half Duplex.
  This because several parallel mediums may be utilized concurrently instead
  of a single shared medium.
@@ -1272,7 +1272,7 @@ Ethernet destinations and promiscuous mode
 \layout Standard
 
 Hardware may or may not verify destination address (DA).
- Packets can be devided in three classes based upon destination address:
+ Packets can be divided in three classes based upon destination address:
 \layout Itemize
 
 Broadcast packets; sent to all hosts
@@ -1298,7 +1298,7 @@ Stray packets are common in Ethernet.
  Switches in full duplex networks will broadcast multicast/unicast packets,
  if it does not know where the packet should be sent
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -1556,7 +1556,7 @@ Several different mediums can be used for Ethernet, including coaxial cables,
  optical fibers and twisted pair cables.
  To simplify development, a PHY
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -2226,14 +2226,14 @@ libgen
 \emph on 
 mbio.h
 \emph default 
-, a C header file wich defines each base address of any peripheral included
+, a C header file which defines each base address of any peripheral included
  in the MicroBlaze platform.
 \layout Paragraph
 
 Final compilation and linking
 \layout Standard
 
-of the project's main source code perfromed using the associated C header
+of the project's main source code performed using the associated C header
  files and the modified libc library.
 \layout Subsection
 
@@ -2253,7 +2253,7 @@ The documentation
 
 \end_inset 
 
- included in MDK is suffient for beginner's applications.
+ included in MDK is sufficient for beginner's applications.
  In some issues, in depth information is hard to find.
  When searching at Xilinx (or common Internet search engines such as Google
  or Altavista) information regarding EDK is usually found rather than MDK.
@@ -2310,7 +2310,7 @@ This was discussed in
 
  where Xilinx staff replied that it would be fixed before the end of summer
  2002.
- Apperently Xilinx did not to update MDK but put their efforts into EDK
+ Apparently Xilinx did not to update MDK but put their efforts into EDK
  instead.
 \layout Subsubsection
 
@@ -2345,7 +2345,7 @@ MDK platgen can be configured to insert buffers or not insert buffers.
  
 \layout Standard
 
-When insering buffers, MDK platgen will auto-insert buffers as stated in
+When inserting buffers, MDK platgen will auto-insert buffers as stated in
  table 
 \begin_inset LatexCommand \ref{cap:Auto-inserted-buffers}
 
@@ -2932,7 +2932,7 @@ Why synchronous and single edge triggered flipflops?
 One reason is that asynchronous logic and systems triggered both edges are
  harder to verify.
  Asynchronous operations may introduce hard to find race conditions and
- errors which rarely occur in RTL-simultations.
+ errors which rarely occur in RTL-simulations.
 \layout Standard
 
 Another reason is that asynchronous logic in Xilinx Virtex FPGA implementations
@@ -3264,7 +3264,7 @@ It is reasonable to assume
 \begin_inset Formula $\left|d_{sysclk}\right|$
 \end_inset 
 
- to be small because a system clock oscilliator is usually very exact.
+ to be small because a system clock oscillator is usually very exact.
  
 \begin_inset Formula $\left|d_{phyclk}\right|$
 \end_inset 
@@ -3278,7 +3278,7 @@ may however be large; Ethernet receiver clocks must synchronize against
 
  
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -3569,8 +3569,8 @@ To simplify the main testbench, verification of Ethernet correctness is
  The model identifies short packets, long packets, short interframe gaps,
  incorrect FCS and a number of other Ethernet violations.
  Ethernet violations will cause warning assertions.
- Corret packets will cause assertion notes, representing the packet in hexadecim
-al notation.
+ Correct packets will cause assertion notes, representing the packet in
+ hexadecimal notation.
 \layout Subsubsection
 
 Modular testbench: OPB Model / Loopback
@@ -3595,7 +3595,7 @@ Loopback
 \layout Standard
 
 The model also acts as a loopback device: Any packet received by the model,
- will also be transmited by the model.
+ will also be transmitted by the model.
 \layout Subsection
 
 Multiple Compilation and Synthesis
@@ -3729,23 +3729,21 @@ Comparing peripherals is hard.
 Given all these factors, it is not feasible to name a single peripheral
  which is optimal for all applications.
  However it is possible to compare peripherals and determine which is best
- suitedfor certain applications.
+ suited for certain applications.
 \layout Standard
 
 A number of Ethernet peripherals have been compared: EMAC Lite - Xilinx
  OPB Ethernet Lite Media Access Controller, EMAC - Xilinx OPB Ethernet Media
- Access Controller, EthMac - Opencores.org 10/100 Ethernet MAC, Bandung -
- Bandung Institute of Technology 10/100 Ethernet MAC, Eth Version 1.00 Revision
- A and Eth Version 1.00 Revision C.
+ Access Controller, EthMac - Opencores.org 10/100 Ethernet MAC, Eth Version
+ 1.00 Revision A and Eth Version 1.00 Revision C.
 \layout Standard
 
-Neither EthMac nor Bandung is an OPB peripheral.
- Bandung has been included because it is a published student project and
- therefor created under conditions similar to Eth Version 1.00.
+EthMac is an WISHBONE peripheral.
+ MicroBlaze cannot use it because MicroBlaze does not support the WISHBONE
+ bus.
  EthMac has been included because it is a well verified MAC, has been used
  in real world applications, and is open source.
- Bandung and EthMac could probably be converted into OPB peripherals with
- some effort.
+ EthMac could probably be converted into an OPB peripheral with some effort.
 \layout Section
 
 Feature comparison
@@ -3804,8 +3802,8 @@ s.
  frames) while the others does not.
  Therefor peripherals such as EMAC and EthMac are preferable if an application
  require a full scale DMA-capable interface.
- Peripherals such as EMAC Lite, Bandung and Eth Version 1.00 Revision A and
- C are preferable if only a simple peripheral is required.
+ Peripherals such as EMAC Lite and Eth Version 1.00 Revision A and C are
+ preferable if only a simple peripheral is required.
 \layout Standard
 
 
@@ -3825,7 +3823,7 @@ Ethernet peripherals feature comparison
 \align center 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="7" columns="7">
+<lyxtabular version="3" rows="6" columns="7">
 <features>
 <column alignment="left" valignment="top" leftline="true" width="0pt">
 <column alignment="center" valignment="top" leftline="true" width="0pt">
@@ -4072,64 +4070,6 @@ No
 
 \layout Standard
 
-Bandung
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Yes
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-N/A
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-No
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-No
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-No
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-No
-\end_inset 
-</cell>
-</row>
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
 Eth v1.00 A
 \end_inset 
 </cell>
@@ -4353,13 +4293,18 @@ Reduced MII interface support
 
 \layout Section
 
+
+\begin_inset LatexCommand \label{sec:Speed-comparison}
+
+\end_inset 
+
 Speed comparison
 \layout Standard
 
-Speed comparison was based on extimated performance for Xilinx Virtex-E
+Speed comparison was based on estimated performance for Xilinx Virtex-E
  FPGA (chip xsv2000e-8-FG1156) implementations.
  One reason for using this particular FPGA is that the Platinum prototype
- board which was supposed to be available for thid evaluation was Virtex-E
+ board which was supposed to be available for the evaluation was Virtex-E
  based.
  Another reason is that speed/area statistics for this particular FPGA is
  included in EMAC / EMAC Lite documentation.
@@ -4543,7 +4488,7 @@ Ethernet peripherals performance comparison
 \align center 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="9" columns="6">
+<lyxtabular version="3" rows="8" columns="6">
 <features>
 <column alignment="left" valignment="top" leftline="true" width="0pt">
 <column alignment="center" valignment="top" leftline="true" width="0pt">
@@ -4814,6 +4759,7 @@ EthMac
 
 \layout Standard
 
+?
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -4821,6 +4767,7 @@ EthMac
 
 \layout Standard
 
+?
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -4845,68 +4792,6 @@ N/A
 \layout Standard
 
 76.9 MHz
-\end_inset 
-</cell>
-</row>
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Bandung
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\begin_inset Formula $(a)$
-\end_inset 
-
-
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\begin_inset Formula $(a)$
-\end_inset 
-
-
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-N/A
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-N/A
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\begin_inset Formula $(a)$
-\end_inset 
-
-
 \end_inset 
 </cell>
 </row>
@@ -5092,7 +4977,7 @@ Maximum system clock frequency
 \layout Standard
 
 
-\begin_inset Formula $(a)$
+\begin_inset Formula $?$
 \end_inset 
 
 
@@ -5103,8 +4988,11 @@ Maximum system clock frequency
 
 \layout Standard
 
-Bandung MAC utilize MII clocks.
- No system clock.
+
+\begin_inset Formula $f_{min}$
+\end_inset 
+
+ has not been researched by EthMac developers
 \end_inset 
 </cell>
 </row>
@@ -5118,25 +5006,296 @@ Bandung MAC utilize MII clocks.
 
 \layout Section
 
-Area comparison
+Resource comparison
+\layout Standard
+
+Resource comparison was performed for Xilinx Virtex-E FPGA (chip xsv2000e-8-FG11
+56) implementations.
+ Virtex-E was selected for the same reasons as stated in section 
+\begin_inset LatexCommand \ref{sec:Speed-comparison}
+
+\end_inset 
+
+ (Speed Comparison).
+\layout Standard
+
+Virtex-E has three major resources which is used by the Ethernet peripherals:
+\layout Paragraph
+
+Slices
+\layout Standard
+
+are the main Virtex-E resource.
+ This is blocks of programmable logic in which most parts are implemented
+ in.
+ Table 
+\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-area}
+
+\end_inset 
+
+ shows that all simple MACs consume few slices (350 - 470) while advanced
+ MACs consume a few thousand slices.
+\layout Paragraph
+
+BRAM (Block Select RAM)
+\layout Standard
+
+are memory blocks in which data can be stored efficiently.
+ Table 
+\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-area}
+
+\end_inset 
+
+ shows that EthMac utilize less BRAM resources than other MACs in test.
+\layout Paragraph
+
+GCLK (Global Clock Nets)
+\layout Standard
+
+are routing nets which provide clock signals to logic (e.g.
+ slices and BRAM).
+ This is a scarce resource: Virtex-E have only four GCLKs.
+ Table 
+\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-area}
+
+\end_inset 
+
+ shows that all synchronous MACs in the test utilize one GCLK (system clock).
+ All asynchronous MACs used in test utilize three GCLKs (System, transmit
+ and receive clocks).
 \layout Standard
 
 
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ethernet-peripherals-area}
+
+\end_inset 
+
+Ethernet peripherals area comparison
+\layout Standard
+\align center 
+
 \begin_inset  Tabular
-<lyxtabular version="3" rows="1" columns="1">
+<lyxtabular version="3" rows="6" columns="4">
 <features>
+<column alignment="left" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
 <column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
 <row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \layout Standard
 
-TO BE WRITTEN
+Device
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Slices
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+BRAM
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+GCLK
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+EMAC Lite
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+350 - 405
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8 (4KB)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+EMAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1528 - 2570
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8 - 16 (4 - 8KB)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+EthMac
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2439
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2 (1KB)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Eth v1.00 A
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+370
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8 (4KB)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Eth v1.00 C
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+476
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8 (4KB)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
 \end_inset 
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset 
+
 
 \end_inset 
 
@@ -5146,14 +5305,14 @@ TO BE WRITTEN
 Quality comparison
 \layout Standard
 
-EMAC Lite and EMAC is considered production quality by the Xilinx corperation.
+EMAC Lite and EMAC is considered production quality by the Xilinx corporation.
  EthMac is considered production quality by the opencores.org developers.
  These three MACs have been tested by developers as well as number of users/cust
 omers.
  Therefor, they are by far the most well verified peripherals.
 \layout Standard
 
-Bandung and Eth Version 1.00 Revision A, C are not as well verified.
+Eth Version 1.00 Revision A and C are not as well verified.
  
 \layout Standard
 
@@ -5163,12 +5322,6 @@ The Eth Version 1.00 revisions has been reused by a small number of students.
  but more tests are needed before they can be considered to be of production
  quality.
  
-\layout Standard
-
-There is not much information regarding verification and reuse of the Bandung
- MAC.
- Comments on the Bandung MAC homepage indicate that the design is incomplete.
- Bandung quality is therefor considered poor.
 \layout Section
 
 Details about the devices used in analysis
@@ -5177,140 +5330,116 @@ Details about the devices used in analysis
 EMAC Lite - Xilinx OPB Ethernet Lite Media Access Controller
 \layout Standard
 
-
-\begin_inset  Tabular
-<lyxtabular version="3" rows="1" columns="1">
-<features>
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
+EMAC Lite is a simple Ethernet MAC provided by Xilinx.
+ It is a OPB device and easily used in MicroBlaze applications.
+ It is marketed as a simpler and smaller device than EMAC.
 \layout Standard
 
-TO BE WRITTEN
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
+Features:
+\layout Itemize
 
-\end_inset 
+10/100 MBit/s, MII only.
+\layout Itemize
 
+Minimum system clock frequency is 5 MHz (50 MHz for 100 MBit/s).
+\layout Itemize
 
-\layout Standard
+Synchronous.
+\layout Itemize
 
-50 MHz for 100 MBit
-\layout Standard
+Not runtime configurable, e.g.
+ duplex mode is configured at build time.
+\layout Itemize
 
-5 MHz for 10 MBit
-\layout Standard
+No promiscuous mode.
+\layout Itemize
 
-Virtex-E -8; 80.2 MHz full duplex, 75.5 MHz half
-\layout Standard
-
-no MII management
-\layout Standard
-
-no pause frame support
+Small 2*2KB packet FIFOs, one packet per FIFO only.
 \layout Subsection
 
 EMAC - Xilinx OPB Ethernet Media Access Controller
 \layout Standard
 
-
-\begin_inset  Tabular
-<lyxtabular version="3" rows="1" columns="1">
-<features>
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
+EMAC is an advanced and full-featured MAC provided by Xilinx.
+ It is a OPB device and easily used in MicroBlaze applications.
+ It has features which enables great performance (such as DMA and multiple
+ packets per FIFO) and useful options (MII Management, autopad, promiscuous
+ mode).
 \layout Standard
 
-TO BE WRITTEN
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
+Features:
+\layout Itemize
 
-\end_inset 
+10/100 MBit/s, MII only.
+\layout Itemize
 
+Minimum system clock frequency is 5 MHz (50 MHz for 100 MBit/s).
+\layout Itemize
 
-\layout Standard
+Synchronous.
+\layout Itemize
 
-multiple packets, 2 or 4 kb fifos, up to 16 packets per fifo, pause frame
- support, MII management, DMA or FIFO-read-registers, autopad, promiscuous
- mode optional, etc etc 
+MII Management module.
+\layout Itemize
+
+Small 2*2KB or 2*4KB FIFOs, up to 16 packets per FIFO.
+\layout Itemize
+
+Pause frame support.
+\layout Itemize
+
+DMA or FIFO-registers for I/O.
+\layout Itemize
+
+Autopad short packages.
+\layout Itemize
+
+Promiscuous mode runtime configurable.
+ 
 \layout Subsection
 
 EthMac - Opencores.org 10/100 Ethernet MAC
 \layout Standard
 
+EthMac is an advanced and full featured MAC developed in the Open Source
+ community Opencores.org.
+ EthMac uses a WISHBONE data bus for I/O (WISHBONE is a simple bus standard
+ maintained by opencores.org).
+\layout Standard
 
-\begin_inset  Tabular
-<lyxtabular version="3" rows="1" columns="1">
-<features>
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
+Features:
+\layout Itemize
+
+10/100 MBit/s, MII only.
+\layout Itemize
+
+Minimum system clock frequency unspecified
+\begin_inset Foot
+collapsed false
 
 \layout Standard
 
-TO BE WRITTEN
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset 
-
-
-\layout Subsection
-
-Bandung - Bandung Institute of Technology 10/100 Ethernet MAC
-\layout Standard
-
-The Bandung MAC is a simple Ethernet MAC.
- It is not designed for SoC implementation, instead it uses the prototype
- board's SRAM as a shared medium.
- A PC controls the MAC by writing or reading the shared medium through a
- parallel cable which is connected to a small SRAM interface module.
-\layout Standard
-
-The transmit module of The Bandung MAC is broken.
- The Bandung MAC homepage states: 
-\begin_inset Quotes eld
-\end_inset 
-
-the transmitter can only send a few bytes
-\begin_inset Quotes erd
+EthMac developers have focused on achieving great clock frequencies.
+ Since low clock frequency have not been a design concerned, this has not
+ been researched by EthMac developers.
 \end_inset 
 
 .
- This is a half-finished academic design.
-\layout Standard
-
-Key aspects:
 \layout Itemize
 
-10/100 MBit, MII only
+Asynchronous.
 \layout Itemize
 
-Half Duplex supported
+Pause frame support.
 \layout Itemize
 
-Full Duplex supported, but no PAUSE frame support
+DMA or FIFO registers for I/O.
 \layout Itemize
 
-No system bus - Interfaced through shared SRAM medium
+Autopad short packages.
 \layout Itemize
 
-Asynchronous
-\layout Itemize
-
-No MII Management module
+Promiscuous mode runtime configurable.
 \layout Chapter
 
 
@@ -5404,10 +5533,10 @@ The requirements on MAC send/receive functions are unspecified.
 No example applications utilizing XilNet are provided.
 \layout Itemize
 
-XilNet is unsupported, as opposed to all other MDK libraries.
+XilNet is unsupported (as opposed to all other MDK libraries).
 \layout Itemize
 
-XilNet documentation is of low quality and only describe the function calls.
+XilNet documentation is of low quality and only describes the function calls.
  No usage notes nor general design description is provided.
 \layout Subsubsection
 
@@ -5415,7 +5544,7 @@ Several issues with XilNet
 \layout Standard
 
 Attempts were made to make XilNet work.
- The XilNet implementation used is decribed in Appendix 
+ The XilNet implementation used is described in Appendix 
 \begin_inset LatexCommand \ref{cha:XilNet-implementation-for-eth}
 
 \end_inset 
@@ -5498,7 +5627,7 @@ Overall
 \layout Standard
 
 XilNet is a very small TCP/IP stack.
- XilNet is 8 KB large, but a small testapplication (appendix 
+ XilNet is 8 KB large, but a small test-application (appendix 
 \begin_inset LatexCommand \ref{cha:XilNet-implementation-for-eth}
 
 \end_inset 
@@ -5538,29 +5667,11 @@ lwIP was ported to MicroBlaze by Nilsson, Schmid and Wiklander.
 Modularity
 \layout Standard
 
-
-\begin_inset  Tabular
-<lyxtabular version="3" rows="1" columns="1">
-<features>
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-TO BE WRITTEN
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset 
-
-
+lwIP is of a modular design.
+ Its is made to be easy to port and to add new network interface drivers.
 \layout Subsubsection
 
-Functionallity
+Functionality
 \layout Standard
 
 lwIP is a full scale TCP/IP stack.
@@ -5570,33 +5681,43 @@ Overall
 \layout Standard
 
 lwIP uses 40 KB RAM, which is a lot in (low cost) SoC applications.
- Either the SoC contains more than 40 KB of interal RAM, or external memory
+ Either the SoC contains more than 40 KB of internal RAM, or external memory
  must be used.
 \layout Section
 
 Operating Systems for MicroBlaze
 \layout Standard
 
+A number of real-time and micro controller operating systems are ported
+ to MicroBlaze, e.g:
+\layout Itemize
 
-\begin_inset  Tabular
-<lyxtabular version="3" rows="1" columns="1">
-<features>
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
+Micrium 
+\begin_inset Formula $\mu $
+\end_inset 
 
+C/OS-II
+\layout Itemize
+
+ATI Nucleus
+\layout Itemize
+
+
+\begin_inset Formula $\mu $
+\end_inset 
+
+CLinux
 \layout Standard
 
-TO BE WRITTEN
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
+Notably is RealFast 
+\begin_inset LatexCommand \cite{RealFast-Sierra16}
 
 \end_inset 
 
-
+ Sierra 16 HW-RTOS (hardware real-time operating systems) support for MicroBlaze.
+ Sierra 16 and MicroBlaze may be implemented in a single Xilinx FPGA.
+ RealFast's vision is to relieve micro controllers of time consuming software
+ tasks by providing dedicated hardware such as Sierra 16 HW-RTOS.
 \layout Chapter
 
 
@@ -5643,7 +5764,7 @@ proved to be easy to use - partially thanks to their similarities with standard
  UNIX tools.
  MicroBlaze software development is usually simple and straight-forward
  programming in the C language.
- The GNU Debugger (GDB) allows remote on-chip debugging which is usefull.
+ The GNU Debugger (GDB) allows remote on-chip debugging which is useful.
 \layout Paragraph
 
 The MDK platform tailoring tools
@@ -5697,7 +5818,7 @@ was evaluated for MicroBlaze.
 
 \end_inset 
 
- demonstrated a lwIP based webserver running on MicroBlaze.
+ demonstrated a lwIP based web-server running on MicroBlaze.
 \layout Chapter
 
 
@@ -5782,11 +5903,11 @@ XilNet
 
 sent bad IP and ICMP packets in this evaluation.
  The cause of bad packets is not known.
- Making XilNet send correct packets would be usefull.
+ Making XilNet send correct packets would be useful.
  More recent versions of XilNet included in EDK could be evaluated.
 \layout Paragraph
 
-Soft core processor comparission.
+Soft core processor comparison.
 \layout Standard
 
 An overview of the soft core processors available would be interesting.
@@ -6111,6 +6232,18 @@ Xilinx Embedded Processor Forum
 \emph default 
 , 2003.
 \layout Bibliography
+\bibitem [REALFAST]{RealFast-Sierra16}
+
+Tommy Klevin.
+\newline 
+Get RealFast RTOS with Xilinx FGPAs.
+\newline 
+In 
+\emph on 
+Xilinx Journal
+\emph default 
+, Spring 2003.
+\layout Bibliography
 \bibitem [lwIP]{lwIP}
 
 Adam Dunkels.
@@ -6182,11 +6315,11 @@ All products and company names are service marks, trademarks or registered
  respective owners.
 \layout Standard
 
-Permissions to reprint copyrighted materails owned by Xilinx Inc for this
+Permissions to reprint copyrighted materials owned by Xilinx Inc for this
  thesis have been obtained from Xilinx Inc.
 \layout Standard
 
-Permisson to reprint copyrighted materials owned by IBM for this thesis
+Permission to reprint copyrighted materials owned by IBM for this thesis
  have been requested.
  (waiting for reply)
 \layout Chapter
@@ -6815,9 +6948,6 @@ ASIC - Application Specific Integrated Circuit
 \layout Itemize
 
 AUI - Attachment Unit Interface
-\layout Itemize
-
-Bandung - Bandung Institute of Technology 10/100 Ethernet MAC
 \layout Itemize
 
 CPU - Central Processing Unit
