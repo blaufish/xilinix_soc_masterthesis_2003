@@ -51,8 +51,8 @@ Xilinx MicroBlaze is a processor core for implementation in Xilinx Field
 Preface
 \layout Standard
 
-The evaluation of Xilinx MicroBlaze has been performed as a Master Thesis
- in Computer Science and Engineering.
+The evaluation of the Xilinx MicroBlaze has been performed as a Master Thesis
+ work in Computer Science and Engineering.
  The evaluation was performed at Department of Computer Science and Electrical
  Engineering (CSEE) and Embedded Internet Systems Laboratory (EISLAB) at
  Luleå Univeristy of Technology.
@@ -213,7 +213,7 @@ Technology & Background
 System on Chip (SoC) solutions
 \layout Standard
 
-System on Chip (SoC) refer to devices where all essential parts of a computing
+System on Chip (SoC) refers to devices where all essential parts of a computing
  systems have been integrated in a single circuit.
  A typical SoC includes one (or many) processor core(s), an aribitary number
  of peripherals for input/output, some on-chip memory and an interface for
@@ -223,11 +223,11 @@ System on Chip (SoC) refer to devices where all essential parts of a computing
 
 As SoCs usually are designed with a limited set of applications in mind,
  they tend to need less CPU power than a general purpose computer.
- As a modern workstation operates with clock frequences in the range of
- 500 MHz - 3 GHz, the SoC CPU might operate with just a few megahertz.
+ While a modern workstation operates with clock frequences in the range
+ of 500 MHz - 3 GHz, the SoC CPU might operate at just a few megahertz.
  An ideal SoC CPU is operating at the minimum clock frequence needed to
  properly perform the desired application.
- By maintaining a slow clock frequence the power consumtion and chip temperature
+ By maintaining a low clock frequence the power consumtion and chip temperature
  is reduced.
  This allows SoCs to operate with less cooling devices and better battery/power
  utilization.
@@ -242,6 +242,63 @@ A typical microcontroller consists of a single processor core, some memory
  are energy efficient and they are more or less general purpose.
  Therefore microcontrollers can be considered to be a subset of SoCs.
 \layout Section
+
+Application Specific Interated Circuit (ASIC)
+\layout Standard
+
+Application Specific Interated Circuit (ASIC) is one of the most common
+ type of chips.
+ An ASIC is designed for a specific applications and can be heavily customized
+ for reduced low power dissipation, small area or high clock frequencies.
+ Defining characteristics of ASICs is -----
+\layout Standard
+
+An ASIC may implement a large design (
+\begin_inset Quotes eld
+\end_inset 
+
+application
+\begin_inset Quotes erd
+\end_inset 
+
+ in ASIC terms) such as a SoC.
+\layout Section
+
+Programmable logic devices (PLDs)
+\layout Standard
+
+Programmable logic devices are chips which can programmed to behave as an
+ aribitrary design.
+ A PLD may be programmed to implement something as simple as a small net
+ of combinatory logic, but it may also implement a large design such as
+ a SoC.
+ One common type of programmable logic devices is FPGAs.
+\layout Subsection
+
+Field Programmable Gate Array (FPGA)
+\layout Standard
+
+Field Programmable Gate Array (FPGA) is a type of programmable devices.
+ An FPGA contains a generic architecture with configurable logic and routing.
+ FPGAs are expensive, but can contain enough logic to implement advanced
+ systems, such as a System on Chip.
+ 
+\layout Standard
+
+FPGAs are not optimized for any specific application, and therefore they
+ may consume more power or implement a design less efficient than a ASIC.
+ However an FPGA is easily reprogrammed and which shortens designcycles
+ and allows early real world tests.
+ This makes FPGAs perfect for prototypes and small production volumes.
+ FPGAs are also usefull in first generation manufacturing if standards and
+ applications are subject to change, or if an application must be released
+ before engineers consider the design safe for implementation in an ASIC.
+\layout Section
+
+
+\begin_inset LatexCommand \label{sec:On-Chip-Peripheral-Bus}
+
+\end_inset 
 
 On-Chip Peripheral Bus (OPB)
 \layout Standard
@@ -271,140 +328,60 @@ OPB Bus
  in this paper.
 \end_inset 
 
- is an easy to use bus, allowing an aribtery number of masters to read from
- / write to an aribitery number of slaves.
+ is an easy to use bus, allowing an aribtrary number of masters to read
+ from / write to an aribitrary number of slaves.
+ The bus is highly customizeable, as an example bus widths are configurable
+ and response times and several other paramarers are implementation specific.
+ Given this level of configurability, OPB devices are generally 
+\emph on 
+not
+\emph default 
+ compatible unless they designed with the same designrules.
 \layout Standard
 
 The bus includes a data bus and an address bus.
  A typical OPB device use the most significant bits of the address bus to
- determin weather it was selected or not, and the least significant bits
- to determin which address was accessed.
+ determine weather it was selected or not, and the least significant bits
+ to determine which register (internal address) was accessed.
  
 \layout Standard
 
 A normal OPB access can be performed in one cycle.
- Slow OPB devices may responed in up to 16 cycles, or an aribitary number
+ Slow OPB devices may responed in up to 16 cycles, or an aribitrary number
  of cycles if issuing a Timout Supress signal.
 \layout Standard
 
-When several masters share a OPB bus, a bus aribitrator is used to grant
- exclusive bus access.
- In these systems, an master may have to wait until bus is idle.
- The aribitrator itself may also introduce a short mandatory delay before
+When several OPB masters share a bus, an OPB Aribter is used to grant exclusive
+ bus access.
+ In these systems, a master may have to wait an aribitrary number of cycles
+ until the bus is idle.
+ The OPB Aribter itself may also introduce a short mandatory delay before
  it grant access.
  An OPB master may utilize bus lock / sequencial access to make several
  slave accesses per aribitrated bus grant.
  Utilization of sequencial access keeps arbitration overhead to a minimum.
-\layout Section
+\layout Subsection
 
-Field Programmable Gate Array (FPGA)
+Xilinx OPB
 \layout Standard
 
-Field Programmable Gate Array (FPGA) is a type of programmable devices.
- An FPGA contains a generic architecture with configurable logic and routing.
- FPGAs are expensive, but can contain enough logic to implement advanced
- systems, such as a System on Chip.
- 
-\layout Standard
-
-FPGAs are not optimized for any specific task, and therefore they consume
- more power or implement a design inefficiently.
- However FPGAs are ease of use and quickly reprogrammed.
- This makes FPGA perfect for prototypes or small series development.
- FPGAs are also usefull in first generation manufacturing if standards and
- applications are subject to change, or if an application must be released
- earlier than engineers consider the design safe for implementation in an
- Application Specific Integrated Circuit (ASIC).
-\layout Section
-
-Xilinx MicroBlaze
-\layout Standard
-
-Xilinx MicroBlaze is a small processor core geared for implementation in
- Xilinx FPGAs and embedded applications.
- A MicroBlaze platform consists of one or several MicroBlaze cores, interconnect
-ed with a set of peripherals through a bus architecture.
-\layout Standard
-
-The MicroBlaze core is a highly optimized 
-\begin_inset Quotes eld
-\end_inset 
-
-soft processor
-\begin_inset Quotes erd
-\end_inset 
-
-
-\begin_inset Foot
-collapsed true
-
-\layout Standard
-
-Processor implementation of configurable devices, such as FGPAs.
- Soft processors are usually distributed as source code or as netlists.
-\end_inset 
-
- and among the fastest available to Xilinx FPGAs.
- The MicroBlaze instruction set is a typical instruction set familar to
- MIPS and other common RISC processors.
- 
-\layout Standard
-
-The MicroBlaze core contains two OPB buses (OPB instruction path, OPB data
- path), and two Local Memory Buses (LMB) buses (LMB instruction path, LMB
- data path).
- The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
- Port Block RAM support for dual single cycle access.
- A MicroBlaze platform with only LMB access is extremly efficient, however
- an FPGA conatins only a few kilobytes of Block RAM.
- A MicroBlaze system may utilize all four buses (as shown in figure 
-\begin_inset LatexCommand \prettyref{cap:MicroBlaze}
+Xilinx implements the IBM CoreConnect On-Chip Peripheral bus 
+\begin_inset LatexCommand \ref{sec:On-Chip-Peripheral-Bus}
 
 \end_inset 
 
-).
- A MicroBlaze platform must include a data path and an instruction path
- to the MicroBlaze core, therefor it will utilize 2, 3 or 4 buses.
+ with a number of parameters defined.
+ Some of these parameters include datawidth set to 32 and addresswidth which
+ also is set to 32.
+ Xilinx documents how some other OPB implementations may be interconnected,
+ such as OPB-devices with less addresswidth.
 \layout Standard
 
-Xilinx provides software and documentation allowing developers to utilize
- a number of standard OPB peripherals (Memory Controller, UART, Watchdog,
- JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
- 1 to 16 masters to share an OPB Bus).
- Xilinx also provides documentation and tutorials on the subject of designing
- custom OPB Slaves for MicroBlaze platforms.
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed true
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:MicroBlaze}
-
-\end_inset 
-
-MicroBlaze Core with Bus Connections
-\layout Standard
-\align center 
-
-\begin_inset Graphics FormatVersion 1
-	filename images/microblaze_busconfig.eps
-	display default
-	size_type 2
-	scale 75
-	rotateOrigin leftBaseline
-	lyxsize_type 0
-
-\end_inset 
-
-
-\end_inset 
-
-
+This definition of OPB parameters makes all Xilinx OPB devices compatible.
+ Xilinx compatible OPB devices include Xilinx Microblaze softcore processor,
+ Xilinx Picoblaze softcore processor, a large set of OPB peripherals and
+ a bridge which allows IBM PPC 440 processor core (built into recent Xilinx
+ Virtex II Pro FPGAs) to be interconnected.
 \layout Section
 
 About Ethernet 10/100 MBit
@@ -939,6 +916,145 @@ Reduced Medium Independant Interface (RMII)
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Chapter
+
+Xilinx MicroBlaze
+\layout Section
+
+The Xilinx Microblaze core
+\layout Standard
+
+Xilinx MicroBlaze is a small processor core geared for implementation in
+ Xilinx FPGAs and embedded applications.
+ A MicroBlaze platform consists of one or several MicroBlaze cores, interconnect
+ed with a set of peripherals through a bus architecture.
+\layout Standard
+
+The MicroBlaze core is a highly optimized 
+\begin_inset Quotes eld
+\end_inset 
+
+soft processor
+\begin_inset Quotes erd
+\end_inset 
+
+
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Processor implementation of configurable devices, such as FGPAs.
+ Soft processors are usually distributed as source code or as netlists.
+\end_inset 
+
+ and among the fastest available to Xilinx FPGAs.
+ The MicroBlaze instruction set is a typical instruction set familar to
+ MIPS and other common RISC processors.
+ 
+\layout Subsection
+
+Xilinx Microblaze bus interfaces
+\layout Standard
+
+The MicroBlaze core contains two OPB master interfaces, the 
+\begin_inset Quotes eld
+\end_inset 
+
+IOPB
+\begin_inset Quotes erd
+\end_inset 
+
+ OPB instruction path and the 
+\begin_inset Quotes eld
+\end_inset 
+
+DOPB
+\begin_inset Quotes erd
+\end_inset 
+
+ OPB data path.
+ The core also contain two Local Memory Buses (LMB) buses, the 
+\begin_inset Quotes eld
+\end_inset 
+
+ILMB
+\begin_inset Quotes erd
+\end_inset 
+
+ instruction path and the 
+\begin_inset Quotes eld
+\end_inset 
+
+DLMB
+\begin_inset Quotes erd
+\end_inset 
+
+ data path.
+ 
+\layout Subsubsection
+
+Local Memory Buses (LMBs)
+\layout Standard
+
+The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
+ Port Block RAM support for dual memory access.
+ This enables concurrent ILMB and DLMB access.
+\layout Standard
+
+A MicroBlaze platform with only LMB access is extremly efficient, however
+ many FPGAs contains only a few kilobytes of Block RAM.
+ A MicroBlaze system may utilize all four buses (as shown in figure 
+\begin_inset LatexCommand \prettyref{cap:MicroBlaze}
+
+\end_inset 
+
+).
+ A MicroBlaze platform must include a data path and an instruction path
+ to the MicroBlaze core, therefor it will utilize 2, 3 or 4 busess.
+\layout Subsubsection
+
+On-Chip Periperal buses (OPBs)
+\layout Standard
+
+Xilinx provides software and documentation allowing developers to utilize
+ a number of standard OPB peripherals (Memory Controller, UART, Watchdog,
+ JTAG_UART, Interrupt controller and others) and an OPB Aribitrator (allowing
+ 1 to 16 masters to share an OPB Bus).
+ Xilinx also provides documentation and tutorials on the subject of designing
+ custom OPB Slaves for MicroBlaze platforms.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze}
+
+\end_inset 
+
+MicroBlaze Core with Bus Connections
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_busconfig.eps
+	display default
+	size_type 2
+	scale 75
+	rotateOrigin leftBaseline
+	lyxsize_type 0
 
 \end_inset 
 
