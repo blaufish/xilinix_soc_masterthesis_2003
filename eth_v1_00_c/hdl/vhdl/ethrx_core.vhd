@@ -170,16 +170,16 @@ begin
 	fifo_wrd  <= word_pkt_start & word_pkt_end & word_data & word_dv_bytes;
 	fifo_rden <= not fifo_empty;
 	
-	to_reg_en <= fifo_rden;
-	--process (sys_clk) begin
-	--	if rising_edge(sys_clk) then
-	--		if sys_reset = '1' then
-	--			to_reg_en <= '0';
-	--		else
-	--			to_reg_en <= fifo_rden;
-	--		end if;
-	--	end if;
-	--end process;
+	--to_reg_en <= fifo_rden;
+	process (sys_clk) begin
+		if rising_edge(sys_clk) then
+			if sys_reset = '1' then
+				to_reg_en <= '0';
+			else
+				to_reg_en <= fifo_rden;
+			end if;
+		end if;
+	end process;
 	
 	to_reg <= fifo_rdd when to_reg_en = '1' else (others=>'0');
 
