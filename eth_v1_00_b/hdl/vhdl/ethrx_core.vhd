@@ -210,7 +210,7 @@ begin
     		port map (
 			reset	=> sys_reset,
         	  	wr_clk	=> rx_clock,
-          		wr_en	=> not rx_async_fifo_empty,
+          		wr_en	=> not rx_async_fifo_full,
 	          	wr_data	=> rx_async_fifo_din,
         	  	rd_clk	=> sys_clk,
           		rd_en	=> not rx_async_fifo_empty,
