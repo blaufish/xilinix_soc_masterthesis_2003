@@ -49,8 +49,8 @@ architecture sim of bench_eth is
 	);
 	end component eth;
 
-	constant clkperiod : time := 50 ns;  -- 20 MHz
-	constant rx_period : time := 400 ns;  -- 2.5 MHz
+	constant clkperiod : time := 20 ns;  -- 50 ns = 20 MHz, 20 ns = 50 MHz
+	constant rx_period : time := 40 ns;  -- 40 ns = 25 MHz (100 MBit MII), 400 ns = 2.5 MHz (10 MBit MII)
 
 	-- Stimulus
 	file vectors0 : text open read_mode is "stimulus0.txt";
@@ -266,8 +266,8 @@ begin  -- sim
 				read(VectorLine, time0_tx);
 				--read(VectorLine, time1_rx);
 				--read(VectorLine, time1_tx);
-				rx_clk_drift0 <= time0_rx * 1 ns;
-				tx_clk_drift0 <= time0_tx * 1 ns;
+				rx_clk_drift0 <= time0_rx * clkperiod / 400;
+				tx_clk_drift0 <= time0_tx * clkperiod / 400;
 				--rx_clk_drift1 <= time1_rx * 1 ns;
 				--tx_clk_drift1 <= time1_tx * 1 ns;
 			wait until rising_edge(phy_clk);
