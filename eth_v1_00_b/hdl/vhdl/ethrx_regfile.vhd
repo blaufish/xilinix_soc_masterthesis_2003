@@ -134,13 +134,15 @@ begin
 
 				elsif SR_packet_buffered = '0' then
 
-					SR_packet_length		<= std_logic_vector(packet_length(1 to 11));
-					SR_packet_length_nz		<= SR_packet_length_nz or core_dv_bytes(2) or core_dv_bytes(1) or core_dv_bytes(0) ;
-					SR_fifo_overflowed		<= SR_fifo_overflowed or std_logic(packet_length(0));
+					if SR_packet_preambled = '1' then
+						SR_packet_length		<= std_logic_vector(packet_length(1 to 11));
+						SR_packet_length_nz		<= SR_packet_length_nz or core_dv_bytes(2) or core_dv_bytes(1) or core_dv_bytes(0) ;
+						SR_fifo_overflowed		<= SR_fifo_overflowed or std_logic(packet_length(0));
 
-					if core_pkt_end = '1' then
-						SR_packet_buffered <= '1';
-					end if;	
+						if core_pkt_end = '1' then
+							SR_packet_buffered <= '1';
+						end if;	
+					end if;
 	
 					if core_pkt_start = '1' and SR_packet_length="00000000000" then
 						SR_packet_preambled <= '1';
