@@ -1,0 +1,1431 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox:      70.0    350.0   500.0   500.0
+%%Creator: petmag-8 using synplify
+%%CreationDate: Fri Mar  7 13:48:56 2003
+%%Title: ethtx-core-hack.eps
+%%EndComments
+
+%%BeginProlog
+200 dict begin 
+%%BeginResource: Units and resolution
+/cm { 300 mul 2.54 div } def
+/PageHeight 28.7 cm def
+ /PageWidth 20.0 cm def
+/LineSpace 0.05 cm def
+%%EndResource
+
+%%BeginResource: PenBrush
+/TmpPenArray 5 array def
+/PenArray 5 array def
+ /lpStyle 0 def
+ /lpWidth 1 def
+ /lpRed 2 def
+ /lpGreen 3 def
+ /lpBlue 4 def
+/BrushArray 6 array def
+ /lbStyle 0 def
+ /lbRed 1 def
+ /lbGreen 2 def
+ /lbBlue 3 def
+ /lbHatchStyle 4 def
+ /lpPattern 5 def
+/BkColorArray 5 array def
+ /bkRed 0 def
+ /bkGreen 1 def
+ /bkBlue 2 def
+/TextColorArray 3 array def
+ /TextRed 0 def
+ /TextGreen 1 def
+ /TextBlue 2 def
+/PenDashArray [ [] [0.2 cm 0.1 cm] [0.1 cm 0.1 cm] [0.3 cm 0.1 cm 0.1 cm 0.1 cm] [0.3 cm 0.1 cm 0.1 cm 0.1 cm 0.1 cm 0.1 cm] [] [] ] def
+
+/HatchStyleArray [ {HS_HORIZ} {HS_VERT} {HS_BDIAG} {HS_FDIAG} {HS_CROSS} {HS_DIAGCROSS} ] def
+
+/UpdatePen
+ {/PenArray exch def /PenWidthMemo PenArray lpWidth get def } def
+/UpdateBrush
+ {/BrushArray exch def} def
+
+/UpdateBkColor
+ {/BkColorArray exch def} def
+
+/UpdateBkMode
+ {/BkMode exch def} def
+
+/UpdateTextColor
+ {/TextColorArray exch def} def
+
+/HS_HORIZ
+ {0 LineSpace PageHeight { /i exch def 0 i MyMatrix itransform moveto PageWidth i MyMatrix idtransform lineto } for stroke } def
+/HS_VERT
+ {0 LineSpace PageWidth { /i exch def i 0 MyMatrix itransform moveto i PageHeight MyMatrix idtransform lineto } for stroke } def
+/HS_CROSS
+ { HS_HORIZ HS_VERT } def
+
+/HS_FDIAG
+ {0 PageHeight sub LineSpace 3.5 mul PageWidth 
+     { /i exch def i 0 MyMatrix itransform moveto i PageHeight add PageHeight 
+ MyMatrix idtransform lineto } for stroke } def
+/HS_BDIAG
+ {0 LineSpace 3.5 mul PageWidth PageHeight add
+     { /i exch def i 0 MyMatrix itransform moveto  i PageHeight sub
+  PageHeight MyMatrix idtransform lineto } for stroke } def
+/HS_DIAGCROSS
+ { HS_FDIAG HS_BDIAG } def
+
+/StrokeWithPen
+{/join exch def /Penwidth PenArray lpWidth get def 
+ Penwidth setlinewidth
+ Penwidth 1 le
+     { 0 setlinecap }
+     { Penwidth 5 gt { 1 setlinecap } { 2 setlinecap } ifelse } ifelse
+ join { Penwidth 5 le {0 setlinejoin 3 setmiterlimit}
+ { Penwidth 8 gt { 1 setlinejoin } { 2 setlinejoin } ifelse } ifelse } if
+ join LineJoin -1 ne and {SetLineJoin setlinejoin} if
+ join MiterLimit -1 ne and {MiterLimit miterlimit} if
+ PenArray lpRed get 255 div PenArray lpGreen get 255 div PenArray lpBlue get 255 div setrgbcolor
+ /PenStyle PenArray lpStyle get def
+ PenStyle 5 lt  { PenDashArray PenStyle get 0 setdash stroke }
+ { PenStyle 6 eq  { [] 0 setdash stroke } {newpath} ifelse } ifelse
+ join {0 setlinejoin 10 setmiterlimit} if } def
+
+/FillWithBkColor
+ { gsave BkColorArray bkRed get 255 div
+BkColorArray bkGreen get 255 div BkColorArray bkBlue get 
+255 div setrgbcolor fill grestore } def
+
+/FillWithBrush
+ {/BrushStyle BrushArray lbStyle get def
+ BrushStyle 2 eq dup BrushStyle 0 eq or
+ { BrushArray lbRed get 255 div BrushArray lbGreen get 255 div BrushArray lbBlue get 255 div setrgbcolor
+ { gsave BkMode 2 eq {FillWithBkColor} if clip
+PenArray lpWidth get PenWidthMemo dup 0 ne {div} {pop} ifelse setlinewidth
+ HatchStyleArray BrushArray lbHatchStyle get get exec
+ grestore }
+ { fill } ifelse }
+ {BrushStyle 3 eq {BrushArray 5 get p SHR
+  gsave clip /Tmp save def pfill Tmp restore grestore} {pop}ifelse
+     } ifelse } def
+
+/Fill&Stroke
+ { gsave FillWithBrush grestore StrokeWithPen } def
+  /patfont 10 dict def patfont begin
+    /FontType 3 def
+    /FontMatrix [1 0 0 -1 0 0] def
+    /FontBBox [0 0 16 16]
+    def/Encoding StandardEncoding def
+    /BuildChar{pop pop 16 0 0 0 16 16
+      setcachedevice 16 16 false [1 0 0 1 .25 .25]{pat}imagemask}bind def
+  end
+/p{/pat 32 string def
+    {}forall 0 1 7{dup 2 mul pat exch 3 index put dup
+      2 mul 1 add pat exch 3 index put dup 2 mul 16 add pat exch 3 index
+      put 2 mul 17 add pat exch 2 index put pop}for}bind def
+
+/AU{1 add cvi 15 or}bind def
+/AD{1 sub cvi -16 and}bind def
+/SHR{pathbbox
+AU/Y1 exch def AU/X1 exch def AD/Y0 exch def AD/X0 exch def}bind def
+
+/M /moveto load def
+
+/pfill{/PatFont patfont
+definefont setfont/ch(AAAA)def X0 64 X1{Y1 -16 Y0{1 index exch M ch
+show}for pop}for}bind def
+%%EndResource
+
+%%BeginResource: LineTo
+/LineTo
+ { /y exch def /x exch def
+ moveto x y lineto currentpoint false StrokeWithPen } def
+%%EndResource
+
+%%BeginResource: RectanglePath
+/RectanglePath
+{
+3 index 3 index moveto 3 index 1 index lineto
+1 index 1 index lineto 1 index 3 index lineto
+3 index 3 index lineto pop pop pop pop closepath} def
+/RectanglePathBackwards
+{
+3 index 3 index moveto 1 index 3 index lineto
+1 index 1 index lineto 3 index 1 index lineto
+3 index 3 index lineto pop pop pop pop closepath} def
+%%EndResource
+
+%%BeginResource: EllipticPath
+/EllipticPath
+{matrix currentmatrix dup 3 index 6 index sub 2 div
+3 index 6 index sub 2 div
+7 index 2 index add
+7 index 2 index add
+matrix translate 3 1 roll matrix scale
+exch matrix concatmatrix exch matrix concatmatrix setmatrix
+1 0 moveto 0 0 1 360 0 arcn closepath
+setmatrix
+pop pop pop pop 
+}def
+/EllipticPathBackwards
+{matrix currentmatrix dup 3 index 6 index sub 2 div
+3 index 6 index sub 2 div
+7 index 2 index add
+7 index 2 index add
+matrix translate 3 1 roll matrix scale
+exch matrix concatmatrix exch matrix concatmatrix setmatrix
+1 0 moveto 0 0 1 0 360 arc closepath
+setmatrix
+pop pop pop pop 
+}def
+%%EndResource
+
+%%BeginResource: Rectangle
+/RectangleOutLine
+{/y2 exch def /x2 exch def /y1 exch def /x1 exch def
+ newpath
+ x1 y1 moveto x2 y1 lineto x2 y2 lineto x1 y2 lineto
+ closepath
+ false StrokeWithPen } def
+
+/FillRectangle
+{/y2 exch def /x2 exch def /y1 exch def /x1 exch def
+ /MyMatrix matrix def
+ newpath
+ x1 y1 moveto x2 y1 lineto x2 y2 lineto x1 y2 lineto
+ closepath
+ FillWithBrush} def
+/FrameRectangle
+{/y2 exch def /x2 exch def /y1 exch def /x1 exch def
+ /MyMatrix matrix def
+ /x1 x1 0.5 sub def /x2 x2 0.5 add def /y2 y2 0.5 sub def /y1 y1 0.5 add def newpath
+ x1 y1 moveto x2 y1 lineto x2 y2 lineto x1 y2 lineto x1 y1 lineto
+ /x1 x1 1 add def /x2 x2 1 sub def /y2 y2 1 add def /y1 y1 1 sub def
+ x1 y1 moveto x1 y2 lineto x2 y2 lineto x2 y1 lineto x1 y1 lineto
+ closepath
+ FillWithBrush} def
+%%EndResource
+
+%%BeginResource: Polygon
+/Polygon
+{/MyMatrix matrix def
+ newpath PolylineArray PolylineMode 1 sub get exec closepath
+ true Fill&Stroke } def
+
+/FillPolygon
+{/MyMatrix matrix def
+ newpath PolylineArray PolylineMode 1 sub get exec closepath
+ FillWithBrush } def
+%%EndResource
+
+%%BeginResource: Polyline
+/PolylineArray [ {DrawPolyline} {Bezier} ] def
+/Polyline 
+{PolylineArray PolylineMode 1 sub get exec pop pop currentpoint true StrokeWithPen } def
+/Bezier 
+{/nbPoint exch def /nbCurves nbPoint 1 sub 3 idiv def /nbLeft nbPoint 1 sub nbCurves 3 mul sub def
+ moveto 1 1 nbCurves { pop 4 2 roll 6 -2 roll curveto } for
+ nbLeft 1 eq { lineto } {nbLeft 2 eq { 4 2 roll 2 copy curveto } if } ifelse
+ } def
+/DrawPolyline 
+{/nbPoint exch def moveto
+ 1 1 nbPoint 1 sub { pop lineto } for
+ } def
+
+%%EndResource
+
+%%BeginResource: Ellipse
+/Ellipse
+{gsave
+ /Dy exch def /Dx exch def /Cy exch def /Cx exch def
+ Cx Cy translate Dx Dy scale
+ /MyMatrix Dx Dy matrix scale Cx Cy matrix translate matrix concatmatrix def
+ newpath 0 0 1 0 360 arc closepath
+ 1 Dx div 1 Dy div scale 0 Cx sub 0 Cy sub translate
+ false Fill&Stroke
+ grestore } def 
+
+/FillEllipse
+{gsave
+ /Dy exch def /Dx exch def /Cy exch def /Cx exch def
+ Cx Cy translate Dx Dy scale
+ /MyMatrix Dx Dy matrix scale Cx Cy matrix translate matrix concatmatrix def
+ newpath 0 0 1 0 360 arc closepath
+ FillWithBrush
+ grestore } def 
+%%EndResource
+
+%%BeginResource: Arc
+/Arc
+{ gsave
+ /ang1 exch def /ang2 exch def /Dy exch def /Dx exch def /Cy exch def /Cx exch def
+ Cx Cy translate Dx Dy 
+ scale 1 -1 scale
+ newpath
+ ClockWise {0 0 1 ang2 ang1 narc} {0 0 1 ang2 ang1 arc} ifelse 
+ 1 -1 scale 1 Dx div 1 Dy div scale 0 Cx sub 0 Cy sub translate
+ false StrokeWithPen
+ grestore } def 
+%%EndResource
+
+%%BeginResource: Pie
+/Pie
+{gsave
+ /ang1 exch def /ang2 exch def /Dy exch def /Dx exch def /Cy exch def /Cx exch def
+ Cx Cy translate Dx Dy scale
+ 1 -1 scale
+ /MyMatrix Dx Dy matrix scale Cx Cy matrix translate matrix concatmatrix def
+ newpath 0 0 moveto ClockWise {0 0 1 ang2 ang1 narc} {0 0 1 ang2 ang1 arc} ifelse closepath
+ 1 -1 scale 1 Dx div 1 Dy div scale 0 Cx sub 0 Cy sub translate
+ true Fill&Stroke
+ grestore } def 
+%%EndResource
+
+%%BeginResource: Chord
+/Chord
+{gsave
+ /ang1 exch def /ang2 exch def /Dy exch def /Dx exch def /Cy exch def /Cx exch def
+ Cx Cy translate Dx Dy scale
+ 1 -1 scale
+ /MyMatrix Dx Dy matrix scale Cx Cy matrix translate matrix concatmatrix def
+ newpath ClockWise {0 0 1 ang2 ang1 narc} {0 0 1 ang2 ang1 arc} ifelse closepath
+ 1 -1 scale 1 Dx div 1 Dy div scale 0 Cx sub 0 Cy sub translate
+ true Fill&Stroke
+ grestore } def 
+%%EndResource
+
+%%BeginResource: RoundRectangle
+ /min {1 index 1 index le { pop} {exch pop} ifelse } def
+/RoundRectangle
+{/r2 exch def /r1 exch def /y2 exch def /x2 exch def /y1 exch def /x1 exch def
+ y2  2 div r2 min cvi /r2 exch def
+ x2 2 div r1 min cvi /r1 exch def
+ /width x2 r1 idiv def /height y2 r2 idiv def
+ gsave
+ x1 y1 translate r1 r2 scale
+ 1 -1 scale
+ /MyMatrix r1 r2 matrix scale x1 y1 matrix translate matrix concatmatrix def
+ newpath
+ 1 1 1 180 270 arc
+ width 1 sub 0 lineto width 1 sub 1 1 270 0 arc
+ width height 1 sub lineto width 1 sub height 1 sub 1 0 90 arc
+ 1 height lineto 1 height 1 sub 1 90 180 arc
+ closepath
+ PenArray TmpPenArray copy pop
+ PenArray lpWidth PenArray lpWidth get r1 abs r2 abs add 2 div div put
+ false Fill&Stroke
+ TmpPenArray PenArray copy pop
+ grestore } def
+%%EndResource
+
+%%BeginResource: TextOut
+/TextOut
+{TextColorArray 0 get 255 div TextColorArray 1 get 255 div TextColorArray 2 get 255 div setrgbcolor
+gsave translate rotate
+0 0 moveto /expwidth exch def dup stringwidth pop expwidth exch div -1 scale show pop pop currentpoint grestore} def 
+%%EndResource
+
+%%BeginResource: MwSetFont
+/EncodingDict 256 dict def
+EncodingDict begin
+0  [/.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef
+  /space /exclam /quotedbl /numbersign
+  /dollar /percent /ampersand /quotesingle
+  /parenleft /parenright /asterisk /plus
+  /comma /hyphen /period /slash /zero /one
+  /two /three /four /five /six /seven
+  /eight /nine /colon /semicolon /less
+  /equal /greater /question /at /A /B /C
+  /D /E /F /G /H /I /J /K /L /M /N /O /P
+  /Q /R /S /T /U /V /W /X /Y /Z
+  /bracketleft /backslash /bracketright
+  /asciicircum /underscore /grave /a
+  /b /c /d /e /f /g /h /i /j /k /l /m /n
+  /o /p /q /r /s /t /u /v /w /x /y /z
+  /braceleft /bar /braceright /asciitilde
+  /.notdef /.notdef /.notdef /quotesinglbase
+  /florin /quotedblbase /ellipsis /dagger
+  /daggerdbl /circumflex /perthousand /Scaron
+  /guilsinglleft /OE /.notdef /.notdef
+  /.notdef /.notdef /quoteleft /quoteright
+  /quotedblleft /quotedblright /bullet /endash
+  /emdash /tilde /trademark /scaron
+  /guilsinglright /oe /.notdef /.notdef
+  /Ydieresis /.notdef /exclamdown /cent
+  /sterling /currency /yen /brokenbar
+  /section /dieresis /copyright
+  /ordfeminine /guillemotleft /logicalnot
+  /hyphen /registered /macron /degree
+  /plusminus /twosuperior /threesuperior
+  /acute /mu /paragraph /periodcentered
+  /cedilla /onesuperior /ordmasculine
+  /guillemotright /onequarter /onehalf
+  /threequarters /questiondown /Agrave
+  /Aacute /Acircumflex /Atilde /Adieresis
+  /Aring /AE /Ccedilla /Egrave /Eacute
+  /Ecircumflex /Edieresis /Igrave /Iacute
+  /Icircumflex /Idieresis /Eth /Ntilde
+  /Ograve /Oacute /Ocircumflex /Otilde
+  /Odieresis /multiply /Oslash /Ugrave
+  /Uacute /Ucircumflex /Udieresis /Yacute
+  /Thorn /germandbls /agrave /aacute
+  /acircumflex /atilde /adieresis /aring
+  /ae /ccedilla /egrave /eacute
+  /ecircumflex /edieresis /igrave /iacute
+  /icircumflex /idieresis /eth /ntilde
+  /ograve /oacute /ocircumflex /otilde
+  /odieresis /divide /oslash /ugrave
+  /uacute /ucircumflex /udieresis /yacute
+  /thorn /ydieresis] def
+end
+/fntdict 100 dict def
+
+/MwScaleAndSetFont 
+{
+    2 index findfont  dup length dict begin
+    {1 index /FID ne {def} {pop pop} ifelse} forall
+    dup EncodingDict exch known 
+    {EncodingDict exch get /Encoding exch def} {pop} ifelse
+    currentdict end /font0 exch definefont
+    exch scalefont setfont pop
+} def
+
+/MwSetFont
+{
+  % look in cache of scaled fonts
+  1 index /askedsize exch def
+  2 index /askedname exch def
+  fntdict askedname known 
+  { % font name found in cache - what about the size
+    /fntszdict fntdict askedname get def
+    fntszdict askedsize known
+    {
+      % font size found in cache
+      fntszdict askedsize get setfont pop pop pop
+    }
+    {
+      MwScaleAndSetFont 
+      fntszdict askedsize currentfont put
+    }
+    ifelse
+  }
+  { % not found in cache
+    MwScaleAndSetFont 
+    /fntszdict 200 dict def
+    fntszdict askedsize currentfont put
+    fntdict askedname fntszdict put
+  }
+  ifelse 
+} def
+%%EndResource
+
+%%BeginResource: DisplayBB
+/DisplayBB {gsave initgraphics 72 300 div 72 300 div scale 0 3507 translate 
+1 -1 scale 1 setlinewidth 1 0 0 setrgbcolor 
+/y2 exch def /x2 exch def /y1 exch def /x1 exch def 
+newpath x1 y1 moveto x2 y1 lineto x2 y2 lineto x1 y2 lineto closepath 
+stroke grestore } def
+%%EndResource
+
+%%EndProlog
+
+%%BeginSetup
+%%EndSetup
+
+0 0 %initial current point
+ pop pop % pop out coordinates for current pen position
+%%Page:
+%%BeginPageSetup
+/ClockWise false def /LineJoin -1 def /MiterLimit -1 def /PolylineMode 1 def /LineCap 0 def
+[0 0 0 0 0] UpdatePen
+[0 255 255 255 0 <>] UpdateBrush
+[0 0 0] UpdateTextColor
+[255 255 255] UpdateBkColor
+2 UpdateBkMode
+0 0
+
+% All the numbers (for positions, length or font size) given
+% in this file are expressed in pixels, but interpreted by
+% Postscript as points (1/72 inch)!
+%   -->so scale accordingly!
+72 300 div 72 300 div scale
+
+% So that (0, 0) is at top-left corner of paper sheet (takes postscript scaling into account too)
+0 3507 translate
+1 -1 scale
+
+/Courier  38 0  MwSetFont
+gstate /Mwgstate exch def
+%%EndPageSetup:
+/Helvetica  57 0  MwSetFont
+1 UpdateBkMode
+%(/home/petmag-8/rev_1/eth.srs Fri Mar 07 12:32:31 2003) 1440 -0.00 100 154 TextOut
+%(Instance ETH.TX_core: Sheet 1 of 1) 931 -0.00 100 237 TextOut
+%pop pop 100 267
+%2261 267 LineTo
+%pop pop 100 3305
+%2261 3305 LineTo
+%(Page: 1) 200 -0.00 100 3376 TextOut
+/Courier  38 0  MwSetFont
+[0 255 255 255 0 <>] UpdateBrush
+2 UpdateBkMode
+[255 255 255] UpdateBkColor
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(tx_clk_fdr) 67 -0.00 536 2004 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 547 1927
+591 1927 LineTo
+pop pop 547 1985
+591 1985 LineTo
+pop pop 547 1927
+547 1985 LineTo
+pop pop 591 1927
+591 1985 LineTo
+[0 1 0 0 0] UpdatePen
+pop pop 547 1938
+555 1941 LineTo
+pop pop 555 1941
+547 1945 LineTo
+531 1940 533 1942 FillRectangle
+531 1940 533 1942 RectangleOutLine
+pop pop 547 1941
+533 1941 LineTo
+604 1954 606 1956 FillRectangle
+604 1954 606 1956 RectangleOutLine
+pop pop 591 1956
+606 1956 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(Q) 10 -0.00 574 1960 TextOut
+/Courier  38 0  MwSetFont
+531 1954 533 1956 FillRectangle
+531 1954 533 1956 RectangleOutLine
+pop pop 547 1956
+533 1956 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(D) 9 -0.00 555 1960 TextOut
+/Courier  38 0  MwSetFont
+531 1969 533 1971 FillRectangle
+531 1969 533 1971 RectangleOutLine
+pop pop 547 1971
+533 1971 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(R) 9 -0.00 555 1975 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 905 1576
+1146 1576 LineTo
+pop pop 905 1803
+1146 1803 LineTo
+pop pop 905 1576
+905 1803 LineTo
+pop pop 1146 1576
+1146 1803 LineTo
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(ethtx_regfile) 85 -0.00 983 1617 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(regfile) 42 -0.00 1004 1792 TextOut
+/Courier  38 0  MwSetFont
+889 1626 891 1628 FillRectangle
+889 1626 891 1628 RectangleOutLine
+pop pop 890 1628
+905 1628 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_clk) 43 -0.00 912 1632 TextOut
+/Courier  38 0  MwSetFont
+889 1641 891 1643 FillRectangle
+889 1641 891 1643 RectangleOutLine
+pop pop 890 1642
+905 1642 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_reset) 56 -0.00 912 1646 TextOut
+/Courier  38 0  MwSetFont
+889 1655 891 1657 FillRectangle
+889 1655 891 1657 RectangleOutLine
+pop pop 890 1657
+905 1657 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(reg_status_rd) 79 -0.00 912 1661 TextOut
+/Courier  38 0  MwSetFont
+889 1670 891 1672 FillRectangle
+889 1670 891 1672 RectangleOutLine
+pop pop 890 1671
+905 1671 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(reg_fifo_wr) 64 -0.00 912 1676 TextOut
+/Courier  38 0  MwSetFont
+889 1684 891 1686 FillRectangle
+889 1684 891 1686 RectangleOutLine
+pop pop 890 1686
+905 1686 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(reg_ctrl_wr) 64 -0.00 912 1690 TextOut
+/Courier  38 0  MwSetFont
+889 1699 891 1701 FillRectangle
+889 1699 891 1701 RectangleOutLine
+pop pop 890 1701
+905 1701 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(word_rd) 47 -0.00 912 1705 TextOut
+/Courier  38 0  MwSetFont
+889 1714 891 1716 FillRectangle
+889 1714 891 1716 RectangleOutLine
+pop pop 890 1715
+905 1715 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(packet_sent) 70 -0.00 912 1719 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([0:31]) 24 -0.00 866 1735 TextOut
+/Courier  38 0  MwSetFont
+889 1736 891 1737 FillRectangle
+889 1736 891 1737 RectangleOutLine
+pop pop 890 1737
+905 1737 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(reg_wr_data[0:31]) 105 -0.00 912 1741 TextOut
+/Courier  38 0  MwSetFont
+1159 1641 1161 1643 FillRectangle
+1159 1641 1161 1643 RectangleOutLine
+pop pop 1160 1642
+1146 1642 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(append_fcs) 67 -0.00 1072 1646 TextOut
+/Courier  38 0  MwSetFont
+1159 1655 1161 1657 FillRectangle
+1159 1655 1161 1657 RectangleOutLine
+pop pop 1160 1657
+1146 1657 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(packet_buffered) 93 -0.00 1046 1661 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([0:31]) 24 -0.00 1160 1677 TextOut
+/Courier  38 0  MwSetFont
+1159 1677 1161 1679 FillRectangle
+1159 1677 1161 1679 RectangleOutLine
+pop pop 1160 1679
+1146 1679 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(reg_status[0:31]) 93 -0.00 1046 1683 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([31:0]) 24 -0.00 1160 1699 TextOut
+/Courier  38 0  MwSetFont
+1159 1699 1161 1701 FillRectangle
+1159 1699 1161 1701 RectangleOutLine
+pop pop 1160 1701
+1146 1701 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(word_data[31:0]) 93 -0.00 1046 1705 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([2:0]) 19 -0.00 1160 1720 TextOut
+/Courier  38 0  MwSetFont
+1159 1721 1161 1723 FillRectangle
+1159 1721 1161 1723 RectangleOutLine
+pop pop 1160 1722
+1146 1722 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(word_count[2:0]) 92 -0.00 1047 1727 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 1620 1576
+1825 1576 LineTo
+pop pop 1620 1817
+1825 1817 LineTo
+pop pop 1620 1576
+1620 1817 LineTo
+pop pop 1825 1576
+1825 1817 LineTo
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(ethtx_byte_to_mii) 122 -0.00 1661 1617 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(sender) 48 -0.00 1698 1807 TextOut
+/Courier  38 0  MwSetFont
+1604 1626 1606 1628 FillRectangle
+1604 1626 1606 1628 RectangleOutLine
+pop pop 1606 1628
+1620 1628 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_clk) 43 -0.00 1628 1632 TextOut
+/Courier  38 0  MwSetFont
+1604 1641 1606 1643 FillRectangle
+1604 1641 1606 1643 RectangleOutLine
+pop pop 1606 1642
+1620 1642 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_reset) 56 -0.00 1628 1646 TextOut
+/Courier  38 0  MwSetFont
+1604 1655 1606 1657 FillRectangle
+1604 1655 1606 1657 RectangleOutLine
+pop pop 1606 1657
+1620 1657 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_clock_pulse) 85 -0.00 1628 1661 TextOut
+/Courier  38 0  MwSetFont
+1604 1670 1606 1672 FillRectangle
+1604 1670 1606 1672 RectangleOutLine
+pop pop 1606 1671
+1620 1671 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(append_fcs) 67 -0.00 1628 1676 TextOut
+/Courier  38 0  MwSetFont
+1604 1684 1606 1686 FillRectangle
+1604 1684 1606 1686 RectangleOutLine
+pop pop 1606 1686
+1620 1686 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(byte_valid) 58 -0.00 1628 1690 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([1:0]) 19 -0.00 1587 1706 TextOut
+/Courier  38 0  MwSetFont
+1604 1706 1606 1708 FillRectangle
+1604 1706 1606 1708 RectangleOutLine
+pop pop 1606 1708
+1620 1708 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(send_state[1:0]) 89 -0.00 1628 1712 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([31:0]) 24 -0.00 1582 1728 TextOut
+/Courier  38 0  MwSetFont
+1604 1728 1606 1730 FillRectangle
+1604 1728 1606 1730 RectangleOutLine
+pop pop 1606 1730
+1620 1730 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(fcs[31:0]) 49 -0.00 1628 1734 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([7:0]) 19 -0.00 1587 1750 TextOut
+/Courier  38 0  MwSetFont
+1604 1750 1606 1752 FillRectangle
+1604 1750 1606 1752 RectangleOutLine
+pop pop 1606 1752
+1620 1752 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(byte_data[7:0]) 82 -0.00 1628 1756 TextOut
+/Courier  38 0  MwSetFont
+1838 1663 1840 1665 FillRectangle
+1838 1663 1840 1665 RectangleOutLine
+pop pop 1839 1664
+1825 1664 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_en) 32 -0.00 1785 1668 TextOut
+/Courier  38 0  MwSetFont
+1838 1677 1840 1679 FillRectangle
+1838 1677 1840 1679 RectangleOutLine
+pop pop 1839 1679
+1825 1679 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(packet_sent) 70 -0.00 1747 1683 TextOut
+/Courier  38 0  MwSetFont
+1838 1692 1840 1694 FillRectangle
+1838 1692 1840 1694 RectangleOutLine
+pop pop 1839 1693
+1825 1693 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(byte_rd) 43 -0.00 1774 1698 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([3:0]) 19 -0.00 1839 1713 TextOut
+/Courier  38 0  MwSetFont
+1838 1714 1840 1716 FillRectangle
+1838 1714 1840 1716 RectangleOutLine
+pop pop 1839 1715
+1825 1715 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_data[3:0]) 68 -0.00 1749 1719 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 547 1628
+766 1628 LineTo
+pop pop 547 1817
+766 1817 LineTo
+pop pop 547 1628
+547 1817 LineTo
+pop pop 766 1628
+766 1817 LineTo
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(ethtx_word_to_byte) 136 -0.00 589 1668 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(byteifier) 55 -0.00 630 1807 TextOut
+/Courier  38 0  MwSetFont
+531 1677 533 1679 FillRectangle
+531 1677 533 1679 RectangleOutLine
+pop pop 533 1679
+547 1679 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_clk) 43 -0.00 555 1683 TextOut
+/Courier  38 0  MwSetFont
+531 1692 533 1694 FillRectangle
+531 1692 533 1694 RectangleOutLine
+pop pop 533 1693
+547 1693 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_reset) 56 -0.00 555 1698 TextOut
+/Courier  38 0  MwSetFont
+531 1706 533 1708 FillRectangle
+531 1706 533 1708 RectangleOutLine
+pop pop 533 1708
+547 1708 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(byte_rd) 43 -0.00 555 1712 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([31:0]) 24 -0.00 509 1728 TextOut
+/Courier  38 0  MwSetFont
+531 1728 533 1730 FillRectangle
+531 1728 533 1730 RectangleOutLine
+pop pop 533 1730
+547 1730 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(word_data[31:0]) 93 -0.00 555 1734 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([2:0]) 19 -0.00 514 1750 TextOut
+/Courier  38 0  MwSetFont
+531 1750 533 1752 FillRectangle
+531 1750 533 1752 RectangleOutLine
+pop pop 533 1752
+547 1752 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(word_count[2:0]) 92 -0.00 555 1756 TextOut
+/Courier  38 0  MwSetFont
+779 1699 781 1701 FillRectangle
+779 1699 781 1701 RectangleOutLine
+pop pop 781 1701
+766 1701 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(word_rd) 47 -0.00 712 1705 TextOut
+/Courier  38 0  MwSetFont
+779 1714 781 1716 FillRectangle
+779 1714 781 1716 RectangleOutLine
+pop pop 781 1715
+766 1715 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(byte_valid) 58 -0.00 701 1719 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([7:0]) 19 -0.00 781 1735 TextOut
+/Courier  38 0  MwSetFont
+779 1736 781 1737 FillRectangle
+779 1736 781 1737 RectangleOutLine
+pop pop 781 1737
+766 1737 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(byte_data[7:0]) 82 -0.00 677 1741 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 1270 1825
+1430 1825 LineTo
+pop pop 1270 2007
+1430 2007 LineTo
+pop pop 1270 1825
+1270 2007 LineTo
+pop pop 1430 1825
+1430 2007 LineTo
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(crc32) 38 -0.00 1331 1865 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(cyclic) 38 -0.00 1331 1997 TextOut
+/Courier  38 0  MwSetFont
+1254 1874 1256 1876 FillRectangle
+1254 1874 1256 1876 RectangleOutLine
+pop pop 1255 1876
+1270 1876 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(CLK) 25 -0.00 1277 1880 TextOut
+/Courier  38 0  MwSetFont
+1254 1889 1256 1891 FillRectangle
+1254 1889 1256 1891 RectangleOutLine
+pop pop 1255 1890
+1270 1890 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(RST) 26 -0.00 1277 1895 TextOut
+/Courier  38 0  MwSetFont
+1254 1903 1256 1905 FillRectangle
+1254 1903 1256 1905 RectangleOutLine
+pop pop 1255 1905
+1270 1905 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(softreset) 50 -0.00 1277 1909 TextOut
+/Courier  38 0  MwSetFont
+1254 1918 1256 1920 FillRectangle
+1254 1918 1256 1920 RectangleOutLine
+pop pop 1255 1919
+1270 1919 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(dvalid) 34 -0.00 1277 1924 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([7:0]) 19 -0.00 1236 1939 TextOut
+/Courier  38 0  MwSetFont
+1254 1940 1256 1942 FillRectangle
+1254 1940 1256 1942 RectangleOutLine
+pop pop 1255 1941
+1270 1941 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(data[7:0]) 51 -0.00 1277 1946 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([31:0]) 24 -0.00 1445 1903 TextOut
+/Courier  38 0  MwSetFont
+1444 1903 1446 1905 FillRectangle
+1444 1903 1446 1905 RectangleOutLine
+pop pop 1445 1905
+1430 1905 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(crc[31:0]) 50 -0.00 1373 1909 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 1270 1576
+1496 1576 LineTo
+pop pop 1270 1752
+1496 1752 LineTo
+pop pop 1270 1576
+1270 1752 LineTo
+pop pop 1496 1576
+1496 1752 LineTo
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(ethtx_statemachine) 135 -0.00 1316 1617 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(state) 34 -0.00 1366 1741 TextOut
+/Courier  38 0  MwSetFont
+1254 1626 1256 1628 FillRectangle
+1254 1626 1256 1628 RectangleOutLine
+pop pop 1255 1628
+1270 1628 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_clk) 43 -0.00 1277 1632 TextOut
+/Courier  38 0  MwSetFont
+1254 1641 1256 1643 FillRectangle
+1254 1641 1256 1643 RectangleOutLine
+pop pop 1255 1642
+1270 1642 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_reset) 56 -0.00 1277 1646 TextOut
+/Courier  38 0  MwSetFont
+1254 1655 1256 1657 FillRectangle
+1254 1655 1256 1657 RectangleOutLine
+pop pop 1255 1657
+1270 1657 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(packet_buffered) 93 -0.00 1277 1661 TextOut
+/Courier  38 0  MwSetFont
+1254 1670 1256 1672 FillRectangle
+1254 1670 1256 1672 RectangleOutLine
+pop pop 1255 1671
+1270 1671 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(packet_sent) 70 -0.00 1277 1676 TextOut
+/Courier  38 0  MwSetFont
+1254 1684 1256 1686 FillRectangle
+1254 1684 1256 1686 RectangleOutLine
+pop pop 1255 1686
+1270 1686 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_clock_pulse) 85 -0.00 1277 1690 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([1:0]) 19 -0.00 1511 1655 TextOut
+/Courier  38 0  MwSetFont
+1509 1655 1511 1657 FillRectangle
+1509 1655 1511 1657 RectangleOutLine
+pop pop 1511 1657
+1496 1657 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(send_state[1:0]) 89 -0.00 1400 1661 TextOut
+/Courier  38 0  MwSetFont
+[0 2 0 0 0] UpdatePen
+pop pop 905 1876
+1087 1876 LineTo
+pop pop 905 2022
+1087 2022 LineTo
+pop pop 905 1876
+905 2022 LineTo
+pop pop 1087 1876
+1087 2022 LineTo
+[0 1 0 0 0] UpdatePen
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(ethtx_clk_sampler) 125 -0.00 934 1916 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  15 0  MwSetFont
+1 UpdateBkMode
+(sampler) 55 -0.00 969 2011 TextOut
+/Courier  38 0  MwSetFont
+889 1925 891 1927 FillRectangle
+889 1925 891 1927 RectangleOutLine
+pop pop 890 1927
+905 1927 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_clk) 43 -0.00 912 1931 TextOut
+/Courier  38 0  MwSetFont
+889 1940 891 1942 FillRectangle
+889 1940 891 1942 RectangleOutLine
+pop pop 890 1941
+905 1941 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(sys_reset) 56 -0.00 912 1946 TextOut
+/Courier  38 0  MwSetFont
+889 1954 891 1956 FillRectangle
+889 1954 891 1956 RectangleOutLine
+pop pop 890 1956
+905 1956 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_clock) 47 -0.00 912 1960 TextOut
+/Courier  38 0  MwSetFont
+1101 1940 1102 1942 FillRectangle
+1101 1940 1102 1942 RectangleOutLine
+pop pop 1102 1941
+1087 1941 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_clock_pulse) 85 -0.00 995 1946 TextOut
+/Courier  38 0  MwSetFont
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_d[3:0]) 50 -0.00 1909 1720 TextOut
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([3:0]) 19 -0.00 1886 1713 TextOut
+/Helvetica  12 0  MwSetFont
+/Courier  38 0  MwSetFont
+pop pop 1905 1707
+1956 1707 LineTo
+1985 1715 LineTo
+1956 1723 LineTo
+1905 1723 LineTo
+1905 1707 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(TX_EN) 42 -0.00 1909 1669 TextOut
+/Courier  38 0  MwSetFont
+pop pop 1905 1656
+1949 1656 LineTo
+1978 1664 LineTo
+1949 1672 LineTo
+1905 1672 LineTo
+1905 1656 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(TX_CLK) 49 -0.00 389 1961 TextOut
+/Courier  38 0  MwSetFont
+pop pop 387 1948
+438 1948 LineTo
+467 1956 LineTo
+438 1964 LineTo
+387 1964 LineTo
+387 1948 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_reg_ctrl_wr) 81 -0.00 357 1574 TextOut
+/Courier  38 0  MwSetFont
+pop pop 354 1561
+438 1561 LineTo
+467 1569 LineTo
+438 1577 LineTo
+354 1577 LineTo
+354 1561 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_reg_fifo_wr) 81 -0.00 357 1589 TextOut
+/Courier  38 0  MwSetFont
+pop pop 354 1576
+438 1576 LineTo
+467 1584 LineTo
+438 1592 LineTo
+354 1592 LineTo
+354 1576 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_reg_wr_data[31:0]) 122 -0.00 316 1837 TextOut
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([0:31]) 24 -0.00 467 1830 TextOut
+/Helvetica  12 0  MwSetFont
+/Courier  38 0  MwSetFont
+pop pop 314 1824
+438 1824 LineTo
+467 1832 LineTo
+438 1840 LineTo
+314 1840 LineTo
+314 1824 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_reg_status_rd) 97 -0.00 341 1603 TextOut
+/Courier  38 0  MwSetFont
+pop pop 339 1590
+438 1590 LineTo
+467 1598 LineTo
+438 1606 LineTo
+339 1606 LineTo
+339 1590 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(tx_reg_status[31:0]) 110 -0.00 1909 1516 TextOut
+/Helvetica  9 0  MwSetFont
+1 UpdateBkMode
+([0:31]) 24 -0.00 1881 1509 TextOut
+/Helvetica  12 0  MwSetFont
+/Courier  38 0  MwSetFont
+pop pop 1905 1503
+2018 1503 LineTo
+2047 1511 LineTo
+2018 1519 LineTo
+1905 1519 LineTo
+1905 1503 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(OPB_Rst) 54 -0.00 384 1698 TextOut
+/Courier  38 0  MwSetFont
+pop pop 383 1685
+438 1685 LineTo
+467 1693 LineTo
+438 1701 LineTo
+383 1701 LineTo
+383 1685 LineTo
+/Helvetica  12 0  MwSetFont
+1 UpdateBkMode
+(OPB_Clk) 53 -0.00 385 1684 TextOut
+/Courier  38 0  MwSetFont
+pop pop 383 1671
+438 1671 LineTo
+467 1679 LineTo
+438 1687 LineTo
+383 1687 LineTo
+383 1671 LineTo
+pop pop 500 1956
+514 1956 LineTo
+pop pop 514 1956
+533 1956 LineTo
+pop pop 467 1956
+500 1956 LineTo
+pop pop 1197 1511
+1197 1679 LineTo
+pop pop 1197 1511
+1905 1511 LineTo
+pop pop 1160 1679
+1197 1679 LineTo
+pop pop 868 1737
+868 1832 LineTo
+pop pop 868 1737
+890 1737 LineTo
+pop pop 467 1832
+868 1832 LineTo
+pop pop 861 1569
+861 1686 LineTo
+pop pop 467 1569
+861 1569 LineTo
+pop pop 861 1686
+890 1686 LineTo
+pop pop 868 1584
+868 1671 LineTo
+pop pop 467 1584
+868 1584 LineTo
+pop pop 868 1671
+890 1671 LineTo
+pop pop 876 1598
+876 1657 LineTo
+pop pop 467 1598
+876 1598 LineTo
+pop pop 876 1657
+890 1657 LineTo
+pop pop 1872 1715
+1887 1715 LineTo
+pop pop 1887 1715
+1905 1715 LineTo
+pop pop 1839 1715
+1872 1715 LineTo
+pop pop 1872 1664
+1887 1664 LineTo
+pop pop 1887 1664
+1905 1664 LineTo
+pop pop 1839 1664
+1872 1664 LineTo
+pop pop 1190 1547
+1190 1642 LineTo
+pop pop 1569 1547
+1569 1671 LineTo
+pop pop 1190 1547
+1569 1547 LineTo
+pop pop 1160 1642
+1190 1642 LineTo
+pop pop 1569 1671
+1606 1671 LineTo
+pop pop 803 1715
+803 1817 LineTo
+pop pop 1175 1766
+1175 1817 LineTo
+pop pop 1576 1686
+1576 1766 LineTo
+pop pop 781 1715
+803 1715 LineTo
+pop pop 803 1817
+1175 1817 LineTo
+pop pop 1175 1766
+1576 1766 LineTo
+pop pop 1576 1686
+1606 1686 LineTo
+pop pop 836 1701
+861 1701 LineTo
+pop pop 861 1701
+890 1701 LineTo
+pop pop 781 1701
+836 1701 LineTo
+pop pop 518 1504
+518 1752 LineTo
+pop pop 1182 1504
+1182 1722 LineTo
+pop pop 518 1504
+1182 1504 LineTo
+pop pop 518 1730
+533 1730 LineTo
+pop pop 518 1752
+533 1752 LineTo
+pop pop 1160 1701
+1182 1701 LineTo
+pop pop 1160 1722
+1182 1722 LineTo
+pop pop 1584 1730
+1584 1905 LineTo
+pop pop 1445 1905
+1584 1905 LineTo
+pop pop 1584 1730
+1606 1730 LineTo
+pop pop 795 1737
+795 1825 LineTo
+pop pop 1241 1774
+1241 1941 LineTo
+pop pop 1591 1752
+1591 1774 LineTo
+pop pop 781 1737
+795 1737 LineTo
+pop pop 795 1825
+1241 1825 LineTo
+pop pop 1241 1774
+1591 1774 LineTo
+pop pop 1591 1752
+1606 1752 LineTo
+pop pop 1241 1941
+1255 1941 LineTo
+pop pop 511 1708
+511 1839 LineTo
+pop pop 1861 1693
+1861 2022 LineTo
+pop pop 1204 1839
+1204 2022 LineTo
+pop pop 1839 1693
+1861 1693 LineTo
+pop pop 511 1708
+533 1708 LineTo
+pop pop 1204 1919
+1255 1919 LineTo
+pop pop 511 1839
+1204 1839 LineTo
+pop pop 1204 2022
+1861 2022 LineTo
+pop pop 1525 1657
+1525 1708 LineTo
+pop pop 1511 1657
+1525 1657 LineTo
+pop pop 1525 1708
+1606 1708 LineTo
+pop pop 1861 1518
+1861 1679 LineTo
+pop pop 876 1715
+876 1832 LineTo
+pop pop 1212 1518
+1212 1905 LineTo
+pop pop 1212 1518
+1861 1518 LineTo
+pop pop 1839 1679
+1861 1679 LineTo
+pop pop 876 1715
+890 1715 LineTo
+pop pop 1212 1671
+1255 1671 LineTo
+pop pop 1212 1905
+1255 1905 LineTo
+pop pop 876 1832
+1212 1832 LineTo
+pop pop 1208 1657
+1230 1657 LineTo
+pop pop 1230 1657
+1255 1657 LineTo
+pop pop 1160 1657
+1208 1657 LineTo
+pop pop 1233 1540
+1233 1941 LineTo
+pop pop 1576 1540
+1576 1657 LineTo
+pop pop 1233 1540
+1576 1540 LineTo
+pop pop 1233 1686
+1255 1686 LineTo
+pop pop 1576 1657
+1606 1657 LineTo
+pop pop 1102 1941
+1233 1941 LineTo
+pop pop 748 1956
+817 1956 LineTo
+pop pop 817 1956
+890 1956 LineTo
+pop pop 606 1956
+748 1956 LineTo
+pop pop 496 1606
+496 1971 LineTo
+pop pop 847 1533
+847 1941 LineTo
+pop pop 1219 1533
+1219 1890 LineTo
+pop pop 1584 1533
+1584 1642 LineTo
+pop pop 496 1971
+533 1971 LineTo
+pop pop 847 1533
+1584 1533 LineTo
+pop pop 467 1693
+496 1693 LineTo
+pop pop 496 1693
+533 1693 LineTo
+pop pop 496 1606
+847 1606 LineTo
+pop pop 847 1642
+890 1642 LineTo
+pop pop 1219 1642
+1255 1642 LineTo
+pop pop 1584 1642
+1606 1642 LineTo
+pop pop 847 1941
+890 1941 LineTo
+pop pop 1219 1890
+1255 1890 LineTo
+pop pop 504 1613
+504 1941 LineTo
+pop pop 854 1525
+854 1927 LineTo
+pop pop 1226 1525
+1226 1876 LineTo
+pop pop 1591 1525
+1591 1628 LineTo
+pop pop 504 1941
+533 1941 LineTo
+pop pop 854 1525
+1591 1525 LineTo
+pop pop 467 1679
+504 1679 LineTo
+pop pop 504 1679
+533 1679 LineTo
+pop pop 504 1613
+854 1613 LineTo
+pop pop 854 1628
+890 1628 LineTo
+pop pop 1226 1628
+1255 1628 LineTo
+pop pop 1591 1628
+1606 1628 LineTo
+pop pop 854 1927
+890 1927 LineTo
+pop pop 1226 1876
+1255 1876 LineTo
+[0 0 0 0 0] UpdatePen
+[0 255 255 255 0 <>] UpdateBrush
+ showpage 
+end
+% end of the MainWin EPS file
