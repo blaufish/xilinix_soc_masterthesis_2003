@@ -3,10 +3,9 @@
 \textclass report
 \begin_preamble
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-
-\lhead{\thepage}
+\fancyhead[LO,RE]{\thepage}
+\fancyhead[RO,LE]{\leftmark}
 \cfoot{}
-\rhead{\leftmark}
 \end_preamble
 \language english
 \inputencoding auto
@@ -28,7 +27,7 @@
 \quotes_language english
 \quotes_times 2
 \papercolumns 1
-\papersides 1
+\papersides 2
 \paperpagestyle fancy
 
 \layout Title
@@ -3145,11 +3144,18 @@ speed
 
 ).
  Then the netlist is passed through the Xilinx Place & Route flow (overall
- effort set to 5, extra effort set to 2) utilizing a set of timing constraints
- used by Xilinx in EMAC documentation.
- The system clock timespecification is tweaked and flow re-started until
- all a minimum period is found for which all constraints are met.
- Then 
+ effort set to 5, extra effort set to 2) utilizing a set of Ethernet timing
+ constraints (table
+\begin_inset LatexCommand \ref{cap:Ethernet-timing-constraints}
+
+\end_inset 
+
+) used by Xilinx in EMAC documentation.
+ The system constraint is tweaked a minimum period is found for which all
+ constraints are met.
+\layout Standard
+
+Then 
 \begin_inset Formula $f_{max}$
 \end_inset 
 
@@ -3160,26 +3166,31 @@ speed
  MHz.
 \layout Standard
 
-For EMAC and EMAC Lite, the corosponding values are extracted from the specifica
-tion.
+Table 
+\begin_inset LatexCommand \ref{cap:System-clock-and-reset-constraints}
+
+\end_inset 
+
+ illustrates a 133 MHz system clock constraint.
+\layout Standard
+
+For EMAC and EMAC Lite, the corresponding values are extracted from the
+ specification.
 \layout Standard
 
 
-\begin_inset Float algorithm
+\begin_inset Float table
 wide false
 collapsed true
 
 \layout Caption
 
-UCF Ethernet Timing constraints
-\layout LyX-Code
 
-NET "opb_clk" TNM_NET = "opb_clk"; 
-\layout LyX-Code
+\begin_inset LatexCommand \label{cap:Ethernet-timing-constraints}
 
-TIMESPEC "TS_opb_clk" = PERIOD "opb_clk" 7.5 ns HIGH 50 %;
-\layout LyX-Code
+\end_inset 
 
+Ethernet timing constraints
 \layout LyX-Code
 
 NET "rx_clk" TNM_NET = "RXCLK_GRP"; 
@@ -3191,13 +3202,10 @@ NET "tx_clk" TNM_NET = "TXCLK_GRP";
 TIMESPEC "TSTXOUT" = FROM "TXCLK_GRP" TO "PADS" 10 ns; 
 \layout LyX-Code
 
-TIMESPEC "TSRXIN" = FROM "PADS" TO "RXCLK_GRP" 6 ns; 
+TIMESPEC "TSRXIN" = FROM "PADS" TO "RXCLK_GRP" 6 ns;
 \layout LyX-Code
 
-NET "opb_rst" TIG; 
-\layout LyX-Code
-
-NET "rx_clk" USELOWSKEWLINES; 
+NET "rx_clk" USELOWSKEWLINES;
 \layout LyX-Code
 
 NET "tx_clk" USELOWSKEWLINES; 
@@ -3228,6 +3236,46 @@ NET "rx_d<0>" NODELAY;
 \layout LyX-Code
 
 NET "rx_dv" NODELAY; 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:System-clock-and-reset-constraints}
+
+\end_inset 
+
+System clock and reset constraints
+\layout LyX-Code
+
+NET "opb_clk" TNM_NET = "opb_clk"; 
+\layout LyX-Code
+
+TIMESPEC "TS_opb_clk" = PERIOD "opb_clk" 7.5 ns HIGH 50 %;
+\layout LyX-Code
+
+NET "opb_rst" TIG; 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float algorithm
+wide false
+collapsed false
+
+\layout Caption
+
+UCF Ethernet Timing constraints
 \end_inset 
 
 
@@ -3559,6 +3607,7 @@ N/A
 
 \layout Standard
 
+76.9 MHz
 \end_inset 
 </cell>
 </row>
