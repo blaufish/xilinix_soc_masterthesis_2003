@@ -9,7 +9,7 @@
 \end_preamble
 \language english
 \inputencoding auto
-\fontscheme default
+\fontscheme pslatex
 \graphics default
 \paperfontsize default
 \spacing single 
@@ -106,6 +106,17 @@ During my work on the thesis, I have taught MicroBlaze based System on Chip
  (SoC) development to MS.c.
  students in the Digital Synthesis course at CSEE.
  Additional credits goes to these students for valuable input.
+\layout Chapter*
+
+Copyrights & Trademarks
+\layout Standard
+
+All products and company names are service marks, trademarks or registered
+ trademarks are the property of their respective owners.
+ This thesis include images from copyrighted materials for academic citation
+ purposes.
+ All images included from copyrighted materials are the property of their
+ respective owners.
 \layout Standard
 
 
@@ -155,18 +166,11 @@ This Master Thesis work has been performed during a period of 6 months.
 \layout Section
 
 Software
-\layout Itemize
+\layout Standard
 
 MicroBlaze Development Kit (MDK) 2.2 (Service Pack 2) has been used for this
  evalutation.
  Currently it remains the most recent release.
-\layout Itemize
-
-The report is written in LyX 1.2.1.
-\layout Itemize
-
-Other tools which has been used include: Xilinx ISE, Cadence Simulation
- Tools, Synplicity Synplify Pro, Modeltech ModelSim.
 \layout Section
 
 Hardware
@@ -176,7 +180,7 @@ XESS XSV-100 / XSV-800 Prototyping Board
 \layout Standard
 
 These are Xilinx Virtex based prototyping board.
- XSV-100 is equipped with a Virtex 100, XSV-800 with a Virtex 800.
+ XSV-100 is equipped with a Virtex 100 FPGA, XSV-800 with a Virtex 800 FPGA.
  The Virtex chip is connected to a large set of interfaces, including:
 \layout Itemize
 
@@ -555,6 +559,111 @@ Overall processor cores and software support add flexibility and shorten
  development / bugfix / reconfiguration times.
 \layout Section
 
+IBM CoreConnect
+\layout Standard
+
+IBM CoreConnect 
+\begin_inset LatexCommand \cite{CoreConnect_WhitePaper}
+
+\end_inset 
+
+ is family of SoC busses.
+ It features three bus architectures:
+\layout Itemize
+
+Processor Local Bus (PLB): a high performance bus for interconnecting fast
+ processor cores and high performance peripherals (PCI interfaces, memory
+ interfaces etc)
+\layout Itemize
+
+On-Chip Peripheral Bus (OPB): a simple bus intended for use with peripherals
+ which are slow or otherwise unsuited for PLB.
+\layout Itemize
+
+Device Control Register (DCR) Bus: a simple bus intended to distribute register
+ values in an efficient manner.
+\layout Standard
+
+An IBM CoreConnect system may utilize DCR, OPB and PLB in a single SoC (as
+ shown in figure 
+\begin_inset LatexCommand \ref{cap:CoreConnect-based-SoC}
+
+\end_inset 
+
+) or only one or two of the bus architectures.
+ A mixed system may use different systems clocks - often OPB uses a slower
+ clock than PLB.
+ PLB and OPB may be interconnected using OPB-to-PLB and PLB-to-OPB bridges.
+ The CoreConnect busses shares two important parameters:
+\layout Itemize
+
+CoreConnect is fully synchronous
+\layout Itemize
+
+CoreConnect does not require tri-state drivers
+\layout Standard
+
+The IBM CoreConnect architecture heavily customizeable and several CoreConnect
+ architecture parameters may different between different implementations.
+ Therefor IBM CoreConnect cores may 
+\emph on 
+not
+\emph default 
+ be compatible unless designed for compliance with a specific CoreConnect
+ implementation.
+ Important CoreConnect implementations include: 
+\layout Itemize
+
+IBM Blue Logic
+\begin_inset Formula $^{\textrm{TM}}$
+\end_inset 
+
+ Core library for ASIC SoC design.
+\layout Itemize
+
+Xilinx OPB for FPGA SoC design.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:CoreConnect-based-SoC}
+
+\end_inset 
+
+CoreConnect based SoC
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/coreconnect_system.eps
+	display default
+	size_type 1
+	width 100text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\newline 
+(from 
+\begin_inset LatexCommand \cite{CoreConnect_WhitePaper}
+
+\end_inset 
+
+ page 1)
+\end_inset 
+
+
+\layout Subsection
+
 
 \begin_inset LatexCommand \label{sec:On-Chip-Peripheral-Bus}
 
@@ -563,7 +672,7 @@ Overall processor cores and software support add flexibility and shorten
 On-Chip Peripheral Bus (OPB)
 \layout Standard
 
-The IBM Core Connect On-Chip Peripheral Bus
+The IBM CoreConnect On-Chip Peripheral Bus
 \begin_inset Foot
 collapsed true
 
@@ -591,13 +700,7 @@ OPB Bus
  is an easy to use bus.
  OPB allows an arbitrary number of masters to read from / write to an arbitrary
  number of slaves.
- The bus is highly customizable, as an example bus widths are configurable
- and response times and several other parameters are implementation specific.
- Given this level of customizing, OPB devices are generally 
-\emph on 
-not
-\emph default 
- compatible unless they share the same OPB parameters.
+ 
 \layout Standard
 
 The bus includes a data bus and an address bus.
@@ -608,8 +711,16 @@ The bus includes a data bus and an address bus.
 \layout Standard
 
 A normal OPB access can be performed in one cycle.
- Slow OPB devices may respond in up to 16 cycles, or an arbitrary number
- of cycles if issuing a Timeout Suppress signal.
+ Slow OPB devices may respond in an arbitrary number of cycles if issuing
+ a 
+\begin_inset Quotes eld
+\end_inset 
+
+Timeout Suppress
+\begin_inset Quotes erd
+\end_inset 
+
+ signal.
 \layout Standard
 
 When several OPB masters share a bus, an OPB Arbiter is used to grant exclusive
@@ -618,8 +729,16 @@ When several OPB masters share a bus, an OPB Arbiter is used to grant exclusive
  until the bus is idle.
  The OPB Arbiter itself may also introduce a short mandatory delay before
  it grant access.
- An OPB master may utilize bus lock / sequential access to make several
- slave accesses per arbitrated bus grant.
+ An OPB master may utilize 
+\begin_inset Quotes eld
+\end_inset 
+
+Bus Lock
+\begin_inset Quotes erd
+\end_inset 
+
+ (also referred to as sequential access or bursts) to make several slave
+ accesses per arbitrated bus grant.
  Utilization of sequential access keeps arbitration overhead to a minimum.
 \layout Subsection
 
@@ -633,9 +752,81 @@ Xilinx OPB
 
 Xilinx implements the IBM CoreConnect On-Chip Peripheral Bus with most configura
 ble OPB parameters set to specific values.
- Important parameters include datawidth which is set to 32 and addresswidth
- which also is set to 32.
- 
+ Important parameters include 32-bit data bus and 32-bit address bus.
+ Xilinx OPB Arbiter supports up to 16 masters and allow slow slaves to respond
+ in up to 16 cycles without issuing a 
+\begin_inset Quotes eld
+\end_inset 
+
+Timeout supppress
+\begin_inset Quotes erd
+\end_inset 
+
+ signal.
+ Figure 
+\begin_inset LatexCommand \ref{cap:Xilinx-OPB-physical}
+
+\end_inset 
+
+ shows a small Xilinx OPB system.
+ It is important to note that Xilinx OPB is based upon OR-gates and does
+ not implement 
+\begin_inset Quotes eld
+\end_inset 
+
+enable
+\begin_inset Quotes erd
+\end_inset 
+
+-outputs
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Xilinx OPB requires that all slave/master peripherals set all output signals
+ to logic zero when not selected.
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Xilinx-OPB-physical}
+
+\end_inset 
+
+Xilinx OPB physical implementation
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/xilinx_opb_physical_implementation.eps
+	display default
+	size_type 1
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\newline 
+(from 
+\begin_inset LatexCommand \cite{MB_OPB_TUTORIAL}
+
+\end_inset 
+
+ page 3)
+\end_inset 
+
+
 \layout Standard
 
 This definition of OPB parameters makes all Xilinx OPB devices compatible.
@@ -652,6 +843,11 @@ Xilinx provide
 
 OPB Usage Notes
 \begin_inset Quotes erd
+\end_inset 
+
+ 
+\begin_inset LatexCommand \cite{MB_HWREF}
+
 \end_inset 
 
  for mixed systems where Xilinx OPB and other OPB implementations connected.
@@ -1300,6 +1496,56 @@ The MicroBlaze core is a high performance 32-bit RISC Soft Processor and
  The MicroBlaze instruction set is familiar to MIPS and other common RISC
  processors.
  
+\layout Standard
+
+The core consists of a three stage pipeline with a Harvard-style dedicated
+ instruction and data paths.
+ The core is illustrated in figure 
+\begin_inset LatexCommand \ref{cap:MicroBlaze-Core-Block-Diagram}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:MicroBlaze-Core-Block-Diagram}
+
+\end_inset 
+
+MicroBlaze Core Block Diagram
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename images/microblaze_core_block_diagram.eps
+	display default
+	size_type 1
+	width 90text%
+	keepAspectRatio
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\newline 
+(from 
+\begin_inset LatexCommand \cite{MB_HWREF}
+
+\end_inset 
+
+ page 3)
+\end_inset 
+
+
 \layout Subsection
 
 Xilinx MicroBlaze bus interfaces
@@ -1657,8 +1903,13 @@ There are several problems with MDK which are easily encountered.
 MDK Documentation
 \layout Standard
 
-The documentation included in MDK is fine for beginner applications but
- in depth information is hard to find.
+The documentation 
+\begin_inset LatexCommand \cite{MB_HWREF,MB_SWREF,MB_TUTORIAL,MB_OPB_TUTORIAL}
+
+\end_inset 
+
+ included in MDK is fine for beginner applications but in depth information
+ is hard to find.
  
 \layout Standard
 
@@ -4947,7 +5198,12 @@ OPB Usage Notes
 \begin_inset Quotes erd
 \end_inset 
 
- provided by Xilinx, intended to aid briding Xilinx OPB with other OPBs,
+ 
+\begin_inset LatexCommand \cite{MB_HWREF}
+
+\end_inset 
+
+ provided by Xilinx, intended to aid bridging Xilinx OPB with other OPBs,
  might also be used in the development of the bridge.
 \layout Section
 
@@ -4996,6 +5252,90 @@ Gigabit Ethernet - Migrating to High-Bandwidth LANs
 \newline 
 Prentice Hall, 1998.
  ISBN 0-13-913286-4
+\layout Bibliography
+\bibitem [IBM1]{CoreConnect_WhitePaper}
+
+
+\emph on 
+The CoreConnect
+\begin_inset Formula $^{\textrm{TM}}$
+\end_inset 
+
+ Bus Architecture (White Paper)
+\emph default 
+
+\newline 
+International Busniess Machines Corporation (IBM), 1999.
+\newline 
+
+\emph on 
+http://www.chips.ibm.com/products/coreconnect/
+\layout Bibliography
+\bibitem [XMB1]{MB_HWREF}
+
+
+\emph on 
+MicroBlaze
+\begin_inset Formula $^{\textrm{TM}}$
+\end_inset 
+
+ Hardware Reference Guide (version 2.2)
+\emph default 
+.
+\newline 
+Xilinx Inc., 2002.
+ 
+\newline 
+
+\emph on 
+http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/hwref.pdf
+\layout Bibliography
+\bibitem [XMB2]{MB_SWREF}
+
+
+\emph on 
+MicroBlaze
+\begin_inset Formula $^{\textrm{TM}}$
+\end_inset 
+
+ Software Reference Gudie (version 2.2)
+\emph default 
+.
+\newline 
+Xilinx Inc, 2002.
+\newline 
+
+\emph on 
+http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/swref.pdf
+\layout Bibliography
+\bibitem [XMB3]{MB_TUTORIAL}
+
+
+\emph on 
+MicroBlaze Development Kit Tutorial (version 2.2).
+\emph default 
+
+\newline 
+Xilinx Inc, 2002.
+\newline 
+
+\emph on 
+http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/mb_tutotial_c2bits.
+pdf
+\layout Bibliography
+\bibitem [XMB4]{MB_OPB_TUTORIAL}
+
+
+\emph on 
+Designing Custom OPB Slave Peripherals for MicroBlaze.
+\emph default 
+
+\newline 
+Xilinx Inc, 2002.
+\newline 
+
+\emph on 
+http://www.xilinx.com/ipcenter/processor_central/microblaze/doc/opb_tutorial.pdf
 \layout Bibliography
 \bibitem [XAPP632]{XAPP632 Programming via E-Mail}
 
