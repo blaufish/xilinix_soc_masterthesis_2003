@@ -170,8 +170,8 @@ architecture RTL of ethrx_core is
 	signal rx_async_fifo_din, rx_async_fifo_dout : std_logic_vector(rx_data_pins downto 0);
 	
 	signal rx_clock_FDR, rx_clock_s   : std_logic;
-	signal rx_data_FDR, rx_data_s     : std_logic_vector(rx_data_pins-1 downto 0);
-	signal rx_dvalid_FDR, rx_dvalid_s : std_logic;
+	signal rx_data_nFDR, rx_data_FDR, rx_data_s     : std_logic_vector(rx_data_pins-1 downto 0);
+	signal rx_dvalid_nFDR, rx_dvalid_FDR, rx_dvalid_s : std_logic;
 begin
 
 	gen0 : if async=false generate
@@ -207,9 +207,13 @@ begin
 
 	gen1 : if async=true generate
 		clockbuffering1 : process (rx_clock) begin
-			if rising_edge(rx_clock) then
-				rx_dvalid_FDR <= rx_dvalid;
-				rx_data_FDR   <= rx_data;
+		    if falling_edge(rx_clock) then
+				rx_dvalid_nFDR <= rx_dvalid;
+				rx_data_nFDR   <= rx_data;
+
+			elsif rising_edge(rx_clock) then
+				rx_dvalid_FDR <= rx_dvalid_nFDR;
+				rx_data_FDR   <= rx_data_nFDR;
 			end if;
 		end process;
 
