@@ -44,14 +44,20 @@ Peter Magnusson
 petmag-8@sm.luth.se
 \layout Abstract
 
-Xilinx MicroBlaze is a processor core for implementation in Xilinx Field
- Programmable Arrays (FPGA) circuits.
- This thesis explores the possibility of utilizing Xilinx MicroBlaze and
- IBM CoreConnect On-Chip Peripheral Bus peripherals in a single FPGA to
- provide a System on Chip (SoC) solution for an aribitery set of network
- applications.
- Typical applications include Ethernet switches, Internet-connected embedded
- systems, small IP clients for handheld devices and simple Internet gateways.
+This thesis explores the possibility of implementing a System on Chip (SoC)
+ solution for network applications.
+ 
+\layout Abstract
+
+Xilinx MicroBlaze soft processor core and IBM CoreConnect On-Chip Peripheral
+ bus peripherals is utilized in the SoC.
+ The SoC is implemented in Virtex and Virtex-E which are Field Programmable
+ Arrays (FPGA) manufactured by Xilinx.
+\layout Abstract
+
+Typical network SoC applications include Ethernet switches, Internet-connected
+ embedded systems, small IP clients for handheld devices and simple Internet
+ gateways.
 \layout Chapter*
 
 Preface
@@ -131,7 +137,7 @@ Introduction
 Limitations
 \layout Chapter
 
-Dispotion
+Thesis outline
 \layout Standard
 
 \SpecialChar ~
@@ -220,8 +226,8 @@ Chapter
 
 \end_inset 
 
- sugests which futher work could be performed to improve the evaluation
- of MicroBlaze or to extend it's network capabilities.
+ suggests future work which could improve the evaluation of MicroBlaze or
+ to extend MicroBlaze's network capabilities.
 \layout Chapter
 
 
@@ -237,13 +243,17 @@ System on Chip (SoC) solutions
 
 System on Chip (SoC) refers to devices where all essential parts of a computing
  systems have been integrated in a single circuit.
- A typical SoC includes one (or many) processor core(s), an aribitrary number
- of peripherals for input/output, some on-chip memory and an interface for
- connecting external memory, and one or several busses which interconnects
- all these devices.
+ 
 \layout Standard
 
-As SoCs usually are designed with a limited set of applications in mind,
+A typical SoC includes one (or many) processor core(s), an aribitrary number
+ of peripherals, some on-chip memory and a bus architecture which interconnects
+ all these devices.
+ A SoC may also contain a large set of I/O interfaces for e.g.
+ external memory, off-chip peripherals and network interfaces.
+\layout Standard
+
+As SoCs usually are designed with a limited set of applications in mind
  they tend to need less CPU power than a general purpose computer.
  While a modern workstation operates with clock frequences in the range
  of 500 MHz - 3 GHz, the SoC CPU might operate at just a few megahertz.
@@ -255,21 +265,21 @@ As SoCs usually are designed with a limited set of applications in mind,
  utilization.
 \layout Subsection
 
-What is a microcontroller and what is a SoC?
+Microcontrollers
 \layout Standard
 
 A typical microcontroller consists of a single processor core, some memory
  and a few simple peripherals.
  Most microcontrollers share the following properties: they are cheap, they
  are energy efficient and they are more or less general purpose.
- Therefore microcontrollers can be considered to be a subset of SoCs.
+ Therefor microcontrollers can be considered to be a subset of SoCs.
 \layout Section
 
 Application Specific Interated Circuit (ASIC)
 \layout Standard
 
-Application Specific Interated Circuit (ASIC) is one of the most common
- type of chips.
+Application Specific Integrated Circuit (ASIC) is one of the most common
+ chip types.
  An ASIC may implement simple designs (
 \begin_inset Quotes eld
 \end_inset 
@@ -282,7 +292,7 @@ application
 \layout Standard
 
 An ASIC is designed for a specific applications and can be heavily customized
- for reduced low power dissipation, small area or high clock frequencies.
+ for reduced power dissipation, small area or high clock frequencies.
  Other important ASIC characteristics is low reconfigurability, long design
  phazes, large startup costs and low mass production costs.
  This makes ASIC ideal for large scale manufacturing of well verified designs,
@@ -293,9 +303,9 @@ Programmable logic devices (PLDs)
 \layout Standard
 
 Programmable logic devices are chips which can programmed to behave as an
- aribitrary design.
+ arbitrary design.
  A PLD may be programmed to implement something as simple as a small net
- of combinatory logic, but it may also implement a large design such as
+ of combinatorial logic, but it may also implement large designs such as
  a SoC.
  One common type of programmable logic devices is FPGAs.
 \layout Subsection
@@ -305,19 +315,19 @@ Field Programmable Gate Arrays (FPGAs)
 
 Field Programmable Gate Array (FPGA) is a type of programmable devices.
  An FPGA contains a generic architecture with configurable logic and routing.
- FPGAs are expensive, but can contain enough logic to implement advanced
- systems, such as a System on Chip.
+ FPGAs are expensive but may contain enough logic to implement large designs
+ such as a System on Chip.
  
 \layout Standard
 
 FPGAs are not optimized for any specific application, and therefore they
  may consume more power or implement a design less efficient than a ASIC.
- However an FPGA is easily reprogrammed and which shortens designcycles
+ However an FPGA is easily reprogrammed and which shortens design cycles
  and allows early real world tests.
  This makes FPGAs perfect for prototypes and small production volumes.
  FPGAs are also usefull in first generation manufacturing if standards and
  applications are subject to change, or if an application must be released
- before engineers consider the design safe for implementation in an ASIC.
+ before engineers consider the design safe for ASIC implementation.
 \layout Section
 
 
@@ -353,8 +363,9 @@ OPB Bus
  in this paper.
 \end_inset 
 
- is an easy to use bus, allowing an aribtrary number of masters to read
- from / write to an aribitrary number of slaves.
+ is an easy to use bus.
+ OPB allows an arbitrary number of masters to read from / write to an arbitrary
+ number of slaves.
  The bus is highly customizeable, as an example bus widths are configurable
  and response times and several other paramarers are implementation specific.
  Given this level of configurability, OPB devices are generally 
@@ -376,11 +387,11 @@ A normal OPB access can be performed in one cycle.
  of cycles if issuing a Timout Supress signal.
 \layout Standard
 
-When several OPB masters share a bus, an OPB Aribter is used to grant exclusive
+When several OPB masters share a bus, an OPB Arbiter is used to grant exclusive
  bus access.
  In these systems, a master may have to wait an aribitrary number of cycles
  until the bus is idle.
- The OPB Aribter itself may also introduce a short mandatory delay before
+ The OPB Arbiter itself may also introduce a short mandatory delay before
  it grant access.
  An OPB master may utilize bus lock / sequencial access to make several
  slave accesses per aribitrated bus grant.
@@ -399,8 +410,7 @@ Xilinx implements the IBM CoreConnect On-Chip Peripheral bus with most configura
 ble OPB parameters set to specific values.
  Important parameters include datawidth which is set to 32 and addresswidth
  which also is set to 32.
- Xilinx documents how some other OPB implementations may be interconnected,
- such as OPB-devices with less addresswidth.
+ 
 \layout Standard
 
 This definition of OPB parameters makes all Xilinx OPB devices compatible.
@@ -409,6 +419,19 @@ This definition of OPB parameters makes all Xilinx OPB devices compatible.
  Xilinx also provides bridge which allows the IBM PPC 440 processor core
  built into recent Xilinx Virtex II Pro FPGAs to be interconnected with
  the OPB devices.
+\layout Standard
+
+Xilinx provide 
+\begin_inset Quotes eld
+\end_inset 
+
+OPB Usage Notes
+\begin_inset Quotes erd
+\end_inset 
+
+ for mixed systems where Xilinx OPB and other OPB implementations connected.
+ With aid of these usage notes, a broad range of none-Xilinx OPB devices
+ may be interconnected given some work.
 \layout Section
 
 About Ethernet 10/100 MBit
@@ -441,11 +464,79 @@ Ethernet
 
 \end_inset 
 
-) includes a 14 byte header (DA, SA, TYPE) and a 46 to 1500 byte DATA section.
+) includes a 14 byte header (DA, SA, TYPE) and a 46 to 1500 byte DATA section
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Short packets must be padded with unused 
+\begin_inset Quotes eld
+\end_inset 
+
+padding
+\begin_inset Quotes erd
+\end_inset 
+
+ bytes.
+ The value of the padding is arbitrary, often is 0x00 used.
+ More humorous paddings such as 0xBADDCAFE and 0xDEADBEEF is also in use.
+\end_inset 
+
+.
  In a typical implementation, hardware manages access control, synchronization
  (PREAMBLE, SYNC) and error detection (FCS).
- Hardware may or may not verify source address (SA).
- Packets can be based in three classes based upon source address:
+ 
+\layout Subsection
+
+10 MBit, 100 MBit or Auto Negotiation
+\layout Standard
+
+Today 10 MBit Ethernet devices are still available for sale, but the faster
+ 100 MBit Ethernet is by far more common.
+ However, many old devices are 10 MBit only.
+ Most 100 MBit devices will Auto Negotiate to 100 MBit unless negotiating
+ with a 10 Mbit device.
+ Most (if not all) 100 MBit Ethernet devices support 10/100 MBit Auto Negotiatio
+n.
+\layout Subsection
+
+Full Duplex, Half Duplex, and Auto negotiation
+\layout Standard
+
+An Ethernet device is either operating at Full Duplex or Half Duplex mode.
+ Most Ethernet devices can be configured to Auto Negotiate duplex or to
+ use a staticly selected duplex mode.
+ If possible, hosts will negotiate to Full Duplex.
+\layout Subsubsection
+
+Half Duplex
+\layout Standard
+
+In Half Duplex, an arbitratry number of Ethernet devices share a single
+ Ethernet medium, using the CSMA/CD access protocol.
+ Half Duplex is an inefficient and antique Ethernet mode, although still
+ in use in a decreasing number of legacy networks.
+\layout Subsubsection
+
+Full Duplex
+\layout Standard
+
+In full duplex mode each Ethernet device has a dedicated send medium and
+ a dedicated receive medium.
+ Interconnections are handled by network switches.
+ A special ethernet PAUSE frame is used to notify a sender that a Ethernet
+ device is congested and may not recieve more packets for a period of time.
+ Pending on network design and switch capacity allows much more throughput
+ than half duplex, as several parallell mediums may be utilized concurrently
+ instead of a single shared medium.
+\layout Subsection
+
+Ethernet destinations and promiscuous mode
+\layout Standard
+
+Hardware may or may not verify destination address (DA).
+ Packets can be based in three classes based upon destination address:
 \layout Itemize
 
 Broadcast packets; sent to all hosts
@@ -457,14 +548,40 @@ Multicast packets; sent to a group of hosts
 Unicast packets; sent to a specific host
 \layout Standard
 
-As an endhost, a packet is considered to be a stray if is a multicast packet
- sent to a group which the device does not participate in, or if it is a
- unicast packet sent to another host.
- Stray packets are common in ethernet (in a half duplex network, they are
- in fact more common than none stray packets).
- Many end host ethernet devices drop stray packets instead of passing them
+As an endhost, a packet is considered to be a stray if it is 
+\layout Itemize
+
+a multicast packet sent to a group which the host does not participate in
+\layout Itemize
+
+a unicast packet sent to an other host (than the receiver)
+\layout Standard
+
+Stray packets are common in ethernet.
+ Switches in full duplex networks will broadcast multicast/unicast packets
+ if it does not know where it should forward them
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+This can be compared to a postman who has recevied mail where the recipient
+ is unknown to the postman.
+ Instead of discarding the mail, the postman gives a copy of the mail to
+ everyone he knows and hope the someone else will give the mail to the recipient
+\end_inset 
+
+.
+ Therefor switches will generate stray packets in full duplex Ethernets.
+ In half duplex, everyone receives everything.
+ Each packet sent will reach the receiver host, but all other hosts will
+ receive a stray copy.
+\layout Standard
+
+Many end host ethernet devices drop stray packets instead of passing them
  to software.
- To not drop stray packets, is commonly refered to as 
+ To do the opposite, to not drop stray packets is commonly referred to as
+ 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -474,8 +591,8 @@ promiscuous mode
 
 .
  Several end host devices can enable/disable promiscuous mode by software.
- Interconnect devices such as network swicthes, can be considered to operate
- in promiscious mode.
+ Interconnect devices such as network swicthes, can be considered to always
+ operate in promiscious mode.
 \layout Standard
 
 
@@ -688,48 +805,6 @@ bytes
 
 \layout Subsection
 
-Full Duplex, Half Duplex, and Auto negociation
-\layout Standard
-
-An Ethernet device is either operating at Full Duplex or Half Duplex mode.
- Most Ethernet devices can be configured to Auto Negociate duplex or to
- use a staticly selected duplex mode.
- 
-\layout Standard
-
-In half duplex, an aribatry number of ethernet devices share a single Ethernet
- medium, using the CSMA/CD access protocol.
- Half duplex is an inefficient and antique Ethernet mode, although still
- in use in a dwindeling number of legacy networks.
-\layout Standard
-
-In full duplex mode each Ethernet device has a dedicated send medium and
- a dedicated receive medium.
- Interconnections are handled by network switches.
- A special ethernet PAUSE frame is used to notify a sender that a Ethernet
- device is congested and may not recieve more packets for a period of time.
- Pending on network design and switch capacity allows much more throughput
- than half duplex, as several parallell mediums may be utilized concurently
- instead of a single shared medium.
-\layout Standard
-
-Most common Ethernet devices support Half, Full and Auto duplex, and will
- negociate Full Duplex unless negociating with a Half Duplex only Ethernet
- interface.
-\layout Subsection
-
-10 MBit, 100 MBit or Auto Negociation
-\layout Standard
-
-Today,10 MBit Ethernet devices are still available for sale, but the faster
- 100 MBit Ethernet is by far more common.
- However, many old devices are 10 MBit only.
- Most 100 MBit devices will Auto Negociate to 100 MBit unless negociating
- with a 10 Mbit device.
- Most (if not all) 100 MBit Ethernet devices support 10/100 MBit Auto Negociatio
-n.
-\layout Subsection
-
 
 \begin_inset LatexCommand \label{sub:MAU-PHY}
 
@@ -768,19 +843,40 @@ rer independant.
 \layout Standard
 
 There are three common PHYs: AUI, MII and RMII.
- Each of them have their own charisterstics (as shown in table 
+ Each of them have their own characteristics (as shown in table 
 \begin_inset LatexCommand \prettyref{cap:MAU-PHY}
 
 \end_inset 
 
 ).
- AUI is an old 10 Mbit interface only.
- MII was defined as the 10/100 MBit Ethernet was introduced.
- An MII design goal appears to be a high parallellism (data width), offering
- 100 MBit at 25 MHz clockcycles.
- RMII was invented to reduce the number of pins needed by each interface,
- which is a major design concern in e.g.
- switches and other multi-interface ASIC/FPGA designs.
+ 
+\layout Standard
+
+AUI is an old 10 Mbit interface only.
+ 
+\layout Standard
+
+MII was defined as the 10/100 MBit Ethernet was introduced.
+ An MII design goal appears to provide a high level of parallellism (data
+ width), offering 100 MBit at a 25 MHz interface clock.
+ 
+\layout Standard
+
+Reduced-MII (RMII) was invented to reduce the number of pins needed by each
+ interface.
+ A high pin count
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Pin count: the number of chip pins utilized.
+\end_inset 
+
+ raises production costs and power dissipation.
+ Reducing pin count is a major design concern in switches and other multi-interf
+ace ASIC/FPGA designs.
+ RMII provides 100 MBit at a 50 MHz interface clock.
 \layout Standard
 
 
@@ -963,8 +1059,8 @@ Xilinx MicroBlaze
 The Xilinx MicroBlaze core
 \layout Standard
 
-Xilinx MicroBlaze is a small processor core geared for implementation in
- Xilinx FPGAs and embedded applications.
+Xilinx MicroBlaze is a small processor core geared for embedded applications
+ implementated in Xilinx FPGAs.
  A MicroBlaze platform consists of one or several MicroBlaze cores, interconnect
 ed with a set of peripherals through a bus architecture.
 \layout Standard
@@ -1007,16 +1103,13 @@ A MicroBlaze platform must include a data path and an instruction path to
  the MicroBlaze core, therefor it will utilize 2, 3 or 4 busses.
 \layout Subsubsection
 
-Local Memory Busses (LMBs)
+Local Memory Bus (LMB)
 \layout Standard
 
 The LMB bus is a highly optimized architecure, exploiting the Xilinx Dual
  Port Block RAM support for dual single-cycle memory access.
  This enables concurrent ILMB and DLMB access.
-\layout Standard
-
-A MicroBlaze platform with only LMB access is extremly efficient, however
- many FPGAs contains only a few kilobytes of Block RAM.
+ A MicroBlaze platform with only LMB access is extremly efficient.
  
 \layout Subsubsection
 
@@ -1025,7 +1118,7 @@ A MicroBlaze platform with only LMB access is extremly efficient, however
 
 \end_inset 
 
-On-Chip Periperal busses (OPBs)
+On-Chip Periperal Bus (OPB)
 \layout Standard
 
 Xilinx MicroBlaze is compatible with several other OPB devices, as stated
@@ -1042,7 +1135,7 @@ e in a manner optimized for the application.
  
 \layout Standard
 
-Example of customized bus configurations are:
+Examples of customized bus configurations are:
 \layout Itemize
 
 Dual Port RAM configuration (figure 
@@ -1054,10 +1147,10 @@ Dual Port RAM configuration (figure
  IOPB and DOPB both interface a singel Dual Port RAM, to provide a shared,
  high speed instruction / data memory space.
  IOPB and DOPB may act concurrently and independantly.
- This is configuration is similar to the LMB architecture which also utilize
- a Dual Port RAM.
- The downside is that Dual Port RAM's tend to be more expensive than singel
- port RAM.
+ This is similar to the LMB architecture which also utilize a Dual Port
+ RAM.
+ The downside is that Dual Port RAMs tend to be more expensive than singel
+ port RAM and utilize more I/O pins.
 \layout Itemize
 
 DOPB to IOPB Bridge configuration (figure 
@@ -1220,6 +1313,30 @@ MicroBlaze OPB Configuration - IOPB & DOPB interconnected
 \end_inset 
 
 
+\layout Subsubsection
+
+Memory considerations
+\layout Standard
+
+Many FPGAs contain only a few kilobytes of Block RAM.
+ An expensive FPGA (such as a Virtex-II Pro XC2VP125) may contain more than
+ a megabyte of Block RAM.
+ 
+\layout Standard
+
+Small FPGAs contain sufficient Block RAM for small applications only.
+\layout Standard
+
+Large FPGAs contain sufficient Block RAM for large applications.
+\layout Standard
+
+Applications with large buffers requirements such as network switches or
+ routers fits badly even in expensive FPGA.
+\layout Standard
+
+LMB-only memory solutions is therefor suited only for a limited range of
+ applications.
+ Many applications require external memory, accessed through the OPB bus.
 \layout Section
 
 Embedded Development Kit (EDK)
@@ -1228,26 +1345,26 @@ Embedded Development Kit (EDK)
 Xilinx main development kit for embedded applications and SoCs is the Embedded
  Development Kit (EDK).
  It contains a large set of OPB peripherals, Xilinx MicroBlaze soft processor,
- Xilinx PicoBlaze soft processor, and a powerfull up to date development
+ Xilinx PicoBlaze soft processor and a powerfull up to date development
  kit.
 \layout Section
 
 MicroBlaze Development Kit (MDK)
 \layout Standard
 
-MDK is a stripped down version of EDK, and contain less peripherals.
+MDK is a stripped down version of EDK and contains less peripherals.
  The software in MDK is based upon an old version of EDK.
 \layout Subsection
 
 MicroBlaze peripherals includeded in MDK
 \layout Standard
 
-MDK includes ten standard OPB peripherals, e.g.
- Memory Controller, UART, Watchdog, JTAG_UART, Interrupt controller.
- One of the peripherals is an OPB Aribitrator which allows 1 to 16 masters
+MDK includes ten standard OPB peripherals, such as Memory Controller, UART,
+ Watchdog, JTAG_UART, and Interrupt controller.
+ One of the peripherals is an OPB Arbitrator which allows up to 16 masters
  to share the OPB Bus.
- XilinxXilinx also provides documentation and tutorials on the subject of
- designing custom OPB Slaves for MicroBlaze platforms.
+ Xilinx also provides documentation and tutorials on the subject of designing
+ custom OPB Slaves for MicroBlaze platforms.
 \layout Subsection
 
 MDK platform tailoring utilities
@@ -1255,19 +1372,28 @@ MDK platform tailoring utilities
 
 A MicroBlaze platform is specified in a MicroBlaze Hardware Specification
  (MHS) configuration file.
- A PERL-script platgen (
+ Typicall MHS options include which bus configuration to use and which periphera
+ls to interface.
+ 
+\layout Standard
+
+A Platform tailoring utility named Platform Generator (usually referred
+ to by the acronym 
 \begin_inset Quotes eld
 \end_inset 
 
-Platform Generator
+platgen
 \begin_inset Quotes erd
 \end_inset 
 
-) build platform top modules and synthesis them according to the MHS specificati
-on.
- Typicall MHS options include which bus configuration to use and which periphera
-ls to interface.
- MDK platgen is moderately simple while able to cope with most MDK beginners
+) build platforms through an automated process.
+ The process includes creating top modules and launching project synthesis.
+ Platgen is configured through the MHS file and a small set of command line
+ parameters.
+ 
+\layout Standard
+
+MDK platgen is moderately simple and able to cope with most MDK beginners
  design issues.
 \layout Subsection
 
@@ -1277,8 +1403,18 @@ MDK software development tools
 MDK includes most common development tools, such as an assembler, a compiler,
  a linker, a debugger and some other utilities.
  All these tools are based on famous and well verified GNU tools.
- This is a major benefit, as most developers have previous experience with
- the tools.
+ This is a major benefit as many developers have previous experience with
+ these or similar tools
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Several GNU tools, such as the C compiler, behaves similar to common UNIX
+ tools.
+\end_inset 
+
+.
 \layout Standard
 
 The debugger is interfaced by JTAG or RS232.
@@ -1380,14 +1516,31 @@ pad
 .
  Each Virtex FPGA contains four global clock pads.
  These pads are specificly used for clock signals.
- Each pad is in turn connected to a buffer which handles how pad is interfaced
- by the design.
- However, there are a number of different buffers which each has it's own
- purpose and charistics.
+ Each pad is in turn connected to a buffer.
+ The buffer-pad combination decides how a pin may be interfaced by the design.
+ There are a number of different buffers which each has it's own purpose
+ and charistics.
  
 \layout Standard
 
-It is likely that a designer needs to control which buffert to use.
+MDK platgen can be configured weather to insert buffers or not.
+ MDK platgen will auto-insert buffers as stated in table 
+\begin_inset LatexCommand \ref{cap:Auto-inserted-buffers}
+
+\end_inset 
+
+.
+ This is the common buffers which are usually what the design requires.
+\layout Standard
+
+When configured to not insert buffers, MDK platgen will generate a black
+ box.
+ Black boxes may be utilized as components in a larger design.
+ A black box may also to be used in a small wrapper which defines buffer
+ should be used for each I/O signal.
+\layout Standard
+
+There are cases when the design require specific buffers.
  An example of this is when a designer wish to implement a synchronous ethernet
  peripheral on a prototype board with RX_CLK, TX_CLK or REF_CLK connected
  to a global clock pad.
@@ -1411,24 +1564,13 @@ IBUF
  
 \layout Standard
 
-MDK platgen can be configured weather to insert buffers or not.
- MDK platgen will auto-insert buffers as stated in table 
-\begin_inset LatexCommand \ref{cap:Auto-inserted-buffers}
-
-\end_inset 
-
-.
- In the second option, platgen will generate a black box for implementation
- in larger designs, or merely to be used in a small wrapper which defines
- buffer should be used for each I/O signal.
-\layout Standard
-
 Another issue is that tristate buffers in peripherals must be written as
  a set of three I/O signals (input, output and tristate control).
  Although this is not a major drawback, it is an uneccesary restriction
  in how designers may choose to implement their design.
- Specificly, it may limit which blackboxes and source codes which are possible
- to easily utilize in a MicroBlaze peripheral design.
+ Specificly it may limit which OPB components (distributed as black boxes
+ or source code) which are possible to utilize in a MicroBlaze peripheral
+ design.
 \layout Standard
 
 
@@ -1591,17 +1733,10 @@ However, custom design of an Ethernet peripheral may be prefered.
  A custom made peripheral yields a number of interesting properties:
 \layout Itemize
 
-Cheap.
- Basic core design and verification can be one or two students as a part
- of a thesis or project course.
+Cheap
 \layout Itemize
 
-May be customized for specific application.
-\layout Standard
-
-The cost of an Ethernet module may not be a mayor interest in a commerical
- project, but in academic project where fundig is limited it might be.
- 
+May be customized for a specific application.
 \layout Standard
 
 The level of application specific customization is of interest in a large
@@ -1615,22 +1750,33 @@ Speed or area optimized design
 DMA or register access
 \layout Itemize
 
-Promiscious mode or not.
+Promiscious mode or not
 \layout Itemize
 
-Classification, validation, or special handling of certain ethernet frames
+Hardware support for Ethernet multicast
+\layout Itemize
+
+Classification, validation, or special handling of certain Ethernet frames
 \layout Standard
 
 Classification, validation, and special handling of certain ethernet frames
  is performed by most ethernet peripherals, as it is a requirement for IEEE
- ethernet standard compliance.
- A typical ethernet peripheral will verify ethernet frames and take special
- actions upon receipt of Ethernet pause frames.
+ Ethernet standard compliance
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+It may also be performed in software.
+\end_inset 
+
+.
+ A typical Ethernet peripheral will verify ethernet frames and take special
+ actions upon receipt of Ethernet PAUSE frames.
  It would not be difficult to extend such a classification module to also
- handle layer 3 frames, such as IPv4, which might of interest to reduce
- MicroBlaze CPU utilization.
- By lowering utilization, software application may be simplified and functionall
-ity may be reduced.
+ handle layer 3 frames (such as IPv4) to reduce MicroBlaze CPU utilization.
+ By lowering CPU utilization the software application may be simplified
+ or power dissipation reduced.
 \layout Chapter
 
 
