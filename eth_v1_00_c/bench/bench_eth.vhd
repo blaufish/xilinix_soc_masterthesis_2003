@@ -292,7 +292,8 @@ begin  -- sim
 
 	phy_clk <= not phy_clk after rx_period/2;
 
-	OPB_Rst   <= '0' after 105 ns;
+	OPB_Rst   <= '0' after clkperiod + rx_period + 17 ns ; 
+	-- 17 : Det minst slumvist valda talet... (godtycklig konstant, marginal)
 
 end sim;
 
