@@ -169,14 +169,14 @@ architecture RTL of ethrx_core is
 		rx_async_fifo_empty_inv : std_logic;
 	signal rx_async_fifo_din, rx_async_fifo_dout : std_logic_vector(rx_data_pins downto 0);
 	
-	signal rx_clock_FDR  : std_logic;
-	signal rx_data_FDR   : std_logic_vector(rx_data_pins-1 downto 0);
-	signal rx_dvalid_FDR : std_logic;
+	signal rx_clock_FDR, rx_clock_s   : std_logic;
+	signal rx_data_FDR, rx_data_s     : std_logic_vector(rx_data_pins-1 downto 0);
+	signal rx_dvalid_FDR, rx_dvalid_s : std_logic;
 begin
 
 	gen0 : if async=false generate
 
-		clockbuffering : process (sys_clk) begin
+		clockbuffering0 : process (sys_clk) begin
 			if rising_edge(sys_clk) then
 				if sys_reset='1' then
 					rx_clock_FDR  <= '0';
@@ -188,8 +188,12 @@ begin
 					rx_dvalid_FDR <= rx_dvalid;
 				end if;
 			end if;
-		end process clockbuffering;
+		end process;
+		
+		rx_clock_s  <= rx_clock_FDR;
+		rx_data_s   <= rx_data_FDR;
 
+		
 
 		sampler : ethrx_clk_sampler
 		port map (
@@ -202,6 +206,12 @@ begin
 	end generate gen0;
 
 	gen1 : if async=true generate
+		clockbuffering1 : process (rx_clock) begin
+			if rising_edge(rx_clock) then
+				rx_dvalid_FDR <= rx_dvalid;
+				rx_data_FDR   <= rx_data;
+			end if;
+		end process;
 
 		rx_async_fifo :  fifo_async
     		generic map (
@@ -222,9 +232,9 @@ begin
           		full	=> rx_async_fifo_full,
           		empty	=> rx_async_fifo_empty
          	);
-		rx_async_fifo_din <= rx_dvalid & rx_data;
-		rx_dvalid_FDR <= rx_async_fifo_dout(rx_data_pins);
-		rx_data_FDR <= rx_async_fifo_dout(rx_data_pins-1 downto 0);
+		rx_async_fifo_din <= rx_dvalid_FDR & rx_data_FDR;
+		rx_dvalid_s <= rx_async_fifo_dout(rx_data_pins);
+		rx_data_s <= rx_async_fifo_dout(rx_data_pins-1 downto 0);
 
 		rx_async_fifo_full_inv <= not rx_async_fifo_full;
 		rx_async_fifo_empty_inv <= not rx_async_fifo_empty;
@@ -242,8 +252,8 @@ begin
 		sys_clk		=> sys_clk,
 		sys_reset	=> sys_reset,
 		rx_clock_pulse	=> rx_clock_pulse,
-		rx_data		=> rx_data_FDR,
-		rx_dvalid	=> rx_dvalid_FDR,
+		rx_data		=> rx_data_s,
+		rx_dvalid	=> rx_dvalid_s,
 		sample_rx	=> sample_rx
 	);
 
@@ -257,8 +267,8 @@ begin
 		sys_reset	=> sys_reset,
 		sample_rx	=> sample_rx,
 		rx_clock_pulse	=> rx_clock_pulse,
-		rx_data		=> rx_data_FDR,
-		rx_dvalid	=> rx_dvalid_FDR,
+		rx_data		=> rx_data_s,
+		rx_dvalid	=> rx_dvalid_s,
 		byte_pkt_start	=> byte_pkt_start,
 		byte_pkt_end	=> byte_pkt_end,
 		byte_data	=> byte_data,
