@@ -117,7 +117,29 @@ architecture sim of bench_eth is
 	type t_tx_state is (tx_init, tx_send1, tx_w1, tx_send2, tx_w2, tx_status, tx_sleep);
 	signal tx_state : t_tx_state;
 	
+	component tb_mii_reciever_model is
+        generic (
+                nic : string := "no_name"
+        );
+        port (
+                mii_clk, 
+                mii_dv   : std_logic;
+                mii_rxd  : std_logic_vector(3 downto 0)
+        );
+	end component tb_mii_reciever_model;
+
 begin  -- sim
+
+	reciever : tb_mii_reciever_model
+		generic map (
+			nic => "tx0"
+		)
+		port map (
+			mii_clk => tx_clk0,
+			mii_dv  => tx_en0,
+			mii_rxd => tx_data0
+		);
+
 
 	fake_bus : process (OPB_Clk) 
 		--variable i : integer;
