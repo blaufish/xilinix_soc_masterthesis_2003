@@ -110,7 +110,7 @@ begin
 			fifo_reset <= '0';
 			fifo_wr    <= '0';
 			--fifo_rd    <= '0';
-			fifo_d     <= (others => '0');
+			--fifo_d     <= (others => '0');
 	
 			if sys_reset='1' or packet_sent='1' then
 				status_packet_buffered <= '0';
@@ -119,6 +119,7 @@ begin
 				status_fifo_BILW       <= (others => '0');
 				output_set             <= '0';
 				word_count             <= (others => '0');
+			    fifo_d     <= (others => '0');
 			else
 				
 				
