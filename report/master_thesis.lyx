@@ -91,9 +91,123 @@ During my work on the theisis, I have tought MicroBlaze based System on
 \end_inset 
 
 
+\layout Standard
+
+
+\begin_inset FloatList figure
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset FloatList table
+
+\end_inset 
+
+
 \layout Chapter
 
+
+\begin_inset LatexCommand \label{cha:Introduction}
+
+\end_inset 
+
 Introduction
+\layout Chapter
+
+
+\begin_inset LatexCommand \label{cha:Limitation}
+
+\end_inset 
+
+Limitations
+\layout Chapter
+
+Dispotion
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Introduction}
+
+\end_inset 
+
+ gives a general introduction to the thesis and the work perfomed to evaluate
+ Xilinx Microblaze.
+ 
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Limitation}
+
+\end_inset 
+
+ covers what how the evaluation have been constrained and what thesis does
+ not cover.
+ 
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Technology-&-Background}
+
+\end_inset 
+
+ covers the technologies is used and referred to in the thesis.
+\layout Standard
+
+-- Skall MicroBlaze delarna styckas om? Två kapitel? Inget i introduction?
+ --
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Development-of-Microblaze-ethernet-peripherals}
+
+\end_inset 
+
+ outlines the design of a set of Ethernet peripherals for Xilinx Microblaze.
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Comparing-Ethernet-peripherals}
+
+\end_inset 
+
+ compares the Ethernet peripherals designed to a number of other Ethernet
+ peripherals..
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Network-software-for-Microblaze}
+
+\end_inset 
+
+ covers network software, such as TCP/IP stacks, available to Xilinx Microblaze.
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Conclusions}
+
+\end_inset 
+
+ covers the conclusions drawn from the work on this thesis.
+\layout Standard
+
+Chapter 
+\begin_inset LatexCommand \ref{cha:Future-work}
+
+\end_inset 
+
+ sugests which futher work could be performed to improve the evaluation
+ of Microblaze or to extend it's network capabilities.
+\layout Chapter
+
+
+\begin_inset LatexCommand \label{cha:Technology-&-Background}
+
+\end_inset 
+
+Technology & Background
 \layout Section
 
 System on Chip (SoC) solutions
@@ -996,7 +1110,7 @@ collapsed false
 
 \end_inset 
 
-Auto-inserted buffers
+MDK synthesis auto-inserted buffers
 \layout Standard
 \align center 
 
@@ -1208,6 +1322,11 @@ Classification, validation, and special handling of certain ethernet frames
 ity may be reduced.
 \layout Chapter
 
+
+\begin_inset LatexCommand \label{cha:Development-of-Microblaze-ethernet-peripherals}
+
+\end_inset 
+
 Development of MicroBlaze Ethernet peripherals
 \layout Section
 
@@ -1277,7 +1396,7 @@ collapsed true
 
 \end_inset 
 
-Minimum System Clock for reliable synchronous sampling
+Minimum System Clock for reliable synchronous ethernet sampling
 \layout Standard
 \align center 
 
@@ -1488,7 +1607,7 @@ collapsed true
 
 \end_inset 
 
-Eth version 1.00.a VHDL files
+Eth Version 1.00 Revision A VHDL files
 \layout Standard
 \align center 
 
@@ -1638,7 +1757,7 @@ OPB Slave
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1647,7 +1766,7 @@ collapsed true
 
 \end_inset 
 
-RX Core
+Eth Version 1.00 Revision A, RX Core
 \layout Standard
 \align center 
 
@@ -1668,7 +1787,7 @@ RX Core
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1677,7 +1796,7 @@ collapsed true
 
 \end_inset 
 
-TX Core
+Eth Version 1.00 Revision A, TX Core
 \layout Standard
 \align center 
 
@@ -2030,12 +2149,103 @@ ping
 
 ) test, was performed for several hours with 0 packet loss.
  All real world tests indicates that design is robust.
+\layout Chapter
+
+
+\begin_inset LatexCommand \label{cha:Comparing-Ethernet-peripherals}
+
+\end_inset 
+
+Comparing Ethernet peripherals
+\layout Standard
+
+Comparing peripherals is hard.
+ One factor is features, e.g.
+ does the application support DMA? Another factor is speed - how slow can
+ the design be clocked? How fast? Yet another factor is area, a large peripheral
+ waste area which could be used for something else instead.
+ Finally, quality is an important factor which is hard to meassure.
+\layout Standard
+
+Given all these set of factors, it is not feasable to name a single peripheral
+ which is optimal for all applications.
+ However it is possible to compare peripherals and reason which is best
+ for certain applications.
+\layout Standard
+
+A number of Ethernet peripherals have been compared: EMAC Lite - Xilinx
+ OPB Ethernet Lite Media Access Controller, EMAC - Xilinx OPB Ethernet Media
+ Access Controller, EthMac - Opencores.org 10/100 Ethernet MAC, Bandung -
+ Bandung Institute of Technolgy 10/100 Ethernet MAC, Eth Version 1.00 Revision
+ A and Eth Version 1.00 Revision C.
+\layout Standard
+
+Neither EthMac nor Bandung is an OPB device.
+ Bandung has been included because it is a published student project and
+ therefor created under conditions similar to Eth Version 1.00.
+ EthMac has been included because it is a well verified MAC, has been in
+ real world use, and is open source.
+ It is reasonable that given some work, both Bandung and EthMac could be
+ converted into OPB devices.
 \layout Section
 
-Analasysis and comparision
-\layout Subsection
+Feature comparision
+\layout Standard
 
-Other Ethernet peripherals
+The following set of features has been compared in table 
+\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-feature}
+
+\end_inset 
+
+:
+\layout Itemize
+
+Asynchronous, e.g.
+ the peripheral make use of MII/RMII clock signals to clock flipflops/registers.
+ This is common practice to reach 100 MBit but has major a drawback: In
+ several FPGAs, you only have a few clock input pins.
+ Utilizing MII/RMII clocks in a peripheral may limit the application to
+ a single ethernet peripheral.
+\layout Itemize
+
+System bus.
+ OPB is perfered because as it is the only native I/O bus in Microblaze.
+\layout Itemize
+
+DMA.
+ Is the peripheral able to do direct memory access? This is important to
+ make high performance applications.
+\layout Itemize
+
+MII Management.
+ Is the peripheral able to read/write MII Management registers?
+\layout Itemize
+
+PAUSE frame support.
+ This is an important Ethernet standard which prevents network congestions.
+ If not supported in hardware, it should be supported in the software/drivers.
+\layout Itemize
+
+RMII support.
+ RMII is a pin-reduced MII-similar interface, prefered in multi-interface/periph
+erals designs such as switches.
+\layout Standard
+
+The only RMII peripherals are Eth Version 1.00 Revision A and C.
+ This is a major advantage in multi-interface designs.
+ EMAC Lite and Eth Version 1.00 Revision A are synchronous designs.
+ This gives it future advantage in multi-interface designs since it does
+ not utilize clock pins (which are scarced in some FPGA).
+\layout Standard
+
+The peripherals can be divided into a set of simple perhiperals and none
+ simple peripherals.
+ EMAC and EthMac support a large set of features (DMA, MII Management, Pause
+ frames) while the others does not.
+ Therefor EMAC and EthMac are preferable if an application require a fullscale
+ DMA-capable interface.
+ EMAC Lite, Bandung and Eth Version 1.00 Revision A and C are preferable
+ if you only need a simple interface.
 \layout Standard
 
 
@@ -2044,6 +2254,11 @@ wide false
 collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ethernet-peripherals-feature}
+
+\end_inset 
 
 Ethernet peripherals feature comparision
 \layout Standard
@@ -2131,7 +2346,7 @@ EMAC Lite
 
 \layout Standard
 
-Yes
+No
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -2189,7 +2404,7 @@ EMAC
 
 \layout Standard
 
-Yes
+No
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -2297,7 +2512,7 @@ No
 
 \layout Standard
 
-Bandung MAC
+Bandung
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -2576,14 +2791,155 @@ Reduced MII interface support
 \end_inset 
 
 
+\layout Section
+
+Speed comparision
+\layout Standard
+
+Speed comparision is performed against a Xilinx Virtex-E FPGA (chip xsv2000e-8-F
+G1156).
+ One reason for using this particiluar FPGA is that one prototype board
+ available for during the evaluation was Virtex-E based.
+ Another reason is that speed/area statistics for this particiluar FPGA
+ is included EMAC / EMAC Lite documentation.
+\layout Standard
+
+
+\begin_inset Formula $f_{max}$
+\end_inset 
+
+ is the maximum system clock frequency.
+ For configurable designs (such as EMAC / EMAC Lite), the greatest value
+ for 
+\begin_inset Formula $f_{max}$
+\end_inset 
+
+ is listed.
+ For Eth v1.00 Revision A and C, MII configuration is used.
+\layout Standard
+
+
+\begin_inset Formula $f_{max}$
+\end_inset 
+
+ is derived by synthesising the design with XST (optimization level 2 and
+ optimization mode 
+\begin_inset Quotes eld
+\end_inset 
+
+speed
+\begin_inset Quotes erd
+\end_inset 
+
+).
+ Then the netlist is passed through the Xilinx Place & Route flow (overall
+ effort set to 5, extra effort set to 2) utilizing a set of timing constraints
+ used by Xilinx in EMAC documentation.
+ The system clock timespecification is tweaked and flow re-started until
+ all a minimum period is found for which all constraints are met.
+ Then 
+\begin_inset Formula $f_{max}$
+\end_inset 
+
+ is calculated as 
+\begin_inset Formula $f_{max}=\frac{1000}{system\, clock\, period\, (nanoseconds)}$
+\end_inset 
+
+ MHz.
+\layout Standard
+
+For EMAC and EMAC Lite, the corosponding values are extracted from the specifica
+tion.
+\layout Standard
+
+
+\begin_inset Float algorithm
+wide false
+collapsed true
+
+\layout Caption
+
+UCF Ethernet Timing constraints
+\layout LyX-Code
+
+NET "opb_clk" TNM_NET = "opb_clk"; 
+\layout LyX-Code
+
+TIMESPEC "TS_opb_clk" = PERIOD "opb_clk" 7.5 ns HIGH 50 %;
+\layout LyX-Code
+
+\layout LyX-Code
+
+NET "rx_clk" TNM_NET = "RXCLK_GRP"; 
+\layout LyX-Code
+
+NET "tx_clk" TNM_NET = "TXCLK_GRP"; 
+\layout LyX-Code
+
+TIMESPEC "TSTXOUT" = FROM "TXCLK_GRP" TO "PADS" 10 ns; 
+\layout LyX-Code
+
+TIMESPEC "TSRXIN" = FROM "PADS" TO "RXCLK_GRP" 6 ns; 
+\layout LyX-Code
+
+NET "opb_rst" TIG; 
+\layout LyX-Code
+
+NET "rx_clk" USELOWSKEWLINES; 
+\layout LyX-Code
+
+NET "tx_clk" USELOWSKEWLINES; 
+\layout LyX-Code
+
+NET "tx_clk" MAXSKEW= 2.0 ns; 
+\layout LyX-Code
+
+NET "rx_clk" MAXSKEW= 2.0 ns; 
+\layout LyX-Code
+
+NET "rx_clk" PERIOD = 40 ns HIGH 14 ns; 
+\layout LyX-Code
+
+NET "tx_clk" PERIOD = 40 ns HIGH 14 ns; 
+\layout LyX-Code
+
+NET "rx_d<3>" NODELAY; 
+\layout LyX-Code
+
+NET "rx_d<2>" NODELAY; 
+\layout LyX-Code
+
+NET "rx_d<1>" NODELAY; 
+\layout LyX-Code
+
+NET "rx_d<0>" NODELAY; 
+\layout LyX-Code
+
+NET "rx_dv" NODELAY; 
+\end_inset 
+
+
+\layout Standard
+
+The results are shown in table 
+\begin_inset LatexCommand \ref{cap:Ethernet-peripherals-performance}
+
+\end_inset 
+
+.
 \layout Standard
 
 
 \begin_inset Float table
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ethernet-peripherals-performance}
+
+\end_inset 
 
 Ethernet peripherals performance comparision
 \layout Standard
@@ -2592,7 +2948,7 @@ Ethernet peripherals performance comparision
 \begin_inset  Tabular
 <lyxtabular version="3" rows="9" columns="6">
 <features>
-<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="left" valignment="top" leftline="true" width="0pt">
 <column alignment="center" valignment="top" leftline="true" width="0pt">
 <column alignment="center" valignment="top" leftline="true" width="0pt">
 <column alignment="center" valignment="top" leftline="true" width="0pt">
@@ -2793,7 +3149,7 @@ N/A
 
 \layout Standard
 
-80.2 MHz
+80.8 MHz
 \end_inset 
 </cell>
 </row>
@@ -2843,6 +3199,7 @@ N/A
 
 \layout Standard
 
+88.0 MHz
 \end_inset 
 </cell>
 </row>
@@ -2899,7 +3256,7 @@ N/A
 
 \layout Standard
 
-Bandung MAC
+Bandung
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -2977,7 +3334,7 @@ Eth v1.00 A
 
 \layout Standard
 
-N/A
+125 MHz
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -2985,7 +3342,7 @@ N/A
 
 \layout Standard
 
-N/A
+25 MHz
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -3001,6 +3358,7 @@ N/A
 
 \layout Standard
 
+137 MHz
 \end_inset 
 </cell>
 </row>
@@ -3050,6 +3408,7 @@ Eth v1.00 C
 
 \layout Standard
 
+137 MHz
 \end_inset 
 </cell>
 </row>
@@ -3159,7 +3518,41 @@ Bandung MAC utilize MII clocks.
 \end_inset 
 
 
-\layout Subsubsection
+\layout Section
+
+Area comparision
+\layout Section
+
+Quality comparision
+\layout Standard
+
+EMAC Lite and EMAC is considered production quality by the Xilinx cooperation.
+ EhMac is considered production quality by the opencores.org developers.
+ These three MACs have been tested by developers as well as number of users/cust
+omers.
+ Therefor, they are by far the best verified devices.
+\layout Standard
+
+Bandung and Eth Version 1.00 Revision A, C are not as well verified.
+ 
+\layout Standard
+
+The Eth Version 1.00 revisions has been reused by a small number of students.
+ Eth has also passed a number of verification tests.
+ Therefor the Eth 1.00 revisions are considered to be of good academic quality
+ but more tests are needed before they can be considered to be of production
+ quality.
+ 
+\layout Standard
+
+There is not much information regarding verification and reuse Bandung MAC.
+ Comments on the Bandung MAC homepage seems to indicate that the project
+ was terminated prior to completetion.
+ Bandung quality therefor is considered poor.
+\layout Section
+
+Details about the devices used in analasysis
+\layout Subsection
 
 EMAC Lite - Xilinx OPB Ethernet Lite Media Access Controller
 \layout Standard
@@ -3177,7 +3570,7 @@ no MII management
 \layout Standard
 
 no pause frame support
-\layout Subsubsection
+\layout Subsection
 
 EMAC - Xilinx OPB Ethernet Media Access Controller
 \layout Standard
@@ -3185,20 +3578,12 @@ EMAC - Xilinx OPB Ethernet Media Access Controller
 multiple packets, 2 or 4 kb fifos, up to 16 packets per fifo, pause frame
  support, MII management, DMA or FIFO-read-registers, autopad, promiscious
  mode optional, etc etc 
-\layout Subsubsection
+\layout Subsection
 
-Opencores.org 
-\begin_inset Quotes eld
-\end_inset 
+EthMac - Opencores.org 10/100 Ethernet MAC
+\layout Subsection
 
-EthMac
-\begin_inset Quotes erd
-\end_inset 
-
- 10/100 Ethernet MAC
-\layout Subsubsection
-
-Bandung Institute of Technolgy 10/100 Ethernet MAC
+Bandung - Bandung Institute of Technolgy 10/100 Ethernet MAC
 \layout Standard
 
 The Bandung MAC is a simple Ethernet MAC.
@@ -3238,7 +3623,12 @@ Asynchronous
 No MII Management module
 \layout Chapter
 
-Network software for MicroBlaze
+
+\begin_inset LatexCommand \label{cha:Network-software-for-Microblaze}
+
+\end_inset 
+
+Network software for Microblaze
 \layout Standard
 
 A Network System on Chip could do everything in ASIC hardware or configurable
@@ -3365,4 +3755,20 @@ XilNet appears to be written with the purpose of labeling MicroBlaze as
  a Internet enabled processor.
  Code quality, modularity and functionallity is poor.
  
+\layout Chapter
+
+
+\begin_inset LatexCommand \label{cha:Conclusions}
+
+\end_inset 
+
+Conclusions
+\layout Chapter
+
+
+\begin_inset LatexCommand \label{cha:Future-work}
+
+\end_inset 
+
+Future work
 \the_end
