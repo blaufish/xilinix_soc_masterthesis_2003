@@ -29,9 +29,9 @@ entity ETH is
 		-- PHY signals
 		RX_CLK : in std_logic;
 		RX_DV  : in std_logic;
-		RX_D   : in std_logic_vector(C_PHY_WIDTH-1 downto 0);
+		RX_D   : in std_logic_vector(7 downto 0);
 		TX_CLK : in std_logic;
-		TX_D   : out std_logic_vector(C_PHY_WIDTH-1 downto 0);
+		TX_D   : out std_logic_vector(7 downto 0);
 		TX_EN  : out std_logic
 	);
 end ETH;
@@ -218,7 +218,7 @@ begin -- architecture RTL
 		sys_clk		=> OPB_clk,
 		sys_reset	=> OPB_Rst,
 		rx_clock	=> RX_CLK,
-		rx_data		=> RX_D,
+		rx_data		=> RX_D(C_PHY_WIDTH-1 downto 0),
 		rx_dvalid	=> RX_DV,
 		reg_status_wr	=> RX_reg_status_wr,
 		reg_status	=> RX_reg_status,
@@ -242,9 +242,12 @@ begin -- architecture RTL
 		reg_ctrl_wr	=> TX_reg_ctrl_wr,
 		tx_clk		=> TX_CLK,
 		tx_en		=> TX_EN,
-		tx_d		=> TX_D
+		tx_d		=> TX_D(C_PHY_WIDTH-1 downto 0)
 	);
 
+	tx_zero1 : if C_PHY_WIDTH < 8 generate
+		TX_D(7 downto C_PHY_WIDTH) <= (others => '0');
+	end generate;
 
 	ETH_errAck  <= '0'; -- no errors
 	ETH_retry   <= '0'; -- no retries
