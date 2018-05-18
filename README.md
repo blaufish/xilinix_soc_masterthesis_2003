@@ -24,7 +24,7 @@ The the solution utilizes the Xilinx MicroBlaze soft processor core, MicroBlaze
 ## Imported from an old CVS backup using cvsfast-import
 
 This repository is largely based on late 2003 CVS backup I found on an old disk. 
-Ihould include **most** of the artifacts produced in the master thesis but did not 
+It should include **most** of the artifacts produced in the master thesis but did not 
 fully represent the last developments. It should mostly be late changes to the
 report LaTeX / LyX file that are missing.
 
