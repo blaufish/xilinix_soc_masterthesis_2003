@@ -16,7 +16,7 @@ The the solution utilizes the Xilinx MicroBlaze soft processor core, MicroBlaze
  and Xilinx Virtex Field Programmable Gate Array (FPGA).
 
 ## Artifacts
-* PDF: [Evaluating Xilinx MicroBlaze for Network SoC Applications](Masters Thesis Evaluating Xilinx MicroBlaze for Network SoC Applications.pdf)
+* PDF: [Evaluating Xilinx MicroBlaze for Network SoC Applications](Masters_Thesis_Evaluating_Xilinx_MicroBlaze_for_Network_SoC_Applications.pdf)
 * Source code: [eth v1 00 a](eth_v1_00_a) Synchronous MAC for MicroBlaze OPB
 * Source code: [eth v1 00 b](eth_v1_00_b) Abandoned garbage... code rot.
 * Source code: [eth v1 00 c](eth_v1_00_c) Asynchronous MAC for MicroBlace OPB
